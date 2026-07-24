@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<title>onetoeight — Challenge Cards</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 15mm; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; color: #2a2520; font-size: 10pt; line-height: 1.6; }
+h1, h2, h3, h4 { font-family: 'Fraunces', serif; font-weight: 500; color: #3D2820; }
+:root { --forest: #5C3A2E; --forest-dark: #3D2820; --amber: #A46447; --amber-light: #C4805A; --cream: #faf7f2; --cream-dark: #f0ebe0; --ink: #2a2520; --muted: #6b6358; --sage: #88937B; }
+.page-break { page-break-after: always; }
+.label { font-size: 7.5pt; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); font-weight: 700; }
+.header-bar { background: var(--forest-dark); color: var(--cream); padding: 12mm 15mm; margin: -15mm -15mm 1.5rem; }
+.header-bar .label { color: var(--amber-light); }
+.header-bar h1 { color: var(--cream); font-size: 18pt; margin-top: .3rem; }
+.header-bar .sub { font-size: 9pt; color: rgba(250,247,242,0.6); margin-top: .2rem; }
+.footer { text-align: center; font-size: 7pt; color: var(--muted); border-top: 1px solid var(--cream-dark); padding-top: 2mm; margin-top: 2rem; }
+
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.card { border: 2px solid var(--forest-dark); border-radius: 10px; padding: 4mm; min-height: 120mm; display: flex; flex-direction: column; }
+.card-header { background: var(--forest-dark); color: var(--cream); padding: 3mm 4mm; margin: -4mm -4mm 3mm; border-radius: 8px 8px 0 0; }
+.card-num { font-family: 'Fraunces', serif; font-size: 10pt; color: var(--amber-light); }
+.card-title { font-family: 'Fraunces', serif; font-size: 13pt; color: var(--cream); }
+.card-challenge { font-size: 9pt; color: var(--ink); margin-bottom: 2mm; font-weight: 500; }
+.card-levels { font-size: 8pt; color: var(--muted); margin-bottom: 2mm; }
+.card-levels li { margin-bottom: 1mm; }
+.card-checklist { border-top: 1px dotted var(--cream-dark); padding-top: 2mm; }
+.card-checklist li { font-size: 8pt; color: var(--ink); list-style: none; padding-left: 4mm; position: relative; }
+.card-checklist li::before { content: '\u2610'; position: absolute; left: 0; color: var(--amber); }
+</style>
+</head>
+<body>
+<div class="header-bar">
+  <div class="label">Challenge Cards</div>
+  <h1>Do This This Week</h1>
+  <div class="sub">Print · Cut · Carry · Check off · 8 cards (one per essential)</div>
+</div>
+<div class="card-grid">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">ESSENTIAL 01</div>
+      <div class="card-title">Silence</div>
+    </div>
+    <div class="card-challenge">Sit in silence for 5 minutes daily. Phone in another room.</div>
+    <ul class="card-levels">
+      <li>Level 1: 5 min daily silence</li>
+      <li>Level 2: Phone-free evening</li>
+      <li>Level 3: Phone-free walk</li>
+      <li>Level 4: Half-day digital fast</li>
+    </ul>
+    <ul class="card-checklist">
+      <li>Practised silence 3+ days</li>
+      <li>Turned off non-human notifications</li>
+      <li>Completed one challenge level</li>
+      <li>Discussed with someone</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">ESSENTIAL 02</div>
+      <div class="card-title">Body</div>
+    </div>
+    <div class="card-challenge">Treat your body like a temple this week.</div>
+    <ul class="card-levels">
+      <li>Level 1: Daily walk</li>
+      <li>Level 2: Clean fuel week</li>
+      <li>Level 3: Sleep audit</li>
+      <li>Level 4: Gate audit</li>
+    </ul>
+    <ul class="card-checklist">
+      <li>Moved your body daily</li>
+      <li>Ate clean fuel</li>
+      <li>Got 7+ hours sleep</li>
+      <li>Set one new boundary</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">ESSENTIAL 03</div>
+      <div class="card-title">Skills</div>
+    </div>
+    <div class="card-challenge">Learn one real-world skill this week.</div>
+    <ul class="card-levels">
+      <li>Level 1: Cook from scratch</li>
+      <li>Level 2: Fix something</li>
+      <li>Level 3: Build something</li>
+      <li>Level 4: First budget</li>
+    </ul>
+    <ul class="card-checklist">
+      <li>Cooked a meal</li>
+      <li>Fixed or built something</li>
+      <li>Made a budget</li>
+      <li>Taught someone a skill</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">ESSENTIAL 04</div>
+      <div class="card-title">Digital Defence</div>
+    </div>
+    <div class="card-challenge">Strengthen one digital boundary this week.</div>
+    <ul class="card-levels">
+      <li>Level 1: Privacy audit</li>
+      <li>Level 2: Password overhaul</li>
+      <li>Level 3: Digital sabbath</li>
+      <li>Level 4: Deep clean</li>
+    </ul>
+    <ul class="card-checklist">
+      <li>Checked privacy settings</li>
+      <li>Updated passwords</li>
+      <li>Turned off app tracking</li>
+      <li>Took a phone-free day</li>
+    </ul>
+  </div>
+</div>
+<div class="page-break"></div>
+<div class="card-grid">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">ESSENTIAL 05</div>
+      <div class="card-title">Community</div>
+    </div>
+    <div class="card-challenge">Invest in one real relationship this week.</div>
+    <ul class="card-levels">
+      <li>Level 1: Name your people</li>
+      <li>Level 2: Reach out</li>
+      <li>Level 3: Host a meal</li>
+      <li>Level 4: Deepen one</li>
+    </ul>
+    <ul class="card-checklist">
+      <li>Named your 2am people</li>
+      <li>Called someone (not text)</li>
+      <li>Spent time in person</li>
+      <li>Had a real conversation</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">ESSENTIAL 06</div>
+      <div class="card-title">Knowledge</div>
+    </div>
+    <div class="card-challenge">Internalise one thing this week.</div>
+    <ul class="card-levels">
+      <li>Level 1: Memorise something</li>
+      <li>Level 2: Teach someone</li>
+      <li>Level 3: Build offline library</li>
+      <li>Level 4: Local AI backup</li>
+    </ul>
+    <ul class="card-checklist">
+      <li>Memorised something useful</li>
+      <li>Read a book (not a feed)</li>
+      <li>Taught what you know</li>
+      <li>Reduced search dependency</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">ESSENTIAL 07</div>
+      <div class="card-title">Nature</div>
+    </div>
+    <div class="card-challenge">Spend 20 minutes outdoors daily.</div>
+    <ul class="card-levels">
+      <li>Level 1: 20 min outside daily</li>
+      <li>Level 2: Barefoot grounding</li>
+      <li>Level 3: Seasonal project</li>
+      <li>Level 4: Overnight outdoors</li>
+    </ul>
+    <ul class="card-checklist">
+      <li>20 min outside daily</li>
+      <li>Phone-free in nature</li>
+      <li>Noticed the season</li>
+      <li>Touched soil or bark</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">ESSENTIAL 08</div>
+      <div class="card-title">Convictions</div>
+    </div>
+    <div class="card-challenge">Name and test one conviction this week.</div>
+    <ul class="card-levels">
+      <li>Level 1: Write your convictions</li>
+      <li>Level 2: Share with someone</li>
+      <li>Level 3: Examine one deeply</li>
+      <li>Level 4: Stand firm under pressure</li>
+    </ul>
+    <ul class="card-checklist">
+      <li>Wrote down 3 convictions</li>
+      <li>Shared one with someone</li>
+      <li>Examined one honestly</li>
+      <li>Acted on one under pressure</li>
+    </ul>
+  </div>
+</div>
+<div class="footer">onetoeight · Leader's Resource Pack · Challenge Cards · Cut along borders</div>
+</body>
+</html>
