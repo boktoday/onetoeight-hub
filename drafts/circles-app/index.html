@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#3D2820">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>onetoeight · Circles</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "@mlc-ai/web-llm": "https://unpkg.com/@mlc-ai/web-llm@0.2.68/lib/index.js"
+  }
+}
+</script>
+<style>
+:root{
+  --terracotta:#A46447; --almond:#CEB59E; --sage:#88937B; --umber:#4C362D; --forest:#5C3A2E;
+  --forest-dark:#3D2820; --linen:#E8E1D5; --cream:#F5F0E8; --ink:#2a2520; --muted:#7a6657;
+  --white:#ffffff; --line:rgba(76,54,45,.10); --shadow:0 6px 20px rgba(76,54,45,.10);
+  --radius:16px; --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden}
+body{
+  font-family:Inter,system-ui,sans-serif;font-size:16px;color:var(--ink);line-height:1.5;
+  background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:Fraunces,serif;font-weight:500;line-height:1.2;color:var(--umber);margin:0}
+a{color:var(--terracotta);text-decoration:none}
+strong{color:var(--umber)}
+button,input,select{font:inherit;border:0;outline:0}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+input::placeholder{color:#b5aaa0}
+
+/* === App shell === */
+#app{width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden}
+#view{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 var(--pad,16px) 8px}
+#view.no-pad{padding:0}
+header.app-bar{
+  position:sticky;top:0;z-index:10;
+  background:linear-gradient(180deg,#3D2820,#4C362D);
+  color:var(--cream);padding:10px 16px;display:flex;align-items:center;gap:10px;
+  min-height:48px;flex-shrink:0;
+}
+.app-bar h1{font-size:1rem;color:var(--cream);font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app-bar .sub{font-size:.65rem;color:rgba(232,225,213,.7);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:1px}
+.app-bar .btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);color:var(--cream);font-size:1.1rem;display:flex;align-items:center;justify-content:center}
+/* Bottom tab */
+#tabs{
+  display:flex;background:var(--white);border-top:1px solid var(--line);
+  padding:4px 0 calc(4px + var(--safe-bottom));flex-shrink:0;
+}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 0;font-size:.6rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;background:none;border:0;transition:color .15s}
+.tab .ico{font-size:1.2rem;line-height:1}
+.tab.active{color:var(--terracotta)}
+/* screen = section inside #view */
+.screen{display:none;padding-bottom:20px}
+.screen.active{display:block}
+
+/* Cards */
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 14px;margin:10px 0}
+.card .k{font-size:.6rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);margin-bottom:4px}
+h2{font-size:1.2rem;margin:0 0 4px}
+p{font-size:.92rem;margin:6px 0;color:var(--ink);line-height:1.5}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:4px;background:var(--umber);color:#fff;border-radius:999px;padding:12px 20px;font-weight:700;font-size:.95rem;width:100%;margin:6px 0}
+.btn-outline{background:transparent;border:2px solid var(--line);color:var(--umber);border-radius:999px;padding:10px 18px;font-weight:700;font-size:.9rem;display:inline-flex;align-items:center;justify-content:center;gap:4px;width:100%;margin:4px 0}
+.btn-ghost{background:transparent;color:var(--terracotta);font-weight:700;font-size:.85rem;padding:8px 0;display:inline-flex;align-items:center;gap:4px}
+.tag{display:inline-flex;font-size:.62rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--sage);padding:2px 6px;border-radius:999px;background:rgba(136,147,123,.1)}
+.status{border-radius:999px;padding:2px 10px;font-size:.65rem;font-weight:700}
+.status.go{background:rgba(164,100,71,.12);color:var(--terracotta)}
+.status.ok{background:rgba(136,147,123,.12);color:var(--sage)}
+
+/* Member row */
+.member{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.member:last-child{border:0}
+.member .av{width:36px;height:36px;border-radius:50%;background:var(--linen);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:var(--umber);flex-shrink:0}
+.member .nm{flex:1;font-weight:600;font-size:.88rem}
+.member .sc{font-size:.7rem;color:var(--muted);font-weight:600}
+
+/* Week grid */
+.week-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+.week-cell{padding:10px 4px;border-radius:12px;background:var(--linen);text-align:center;font-weight:700;font-size:.75rem;color:var(--muted)}
+.week-cell.active{background:var(--terracotta);color:#fff}
+.week-cell.done{background:var(--sage);color:#fff}
+.week-cell.locked{opacity:.4}
+
+/* Essential brief */
+.ess-brief{padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:flex-start}
+.ess-brief:last-child{border:0}
+.ess-brief .n{width:28px;height:28px;border-radius:50%;background:var(--linen);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem;flex-shrink:0}
+.ess-brief .n.active{background:var(--terracotta);color:#fff}
+.ess-brief .d{flex:1}
+.ess-brief .d h4{font-size:.93rem;font-weight:500;margin:0 0 2px}
+.ess-brief .d p{font-size:.78rem;color:var(--muted);margin:0}
+
+/* check-in */
+.checkin{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--white);border:1px solid var(--line);margin:6px 0}
+.checkin .val{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);background:var(--white);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:transparent;transition:.15s}
+.checkin .val.done{border-color:var(--sage);background:var(--sage);color:#fff}
+.checkin .lbl{flex:1;font-size:.88rem;font-weight:500}
+.checkin .sub{font-size:.7rem;color:var(--muted);font-weight:600}
+
+/* prompt card */
+.prompt{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:10px 0;border-left:4px solid var(--terracotta)}
+.prompt h3{font-size:1rem;margin:0 0 8px}
+.prompt p{font-size:.85rem;color:var(--muted);margin:0 0 10px}
+.prompt .sender{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--muted);margin-top:8px}
+
+/* splash */
+#splash{
+  position:fixed;inset:0;z-index:100;
+  background:linear-gradient(180deg,#3D2820 0%,#4C362D 60%,#5C3A2E 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:24px;transition:opacity .4s;
+}
+#splash.hidden{opacity:0;pointer-events:none}
+#splash .logo{font-family:Fraunces,serif;font-size:2.2rem;font-weight:600;color:var(--cream);margin-bottom:4px}
+#splash .logo em{color:var(--almond);font-style:italic;font-weight:400}
+#splash p{color:rgba(245,240,232,.78);font-size:.95rem;max-width:30ch;margin:4px 0}
+#splash .btn-primary{background:var(--terracotta);max-width:300px;margin-top:16px}
+
+/* avatar colors */
+.av-0{background:#88937B!important;color:#fff!important}
+.av-1{background:#A46447!important;color:#fff!important}
+.av-2{background:#6B5B4E!important;color:#fff!important}
+.av-3{background:#9a7d63!important;color:#fff!important}
+.av-4{background:#4C362D!important;color:#fff!important}
+.av-5{background:#7A6657!important;color:#fff!important}
+.av-6{background:#C4805A!important;color:#fff!important}
+.av-7{background:#5C7870!important;color:#fff!important}
+
+@media(max-width:380px){
+  .week-grid{grid-template-columns:repeat(4,1fr);gap:4px}
+  .week-cell{padding:8px 2px;font-size:.68rem}
+}
+
+/* Evidence gallery */
+#evidenceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;min-height:40px}
+#evidenceGrid img,#evidenceGrid video{border-radius:8px;width:100%}
+#evidenceGrid div{position:relative}
+
+
+/* Activity section */
+.act-card{font-size:.9rem;line-height:1.6}
+.act-card .day{font-weight:700;color:var(--umber)}
+
+
+/* Celebration card */
+.celebrate-card{background:linear-gradient(135deg,#3D2820,#5C3A2E);border-radius:var(--radius);padding:16px;margin:10px 0;color:var(--cream)}
+.celebrate-card h3{color:var(--almond);font-size:1rem;margin:0 0 4px}
+.celebrate-card p{color:rgba(245,240,232,.8);font-size:.82rem;margin:0}
+.celebrate-card .locked{opacity:.5}
+.celebrate-card .prize{display:inline-block;background:var(--terracotta);border-radius:999px;padding:2px 10px;font-size:.68rem;font-weight:800;color:#fff;margin-top:4px}
+/* Service track */
+.service-badge{display:inline-flex;align-items:center;gap:4px;background:var(--sage);color:#fff;border-radius:999px;padding:3px 10px;font-size:.68rem;font-weight:800}
+.sponsor-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:8px;background:var(--cream);border:1px solid var(--line);font-size:.72rem;font-weight:600;color:var(--umber)}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-4px)}}
+
+/* Podcast recorder overlay */
+#podcastOverlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;background:var(--umber);display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;color:#fff;text-align:center}
+#podcastOverlay.active{display:flex}
+#podcastOverlay h2{color:#fff;margin:0 0 8px}
+#podcastOverlay p{color:rgba(255,255,255,.7);margin:0 0 20px}
+.pod-timer{font-family:Fraunces,serif;font-size:clamp(2.5rem,12vw,4rem);color:#fff;margin:10px 0}
+.pod-btn{width:64px;height:64px;border-radius:50%;border:0;font-size:1.4rem;display:flex;align-items:center;justify-content:center;margin:10px auto;cursor:pointer;transition:transform .15s}
+.pod-btn:active{transform:scale(.92)}
+.pod-btn.record{background:#d32f2f;color:#fff}
+.pod-btn.stop{background:#fff;color:var(--umber)}
+.pod-btn.play{background:var(--terracotta);color:#fff}
+.pod-wave{display:flex;gap:2px;align-items:center;height:30px;margin:10px 0}
+.pod-wave span{width:3px;border-radius:2px;background:rgba(255,255,255,.6);height:var(--h,10px);animation:wave 1s ease-in-out infinite alternate}
+.pod-wave span:nth-child(odd){animation-delay:.3s}
+@keyframes wave{0%{height:6px}100%{height:24px}}
+.pod-actions{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap;justify-content:center}
+.pod-action{padding:8px 16px;border-radius:999px;font-size:.82rem;font-weight:700;border:0;cursor:pointer}
+.pod-action.save{background:var(--terracotta);color:#fff}
+.pod-action.share{background:#25D366;color:#fff}
+.pod-action.discard{background:rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
+.pod-action:disabled{opacity:.5;cursor:default}
+#podcastList{margin-top:8px;display:flex;flex-direction:column;gap:4px}
+.podcast-item{display:flex;align-items:center;gap:8px;padding:6px 8px;background:rgba(164,100,71,.06);border-radius:10px;font-size:.8rem;color:var(--ink)}
+.podcast-item .p-link{font-size:.75rem;color:var(--terracotta);cursor:pointer;margin-left:auto}
+
+/* Audio bar */
+.audio-bar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--white);border:1px solid var(--line);border-radius:12px;margin:8px 0}
+.audio-bar .play-btn{width:40px;height:40px;border-radius:50%;background:var(--terracotta);color:#fff;border:0;font-size:.85rem;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.audio-bar .play-btn.playing{background:var(--umber)}
+.audio-bar .wave{flex:1;height:6px;border-radius:999px;background:var(--line);cursor:pointer;position:relative;overflow:hidden}
+.audio-bar .wave .fill{height:100%;width:0;background:var(--terracotta);border-radius:999px;transition:width .1s linear}
+.audio-bar .time{font-size:.72rem;color:var(--muted);font-weight:600;min-width:70px;text-align:right}
+.ess-image{display:flex;align-items:center;justify-content:center;padding:20px;border-radius:12px;margin:8px 0}
+
+/* Help overlay */
+#helpOverlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;background:rgba(45,28,20,.85);display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px)}
+#helpOverlay.active{display:flex}
+#helpPanel{background:#fff;border-radius:20px;max-width:480px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);padding:0}
+#helpPanel h2{font-family:Fraunces,serif;font-size:1.1rem;color:#4C362D;margin:0;padding:16px 16px 0}
+#helpPanel .close{float:right;background:none;border:0;font-size:1.1rem;color:#7a6657;cursor:pointer;padding:4px 8px}
+#helpContent{padding:4px 16px 16px}
+#helpContent h3{font-family:Fraunces,serif;font-size:.9rem;color:#4C362D;margin:10px 0 4px;border-bottom:1px solid rgba(76,54,45,.08);padding-bottom:4px}
+#helpContent p{font-size:.82rem;color:#7a6657;margin:4px 0;line-height:1.5}
+#helpContent ol{margin:4px 0 4px 16px;font-size:.82rem;color:#7a6657}
+#helpContent li{margin:3px 0}
+#helpContent .step{display:flex;gap:8px;align-items:flex-start;padding:6px 0}
+#helpContent .step .icon{width:24px;height:24px;border-radius:50%;background:rgba(164,100,71,.12);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="logo">one <em>to</em> eight</div>
+  <p style="font-size:.72rem;font-weight:700;text-transform:uppercase;color:rgba(232,225,213,.6);letter-spacing:.05em;margin-top:2px">Circles</p>
+  <p>Eight weeks. Your people. One essential per week.</p>
+  <button class="btn-primary" onclick="startApp()">Get started</button>
+</div>
+
+<div id="app">
+  <header class="app-bar" id="appBar">
+    <button class="btn" id="leftBtn" onclick="navBack()" style="display:none">←</button>
+    <div style="flex:1"><div id="titleText" style="font-weight:600;font-size:1rem">Circles</div><div id="subText" style="font-size:.65rem;color:rgba(232,225,213,.7);font-weight:700;text-transform:uppercase;letter-spacing:.04em">onetoeight</div></div>
+    <button class="btn" id="rightBtn" style="font-size:.7rem;width:auto;padding:0 10px;border-radius:999px" onclick="showHelp()">Help</button>
+  </header>
+
+  <div id="view">
+    <!-- screens injected by JS -->
+  </div>
+
+  <div id="tabs">
+    <button class="tab active" data-tab="home" onclick="showScreen('home')"><span class="ico">🏠</span>Home</button>
+    <button class="tab" data-tab="week" onclick="showScreen('week')"><span class="ico">📅</span>Week</button>
+    <button class="tab" data-tab="pod" onclick="showScreen('pod')"><span class="ico">👥</span>Pod</button>
+    <button class="tab" data-tab="profile" onclick="showScreen('profile')"><span class="ico">👤</span>Profile</button>
+        <button class="tab" data-tab="ai" onclick="showScreen('ai')"><span class="ico">🧠</span>AI</button>
+      </div>
+</div>
+
+
+  
+
+
+<script>
+// ===== DATA =====
+const ESSENTIALS = [
+  {num:1,title:"Silence",subtitle:"The ability to sit still",color:"#88937B",audio:"https://rising-cedar-828r.here.now/drafts/audio/chapter1.ogg",svg:"data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20120%20120%22%20fill=%22none%22%3E%3Ccircle%20cx=%2260%22%20cy=%2260%22%20r=%2248%22%20stroke=%22%2388937B%22%20stroke-width=%222%22/%3E%3Ccircle%20cx=%2260%22%20cy=%2260%22%20r=%2232%22%20stroke=%22%2388937B%22%20stroke-width=%222%22/%3E%3Ccircle%20cx=%2260%22%20cy=%2260%22%20r=%2216%22%20stroke=%22%23A46447%22%20stroke-width=%222%22/%3E%3Ccircle%20cx=%2260%22%20cy=%2260%22%20r=%225%22%20fill=%22%2388937B%22/%3E%3C/svg%3E",intro:"Silence is not emptiness. It is recovery space for attention, emotion, and self-awareness. If you cannot sit still, you cannot think clearly.",activity:`📵 Daily: 3 minutes of silence. Phone in another room. Just sit, walk, or stare out a window. Name the urge to grab your phone, then stay one more minute.<br>📆 Wednesday: Check in with your buddy. Share what came up during silence.<br>📆 Thursday: Try 5 minutes instead of 3.<br>📆 Friday: Pod check-in. Share one thing you noticed.<br>📆 Sunday: Meet up with the pod. Sit in silence together for 10 minutes. No phones. Then share what surfaced.<br>🎯 Challenge: Go a full day without listening to anything (no music, no podcasts, no videos). Just ambient sound.`,practice:"Start with 3 minutes. Phone in another room. Sit, walk, or stare out a window. When the urge to escape comes, name it, then stay one more minute.",irl:"Sit together in silence for 10 minutes. No phones. Then share one thing that surfaced."},
+  {num:2,title:"Body",subtitle:"Your body is a temple",color:"#A46447",audio:"https://rising-cedar-828r.here.now/drafts/audio/chapter2.ogg",svg:"data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20120%20120%22%20fill=%22none%22%3E%3Cpath%20d=%22M60%2020%20C40%2020%2025%2040%2025%2060%20C25%2085%2055%20105%2060%20110%20C65%20105%2095%2085%2095%2060%20C95%2040%2080%2020%2060%2020Z%22%20stroke=%22%23A46447%22%20stroke-width=%222%22%20fill=%22rgba%28164%2C100%2C71%2C.1%29%22/%3E%3Cpath%20d=%22M55%2050%20L55%2075%20M55%2075%20L65%2065%20M55%2075%20L45%2065%22%20stroke=%22%23A46447%22%20stroke-width=%222%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E",intro:"Your body is the platform for everything else. Mood, focus, and patience are physical as much as mental. Neglect is not neutral.",activity:`🏋️ Daily: One physical practice. Walk 15 min, bodyweight circuit, or stretch. Cook one real meal from scratch.<br>📆 Wednesday: Buddy check. What gate are you guarding this week?<br>📆 Friday: Pod check-in. Share one change you made.<br>📆 Sunday: Go for a walk or do a workout together. Talk about one boundary you\'re choosing to keep.<br>🎯 Challenge: Choose one body gate (sleep, food, exercise, environment) and guard it perfectly for 7 days.`,practice:"Protect sleep. Cook real food. Move enough to raise your heart rate. Choose one gate and guard it for a week.",irl:"Go for a walk or do a bodyweight workout together. Talk about one boundary you are choosing to keep."},
+  {num:3,title:"Skills",subtitle:"Feed, fix, build, grow, finance",color:"#4C362D",audio:"https://rising-cedar-828r.here.now/drafts/audio/chapter3_p1.ogg",svg:"data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20120%20120%22%20fill=%22none%22%3E%3Crect%20x=%2220%22%20y=%2255%22%20width=%2280%22%20height=%2240%22%20rx=%226%22%20stroke=%22%234C362D%22%20stroke-width=%222%22%20fill=%22rgba%2876%2C54%2C45%2C.08%29%22/%3E%3Cline%20x1=%2235%22%20y1=%2235%22%20x2=%2235%22%20y2=%2255%22%20stroke=%22%234C362D%22%20stroke-width=%222%22/%3E%3Cline%20x1=%2285%22%20y1=%2235%22%20x2=%2285%22%20y2=%2255%22%20stroke=%22%234C362D%22%20stroke-width=%222%22/%3E%3Cline%20x1=%2235%22%20y1=%2235%22%20x2=%2285%22%20y2=%2235%22%20stroke=%22%234C362D%22%20stroke-width=%222%22/%3E%3Cpath%20d=%22M50%2065%20L55%2075%20L50%2075%20L55%2065%22%20stroke=%22%234C362D%22%20stroke-width=%221.5%22/%3E%3Ccircle%20cx=%2260%22%20cy=%2280%22%20r=%223%22%20fill=%22%234C362D%22/%3E%3Ccircle%20cx=%2270%22%20cy=%2275%22%20r=%223%22%20fill=%22%234C362D%22/%3E%3C/svg%3E",intro:"Skills create quiet confidence: not status confidence, but the kind where you can look after yourself and be useful to others.",activity:`🛠️ Daily: Do one thing with your hands that isn\'t on a screen.<br>📆 Wednesday: Buddy check. What skill did you work on?<br>📆 Friday: Pod check-in. Share one thing you fixed or built.<br>📆 Sunday: Cook a meal together. Each person brings one ingredient they\'ve never used before.<br>🎯 Challenge: Complete one real repair this week. Fix something broken instead of replacing it.`,practice:"Cook from scratch. Complete one repair. Start one grow project. Write a simple budget.",irl:"Cook a meal together from scratch. Each person brings one ingredient they have never used before."},
+  {num:4,title:"Digital",subtitle:"Agency when attention is the product",color:"#4C362D",audio:"https://rising-cedar-828r.here.now/drafts/audio/chapter4_p1.ogg",svg:"data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20120%20120%22%20fill=%22none%22%3E%3Crect%20x=%2225%22%20y=%2225%22%20width=%2270%22%20height=%2270%22%20rx=%2210%22%20stroke=%22%234C362D%22%20stroke-width=%222%22%20fill=%22rgba%2876%2C54%2C45%2C.06%29%22/%3E%3Ccircle%20cx=%2260%22%20cy=%2255%22%20r=%2212%22%20stroke=%22%234C362D%22%20stroke-width=%222%22/%3E%3Cline%20x1=%2260%22%20y1=%2267%22%20x2=%2260%22%20y2=%2282%22%20stroke=%22%234C362D%22%20stroke-width=%222%22/%3E%3Ccircle%20cx=%2260%22%20cy=%2288%22%20r=%222%22%20fill=%22%23A46447%22/%3E%3C/svg%3E",intro:"Your phone maps pressure points as much as plans. Free often means you are the product. Digital self-defence is adult agency.",activity:`📱 Daily: Kill all non-essential notifications. Pick one app and delete it for the week.<br>📆 Wednesday: Buddy check. What digital boundary did you set?<br>📆 Friday: Pod check-in. Share your screen time stats.<br>📆 Sunday: Phone swap. Hold each other\'s phones for 30 minutes. Discuss what you noticed.<br>🎯 Challenge: 24-hour digital fast. No social media, no games, no YouTube. See what comes up.`,practice:"Password manager plus MFA. Kill non-essential notifications. Strip permissions you do not need. Name your post-scam person.",irl:"Do a phone swap for 30 minutes. Hold each others phones. Discuss what you noticed."},
+  {num:5,title:"Community",subtitle:"People who know your name",color:"#9a7d63",audio:"https://rising-cedar-828r.here.now/drafts/audio/chapter5.ogg",svg:"data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20120%20120%22%20fill=%22none%22%3E%3Ccircle%20cx=%2245%22%20cy=%2245%22%20r=%2220%22%20stroke=%22%239a7d63%22%20stroke-width=%222%22%20fill=%22rgba%28154%2C125%2C99%2C.12%29%22/%3E%3Ccircle%20cx=%2275%22%20cy=%2245%22%20r=%2220%22%20stroke=%22%239a7d63%22%20stroke-width=%222%22%20fill=%22rgba%28154%2C125%2C99%2C.12%29%22/%3E%3Ccircle%20cx=%2245%22%20cy=%2275%22%20r=%2220%22%20stroke=%22%239a7d63%22%20stroke-width=%222%22%20fill=%22rgba%28154%2C125%2C99%2C.12%29%22/%3E%3Ccircle%20cx=%2275%22%20cy=%2275%22%20r=%2220%22%20stroke=%22%239a7d63%22%20stroke-width=%222%22%20fill=%22rgba%28154%2C125%2C99%2C.12%29%22/%3E%3Ccircle%20cx=%2260%22%20cy=%2260%22%20r=%2212%22%20fill=%22%23A46447%22/%3E%3C/svg%3E",intro:"Followers amplify. Friends carry. The 2am test reveals the gap. Build load-bearing relationships before the crisis.",activity:`👥 Daily: One social gesture. Text someone you haven\'t talked to this week. Say something specific.<br>📆 Wednesday: Buddy check. Name one person you\'re grateful for.<br>📆 Friday: Pod check-in. Who did you reach out to?<br>📆 Sunday: Do something for someone outside the pod together. Meal, visit, errand, or note.<br>🎯 Challenge: Have one honest conversation this week that you\'ve been avoiding.`,practice:"Name your real people. Initiate one meet. Repair one strained relationship with honesty.",irl:"Do something for someone outside the pod together. Meal, visit, errand, or note."},
+  {num:6,title:"Knowledge",subtitle:"What you still know when Wi-Fi dies",color:"#A46447",audio:"https://rising-cedar-828r.here.now/drafts/audio/chapter6.ogg",svg:"data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20120%20120%22%20fill=%22none%22%3E%3Ccircle%20cx=%2260%22%20cy=%2255%22%20r=%2230%22%20stroke=%22%23A46447%22%20stroke-width=%222%22%20fill=%22rgba%28164%2C100%2C71%2C.08%29%22/%3E%3Cpath%20d=%22M30%2085%20L60%2080%20L90%2085%22%20stroke=%22%23A46447%22%20stroke-width=%222%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E",intro:"Access is not possession. Stress reveals whether skill is real. Own knowledge, do not only rent it from a search bar.",activity:`📚 Daily: Learn one new fact or skill from a book or person. No search engines.<br>📆 Wednesday: Buddy check. Teach each other something. 5 minutes each.<br>📆 Friday: Pod check-in. What did you learn that surprised you?<br>📆 Sunday: Teach each other a skill. 10 minutes each. Something hands-on.<br>🎯 Challenge: Memorise three phone numbers this week. Your pod knows them too.`,practice:"Memorise key contacts. Build a one-page offline life sheet. Learn one thing slowly.",irl:"Teach each other one skill you know that the rest do not. 10 minutes each."},
+  {num:7,title:"Nature",subtitle:"Sunlight, soil, and scale",color:"#88937B",audio:"https://rising-cedar-828r.here.now/drafts/audio/chapter7.ogg",svg:"data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20120%20120%22%20fill=%22none%22%3E%3Cpath%20d=%22M20%2090%20Q40%2040%2060%2070%20Q80%2030%20100%2080%22%20stroke=%22%2388937B%22%20stroke-width=%222%22%20fill=%22none%22%20stroke-linecap=%22round%22/%3E%3Ccircle%20cx=%2250%22%20cy=%2235%22%20r=%228%22%20fill=%22%23A46447%22%20opacity=%22.6%22/%3E%3Cpath%20d=%22M65%2025%20Q70%2018%2075%2022%20Q73%2028%2068%2027%20Z%22%20fill=%22%2388937B%22/%3E%3C/svg%3E",intro:"Nature is not decoration. It is medicine that older generations received by default. Sunlight, soil, and slow rhythm restore what screens empty.",activity:`🌿 Daily: 10 minutes outside. Morning light preferred. Leave headphones behind at least once.<br>📆 Wednesday: Buddy check. What did you notice outside today?<br>📆 Friday: Pod check-in. Share one thing from nature that caught your attention.<br>📆 Sunday: Go outside together for an hour. No phones. Walk somewhere without a destination.<br>🎯 Challenge: Go outside before looking at your phone for 7 days straight.`,practice:"Morning outdoor light. One longer weekly outing. Sometimes leave headphones behind.",irl:"Go outside together for an hour. No phones. Walk somewhere without a destination."},
+  {num:8,title:"Convictions",subtitle:"Values that hold when life invoices you",color:"#4C362D",audio:"https://rising-cedar-828r.here.now/drafts/audio/chapter8_p1.ogg",svg:"data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20120%20120%22%20fill=%22none%22%3E%3Cpolygon%20points=%2260%2C25%2072%2C52%20100%2C55%2078%2C76%2084%2C105%2060%2C90%2036%2C105%2042%2C76%2020%2C55%2048%2C52%22%20stroke=%22%234C362D%22%20stroke-width=%222%22%20fill=%22rgba%2876%2C54%2C45%2C.12%29%22/%3E%3Ccircle%20cx=%2260%22%20cy=%2265%22%20r=%2210%22%20fill=%22%23A46447%22/%3E%3C/svg%3E",intro:"Decorative values look good and cost nothing. Load-bearing values still shape behaviour when inconvenient.",activity:`🎯 Daily: Name one action you took today that matched your values.<br>📆 Wednesday: Buddy check. Share one conviction you\'re testing this week.<br>📆 Friday: Pod check-in. Read your conviction statement out loud.<br>📆 Sunday: Share your conviction statements with each other. Everyone keeps everyone else\'s. Follow up in one month.<br>🎯 Challenge: Write a one-sentence conviction statement for each of the 8 essentials. Share them with the pod.`,practice:"List five values. Prove each with one action. Talk to someone older. Write a personal conviction statement.",irl:"Share your conviction statements with each other. Everyone keeps everyones. Check in one month later."},
+];
+
+const DEFAULT_PROFILE = {
+  name:"",
+  avatar:0,
+  podId:null,
+  completedWeeks:[],
+  streaks:0,
+  checkins:{}
+};
+
+const DEFAULT_POD = {
+  id:null,
+  name:"",
+  code:"",
+  created:null,
+  currentWeek:1,
+  startDate:null,
+  members:[],
+  buddyPairs:{},
+  silentPartners:{},
+  completion:{},
+  meetups:[]
+};
+
+// ===== STATE =====
+let profile = loadJSON("circles_profile", DEFAULT_PROFILE);
+let pod = loadJSON("circles_pod", null);
+
+function loadJSON(key, fallback){
+  try{var v=JSON.parse(localStorage.getItem(key));return v!=null?v:fallback}
+  catch(e){return fallback}
+}
+function save(){localStorage.setItem("circles_profile",JSON.stringify(profile));localStorage.setItem("circles_pod",JSON.stringify(pod))}
+
+// ===== SPLASH =====
+function startApp(){
+  document.getElementById("splash").classList.add("hidden");
+  setTimeout(()=>{
+    document.getElementById("splash").style.display="none";
+    if(!profile.name){showSetup();}
+    else if(!pod){showJoinCreate();}
+    else{renderAll();}
+  },350);
+}
+
+// ===== SETUP =====
+function showSetup(){
+  document.getElementById("tabs").style.display="none";
+  document.getElementById("appBar").style.display="none";
+  document.getElementById("view").classList.add("no-pad");
+  document.getElementById("view").innerHTML=`
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;text-align:center;
+    background:linear-gradient(180deg,#3D2820 0%,#4C362D 60%,#5C3A2E 100%);color:var(--cream)">
+    <div style="font-family:Fraunces,serif;font-size:2rem;font-weight:600;color:var(--cream);margin-bottom:4px">one <em style="color:var(--almond);font-style:italic">to</em> eight</div>
+    <p style="color:rgba(245,240,232,.7);font-size:.9rem;margin:4px 0 20px">Let's set you up for Circles.</p>
+    <div style="width:100%;max-width:320px;text-align:left">
+      <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:rgba(232,225,213,.6);letter-spacing:.04em">Your name</label>
+      <input id="setupName" style="width:100%;padding:12px 14px;border-radius:12px;border:0;margin:6px 0 14px;font-size:.95rem;background:rgba(255,255,255,.1);color:#fff;backdrop-filter:blur(4px)" placeholder="What should the pod call you?">
+      <button class="btn-primary" style="background:var(--terracotta)" onclick="saveSetup()">Continue</button>
+    </div>
+  </div>`;
+}
+
+function saveSetup(){
+  var name=document.getElementById("setupName").value.trim();
+  if(!name) return;
+  profile.name=name;
+  profile.avatar=Math.floor(Math.random()*8);
+  save();
+  document.getElementById("appBar").style.display="flex";
+  document.getElementById("tabs").style.display="flex";
+  document.getElementById("view").classList.remove("no-pad");
+  showJoinCreate();
+}
+
+// ===== JOIN OR CREATE =====
+function showJoinCreate(){
+  document.getElementById("view").innerHTML=`
+  <div style="text-align:center;padding:20px 0 10px">
+    <h2 style="font-size:1.4rem">Welcome, ${profile.name} 👋</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin:4px 0 16px">Join an existing pod or create a new one.</p>
+  </div>
+  <div class="card" onclick="showCreatePod()" style="cursor:pointer">
+    <div class="k">Option 01</div>
+    <h2>Start a pod</h2>
+    <p>Add up to 7 friends. 8 weeks together. Local-first — no cost.</p>
+  </div>
+  <div class="card" onclick="startSolo()" style="cursor:pointer">
+    <div class="k">Option 02</div>
+    <h2>Go solo</h2>
+    <p>Work through the eight essentials on your own. No pod, no accountability — just the content.</p>
+  </div>
+  <p style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:12px">Everything stays on your device. Pod and solo are both free.</p>`;
+}
+
+function showCreatePod(){
+  document.getElementById("view").innerHTML=`
+  <h2 style="margin:16px 0 6px">Create your pod</h2>
+  <p style="font-size:.88rem;color:var(--muted);margin:0 0 12px">Give your pod a name, set your start date, and add your people.</p>
+  <div class="card">
+    <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--sage);letter-spacing:.04em">Pod name</label>
+    <input id="podName" style="width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.95rem;margin:6px 0 14px" placeholder="e.g. The Anchors">
+    <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--sage);letter-spacing:.04em">Start date (this Monday)</label>
+    <input id="podDate" type="date" style="width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.95rem;margin:6px 0 14px">
+    <div style="margin:8px 0 4px;font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--sage);letter-spacing:.04em">Pod members</div>
+    <p style="font-size:.78rem;color:var(--muted);margin:0 0 8px">Add up to 7 friends. Names stay on this device only.</p>
+    <div id="memberFields">
+      <div class="member-field" style="margin:8px 0">
+        <input class="member-name" placeholder="Name" style="width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.9rem;margin-bottom:6px">
+        <input class="member-url" placeholder="Email or chat link (optional)" style="width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.9rem;margin-bottom:6px">
+        <button onclick="removeMemberField(this)" style="padding:6px 12px;border-radius:10px;border:2px solid var(--line);background:var(--white);color:var(--muted);font-size:.8rem;cursor:pointer">Remove</button>
+      </div>
+    </div>
+    <button onclick="addMemberField()" style="width:100%;padding:10px;border-radius:10px;border:2px dashed var(--line);background:transparent;color:var(--muted);font-size:.85rem;font-weight:600;margin:4px 0 12px;cursor:pointer">+ Add another person</button>
+    <button class="btn-primary" onclick="createPod()">Create pod →</button>
+  </div>`;
+  var d=new Date();d.setDate(d.getDate()+(1-d.getDay()+7)%7);
+  document.getElementById("podDate").value=d.toISOString().split("T")[0];
+}
+
+function addMemberField(){
+  var container=document.getElementById("memberFields");
+  var count=container.querySelectorAll(".member-field").length;
+  if(count>=7){alert("Maximum 7 pod members.");return;}
+  var div=document.createElement("div");
+  div.className="member-field";
+  div.style.cssText="margin:8px 0";
+  div.innerHTML=`<input class="member-name" placeholder="Name" style="width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.9rem;margin-bottom:6px">
+  <input class="member-url" placeholder="Email or chat link (optional)" style="width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.9rem;margin-bottom:6px">
+  <button onclick="removeMemberField(this)" style="padding:6px 12px;border-radius:10px;border:2px solid var(--line);background:var(--white);color:var(--muted);font-size:.8rem;cursor:pointer">Remove</button>`;
+  container.appendChild(div);
+}
+
+function removeMemberField(btn){
+  var container=document.getElementById("memberFields");
+  var fields=container.querySelectorAll(".member-field");
+  if(fields.length<=1){alert("Keep at least one field.");return;}
+  btn.closest(".member-field").remove();
+}
+
+function createPod(){
+  var name=document.getElementById("podName").value.trim()||profile.name+"'s Pod";
+  var start=document.getElementById("podDate").value||new Date().toISOString().split("T")[0];
+  var fields=document.querySelectorAll(".member-field");
+  var members=[{name:profile.name,avatar:profile.avatar,joined:new Date().toISOString(),streak:0,url:""}];
+  var colors=[1,2,3,4,5,6,7];
+  var colorIdx=0;
+  fields.forEach(function(f){
+    var n=f.querySelector(".member-name").value.trim();
+    var u=f.querySelector(".member-url").value.trim();
+    if(n){
+      members.push({name:n,avatar:colors[colorIdx%colors.length],joined:new Date().toISOString(),streak:0,url:u});
+      colorIdx++;
+    }
+  });
+  pod={
+    id:"pod_"+Date.now(),
+    name:name,
+    code:"",
+    created:new Date().toISOString(),
+    currentWeek:1,
+    startDate:start,
+    members:members,
+    buddyPairs:{},
+    silentPartners:{},
+    completion:{},
+    meetups:[],
+    checkins:{}
+  };
+  profile.podId=pod.id;
+  save();
+  renderAll();
+  showScreen("pod");
+}
+
+function startSolo(){
+  pod={
+    id:"solo_"+Date.now(),
+    name:"Solo",
+    code:"",
+    created:new Date().toISOString(),
+    currentWeek:1,
+    startDate:new Date().toISOString().split("T")[0],
+    members:[{name:profile.name,avatar:profile.avatar,joined:new Date().toISOString(),streak:0}],
+    buddyPairs:{},silentPartners:{},completion:{},meetups:[],checkins:{}
+  };
+  profile.podId=pod.id;
+  save();
+  renderAll();
+}
+
+// ===== RENDER =====
+function renderAll(){
+  showScreen("home");
+}
+
+function showScreen(id){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab===id));
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  var el=document.getElementById("screen_"+id);
+  if(el) el.classList.add("active");
+  updateTitle(id);
+}
+
+function updateTitle(id){
+  var t=document.getElementById("titleText");
+  var s=document.getElementById("subText");
+  if(!t||!s)return;
+  if(id=="home"){t.textContent=pod?pod.name:"Circles";s.textContent=pod?"Week "+pod.currentWeek+" of 8":"onetoeight"}
+  else if(id=="week"){t.textContent=pod?"Essential "+pod.currentWeek:"Week";s.textContent=pod?ESSENTIALS[pod.currentWeek-1].title:"onetoeight"}
+  else if(id=="pod"){t.textContent=pod?pod.name:"Pod";s.textContent=pod?pod.members.length+" members":"onetoeight"}
+  else if(id=="profile"){t.textContent=profile.name||"Profile";s.textContent="Your profile"}
+  else if(id=="ai"){t.textContent="AI Assistant";s.textContent="Ask about the essentials"}
+}
+
+// ===== HOME SCREEN =====
+function renderHome(){
+  var h=`
+  <div class="screen active" id="screen_home">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:12px 0 6px">
+      <div>
+        <div class="tag">Week ${pod.currentWeek} of 8</div>
+        <h2 style="font-size:1.35rem;margin:4px 0 0">${ESSENTIALS[pod.currentWeek-1].title}</h2>
+      </div>
+      <div style="width:48px;height:48px;border-radius:50%;background:${ESSENTIALS[pod.currentWeek-1].color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.2rem">${pod.currentWeek}</div>
+    </div>
+    <p style="font-size:.9rem;color:var(--muted)">${ESSENTIALS[pod.currentWeek-1].subtitle}</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0">
+      <div class="card" style="margin:0;text-align:center" onclick="showScreen('week')">
+        <div style="font-size:1.3rem">📖</div>
+        <div style="font-weight:700;font-size:.82rem;margin-top:4px">This week</div>
+      </div>
+      <div class="card" style="margin:0;text-align:center" onclick="showMeetup()">
+        <div style="font-size:1.3rem">👋</div>
+        <div style="font-weight:700;font-size:.82rem;margin-top:4px">Meetup prompt</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="k">Your circle</div>
+      ${pod.members.map((m,i)=>`<div class="member"><div class="av av-${m.avatar}">${m.name[0]}</div><div class="nm">${m.name}</div><div class="sc">${m.streak||0} day streak</div></div>`).join("")}
+    </div>
+    ${pod.members.length<8?`<button class="btn-outline" onclick="showAddMember()">+ Add person</button>`:""}
+    <div class="card" style="background:var(--cream);border:2px solid var(--almond);margin:8px 0">
+      <div class="k" style="color:var(--terracotta)">Weekly meetup</div>
+      <p style="font-size:.85rem;margin:4px 0 8px">Join the wider community every Thursday evening — live online teaching, Q&amp;A, and discussion.</p>
+      <a href="https://sleek-drift-4hqr.here.now/" target="_blank" rel="noopener" style="font-size:.82rem;font-weight:700;color:var(--terracotta);text-decoration:none">Join the Weekly Meetup →</a>
+    </div>
+    <div class="card">
+      <div class="k">Progress</div>
+      <div style="display:flex;gap:4px;margin:6px 0">
+        ${Array.from({length:8},(_,i)=>`<div style="flex:1;height:6px;border-radius:999px;background:${i<pod.currentWeek-1?ESSENTIALS[i].color:i==pod.currentWeek-1?'var(--terracotta)':'var(--line)'}"></div>`).join("")}
+      </div>
+      <p style="font-size:.78rem;color:var(--muted);margin:2px 0">${pod.currentWeek-1} of 8 essentials completed</p>
+    </div>
+  </div>
+    
+  `;
+  
+  injectScreen("home",h);
+  // Append celebration + service cards (built with concat, not nested templates)
+  var homeDiv = document.getElementById("screen_home");
+  if(!homeDiv) return;
+  var extras = "";
+  if(pod.celebration && pod.celebration.set){
+    var done = Object.keys(pod.completion||{}).length >= 8;
+    extras += "<div class=\"celebrate-card " + (done ? "" : "locked") + "\">";
+    extras += "<h3>" + (done ? "\\ud83c\\udf89" : "\\ud83d\\udd12") + " Celebration set</h3>";
+    extras += "<p>" + (done ? "Well done! Your celebration: " + pod.celebration.description + (pod.celebration.amount ? " ($" + pod.celebration.amount + ")" : "") : pod.celebration.type + " celebration set for when you complete all 8 essentials") + "</p>";
+    if(done) extras += "<div class=\"prize\">Claim celebration \\u2192</div>";
+    extras += "</div>";
+  }
+  if(Object.keys(pod.completion||{}).length >= 8){
+    var active = pod.serviceExtension && pod.serviceExtension.active;
+    extras += "<div class=\"card\" style=\"border:2px solid var(--sage)\">";
+    extras += "<div class=\"k\" style=\"color:var(--sage)\">Service extension</div>";
+    extras += "<h2 style=\"font-size:1rem\">Serve your community</h2>";
+    extras += "<p style=\"font-size:.82rem\">8 more weeks. 8 acts of service. Complete all 8 and enter the prize draw from local businesses.</p>";
+    extras += "<button class=\"btn-primary\" style=\"background:var(--sage)\" onclick=\"startServiceExtension()\">" + (active ? "Continue service track \\u2192" : "Start service track \\u2192") + "</button>";
+    extras += "</div>";
+  }
+  if(extras) homeDiv.innerHTML += extras;
+}
+
+function injectScreen(id,html){
+  var existing=document.getElementById("screen_"+id);
+  if(existing) existing.remove();
+  var div=document.createElement("div");
+  div.id="screen_"+id;
+  div.className="screen";
+  div.innerHTML=html;
+  document.getElementById("view").appendChild(div);
+}
+
+function showMeetup(){
+  var e=ESSENTIALS[pod.currentWeek-1];
+  document.getElementById("view").innerHTML=`
+  <div style="padding:8px 0">
+    <span class="tag" style="margin-bottom:4px">IRL Prompt · Week ${e.num}</span>
+    <h2>${e.title}</h2>
+    <div class="prompt">
+      <h3>This week's meetup</h3>
+      <p>${e.irl}</p>
+      <div class="sender">🤝 Suggested for Sunday</div>
+    </div>
+    <div class="card">
+      <p style="font-size:.85rem">After your meetup, take a group photo and mark it here.</p>
+      <button class="btn-primary" onclick="markMeetup()">Mark meetup done ✓</button>
+    </div>
+    <div class="card" style="background:var(--cream);border:2px solid var(--almond)">
+      <div class="k" style="color:var(--terracotta)">Go deeper</div>
+      <p style="font-size:.85rem;margin:4px 0 8px">Join the wider community every Thursday evening for a live online session — deep-dive teaching, extended Q&amp;A, and discussion with others on the same road.</p>
+      <a href="https://sleek-drift-4hqr.here.now/" target="_blank" rel="noopener" class="btn-outline" style="display:inline-flex;text-decoration:none">Join the Weekly Meetup →</a>
+    </div>
+    <button class="btn-ghost" onclick="showScreen('home')" style="margin:auto;display:flex">← Back to home</button>
+  </div>`;
+}
+
+function markMeetup(){
+  if(!pod.meetups) pod.meetups=[];
+  if(!pod.meetups.includes(pod.currentWeek)){
+    pod.meetups.push(pod.currentWeek);
+    save();
+    alert("Meetup marked! 🎉 Keep the streak going.");
+    showScreen("home");
+  } else alert("Already marked for this week.");
+}
+
+function showAddMember(){
+  if(pod.members.length>=8){alert("Pod is full (8 members max).");return;}
+  document.getElementById("view").innerHTML=`
+  <h2 style="margin:16px 0 6px">Add pod member</h2>
+  <p style="font-size:.88rem;color:var(--muted);margin:0 0 12px">Add one person. Their name stays on this device.</p>
+  <div class="card">
+    <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--sage);letter-spacing:.04em">Name</label>
+    <input id="newMemberName" style="width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.95rem;margin:6px 0 14px" placeholder="Their name">
+    <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--sage);letter-spacing:.04em">Email or chat link (optional)</label>
+    <input id="newMemberUrl" style="width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.95rem;margin:6px 0 14px" placeholder="Email, WhatsApp, Telegram link">
+    <button class="btn-primary" onclick="addMember()">Add to pod →</button>
+  </div>
+  <button class="btn-ghost" onclick="showScreen('pod')" style="margin:auto;display:flex">← Back to pod</button>`;
+}
+
+function addMember(){
+  var name=document.getElementById("newMemberName").value.trim();
+  var url=document.getElementById("newMemberUrl").value.trim();
+  if(!name){alert("Enter a name");return;}
+  if(pod.members.length>=8){alert("Pod is full (8 members max).");return;}
+  var colors=[1,2,3,4,5,6,7];
+  var used=pod.members.map(function(m){return m.avatar;});
+  var avail=colors.filter(function(c){return used.indexOf(c)<0;});
+  var avatar=avail.length>0?avail[0]:pod.members.length%8;
+  pod.members.push({name:name,avatar:avatar,joined:new Date().toISOString(),streak:0,url:url});
+  save();
+  renderAll();
+  showScreen("pod");
+}
+
+// ===== WEEK SCREEN =====
+function renderWeek(){
+  var e=ESSENTIALS[pod.currentWeek-1];
+  var c=pod.checkins||{};
+  var wk="w"+pod.currentWeek;
+  var myCheck=c[wk]||{};
+  var h=`
+  <div class="screen" id="screen_week">
+    <div style="display:flex;align-items:center;gap:12px;margin:12px 0 8px">
+      <div style="width:44px;height:44px;border-radius:12px;background:${e.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem">${e.num}</div>
+      <div><h2 style="font-size:1.2rem">${e.title}</h2><p style="font-size:.78rem;color:var(--muted);margin:0">${e.subtitle}</p></div>
+    </div>
+        <div class="ess-image" style="background:${e.color}15"><img src="${e.svg}" alt="${e.title}" style="width:80%;height:80%;max-width:240px;object-fit:contain"></div>
+    <div class="audio-bar">
+      <button class="play-btn" onclick="toggleAudio(this,'${e.audio}')">\u25b6</button>
+      <div class="wave" onclick="seekAudio(this,event)"><div class="fill"></div></div>
+      <span class="time">0:00</span>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="k">This week\'s essential</div>
+      <p>${e.intro}</p>
+    </div>
+    <div class="card" style="background:${e.color}10;border-left:4px solid ${e.color}">
+      <div class="k" style="color:${e.color}">This week\'s activity</div>
+      <div style="margin:4px 0;font-size:.92rem">${e.activity}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div class="card" style="margin:0">
+        <div class="k">Practice</div>
+        <p style="font-size:.85rem">${e.practice}</p>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="k">Weekly meetup</div>
+        <p style="font-size:.85rem">${e.irl}</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="k">Daily check-in</div>
+      <div class="checkin" onclick="toggleCheck('listen')">
+        <div class="val ${myCheck.listen?'done':''}" id="ck_listen">${myCheck.listen?'✓':''}</div>
+        <div><div class="lbl">Listened to the audio</div><div class="sub">Start the week with the essential intro</div></div>
+      </div>
+      <div class="checkin" onclick="toggleCheck('practice')">
+        <div class="val ${myCheck.practice?'done':''}" id="ck_practice">${myCheck.practice?'✓':''}</div>
+        <div><div class="lbl">Did the practice</div><div class="sub">At least one practice session this week</div></div>
+      </div>
+      <div class="checkin" onclick="toggleCheck('buddy')">
+        <div class="val ${myCheck.buddy?'done':''}" id="ck_buddy">${myCheck.buddy?'✓':''}</div>
+        <div><div class="lbl">Checked in with buddy</div><div class="sub">Connected with your weekly partner</div></div>
+      </div>
+      <div class="checkin" onclick="toggleCheck('meetup')">
+        <div class="val ${myCheck.meetup?'done':''}" id="ck_meetup">${myCheck.meetup?'✓':''}</div>
+        <div><div class="lbl">Attended meetup</div><div class="sub">Face-to-face with the pod</div></div>
+      </div>
+    </div>
+    <div class="card" style="background:var(--cream);border:2px dashed var(--line)">
+      <div class="k">Evidence</div>
+      <h3 style="font-size:.98rem;margin:0 0 6px">Show what you did</h3>
+      <p style="font-size:.82rem;color:var(--muted);margin:0 0 8px">Upload photos or a short video of your practice or meetup. The pod sees it. Or use privacy mode.</p>
+      <div id="evidenceArea">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:6px 0" id="evidenceGrid">
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <label style="flex:1;min-width:100px;padding:10px;border-radius:10px;background:var(--white);border:2px dashed var(--line);text-align:center;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer">
+            📷 Add photos
+            <input type="file" accept="image/*" multiple style="display:none" onchange="addEvidencePhotos(this,${e.num})">
+          </label>
+          <label style="flex:1;min-width:100px;padding:10px;border-radius:10px;background:var(--white);border:2px dashed var(--line);text-align:center;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer">
+            🎬 Add video
+            <input type="file" accept="video/*" style="display:none" onchange="addEvidenceVideo(this,${e.num})">
+          </label>
+          <label style="flex:1;min-width:100px;padding:10px;border-radius:10px;background:var(--white);border:2px dashed var(--line);text-align:center;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer" onclick="openPodcastRecorder(${e.num})">
+            🎙️ Record podcast
+          </label>
+        </div>
+        <div style="margin-top:6px">
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+            <label style="display:flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer">
+              <input type="checkbox" id="privacyChk_${e.num}" onchange="togglePrivacy(${e.num})"> 🔒 Privacy mode
+            </label>
+            <span style="font-size:.7rem;color:var(--sage)">Others see a placeholder instead</span>
+          </div>
+          <div id="privacyNote_${e.num}" style="display:none">
+            <input id="privacyInput_${e.num}" style="width:100%;padding:8px 10px;border-radius:10px;border:2px solid var(--line);font-size:.85rem;margin:4px 0" placeholder="Write a private note about what you achieved...">
+            <button class="btn-ghost" style="font-size:.8rem;padding:4px 0" onclick="savePrivacyNote(${e.num})">Save note →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="background:var(--linen);border:0">
+      <div class="k">How sharing works in this prototype</div>
+      <p style="font-size:.78rem;color:var(--muted);margin:0">Photos and videos are stored on your phone only. Pod members cannot see them automatically. Tap the \u2197 button on any photo or video to download it, then share via WhatsApp, Telegram, or any app. In the full version, uploads would sync to the pod automatically.</p>
+    </div>
+    <div class="prompt" style="margin:8px 0">
+      <h3>🤫 Your silent partner this week</h3>
+      <p>Someone in the pod is watching your progress silently. They'll reveal themselves at the end of week 8. Keep going.</p>
+    </div>
+    <div class="card">
+      <div class="k">Buddy this week</div>
+      <p style="font-size:.85rem">${pod.members.length>1?`Your buddy is <strong>${pod.members[(pod.currentWeek)%pod.members.length].name}</strong>. Check in with them by Wednesday.`:"You're solo this week. The prompts still work."}</p>
+    </div>
+    ${pod.currentWeek>1?`<button class="btn-outline" style="margin-top:8px" onclick="prevWeek()">← Previous week</button>`:""}
+    ${pod.currentWeek<8?`<button class="btn-primary" style="margin-top:8px" onclick="nextWeek()">Complete week →</button>`
+    :`<button class="btn-primary" style="background:var(--terracotta);margin-top:8px" onclick="completeProgram()">🎉 Complete programme!</button>`}
+  </div>`;
+  injectScreen("week",h);
+}
+
+function toggleCheck(key){
+  var wk="w"+pod.currentWeek;
+  if(!pod.checkins) pod.checkins={};
+  if(!pod.checkins[wk]) pod.checkins[wk]={};
+  pod.checkins[wk][key]=!pod.checkins[wk][key];
+  save();
+  showScreen("week");
+  // check completion
+  var c=pod.checkins[wk];
+  if(c.listen&&c.practice&&c.buddy&&c.meetup){
+    if(!pod.completion[wk]){pod.completion[wk]=true;profile.streaks=(profile.streaks||0)+1;save();}
+  }
+}
+
+function nextWeek(){
+  if(pod.currentWeek<8){
+    pod.currentWeek++;
+    save();
+    renderAll();
+  }
+}
+
+function prevWeek(){
+  if(pod.currentWeek>1){
+    pod.currentWeek--;
+    save();
+    renderAll();
+  }
+}
+
+function completeProgram(){
+  // Mark all 8 weeks complete
+  if(!pod.completion) pod.completion={};
+  for(var i=1;i<=8;i++){
+    var wk="w"+i;
+    if(!pod.checkins) pod.checkins={};
+    if(!pod.checkins[wk]) pod.checkins[wk]={};
+    pod.checkins[wk].listen=true;
+    pod.checkins[wk].practice=true;
+    pod.checkins[wk].buddy=true;
+    pod.checkins[wk].meetup=true;
+    pod.completion[wk]=true;
+  }
+  save();
+  renderHome();
+  showScreen("home");
+  alert("\ud83c\udf89\ud83c\udf89\ud83c\udf89\n\nCongratulations! You completed all 8 essentials!\n\nThe Service extension is now unlocked below.\nIf a celebration was set, it appears on the home screen.\n\nThank you for doing this together.");
+}
+
+// ===== SERVICE EXTENSION =====
+var serviceWeeks = [
+  {num:1,title:"Serve in Silence",prompt:"Sit with someone who is grieving or lonely. Just be present. No fixing. No advice. 20 minutes of your full attention.",challenge:"Do this without checking your phone once."},
+  {num:2,title:"Serve with your Body",prompt:"Help with a community garden, park clean-up, or care for someone else\'s yard or home. Physical work for someone else.",challenge:"Do it without being asked or photographed for social media."},
+  {num:3,title:"Serve with your Skills",prompt:"Fix something for someone else. A neighbour\'s tap, a broken chair, a meal you cook and deliver.",challenge:"Teach someone else to do it too."},
+  {num:4,title:"Serve with your Devices",prompt:"Teach a senior or a younger kid a useful tech skill. Show them how to do something online that matters to them.",challenge:"Do it in person, not over a screen."},
+  {num:5,title:"Serve your Community",prompt:"Volunteer at a local op shop, food bank, community event, or church outreach. Show up and ask how you can help.",challenge:"Bring a pod member with you."},
+  {num:6,title:"Serve with Knowledge",prompt:"Tutor a younger student or read with someone who is learning. Share something you know that helps someone else grow.",challenge:"Do it twice this week."},
+  {num:7,title:"Serve with Nature",prompt:"Do a cleanup walk. Go to a local park, creek, or beach and pick up rubbish for 30 minutes.",challenge:"Take a pod member. Double the impact."},
+  {num:8,title:"Serve with Conviction",prompt:"Plan and lead one service activity for your pod, youth group, or family. You organise it. You invite. You follow through.",challenge:"Write down what serving others taught you."}
+];
+
+function startServiceExtension(){
+  if(!pod.serviceExtension) pod.serviceExtension = {active:true,currentWeek:1,completed:[],evidence:{},enteredDraw:false};
+  else pod.serviceExtension.active = true;
+  save(); showServiceWeek();
+}
+
+function showServiceWeek(){
+  if(!pod.serviceExtension||!pod.serviceExtension.active){showScreen("home");return;}
+  var sw=pod.serviceExtension;
+  var wk=serviceWeeks[sw.currentWeek-1];
+  var ev=sw.evidence||{};
+  var myEv=ev["s"+sw.currentWeek]||{};
+  var h='<div style="padding:8px 0"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div class="service-badge">Service</div><span class="tag">Week '+sw.currentWeek+' of 8</span></div><div style="display:flex;align-items:center;gap:10px;margin:8px 0"><div style="width:40px;height:40px;border-radius:10px;background:var(--sage);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">'+wk.num+'</div><div><h2 style="font-size:1.1rem;margin:0">'+wk.title+'</h2></div></div><div class="card" style="border-left:4px solid var(--sage)"><div class="k" style="color:var(--sage)">This week\'s service</div><p>'+wk.prompt+'</p><p style="font-size:.82rem;color:var(--terracotta);font-weight:600;margin-top:6px">\ud83c\udfaf '+wk.challenge+'</p></div><div class="card"><div class="k">Service evidence</div><p style="font-size:.82rem;color:var(--muted);margin:0 0 6px">Upload a photo of your service act.</p><label style="display:block;padding:10px;border-radius:10px;background:var(--cream);border:2px dashed var(--line);text-align:center;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer">\ud83d\udcf7 Add photo<input type="file" accept="image/*" style="display:none" onchange=\"addServiceEvidence(this,'+sw.currentWeek+')\"></label>'+(myEv.photo?'<div style="margin-top:8px;border-radius:10px;overflow:hidden"><img src="'+myEv.photo+'" style="width:100%;max-height:200px;object-fit:cover;border-radius:10px"><button class="btn-ghost" style="font-size:.78rem" onclick="removeServiceEvidence('+sw.currentWeek+')">Remove</button></div>':'')+'</div><div style="display:flex;gap:8px;margin-top:12px"><button class="btn-outline" style="flex:1" onclick="showScreen(\'home\')">Home</button>'+(sw.currentWeek<8?'<button class="btn-primary" style="flex:1;background:var(--sage)" onclick="nextServiceWeek()">'+(myEv.photo?'Complete & next \u2192':'Skip to next')+'</button>':'<button class="btn-primary" style="flex:1;background:var(--sage)" onclick="finishService()">'+(myEv.photo?'Complete track \u2192':'Finish')+'</button>')+'</div>'+(sw.currentWeek>1?'<button class="btn-ghost" onclick="prevServiceWeek()" style="margin:auto;display:flex;margin-top:6px">\u2190 Previous week</button>':'')+'</div>';
+  document.getElementById("view").innerHTML=h;
+  document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active");});
+}
+
+function addServiceEvidence(input,wk){
+  if(!input.files.length) return;
+  var reader=new FileReader();
+  var sw=pod.serviceExtension;
+  if(!sw.evidence) sw.evidence={};
+  reader.onload=function(e){
+    sw.evidence["s"+wk]={photo:e.target.result};
+    if(!sw.completed) sw.completed=[];
+    if(sw.completed.indexOf(wk)<0) sw.completed.push(wk);
+    save();showServiceWeek();
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function nextServiceWeek(){
+  var sw=pod.serviceExtension;
+  if(sw.currentWeek<8){sw.currentWeek++;save();showServiceWeek();}
+}
+
+function prevServiceWeek(){
+  var sw=pod.serviceExtension;
+  if(sw.currentWeek>1){sw.currentWeek--;save();showServiceWeek();}
+}
+
+function finishService(){
+  var sw=pod.serviceExtension;
+  sw.complete=true;sw.enteredDraw=true;
+  save();
+  var h = "";
+  h += "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:20px\">";
+  h += "<div style=\"font-size:3rem;margin-bottom:8px\">\\ud83c\\udf1f</div>";
+  h += "<h2 style=\"font-size:1.3rem\">Service track complete!</h2>";
+  h += "<p style=\"color:var(--muted);max-width:30ch;margin:4px 0 12px\">You have completed 8 acts of service. You are entered in the prize draw.</p>";
+  h += "<div class=\"card\" style=\"width:100%;max-width:320px\"><div class=\"k\">Prize draw</div>";
+  h += "<p style=\"font-size:.82rem\">Winners drawn quarterly.</p>";
+  h += "<div style=\"display:flex;gap:4px;flex-wrap:wrap;margin-top:6px\">";
+  h += "<span class=\"sponsor-chip\">Cafe</span><span class=\"sponsor-chip\">Bookshop</span><span class=\"sponsor-chip\">Hardware</span></div></div>";
+  h += "<button class=\"btn-primary\" onclick=\"showScreen(\'home\')\" style=\"margin-top:12px\">Back to home</button></div>";
+  document.getElementById("view").innerHTML = h;
+}
+function showCelebrationSetup(){
+  var h = "";
+  h += "<h2 style=\"margin:16px 0 6px\">\\ud83c\\udf81 Set a celebration</h2>";
+  h += "<p style=\"font-size:.88rem;color:var(--muted);margin:0 0 12px\">When the pod completes all 8 essentials, celebrate together. This is not a bribe.</p>";
+  h += "<div class=\"card\">";
+  h += "<label style=\"font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--sage);letter-spacing:.04em\">Type</label>";
+  h += "<select id=\"celType\" style=\"width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.95rem;margin:6px 0 14px;background:var(--white)\">";
+  h += "<option value=\"Experience\">Experience (camping, day out, meal)</option>";
+  h += "<option value=\"Skill\">Skill (class, tool set, lessons)</option>";
+  h += "<option value=\"Thing\">Thing (book, equipment, gear)</option>";
+  h += "<option value=\"Money\">Money (gift card, voucher)</option></select>";
+  h += "<label style=\"font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--sage);letter-spacing:.04em\">Describe it</label>";
+  h += "<input id=\"celDesc\" style=\"width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.95rem;margin:6px 0 14px\" placeholder=\"e.g. Camping weekend, $50 book voucher\">";
+  h += "<label style=\"font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--sage);letter-spacing:.04em\">Amount (optional)</label>";
+  h += "<input id=\"celAmt\" type=\"number\" min=\"0\" style=\"width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:.95rem;margin:6px 0 14px\" placeholder=\"0\">";
+  h += "<button class=\"btn-primary\" onclick=\"saveCelebration()\">Set celebration</button></div>";
+  h += "<button class=\"btn-ghost\" onclick=\"showScreen(\'home\')\" style=\"margin:auto;display:flex\">Cancel</button>";
+  document.getElementById("view").innerHTML = h;
+}
+
+function saveCelebration(){
+  var t=document.getElementById("celType").value;
+  var d=document.getElementById("celDesc").value.trim();
+  var a=parseInt(document.getElementById("celAmt").value)||0;
+  if(!d){alert("Describe the celebration");return;}
+  pod.celebration={set:true,type:t,description:d,amount:a,setBy:"Parent"};
+  save();showScreen("profile");
+  alert("Celebration set! It appears on the home screen when all 8 essentials are complete.");
+}
+
+// ===== POD SCREEN =====
+function renderPod(){
+  var h=`
+  <div class="screen" id="screen_pod">
+    <div style="margin:12px 0 6px">
+      <div class="tag">${pod.members.length} of 8 members</div>
+      <h2 style="font-size:1.3rem;margin:4px 0">${pod.name}</h2>
+    </div>
+    <div class="card">
+      <div class="k">Members</div>
+      ${pod.members.map(m=>{var u=m.url||'';var href=u;if(u&&!u.match(/^https?:\/\//i)&&!u.match(/^mailto:/i)){href='https://'+u;}return `<div class="member" style="flex-direction:column;align-items:flex-start;gap:4px;padding:10px 0"><div style="display:flex;align-items:center;gap:10px;width:100%"><div class="av av-${m.avatar}">${m.name[0]}</div><div class="nm" style="flex:1">${m.name}</div><div class="sc">${m.streak||0}🔥</div></div>${u?`<a href="${href}" target="_blank" rel="noopener" style="font-size:.78rem;color:var(--terracotta);text-decoration:none;font-weight:600;margin-left:46px;display:inline-flex;align-items:center;gap:4px" onclick="event.stopPropagation()">💬 ${u.length>30?u.substring(0,30)+'...':u}</a>`:""}</div>`;}).join("")}
+      ${pod.members.length<8?`<button class="btn-ghost" onclick="showAddMember()" style="margin-top:8px">+ Add person</button>`:""}
+    </div>
+    <div class="card">
+      <div class="k">Pod score</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin:4px 0">
+        <span style="font-size:2.2rem;font-family:Fraunces,serif;color:var(--terracotta);font-weight:500">${Math.round((pod.members.filter(m=>(m.streak||0)>0).length/pod.members.length)*100)}%</span>
+        <span style="font-size:.82rem;color:var(--muted)">engagement rate</span>
+      </div>
+      <div style="height:8px;border-radius:999px;background:var(--line);overflow:hidden">
+        <div style="height:100%;width:${Math.round((pod.members.filter(m=>(m.streak||0)>0).length/pod.members.length)*100)}%;background:var(--terracotta);border-radius:999px"></div>
+      </div>
+      <p style="font-size:.78rem;color:var(--muted);margin:4px 0">${Object.keys(pod.completion||{}).length} of 8 weeks completed by someone in the pod</p>
+    </div>
+    <div class="week-grid">
+      ${Array.from({length:8},(_,i)=>`<div class="week-cell ${i+1==pod.currentWeek?'active':(pod.completion['w'+(i+1)]?'done':'')}">${i+1}</div>`).join("")}
+    </div>
+  </div>`;
+  injectScreen("pod",h);
+}
+
+// ===== PROFILE =====
+function renderProfile(){
+  var h=`
+  <div class="screen" id="screen_profile">
+    <div style="display:flex;align-items:center;gap:14px;margin:16px 0 10px">
+      <div class="av av-${profile.avatar}" style="width:52px;height:52px;font-size:1.2rem">${profile.name[0]}</div>
+      <div><h2 style="font-size:1.2rem">${profile.name}</h2><p style="font-size:.8rem;color:var(--muted);margin:0">${pod?"In pod: "+pod.name:"Not in a pod"}</p></div>
+    </div>
+    <div class="card">
+      <div class="k">Your stats</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;margin:6px 0">
+        <div><div style="font-family:Fraunces,serif;font-size:1.5rem;color:var(--terracotta)">${Object.keys(pod?.checkins||{}).length}</div><div style="font-size:.7rem;color:var(--muted)">Weeks done</div></div>
+        <div><div style="font-family:Fraunces,serif;font-size:1.5rem;color:var(--terracotta)">${profile.streaks||0}</div><div style="font-size:.7rem;color:var(--muted)">ℹ streak</div></div>
+        <div><div style="font-family:Fraunces,serif;font-size:1.5rem;color:var(--terracotta)">${pod&&pod.meetups?pod.meetups.length:0}</div><div style="font-size:.7rem;color:var(--muted)">Meetups</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="k">Your path</div>
+      <div class="week-grid">
+        ${Array.from({length:8},(_,i)=>{
+          var wk="w"+(i+1);
+          var done=pod?.checkins?.[wk];
+          var cls="week-cell"+(i+1==pod?.currentWeek?" active":"")+(done?" done":"");
+          return `<div class="${cls}">${i+1}</div>`;
+        }).join("")}
+      </div>
+    </div>
+    <button class="btn-outline" onclick="showCelebrationSetup()" style="margin-top:8px">🎁 Set completion celebration</button>
+    <button class="btn-outline" onclick="resetApp()" style="margin-top:8px;color:var(--muted)">Reset demo data</button>
+  </div>
+    <div class="card" style="margin-top:16px;border:2px solid #4C362D">
+      <div class="k" style="color:#88937B">Settings</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0">
+        <div>
+          <div style="font-weight:600;font-size:.88rem">Dark mode</div>
+          <div style="font-size:.72rem;color:var(--muted)">Switch to inverted colour scheme</div>
+        </div>
+        <label style="position:relative;display:inline-block;width:44px;height:24px;cursor:pointer">
+          <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode(this.checked)" ${localStorage.getItem('onetoeight_darkmode')==='true'?'checked':''} style="opacity:0;width:0;height:0">
+          <span style="position:absolute;top:0;left:0;right:0;bottom:0;background:#ccc;border-radius:12px;transition:.3s;${localStorage.getItem('onetoeight_darkmode')==='true'?'background:#88937B':''}"></span>
+          <span style="position:absolute;left:2px;top:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.3s;${localStorage.getItem('onetoeight_darkmode')==='true'?'transform:translateX(20px)':''}"></span>
+        </label>
+      </div>
+      <hr style="border:none;border-top:1px solid var(--line);margin:8px 0">
+      <div style="font-weight:700;font-size:.82rem;margin:4px 0 6px;color:var(--umber)">Data</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn-outline" style="flex:1;padding:8px 6px;font-size:.8rem" onclick="exportData()">📤 Export .json</button>
+        <label style="flex:1;padding:8px 6px;border:2px solid var(--line);border-radius:999px;text-align:center;font-weight:700;font-size:.8rem;color:var(--umber);cursor:pointer;background:transparent">
+          📥 Import .json
+          <input type="file" accept=".json" style="display:none" onchange="importData(this)">
+        </label>
+      </div>
+      <p style="font-size:.7rem;color:var(--muted);margin:6px 0 0">Export saves all progress, settings, evidence, and podcasts to a single file. Import restores it on another device.</p>
+    </div>
+
+  `;
+  injectScreen("profile",h);
+}
+function renderAI(){
+  aiLoadHistory();
+  var restoredMsgs = '';
+  if(aiChatHistory.length > 0){
+    for(var i=0;i<aiChatHistory.length;i++){
+      var m = aiChatHistory[i];
+      var isUser = m.role === 'user';
+      var formatted = m.content.replace(/\\*\\*(.*?)\\*\\*/g,'<strong>$1</strong>').replace(/\\n/g,'<br>');
+      restoredMsgs += '<div style="max-width:88%;border-radius:'+(isUser?'12px 0 12px 12px':'0 12px 12px 12px')+';padding:.5rem .6rem;font-size:.85rem;line-height:1.4;margin-bottom:2px;'+(isUser?'margin-left:auto;background:var(--terracotta);color:#fff;':'background:#fff;border:1px solid var(--line);color:var(--ink);')+'">'+formatted+'</div>';
+    }
+  }
+  if(!restoredMsgs){
+    restoredMsgs = '<div style="align-self:flex-start;max-width:88%;background:#fff;border:1px solid var(--line);border-radius:0 12px 12px 12px;padding:.55rem .65rem;font-size:.85rem;color:var(--ink);line-height:1.45"><p style="margin:0">Welcome. This is an education and awareness program — eight insights, not a sales pitch. Ask me anything about the 8 essentials, request a prayer, or just think out loud. I run entirely on your device. Nothing leaves this browser.</p></div>';
+  }
+  var h=`
+  <div class="screen" id="screen_ai" style="padding:12px 0 0;display:flex;flex-direction:column;height:100%">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:0 0 4px">
+      <div>
+        <div class="tag">AI Assistant</div>
+        <h2 style="font-size:1.2rem;margin:4px 0 0">Ask about the essentials</h2>
+      </div>
+      <div id="aiStatus" style="display:flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;color:var(--muted)">
+        <span id="aiStatusDot" style="width:8px;height:8px;border-radius:50%;background:var(--almond);display:inline-block"></span>
+        <span id="aiStatusText">offline</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;margin:0 0 6px;flex-wrap:wrap;align-items:center">
+      <button onclick="aiNewChat()" style="font-size:.68rem;font-weight:700;color:var(--muted);background:var(--white);border:1px solid var(--line);border-radius:999px;padding:3px 10px;cursor:pointer">+ New chat</button>
+      <a href="ai-archive.html" style="font-size:.68rem;font-weight:700;color:var(--terracotta);background:var(--white);border:1px solid var(--line);border-radius:999px;padding:3px 10px;text-decoration:none">📋 History</a>
+      <select id="aiModelSelect" onchange="aiSwitchModel(this.value)" style="margin-left:auto;font-size:.68rem;font-weight:700;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:3px 8px;color:var(--umber);cursor:pointer;font-family:Inter">
+        <option value="lite" selected>Lite · 1B · 780MB</option>
+        <option value="pro">Pro · 3B · 1.9GB</option>
+      </select>
+    </div>
+    <div id="aiModelProgress" style="display:none;margin:0 0 8px;padding:10px 12px;background:var(--umber);color:#fff;border-radius:12px;font-size:.82rem">
+      <div style="font-weight:700;margin-bottom:2px">Loading local model</div>
+      <div style="font-size:.72rem;opacity:.85" id="aiProgressText">Downloading ~780MB (one-time, cached after first load)...</div>
+      <div style="height:6px;background:rgba(255,255,255,.15);border-radius:999px;margin-top:6px;overflow:hidden">
+        <div id="aiProgressBar" style="height:100%;width:0%;background:var(--almond);border-radius:999px;transition:width .3s"></div>
+      </div>
+    </div>
+    <div id="aiMessages" style="flex:1;overflow-y:auto;padding:8px 0;display:flex;flex-direction:column;gap:6px">
+      ${restoredMsgs}
+    </div>
+    <div id="aiTyping" style="display:none;padding:0 0 6px">
+      <div style="display:flex;gap:3px;align-items:center;padding:.45rem .55rem;background:#fff;border-radius:12px;max-width:80%">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--sage);animation:bounce 1.4s infinite"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--sage);animation:bounce 1.4s .2s infinite"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--sage);animation:bounce 1.4s .4s infinite"></span>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px">
+      <span class="chip" onclick="aiAsk('Give me a silence challenge')">🔇 Silence</span>
+      <span class="chip" onclick="aiAsk('What are the 5 skill categories?')">🛠️ Skills</span>
+      <span class="chip" onclick="aiAsk('Write a short prayer for my week')">🙏 Prayer</span>
+      <span class="chip" onclick="aiAsk('How does the app protect my privacy?')">🔒 Privacy</span>
+    </div>
+    <div style="display:flex;gap:6px;padding:8px 0 0;border-top:1px solid var(--line)">
+      <input id="aiInput" type="text" placeholder="Ask anything..." style="flex:1;border:1px solid var(--line);border-radius:999px;padding:.55rem .7rem;font-size:.85rem;font-family:Inter;background:var(--cream);color:var(--ink)" />
+      <button id="aiSend" style="background:var(--terracotta);color:#fff;border:0;border-radius:50%;width:2.2rem;height:2.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem">&rarr;</button>
+    </div>
+    <div style="margin-top:6px;font-size:.72rem;color:var(--sage);text-align:center">Responses stay on your device. Tap any response to copy it.</div>
+  </div>`;
+  injectScreen("ai",h);
+  // Sync model selector with saved preference
+  var savedKey = localStorage.getItem(AI_MODEL_KEY) || 'lite';
+  if (!AI_MODELS[savedKey]) savedKey = 'lite';
+  var sel = document.getElementById('aiModelSelect');
+  if (sel) sel.value = savedKey;
+  if(typeof setupAIEvents==="function") setTimeout(setupAIEvents,50);
+  if(!aiModelLoaded && !aiModelLoading) setTimeout(aiInitModel, 300);
+}
+
+
+function resetApp(){
+  if(confirm("This will clear all demo data. Sure?")){
+    localStorage.removeItem("circles_profile");
+    localStorage.removeItem("circles_pod");
+    location.reload();
+  }
+}
+
+// ===== SCREEN SWITCHING =====
+// Override showScreen to render correct view
+var _origShow=showScreen;
+showScreen=function(id){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab===id));
+  if(id=="home"){renderHome();}
+  else if(id=="week"){renderWeek();setTimeout(function(){renderEvidence(pod.currentWeek);},100);}
+  else if(id=="pod"){renderPod();}
+  else if(id=="profile"){renderProfile();}
+  else if(id=="ai"){renderAI();}
+  document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("active",s.id==="screen_"+id));
+  updateTitle(id);
+  // scroll to top
+  document.getElementById("view").scrollTop=0;
+};
+
+function navBack(){
+  showScreen("home");
+}
+
+// Don't show splash again if already set up
+if(profile.name&&pod){setTimeout(()=>{startApp();},100);}
+else if(profile.name&&!pod){setTimeout(()=>{startApp();},100);}
+
+console.log("onetoeight Circles prototype ready. Data lives in localStorage.");
+
+var currentAudio = null;
+var currentBtn = null;
+function toggleAudio(btn, src){
+  if(currentAudio && currentBtn === btn){
+    if(!currentAudio.paused){ currentAudio.pause(); btn.innerHTML='\u25b6'; btn.classList.remove('playing'); return; }
+    else { currentAudio.play(); btn.innerHTML='\u275a\u275a'; btn.classList.add('playing'); return; }
+  }
+  if(currentAudio){ currentAudio.pause(); if(currentBtn){currentBtn.innerHTML='\u25b6';currentBtn.classList.remove('playing');} }
+  var a = new Audio(src);
+  a.addEventListener('timeupdate',function(){
+    var p = btn.closest('.audio-bar');
+    if(!p) return;
+    var fill = p.querySelector('.fill');
+    var time = p.querySelector('.time');
+    if(a.duration){ fill.style.width = (a.currentTime/a.duration*100)+'%'; }
+    var m=Math.floor(a.currentTime/60),s=Math.floor(a.currentTime%60);
+    time.textContent=m+':'+(s<10?'0':'')+s;
+  });
+  a.addEventListener('loadedmetadata',function(){
+    var p = btn.closest('.audio-bar');
+    if(!p) return;
+    var time = p.querySelector('.time');
+    var m=Math.floor(a.duration/60),s=Math.floor(a.duration%60);
+    time.textContent='0:00 / '+m+':'+(s<10?'0':'')+s;
+  });
+  a.addEventListener('ended',function(){
+    btn.innerHTML='\u25b6';btn.classList.remove('playing');
+  });
+  a.play(); btn.innerHTML='\u275a\u275a'; btn.classList.add('playing');
+  currentAudio = a; currentBtn = btn;
+}
+function seekAudio(wrap, e){
+  var rect = wrap.getBoundingClientRect();
+  var x = (e.clientX - rect.left) / rect.width;
+  if(currentAudio && currentAudio.duration){ currentAudio.currentTime = x * currentAudio.duration; }
+}
+
+
+// ===== EVIDENCE =====
+var evidenceStore = loadJSON("circles_evidence", {});
+
+function addEvidencePhotos(input, wk){
+  if(!input.files.length) return;
+  if(!evidenceStore[wk]) evidenceStore[wk] = {photos:[],video:null,privacy:false,note:""};
+  for(var i=0;i<Math.min(input.files.length,6);i++){
+    var reader = new FileReader();
+    reader.onload = function(e){
+      var data = e.target.result;
+      if(!evidenceStore[wk].photos) evidenceStore[wk].photos = [];
+      if(evidenceStore[wk].photos.length < 6){
+        evidenceStore[wk].photos.push(data);
+        saveEvidence();
+        renderEvidence(wk);
+      }
+    };
+    reader.readAsDataURL(input.files[i]);
+  }
+  input.value = "";
+}
+
+function addEvidenceVideo(input, wk){
+  if(!input.files.length) return;
+  if(!evidenceStore[wk]) evidenceStore[wk] = {photos:[],video:null,privacy:false,note:""};
+  var reader = new FileReader();
+  reader.onload = function(e){
+    evidenceStore[wk].video = e.target.result;
+    saveEvidence();
+    renderEvidence(wk);
+  };
+  reader.readAsDataURL(input.files[0]);
+  input.value = "";
+}
+
+function togglePrivacy(wk){
+  if(!evidenceStore[wk]) evidenceStore[wk] = {photos:[],video:null,privacy:false,note:""};
+  var chk = document.getElementById("privacyChk_"+wk);
+  evidenceStore[wk].privacy = chk.checked;
+  document.getElementById("privacyNote_"+wk).style.display = chk.checked ? "block" : "none";
+  saveEvidence();
+  renderEvidence(wk);
+}
+
+function savePrivacyNote(wk){
+  if(!evidenceStore[wk]) evidenceStore[wk] = {photos:[],video:null,privacy:false,note:""};
+  var inp = document.getElementById("privacyInput_"+wk);
+  evidenceStore[wk].note = inp.value;
+  saveEvidence();
+  renderEvidence(wk);
+}
+
+function saveEvidence(){
+  localStorage.setItem("circles_evidence", JSON.stringify(evidenceStore));
+}
+
+function renderEvidence(wk){
+  var grid = document.getElementById("evidenceGrid");
+  if(!grid) return;
+  var ev = evidenceStore[wk];
+  if(!ev || (!ev.photos||ev.photos.length===0) && !ev.video && !ev.privacy){
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;font-size:.78rem;color:var(--muted);padding:6px 0">No evidence yet. Add photos or video above.</div>';
+    return;
+  }
+  var items = "";
+  if(ev.privacy){
+    items = '<div style="grid-column:1/-1;padding:12px;border-radius:10px;background:var(--white);text-align:center;font-size:.82rem;color:var(--muted)">🔒 Privacy mode' + (ev.note ? '<br><span style="font-size:.75rem;color:var(--umber);font-weight:600;margin-top:4px;display:block"><i>\"'+ev.note+'\"</i></span>' : '') + '</div>';
+  } else {
+    if(ev.photos){
+      for(var i=0;i<ev.photos.length;i++){
+        items += '<div style="position:relative;border-radius:8px;overflow:hidden;aspect-ratio:1;background:var(--linen)">';
+        items += '<img src="'+ev.photos[i]+'" style="width:100%;height:100%;object-fit:cover">';
+        items += '<div style="position:absolute;bottom:2px;left:2px;display:flex;gap:2px">';
+        items += '<button style="width:20px;height:20px;border-radius:4px;background:rgba(0,0,0,.5);color:#fff;font-size:.55rem;border:0;cursor:pointer" onclick="shareEvidence(\''+ev.photos[i]+'\',\'photo\')" title="Share">\u2197</button>';
+        items += '<button style="width:20px;height:20px;border-radius:4px;background:rgba(0,0,0,.5);color:#fff;font-size:.55rem;border:0;cursor:pointer" onclick="removePhoto('+wk+','+i+')" title="Remove">\u00d7</button>';
+        items += '</div>';
+        items += '</div>';
+      }
+    }
+    if(ev.video){
+      items += '<div style="grid-column:1/-1;position:relative"><video src="'+ev.video+'" controls style="width:100%;border-radius:10px;max-height:200px"></video><button style="position:absolute;top:6px;right:6px;width:28px;height:28px;border-radius:6px;background:rgba(0,0,0,.5);color:#fff;font-size:.65rem;border:0;cursor:pointer" onclick="shareEvidence(\''+ev.video+'\',\'video\')" title="Share">\u2197</button></div>';
+    }
+  }
+  grid.innerHTML = items;
+}
+
+function removeServiceEvidence(wk){
+  var sw=pod.serviceExtension;
+  if(sw && sw.evidence && sw.evidence["s"+wk]){
+    delete sw.evidence["s"+wk];
+    if(sw.completed){
+      var idx=sw.completed.indexOf(wk);
+      if(idx>=0) sw.completed.splice(idx,1);
+    }
+    save();
+    showServiceWeek();
+  }
+}
+
+function removePhoto(wk, idx){
+  if(evidenceStore[wk] && evidenceStore[wk].photos){
+    evidenceStore[wk].photos.splice(idx, 1);
+    saveEvidence();
+    renderEvidence(wk);
+  }
+}
+
+function shareEvidence(dataUrl, type){
+  // Always download first — Web Share API with files/dataURLs is unreliable
+  var ext = type==="video"?"mp4":"jpg";
+  var filename = "onetoeight-evidence-" + new Date().toISOString().slice(0,10) + "." + ext;
+  var link = document.createElement("a");
+  link.href = dataUrl;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
+  // Show instructions
+  setTimeout(function(){
+    alert("Downloaded! Now share it:\n\n• WhatsApp: Open chat → attach → Gallery\n• Telegram: Open chat → attach → Gallery\n• Instagram: Post to story or feed\n• Signal: Open chat → + → Gallery\n\nThe file is in your Downloads folder.");
+  }, 300);
+}
+function dataURLtoBlob(dataUrl){
+  var parts = dataUrl.split(",");
+  var mime = parts[0].match(/:(.*?);/)[1];
+  var bytes = atob(parts[1]);
+  var buf = new ArrayBuffer(bytes.length);
+  var view = new Uint8Array(buf);
+  for(var i=0;i<bytes.length;i++) view[i]=bytes.charCodeAt(i);
+  return new Blob([buf], {type:mime});
+}
+
+</script><script>
+
+
+
+function showHelp(){document.getElementById("helpOverlay").classList.add("active");}
+function closeHelp(){document.getElementById("helpOverlay").classList.remove("active");}
+
+
+
+function toggleDarkMode(enabled){
+  localStorage.setItem("onetoeight_darkmode",enabled);
+  if(enabled){
+    document.documentElement.style.setProperty("--terracotta","#CEB59E");
+    document.documentElement.style.setProperty("--almond","#A46447");
+    document.documentElement.style.setProperty("--sage","#88937B");
+    document.documentElement.style.setProperty("--umber","#E8E1D5");
+    document.documentElement.style.setProperty("--ink","#F5F0E8");
+    document.documentElement.style.setProperty("--muted","rgba(245,240,232,.6)");
+    document.documentElement.style.setProperty("--cream","#2a2520");
+    document.documentElement.style.setProperty("--white","#3D2820");
+    document.documentElement.style.setProperty("--linen","#4C362D");
+    document.documentElement.style.setProperty("--line","rgba(206,181,158,.12)");
+  } else {
+    document.documentElement.style.setProperty("--terracotta","#A46447");
+    document.documentElement.style.setProperty("--almond","#CEB59E");
+    document.documentElement.style.setProperty("--sage","#88937B");
+    document.documentElement.style.setProperty("--umber","#4C362D");
+    document.documentElement.style.setProperty("--ink","#2a2520");
+    document.documentElement.style.setProperty("--muted","#7a6657");
+    document.documentElement.style.setProperty("--cream","#F5F0E8");
+    document.documentElement.style.setProperty("--white","#ffffff");
+    document.documentElement.style.setProperty("--linen","#E8E1D5");
+    document.documentElement.style.setProperty("--line","rgba(76,54,45,.10)");
+  }
+}
+
+function exportData(){
+  var data={
+    circles_profile: JSON.parse(localStorage.getItem("circles_profile")||"null"),
+    circles_pod: JSON.parse(localStorage.getItem("circles_pod")||"null"),
+    circles_evidence: JSON.parse(localStorage.getItem("circles_evidence")||"{}"),
+    onetoeight_podcasts: JSON.parse(localStorage.getItem("onetoeight_podcasts")||"{}"),
+    onetoeight_darkmode: localStorage.getItem("onetoeight_darkmode")||"false",
+    exported: new Date().toISOString(),
+    version: 1.3
+  };
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement("a");
+  a.href=url;
+  a.download="onetoeight-backup-"+new Date().toISOString().split("T")[0]+".json";
+  a.click();
+  URL.revokeObjectURL(url);
+  alert("Export complete. Keep this file safe. It contains your data.");
+}
+
+function importData(input){
+  if(!input.files.length) return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var data=JSON.parse(e.target.result);
+      var count=0;
+      if(data.circles_profile){
+        localStorage.setItem("circles_profile",JSON.stringify(data.circles_profile));
+        count++;
+      }
+      if(data.circles_pod){
+        localStorage.setItem("circles_pod",JSON.stringify(data.circles_pod));
+        count++;
+      }
+      if(data.circles_evidence){
+        localStorage.setItem("circles_evidence",JSON.stringify(data.circles_evidence));
+        count++;
+      }
+      if(data.onetoeight_podcasts){
+        localStorage.setItem("onetoeight_podcasts",JSON.stringify(data.onetoeight_podcasts));
+        count++;
+      }
+      if(data.onetoeight_darkmode){
+        localStorage.setItem("onetoeight_darkmode",data.onetoeight_darkmode);
+        if(data.onetoeight_darkmode==="true") toggleDarkMode(true);
+      }
+      alert("Import complete. "+count+" data sets restored. Reloading app...");
+      location.reload();
+    }catch(err){
+      alert("Invalid backup file: "+err.message);
+    }
+  };
+  reader.readAsText(input.files[0]);
+  input.value="";
+}
+
+// Apply dark mode on load
+(function(){
+  var dm=localStorage.getItem("onetoeight_darkmode");
+  if(dm==="true") toggleDarkMode(true);
+})();
+
+
+
+// Podcast recorder
+var podMediaRecorder=null;
+var podAudioChunks=[];
+var podTimerInterval=null;
+var podSeconds=0;
+var podBlob=null;
+var podcastEssential=1;
+const MAX_PODCAST_SECS=180;
+
+function openPodcastRecorder(essential){
+  podcastEssential=essential;
+  document.getElementById('podcastOverlay').classList.add('active');
+  document.getElementById('podTimer').textContent='0:00';
+  document.getElementById('podActions').style.display='none';
+  document.getElementById('podRecordBtn').className='pod-btn record';
+  document.getElementById('podRecordBtn').textContent='\uD83C\uDFA4';
+  document.getElementById('podWave').style.display='none';
+  var preview=document.getElementById('podPreview');
+  preview.style.display='none';
+  podBlob=null;
+  podSeconds=0;
+}
+
+function closePodcast(){
+  if(podMediaRecorder&&podMediaRecorder.state!=='inactive'){
+    podMediaRecorder.stop();
+  }
+  if(podTimerInterval) clearInterval(podTimerInterval);
+  document.getElementById('podcastOverlay').classList.remove('active');
+}
+
+function toggleRecording(){
+  var btn=document.getElementById('podRecordBtn');
+  if(podMediaRecorder&&podMediaRecorder.state==='recording'){
+    // Stop
+    podMediaRecorder.stop();
+    btn.textContent='\uD83C\uDFA4';
+    btn.className='pod-btn play';
+    document.getElementById('podWave').style.display='none';
+    if(podTimerInterval) clearInterval(podTimerInterval);
+  } else {
+    // Start
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+      podAudioChunks=[];
+      podSeconds=0;
+      document.getElementById('podTimer').textContent='0:00';
+      podMediaRecorder=new MediaRecorder(stream,{mimeType:MediaRecorder.isTypeSupported('audio/webm;codecs=opus')?'audio/webm;codecs=opus':'audio/webm'});
+      
+      podMediaRecorder.ondataavailable=function(e){
+        if(e.data.size>0) podAudioChunks.push(e.data);
+      };
+      
+      podMediaRecorder.onstop=function(){
+        stream.getTracks().forEach(function(t){t.stop();});
+        podBlob=new Blob(podAudioChunks,{type:'audio/webm'});
+        if(podAudioChunks.length>0&&podBlob.size>100){
+          var url=URL.createObjectURL(podBlob);
+          var preview=document.getElementById('podPreview');
+          preview.src=url;
+          preview.style.display='block';
+          document.getElementById('podActions').style.display='flex';
+          document.getElementById('podRecordBtn').textContent='\u25B6';
+          document.getElementById('podRecordBtn').className='pod-btn play';
+        } else {
+          alert('No audio recorded. Check microphone permissions.');
+          document.getElementById('podRecordBtn').textContent='\uD83C\uDFA4';
+          document.getElementById('podRecordBtn').className='pod-btn record';
+        }
+        document.getElementById('podWave').style.display='none';
+        if(podTimerInterval) clearInterval(podTimerInterval);
+      };
+      
+      podMediaRecorder.start(100);
+      btn.textContent='\u23F9';
+      btn.className='pod-btn stop';
+      document.getElementById('podWave').style.display='flex';
+      
+      podTimerInterval=setInterval(function(){
+        podSeconds++;
+        var m=Math.floor(podSeconds/60);
+        var s=podSeconds%60;
+        document.getElementById('podTimer').textContent=m+':'+(s<10?'0':'')+s;
+        if(podSeconds>=MAX_PODCAST_SECS){
+          podMediaRecorder.stop();
+        }
+      },1000);
+      
+    }).catch(function(err){
+      alert('Microphone access required to record. Allow mic access and try again.\n\nError: '+err.message);
+    });
+  }
+}
+
+function previewPodcast(){
+  var preview=document.getElementById('podPreview');
+  if(podBlob){
+    preview.src=URL.createObjectURL(podBlob);
+    preview.style.display='block';
+    preview.play();
+  }
+}
+
+function savePodcast(){
+  if(!podBlob||podBlob.size<100){alert('Nothing recorded yet.');return;}
+  var id='podcast_'+podcastEssential+'_'+Date.now();
+  var reader=new FileReader();
+  reader.onload=function(){
+    try{
+      var data=JSON.parse(localStorage.getItem('onetoeight_podcasts')||'{}');
+      data[id]={essential:podcastEssential,blob:reader.result,date:new Date().toISOString(),duration:podSeconds};
+      localStorage.setItem('onetoeight_podcasts',JSON.stringify(data));
+      alert('Podcast saved! You can share it anytime.');
+      closePodcast();
+    }catch(e){alert('Error saving: '+e.message);}
+  };
+  reader.readAsDataURL(podBlob);
+}
+
+function sharePodcast(){
+  if(!podBlob||podBlob.size<100){alert('Nothing to share.');return;}
+  // Always download first — Web Share API with files is unreliable
+  var url=URL.createObjectURL(podBlob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='onetoeight-essential-'+podcastEssential+'-'+new Date().toISOString().slice(0,10)+'.webm';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){
+    alert('Podcast downloaded! Now share it:\n\n• WhatsApp: Open chat → attach → Audio\n• Telegram: Open chat → attach → File\n• Signal: Open chat → + → File\n\nThe file is in your Downloads folder.');
+  }, 300);
+  closePodcast();
+}
+
+// Load podcast entries from localStorage
+function getSavedPodcasts(){
+  try{return JSON.parse(localStorage.getItem('onetoeight_podcasts')||'{}');
+  }catch(e){return{};}
+}
+
+
+
+// AI Assistant - circles app (WebLLM local AI)
+// ==== ONETOEIGHT KNOWLEDGE BASE ====
+var AI_KNOWLEDGE = [
+  {id:"ess1", title:"Essential 1: Silence", content:'Silence is not emptiness. It is recovery space for attention, emotion, and self-awareness. If you cannot sit still, you cannot think clearly. Practice: start with 3 minutes. Phone in another room. Sit, walk, or stare out a window. When the urge to escape comes, name it, then stay one more minute.', tags:["silence","stillness","attention","presence"]},
+  {id:"ess2", title:"Essential 2: Body", content:'Your body is the platform for everything else. Mood, focus, and patience are physical as much as mental. Neglect is not neutral. Practice: protect sleep. Cook real food. Move enough to raise your heart rate. Choose one gate and guard it for a week.', tags:["body","sleep","food","exercise","health"]},
+  {id:"ess3", title:"Essential 3: Skills", content:'Feed, fix, build, grow, finance. Skills create quiet confidence: not status confidence, but the kind where you can look after yourself and be useful to others. Practice: cook from scratch. Complete one repair. Start one grow project. Write a simple budget.', tags:["skills","cooking","repair","growing","budget","finance"]},
+  {id:"ess4", title:"Essential 4: Digital", content:'Your phone maps pressure points as much as plans. Free often means you are the product. Digital self-defence is adult agency. Practice: password manager plus MFA. Kill non-essential notifications. Strip permissions. Name your post-scam person.', tags:["digital","phone","screentime","privacy","security"]},
+  {id:"ess5", title:"Essential 5: Community", content:'Followers amplify. Friends carry. The 2am test reveals the gap. Build load-bearing relationships before the crisis. Practice: name your real people. Initiate one meet. Repair one strained relationship with honesty.', tags:["community","friends","relationships","repair"]},
+  {id:"ess6", title:"Essential 6: Knowledge", content:'Access is not possession. Stress reveals whether skill is real. Own knowledge, do not only rent it from a search bar. Practice: memorise key contacts. Build a one-page offline life sheet. Learn one thing slowly.', tags:["knowledge","learning","memory","offline"]},
+  {id:"ess7", title:"Essential 7: Nature", content:'Nature is not decoration. It is medicine that older generations received by default. Sunlight, soil, and slow rhythm restore what screens empty. Practice: morning outdoor light. One longer weekly outing. Sometimes leave headphones behind.', tags:["nature","outside","sunlight","rhythm"]},
+  {id:"ess8", title:"Essential 8: Convictions", content:'Decorative values look good and cost nothing. Load-bearing values still shape behaviour when inconvenient. Build convictions that can take pressure. Practice: list five values. Prove each with one action. Write a personal conviction statement.', tags:["convictions","values","faith","integrity"]},
+];
+
+// ==== RAG RETRIEVAL ====
+function aiSearchKnowledge(query, topK){
+  topK = topK || 2;
+  var q = query.toLowerCase();
+  var scored = AI_KNOWLEDGE.map(function(k){
+    var score = 0;
+    var txt = (k.title + " " + k.content + " " + k.tags.join(" ")).toLowerCase();
+    k.tags.forEach(function(t){ if(q.indexOf(t) >= 0) score += 3; });
+    q.split(" ").forEach(function(w){ if(w.length > 2 && txt.indexOf(w) >= 0) score += 1; });
+    if(txt.indexOf(q) >= 0) score += 5;
+    return {k:k, score:score};
+  });
+  return scored.sort(function(a,b){return b.score-a.score;}).slice(0, topK).filter(function(x){return x.score>0;}).map(function(x){return x.k;});
+}
+
+// ==== SYSTEM PROMPT ====
+var AI_SYSTEM_PROMPT = 'You are the onetoeight guide — a quiet, honest companion inside an education and awareness program. You help young people (teens and young adults) notice what is real, name what matters, and explore further at their own pace.\n\nonetoeight is not a sales pitch, a transformation promise, or a religion. It is a set of eight insights — frames for thinking about a life that holds:\n1. Silence (stillness is a skill)\n2. Body (you have one, treat it like infrastructure)\n3. Skills (competence is freedom)\n4. Digital (you are not your phone)\n5. Community (real people, not followers)\n6. Knowledge (own it, don\'t rent it)\n7. Nature (sunlight and soil fix things)\n8. Convictions (values that hold under pressure)\n\nYour job is to name the thing, offer the frame, suggest a practice, and invite deeper exploration — never to persuade, sell, or tell the user what to believe.\n\nTone: warm, direct, unhurried, non-preachy. You never hype, moralise, or patronise. You don\'t try to convert. You don\'t promise outcomes. You sound like a trusted friend who has thought about these things, not a curriculum.\n\nRules:\n- Keep responses under 150 words unless asked for depth.\n- When asked for a prayer, write it in a natural, grounded voice. Address it simply. Make it optional — if the user doesn\'t pray, don\'t push.\n- Reference the 8 essentials when relevant, but don\'t shoehorn them in.\n- When the user shares a personal goal, offer ONE concrete practice from the essentials. Let them decide whether to use it.\n- If asked about religion, faith, or Christianity: be honest that the 8 essentials come from a Christian worldview, but don\'t convert. Say plainly: "These are the roots of where onetoeight came from. Take what is useful. Leave the rest."\n- Never collect or store personal data. This runs locally on the user\'s device.';
+
+// ==== STATE ====
+var aiEngine = null;
+var aiModelLoaded = false;
+var aiModelLoading = false;
+var aiChatHistory = [];
+var aiActiveSessionId = null;
+var AI_SESSIONS_KEY = 'onetoeight_ai_sessions';
+var AI_ACTIVE_KEY = 'onetoeight_ai_active';
+var AI_MODEL_KEY = 'onetoeight_ai_model';
+
+// ==== MODEL CATALOG ====
+var AI_MODELS = {
+  lite: {
+    id: 'Llama-3.2-1B-Instruct-q4f16_1-MLC',
+    label: 'Lite · Llama 1B',
+    size: '780 MB',
+    desc: 'Fast. Works on most phones. Good enough for most questions.'
+  },
+  pro: {
+    id: 'Llama-3.2-3B-Instruct-q4f16_1-MLC',
+    label: 'Pro · Llama 3B',
+    size: '1.9 GB',
+    desc: 'Smarter. Better at following instructions and prayers. Needs more RAM.'
+  }
+};
+var aiSelectedModelKey = 'lite';
+function aiGetSelectedModelId(){
+  var key = localStorage.getItem(AI_MODEL_KEY) || 'lite';
+  if (!AI_MODELS[key]) key = 'lite';
+  aiSelectedModelKey = key;
+  return AI_MODELS[key].id;
+}
+function aiSetSelectedModel(key){
+  if (!AI_MODELS[key]) return;
+  aiSelectedModelKey = key;
+  localStorage.setItem(AI_MODEL_KEY, key);
+}
+
+// ==== SESSION PERSISTENCE ====
+function aiLoadSessions(){
+  try{ return JSON.parse(localStorage.getItem(AI_SESSIONS_KEY)) || []; }
+  catch(e){ return []; }
+}
+function aiSaveSessions(sessions){
+  localStorage.setItem(AI_SESSIONS_KEY, JSON.stringify(sessions));
+}
+function aiLoadHistory(){
+  // Load or create a session
+  var sessions = aiLoadSessions();
+  var activeId = localStorage.getItem(AI_ACTIVE_KEY);
+  var s = null;
+  if(activeId){
+    for(var i=0;i<sessions.length;i++){ if(sessions[i].id === activeId){ s = sessions[i]; break; } }
+  }
+  if(!s){
+    // Create new session
+    s = {id:'ai_' + Date.now(), started: new Date().toISOString(), messages:[]};
+    sessions.push(s);
+    aiSaveSessions(sessions);
+    localStorage.setItem(AI_ACTIVE_KEY, s.id);
+  }
+  aiActiveSessionId = s.id;
+  aiChatHistory = s.messages || [];
+  return aiChatHistory;
+}
+function aiSaveHistory(){
+  if(!aiActiveSessionId) return;
+  var sessions = aiLoadSessions();
+  for(var i=0;i<sessions.length;i++){
+    if(sessions[i].id === aiActiveSessionId){
+      sessions[i].messages = aiChatHistory;
+      break;
+    }
+  }
+  aiSaveSessions(sessions);
+}
+function aiNewChat(){
+  // Save current session, start fresh
+  if(aiChatHistory.length > 0) aiSaveHistory();
+  var sessions = aiLoadSessions();
+  var s = {id:'ai_' + Date.now(), started: new Date().toISOString(), messages:[]};
+  sessions.push(s);
+  aiSaveSessions(sessions);
+  localStorage.setItem(AI_ACTIVE_KEY, s.id);
+  aiActiveSessionId = s.id;
+  aiChatHistory = [];
+  // Clear UI
+  var el = document.getElementById('aiMessages');
+  if(el) el.innerHTML = '';
+  // Show fresh greeting
+  if(aiModelLoaded){ aiAddMsg('This is an education and awareness program. Eight insights, not a sales pitch. Ask anything about the 8 essentials, request a prayer, or just think out loud. I run entirely on your device.', false); }
+  else { aiAddMsg('Education and awareness, not a sales pitch. The model is still loading — I will be ready in a moment.', false); }
+}
+
+// ==== MODEL LOADING ====
+function aiSetStatus(state, text){
+  var dot = document.getElementById('aiStatusDot');
+  var txt = document.getElementById('aiStatusText');
+  if(dot){
+    if(state==='loading'){ dot.style.background='var(--almond)'; dot.style.animation='pulse 1.5s infinite'; }
+    else if(state==='ready'){ dot.style.background='var(--sage)'; dot.style.animation='none'; }
+    else if(state==='error'){ dot.style.background='var(--terracotta)'; dot.style.animation='none'; }
+    else { dot.style.background='var(--line)'; dot.style.animation='none'; }
+  }
+  if(txt) txt.textContent = text;
+}
+
+function aiInitModel(){
+  if(aiModelLoaded || aiModelLoading) return;
+  aiModelLoading = true;
+  var progressDiv = document.getElementById('aiModelProgress');
+  var progressBar = document.getElementById('aiProgressBar');
+  var progressText = document.getElementById('aiProgressText');
+  if(progressDiv) progressDiv.style.display='block';
+  aiSetStatus('loading','loading model...');
+
+  import('@mlc-ai/web-llm').then(function(webllm){
+    var modelId = aiGetSelectedModelId();
+    return webllm.CreateMLCEngine(modelId, {
+      initProgressCallback: function(progress){
+        var pct = Math.round(progress.progress * 100);
+        if(progressBar) progressBar.style.width = pct + '%';
+        if(progressText) progressText.textContent = (progress.text || 'Loading...') + ' (' + pct + '%)';
+      }
+    });
+  }).then(function(engine){
+    aiEngine = engine;
+    aiModelLoaded = true;
+    aiModelLoading = false;
+    if(progressDiv) progressDiv.style.display='none';
+    aiSetStatus('ready','ready');
+    var m = AI_MODELS[aiSelectedModelKey];
+    aiAddMsg('Ready. I am an education and awareness companion — eight insights, not a sales pitch. Ask me anything about the 8 essentials, request a prayer, or just think out loud. Everything stays on your device.', false);
+  }).catch(function(e){
+    aiModelLoading = false;
+    if(progressDiv) progressDiv.style.display='none';
+    aiSetStatus('error','not available');
+    aiAddMsg('Could not load the local model. ' + (e && e.message ? e.message : 'Your browser may not support WebGPU. Try Chrome on desktop or Android.'), false);
+  });
+}
+
+function aiSwitchModel(key){
+  if(!AI_MODELS[key]) return;
+  // Don't block on aiModelLoading - allow switching even if previous load failed
+  if(key === aiSelectedModelKey && aiModelLoaded) return;
+  if(aiModelLoading){
+    aiAddMsg('Canceling previous load to switch model...', false);
+    aiModelLoading = false;
+  }
+  aiEngine = null;
+  aiModelLoaded = false;
+  aiSetSelectedModel(key);
+  // Update UI
+  var status = document.getElementById('aiStatusText');
+  if(status) status.textContent = 'switching...';
+  aiAddMsg('Switching to ' + AI_MODELS[key].label + ' (downloads ' + AI_MODELS[key].size + ' on first use)...', false);
+  // Re-init
+  aiInitModel();
+}
+
+// ==== UI HELPERS ====
+function aiAddMsg(text, isUser){
+  var el=document.getElementById('aiMessages');
+  if(!el) return;
+  var d=document.createElement('div');
+  d.style.cssText='max-width:88%;border-radius:'+(isUser?'12px 0 12px 12px':'0 12px 12px 12px')+';padding:.5rem .6rem;font-size:.85rem;line-height:1.4;margin-bottom:2px;'+(isUser?'margin-left:auto;background:var(--terracotta);color:#fff;':'background:#fff;border:1px solid var(--line);color:var(--ink);');
+  var formatted=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  d.innerHTML=formatted;
+  if(!isUser){
+    d.style.cursor='pointer';
+    d.title='Tap to copy';
+    d.onclick=function(){
+      var plain=text.replace(/\*\*(.*?)\*\*/g,'$1').replace(/\n/g,' ');
+      navigator.clipboard.writeText(plain).then(function(){
+        d.style.background='rgba(136,147,123,.2)';
+        setTimeout(function(){d.style.background='#fff';},400);
+      });
+    };
+  }
+  el.appendChild(d);
+  el.scrollTop=el.scrollHeight;
+}
+
+function aiShowTyping(){
+  var t=document.getElementById('aiTyping');
+  if(t) t.style.display='block';
+  var el=document.getElementById('aiMessages');
+  if(el) el.scrollTop=el.scrollHeight;
+}
+function aiHideTyping(){
+  var t=document.getElementById('aiTyping');
+  if(t) t.style.display='none';
+}
+
+// ==== SEND ====
+function aiSend(){
+  var input=document.getElementById('aiInput');
+  if(!input) return;
+  var q=input.value.trim();
+  if(!q) return;
+  if(!aiModelLoaded || !aiEngine){
+    aiAddMsg(q,true);
+    input.value='';
+    aiAddMsg('The local model is still loading. Please wait a moment and try again.', false);
+    if(!aiModelLoading) aiInitModel();
+    return;
+  }
+  aiAddMsg(q,true);
+  input.value='';
+  aiShowTyping();
+
+  var relevant = aiSearchKnowledge(q);
+  var context = '';
+  if(relevant.length > 0){
+    context = '\n\nRelevant guide content:\n' + relevant.map(function(k){ return '[' + k.title + ']: ' + k.content; }).join('\n');
+  }
+
+  aiChatHistory.push({role:'user', content:q});
+  aiSaveHistory();
+  var messages = [{role:'system', content: AI_SYSTEM_PROMPT + context}];
+  var recent = aiChatHistory.slice(-8);
+  for(var i=0;i<recent.length;i++) messages.push(recent[i]);
+
+  aiEngine.chat.completions.create({
+    messages: messages,
+    max_tokens: 300,
+    temperature: 0.7,
+    top_p: 0.9
+  }).then(function(reply){
+    aiHideTyping();
+    var output = reply.choices[0].message.content;
+    aiAddMsg(output, false);
+    aiChatHistory.push({role:'assistant', content:output});
+    aiSaveHistory();
+  }).catch(function(e){
+    aiHideTyping();
+    aiAddMsg('Generation error: ' + (e && e.message ? e.message : 'unknown'), false);
+  });
+}
+
+// ==== EVENTS ====
+function setupAIEvents(){
+  var sendBtn=document.getElementById('aiSend');
+  var input=document.getElementById('aiInput');
+  if(sendBtn) sendBtn.addEventListener('click',aiSend);
+  if(input) input.addEventListener('keydown',function(e){if(e.key==='Enter')aiSend();});
+  // Auto-load model when AI screen is shown
+  if(!aiModelLoaded && !aiModelLoading) aiInitModel();
+}
+document.addEventListener('DOMContentLoaded', setupAIEvents);
+
+// Global for chip buttons
+window.aiAsk=function(q){
+  var input=document.getElementById('aiInput');
+  if(input){input.value=q;aiSend();}
+};
+
+// Bounce keyframe (add if not exists)
+if(!document.querySelector('#aiBounceStyle')){
+  var st=document.createElement('style');
+  st.id='aiBounceStyle';
+  st.textContent='@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-4px)}}@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}';
+  document.head.appendChild(st);
+}
+</script>
+
+<div id="podcastOverlay">
+  <button onclick="closePodcast()" style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:50%;width:36px;height:36px;font-size:1.1rem;cursor:pointer">✕</button>
+  <h2>Record your podcast</h2>
+  <p>Speak freely about this essential. It stays on your device.</p>
+  <div class="pod-timer" id="podTimer">0:00</div>
+  <div class="pod-wave" id="podWave" style="display:none">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <button class="pod-btn record" id="podRecordBtn" onclick="toggleRecording()">🎤</button>
+  <div style="font-size:.78rem;color:rgba(255,255,255,.6)">Tap to start · 3 minutes max</div>
+  <audio id="podPreview" style="display:none" controls></audio>
+  <div class="pod-actions" id="podActions" style="display:none">
+    <button class="pod-action play" onclick="previewPodcast()">▶ Preview</button>
+    <button class="pod-action save" onclick="savePodcast()">💾 Save</button>
+    <button class="pod-action share" onclick="sharePodcast()">📤 Share</button>
+    <button class="pod-action discard" onclick="closePodcast()">Discard</button>
+  </div>
+</div>
+
+<div id="helpOverlay" onclick="if(event.target===this)closeHelp()">
+  <div id="helpPanel">
+    <div style="padding:16px 16px 0">
+      <button class="close" onclick="closeHelp()">✕</button>
+      <h2>How to use onetoeight</h2>
+    </div>
+    <div id="helpContent">
+      <div style="background:rgba(164,100,71,.08);border-left:4px solid var(--terracotta);padding:12px 14px;border-radius:0 10px 10px 0;margin-bottom:14px;font-size:.85rem;line-height:1.55;color:var(--ink)">
+        <strong style="display:block;margin-bottom:4px;color:var(--terracotta)">What this is</strong>
+        onetoeight is an <strong>education and awareness program</strong>. The 8 essentials are insights and frames for thinking — not a sales pitch, not a transformation promise, not a religion. The app and the guide are tools. What you do with them is yours.
+      </div>
+      <h3>Getting started</h3>
+      <div class="step"><div class="icon">1</div><div><strong>Create a pod or go solo</strong><br>Start a pod with up to 7 friends — just add their names. Everything stays on this device. No cost.</div></div>
+      <div class="step"><div class="icon">2</div><div><strong>Follow the weekly rhythm</strong><br>Each week unlocks one essential. Listen to the audio, read the activity, do the practice, meet with your pod.</div></div>
+      <div class="step"><div class="icon">3</div><div><strong>Check in daily</strong><br>Mark off each day's tasks. Your pod sees your progress. Your buddy checks in mid-week.</div></div>
+      
+      <h3>The 8 essentials</h3>
+      <ol>
+        <li><strong>Silence</strong> — Stillness as a superpower. 3 minutes a day.</li>
+        <li><strong>Body</strong> — Stewardship of the only body you get. Sleep, food, movement.</li>
+        <li><strong>Skills</strong> — Feed, fix, build, grow, finance. Real competence.</li>
+        <li><strong>Digital</strong> — Agency in an extractive attention economy.</li>
+        <li><strong>Community</strong> — People who know your name. The 2am test.</li>
+        <li><strong>Knowledge</strong> — What you still own when the signal dies.</li>
+        <li><strong>Nature</strong> — Sunlight, soil, and slow rhythm.</li>
+        <li><strong>Convictions</strong> — Values that hold under pressure.</li>
+      </ol>
+      
+      <h3>Features</h3>
+      <p><strong>🧠 AI Assistant</strong> — Ask about the essentials, get challenges, or reflect. Runs locally on your device.</p>
+      <p><strong>🎙️ Record podcast</strong> — In each essential, record a 3-minute audio diary. Stays on your device.</p>
+      <p><strong>📷 Evidence upload</strong> — Add photos or videos to show your progress. Share with your pod via chat apps.</p>
+      <p><strong>🔒 Privacy mode</strong> — Toggle to show a placeholder instead of your evidence. Others see a locked icon.</p>
+      <p><strong>🔇 Silent partner</strong> — Someone in the pod watches your progress silently. Revealed at week 8.</p>
+      <p><strong>🤝 Buddy pairing</strong> — Different partner each week. Check in directly mid-week.</p>
+      <p><strong>🌙 Dark mode</strong> — Profile tab. Toggle inverted colour scheme.</p>
+      <p><strong>📤 Export / 📥 Import</strong> — Profile tab. Migrate data between devices as a .json file.</p>
+      
+      <h3>Service extension</h3>
+      <p>After completing all 8 essentials, unlock the service track: 8 weeks of community service. Complete all 8 and enter the prize draw.</p>
+      
+      <h3>Privacy</h3>
+      <p>Everything stays on your device. No accounts. No cloud storage. No tracking. Share only what you choose, only through your existing chat apps. The AI runs in your browser. Your conversations never leave.</p>
+      
+      <h3>Need more help?</h3>
+      <p>Contact: <a href="mailto:brendan@onetoeight.org">brendan@onetoeight.org</a></p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
