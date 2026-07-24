@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <style>
+      .skin { fill: #CEB59E; }
+      .hair { fill: #4C362D; }
+      .robe { fill: #A46447; }
+      .robe-shadow { fill: #8a5539; }
+      .robe-light { fill: #c4805a; }
+      .halo { fill: none; stroke: #CEB59E; stroke-width: 1.5; opacity: 0.4; }
+      .line { fill: none; stroke: #4C362D; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.6; }
+    </style>
+  </defs>
+
+  <!-- Background circle / subtle halo -->
+  <circle cx="200" cy="220" r="160" fill="#E8E1D5" opacity="0.5"/>
+  <circle cx="200" cy="220" r="145" class="halo"/>
+  <circle cx="200" cy="220" r="155" class="halo" stroke-width="0.8"/>
+
+  <!-- Shoulders and upper body -->
+  <path d="M120,340 C120,340 140,280 160,260 C160,260 200,250 200,250 C200,250 240,260 240,260 C260,280 280,340 280,340" class="robe"/>
+  <path d="M120,340 C130,360 150,380 200,390 C250,380 270,360 280,340" class="robe"/>
+  
+  <!-- Robe folds -->
+  <path d="M150,300 C160,320 180,350 180,380" class="line"/>
+  <path d="M250,300 C240,320 220,350 220,380" class="line"/>
+  <path d="M180,280 C190,310 195,350 200,390" class="line" opacity="0.4"/>
+
+  <!-- Collar / neckline -->
+  <path d="M175,260 C185,270 200,275 215,270 C225,265 230,260 230,255" class="robe-light"/>
+  <path d="M175,260 C180,255 190,250 200,250 C210,250 220,255 225,260" class="robe-shadow"/>
+
+  <!-- Neck -->
+  <path d="M188,240 C190,250 195,258 200,258 C205,258 210,250 212,240" class="skin"/>
+
+  <!-- Head shape -->
+  <ellipse cx="200" cy="210" rx="38" ry="42" class="skin"/>
+  
+  <!-- Hair -->
+  <path d="M162,200 C160,190 162,175 170,168 C180,160 190,158 200,158 C210,158 220,160 230,168 C238,175 240,190 238,200 C235,210 230,215 225,218 C220,220 215,215 210,218 C205,220 195,220 190,218 C185,215 180,220 175,218 C170,215 165,210 162,200 Z" class="hair"/>
+  
+  <!-- Hair detail - waves -->
+  <path d="M170,180 C175,175 180,172 185,175 C190,178 195,174 200,176 C205,178 210,174 215,177 C220,180 225,176 230,182" class="line" opacity="0.3"/>
+  <path d="M168,195 C175,190 185,188 200,186 C215,188 225,190 232,195" class="line" opacity="0.3"/>
+
+  <!-- Eyes -->
+  <ellipse cx="186" cy="208" rx="5" ry="3.5" fill="#4C362D"/>
+  <ellipse cx="214" cy="208" rx="5" ry="3.5" fill="#4C362D"/>
+  <ellipse cx="186" cy="207" rx="2" ry="2" fill="#E8E1D5"/>
+  <ellipse cx="214" cy="207" rx="2" ry="2" fill="#E8E1D5"/>
+
+  <!-- Eyebrows -->
+  <path d="M178,201 C182,198 188,197 192,200" class="line" opacity="0.5"/>
+  <path d="M222,201 C218,198 212,197 208,200" class="line" opacity="0.5"/>
+
+  <!-- Nose -->
+  <path d="M200,212 C202,215 203,220 201,222" class="line" opacity="0.4"/>
+
+  <!-- Gentle smile -->
+  <path d="M192,228 C196,231 204,231 208,228" class="line" opacity="0.5"/>
+
+  <!-- Cheek warmth -->
+  <circle cx="180" cy="220" r="8" fill="#A46447" opacity="0.06"/>
+  <circle cx="220" cy="220" r="8" fill="#A46447" opacity="0.06"/>
+
+  <!-- Beard -->
+  <path d="M185,230 C185,238 190,245 200,248 C210,245 215,238 215,230" fill="none" stroke="#4C362D" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Cross in the background -->
+  <path d="M200,100 L200,260 M160,180 L240,180" stroke="#CEB59E" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
+
+  <!-- Warm glow at bottom -->
+  <ellipse cx="200" cy="420" rx="80" ry="20" fill="#A46447" opacity="0.08"/>
+</svg>
