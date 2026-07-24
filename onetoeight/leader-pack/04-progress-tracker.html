@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<title>onetoeight — Progress Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 15mm; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; color: #2a2520; font-size: 10pt; line-height: 1.6; }
+h1, h2, h3, h4 { font-family: 'Fraunces', serif; font-weight: 500; color: #3D2820; }
+:root { --forest: #5C3A2E; --forest-dark: #3D2820; --amber: #A46447; --amber-light: #C4805A; --cream: #faf7f2; --cream-dark: #f0ebe0; --ink: #2a2520; --muted: #6b6358; --sage: #88937B; }
+.page-break { page-break-after: always; }
+.label { font-size: 7.5pt; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); font-weight: 700; }
+.header-bar { background: var(--forest-dark); color: var(--cream); padding: 12mm 15mm; margin: -15mm -15mm 1.5rem; }
+.header-bar .label { color: var(--amber-light); }
+.header-bar h1 { color: var(--cream); font-size: 18pt; margin-top: .3rem; }
+.header-bar .sub { font-size: 9pt; color: rgba(250,247,242,0.6); margin-top: .2rem; }
+.footer { text-align: center; font-size: 7pt; color: var(--muted); border-top: 1px solid var(--cream-dark); padding-top: 2mm; margin-top: 2rem; }
+.box { border: 1px solid var(--cream-dark); border-radius: 8px; padding: 1rem 1.2rem; margin: .8rem 0; }
+.box-amber { border-left: 3px solid var(--amber); }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+th { background: var(--forest-dark); color: var(--cream); font-family: 'Fraunces', serif; font-size: 9pt; text-align: left; padding: 6px 10px; }
+td { border-bottom: 1px solid var(--cream-dark); padding: 6px 10px; font-size: 9pt; vertical-align: top; }
+tr:nth-child(even) { background: var(--cream); }
+.ref { font-family: 'Fraunces', serif; font-size: 9pt; color: var(--amber); font-weight: 600; }
+
+@page { size: A3; margin: 15mm; }
+.tracker-table { width: 100%; border-collapse: collapse; }
+.tracker-table th { background: var(--forest-dark); color: var(--cream); font-family: 'Fraunces', serif; font-size: 10pt; padding: 8px; text-align: center; }
+.tracker-table th:first-child { text-align: left; width: 28%; }
+.tracker-table td { border: 1px solid var(--cream-dark); padding: 0; height: 40px; text-align: center; }
+.tracker-table td:first-child { text-align: left; padding: 8px 12px; font-weight: 500; font-size: 10pt; }
+.tracker-cell { display: flex; align-items: center; justify-content: center; height: 100%; }
+.tracker-cell span { font-size: 16pt; color: var(--cream-dark); }
+.essential-num { font-family: 'Fraunces', serif; color: var(--amber); font-weight: 600; margin-right: 8px; }
+</style>
+</head>
+<body>
+<div class="header-bar">
+  <div class="label">Progress Tracker</div>
+  <h1>Eight Essentials · Eight Weeks</h1>
+  <div class="sub">Print A3 · Display on wall · Tick off as challenges are completed</div>
+</div>
+
+<table class="tracker-table">
+  <tr>
+    <th>Essential</th>
+    <th>Week 1</th><th>Week 2</th><th>Week 3</th><th>Week 4</th>
+    <th>Week 5</th><th>Week 6</th><th>Week 7</th><th>Week 8</th>
+  </tr>
+  <tr>
+    <td><span class="essential-num">01</span>Silence</td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+  </tr>
+  <tr>
+    <td><span class="essential-num">02</span>Body</td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+  </tr>
+  <tr>
+    <td><span class="essential-num">03</span>Skills</td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+  </tr>
+  <tr>
+    <td><span class="essential-num">04</span>Digital Defence</td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+  </tr>
+  <tr>
+    <td><span class="essential-num">05</span>Community</td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+  </tr>
+  <tr>
+    <td><span class="essential-num">06</span>Knowledge</td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+  </tr>
+  <tr>
+    <td><span class="essential-num">07</span>Nature</td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+  </tr>
+  <tr>
+    <td><span class="essential-num">08</span>Convictions</td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+    <td><div class="tracker-cell"><span>&#9744;</span></div></td>
+  </tr>
+</table>
+
+<div style="margin-top: 2rem; display: flex; gap: 2rem; justify-content: space-between;">
+  <div>
+    <div class="label">Participant Name</div>
+    <div style="border-bottom: 1px solid var(--cream-dark); height: 20px; width: 250px; margin-top: 5px;"></div>
+  </div>
+  <div>
+    <div class="label">Start Date</div>
+    <div style="border-bottom: 1px solid var(--cream-dark); height: 20px; width: 150px; margin-top: 5px;"></div>
+  </div>
+  <div>
+    <div class="label">Group / Cohort</div>
+    <div style="border-bottom: 1px solid var(--cream-dark); height: 20px; width: 200px; margin-top: 5px;"></div>
+  </div>
+</div>
+
+<div class="footer">onetoeight · Leader's Resource Pack · Progress Tracker · A3 Wall Poster</div>
+</body>
+</html>
