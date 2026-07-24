@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>onetoeight &mdash; Youth Phone Shell + Go-To-Market Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAF6EF;
+  --cream-deep:#F3EDE0;
+  --terracotta:#C96F4A;
+  --terracotta-dark:#A8552F;
+  --sage:#7A8B6F;
+  --sage-dark:#5C6E52;
+  --umber:#4A3F35;
+  --umber-light:#6B5D4F;
+  --ink:#2B2520;
+  --paper:#FFFFFF;
+  --line:#E5DDD0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.6;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.topbar{
+  background:var(--umber);
+  color:var(--cream);
+  padding:.6rem 1.5rem;
+  font-size:.82rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.topbar a{color:var(--cream);text-decoration:none;opacity:.85}
+.topbar a:hover{opacity:1}
+.topbar .brand{font-family:'Fraunces',serif;font-weight:600;letter-spacing:0;text-transform:none;font-size:1rem}
+.container{max-width:860px;margin:0 auto;padding:0 1.25rem}
+section{padding:3.5rem 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+.kicker{
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--terracotta);
+  font-weight:600;
+  margin-bottom:.75rem;
+}
+h1{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,2.8rem);font-weight:600;line-height:1.15;margin-bottom:1rem;color:var(--umber)}
+h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,4vw,2rem);font-weight:600;line-height:1.2;margin:2.5rem 0 1rem;color:var(--umber)}
+h3{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;margin:1.75rem 0 .6rem;color:var(--umber)}
+p{margin-bottom:1rem;max-width:68ch}
+.lede{font-size:1.15rem;color:var(--umber-light);max-width:64ch}
+ul,ol{margin:0 0 1rem 1.25rem}
+li{margin-bottom:.4rem}
+table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.93rem}
+th{font-family:'Fraunces',serif;font-weight:600;text-align:left;padding:.6rem .75rem;background:var(--cream-deep);border-bottom:2px solid var(--line);color:var(--umber)}
+td{padding:.6rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:1.25rem 1.5rem;
+  margin:1rem 0;
+}
+.card h3{margin-top:0}
+.tag{
+  display:inline-block;
+  font-size:.72rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:.2rem .55rem;
+  border-radius:999px;
+  background:var(--cream-deep);
+  color:var(--umber-light);
+  margin-right:.35rem;
+}
+.tag.terracotta{background:var(--terracotta);color:#fff}
+.tag.sage{background:var(--sage);color:#fff}
+.tag.umber{background:var(--umber);color:var(--cream)}
+.callout{
+  border-left:4px solid var(--terracotta);
+  background:var(--paper);
+  padding:1rem 1.25rem;
+  margin:1.25rem 0;
+  border-radius:0 8px 8px 0;
+}
+.callout strong{color:var(--umber)}
+.grid-2{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:640px){.grid-2{grid-template-columns:1fr 1fr}}
+.grid-3{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:640px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+.stat{
+  text-align:center;
+  padding:1.25rem 1rem;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+.stat .num{font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:var(--terracotta);line-height:1}
+.stat .lbl{font-size:.85rem;color:var(--umber-light);margin-top:.35rem}
+.footer{
+  padding:2.5rem 0;
+  text-align:center;
+  color:var(--umber-light);
+  font-size:.85rem;
+}
+.footer a{color:var(--terracotta);text-decoration:none}
+.toc{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:1.25rem 1.5rem;
+  margin:1.5rem 0;
+}
+.toc ol{margin-left:1.25rem}
+.toc a{color:var(--umber);text-decoration:none}
+.toc a:hover{color:var(--terracotta)}
+.divider{
+  height:1px;
+  background:var(--line);
+  margin:2.5rem 0;
+}
+.badge{
+  display:inline-block;
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:.8rem;
+  padding:.15rem .5rem;
+  border-radius:6px;
+  background:var(--cream-deep);
+  color:var(--umber-light);
+  margin-right:.4rem;
+}
+@media(max-width:640px){
+  body{font-size:15px}
+  .container{padding:0 1rem}
+  section{padding:2.5rem 0}
+  th,td{padding:.5rem .5rem;font-size:.88rem}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="brand">onetoeight</span>
+  <span>Youth Phone Shell + Go-To-Market &middot; v1.0</span>
+</div>
+
+<div class="container">
+
+<section>
+  <div class="kicker">Strategy Document</div>
+  <h1>Youth Phone Shell + Go-To-Market Strategy</h1>
+  <p class="lede">How onetoeight presents to young people, how it reaches the adults who buy for them, and how it earns without becoming another wellness app.</p>
+  <p>This document covers the phone-first design system, distribution channels, pricing architecture, launch sequence, content marketing, partnerships, and the metrics that actually matter. It is written for Brendan O'Keefe and the onetoeight team. It assumes the product is formation, not entertainment. The tone is direct because the audience is tired of hype.</p>
+
+  <div class="toc">
+    <strong>Contents</strong>
+    <ol>
+      <li><a href="#shell">Youth Phone Shell Design System</a></li>
+      <li><a href="#distribution">Distribution Channels</a></li>
+      <li><a href="#pricing">Pricing & Packaging Strategy</a></li>
+      <li><a href="#launch">Launch Sequence</a></li>
+      <li><a href="#content">Content Marketing Approach</a></li>
+      <li><a href="#partnerships">Partnership Strategy</a></li>
+      <li><a href="#metrics">Metrics That Matter</a></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ========== 1. YOUTH PHONE SHELL ========== -->
+<section id="shell">
+  <div class="kicker">Section 1</div>
+  <h2>Youth Phone Shell Design System</h2>
+  <p>The phone shell is the surface young people actually touch. It is not the leader guide. It is not the pitch deck. It is the thing a 15-year-old opens at 10pm when they cannot sleep. The design must feel like a tool, not a tract.</p>
+
+  <div class="callout">
+    <strong>Design principle:</strong> Warm, earthy, serious. Cream field, terracotta action, sage support, umber structure. Fraunces for voice, Inter for utility. No neon, no glassmorphism, no confetti. Progress is marked, not celebrated.
+  </div>
+
+  <h3>1.1 Core Interaction Model</h3>
+  <p>The shell is built around <strong>cards</strong>, not chapters. Each essential is a stack of eight cards:</p>
+  <table>
+    <tr><th>Card</th><th>Purpose</th><th>Content</th></tr>
+    <tr><td><strong>00 Cover</strong></td><td>Orientation</td><td>Essential number, title, one-line promise, audio play button, time estimate</td></tr>
+    <tr><td><strong>01 Story</strong></td><td>Hook</td><td>Short narrative scene (300&ndash;500 words) that makes the essential concrete</td></tr>
+    <tr><td><strong>02 Why</strong></td><td>Stakes</td><td>Three bullets first, full paragraph behind a "go deeper" expander</td></tr>
+    <tr><td><strong>03 Reality</strong></td><td>Honesty</td><td>The hard part. What usually goes wrong. No sugar-coating.</td></tr>
+    <tr><td><strong>04 Practice</strong></td><td>Action</td><td>The weekly challenge, broken into daily steps</td></tr>
+    <tr><td><strong>05 This Week</strong></td><td>Commitment</td><td>Action-first challenge ticket: level chip, time estimate, mode (solo/with someone/offline), one CTA</td></tr>
+    <tr><td><strong>06 Talk</strong></td><td>Discussion</td><td>Two or three questions that actually work in a group</td></tr>
+    <tr><td><strong>07 Wisdom</strong></td><td>Anchor</td><td>Seven day-chips, one verse or reflection per day, tap to expand</td></tr>
+    <tr><td><strong>08 Checklist</strong></td><td>Closure</td><td>Mark done, export fragment, next essential preview</td></tr>
+  </table>
+
+  <h3>1.2 Sticky HUD</h3>
+  <p>The top of the screen never scrolls away. It shows:</p>
+  <ul>
+    <li><code>Silence &middot; 01/08 &middot; 12 min &middot; continue</code></li>
+    <li>Four actions: <strong>Listen</strong> &middot; <strong>Do</strong> &middot; <strong>Discuss</strong> &middot; <strong>Mark done</strong></li>
+  </ul>
+  <p>This is the app's spine. It tells the young person where they are, how much is left, and what to do next without making them think.</p>
+
+  <h3>1.3 Action-First Challenges</h3>
+  <p>Challenges are the hero UI object, bigger than reflections. Each challenge is a ticket:</p>
+  <div class="card">
+    <span class="tag terracotta">Level 2</span> <span class="tag sage">Solo</span> <span class="tag umber">8 min</span>
+    <h3>Cook one meal from scratch</h3>
+    <p>No packet mixes. No takeaway. Plan it, shop for it, cook it, eat it. Take a photo of the mess.</p>
+    <p><strong>CTA:</strong> Start challenge &rarr;</p>
+  </div>
+  <p>Young people skim. The ticket format forces clarity. If a challenge cannot fit on a ticket, it is too complicated.</p>
+
+  <h3>1.4 Postable Fragments</h3>
+  <p>Every essential generates auto-formatted mini-cards for screenshot sharing:</p>
+  <ul>
+    <li>One line of truth from the chapter</li>
+    <li>The essential number and title</li>
+    <li>The onetoeight mark</li>
+    <li>Cream background, terracotta accent, Fraunces type</li>
+  </ul>
+  <p>Young creators distribute culture through captures. If the layout does not make shareable units, it dies in the chat. The share button uses the native Web Share API &mdash; WhatsApp, Telegram, Signal, iMessage. No in-app social network to moderate.</p>
+
+  <h3>1.5 Progress Without Cheap Gamification</h3>
+  <p>Formation is not a streak. The shell tracks progress honestly:</p>
+  <table>
+    <tr><th>What we do</th><th>What we do not do</th></tr>
+    <tr><td>"2 of 8 essentials started" &mdash; calm, factual</td><td>Flame icons, daily streaks, XP bars</td></tr>
+    <tr><td>Checkmarks that tick when a challenge is done</td><td>Confetti, badges, leaderboards by default</td></tr>
+    <tr><td>Pod score as a group health signal (optional)</td><td>Individual ranking against friends</td></tr>
+    <tr><td>Silent partner &mdash; someone watches without commenting</td><td>Public shaming or guilt notifications</td></tr>
+    <tr><td>Service extension unlocked after week 8</td><td>Pay-to-win or skip-ahead mechanics</td></tr>
+  </table>
+  <p>The leaderboard is optional in the subscription tier because some youth groups want it. It is off by default. Formation is not a competition.</p>
+
+  <h3>1.6 Typography & Colour System</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Type</h3>
+      <ul>
+        <li><strong>Fraunces</strong> &mdash; headings, essential numbers, quotes. Serif with warmth.</li>
+        <li><strong>Inter</strong> &mdash; body, UI labels, buttons. Clean, legible at small sizes.</li>
+        <li>Mobile body: 17&ndash;18px, line-height 1.6</li>
+        <li>Measure: 32&ndash;36 characters on phone</li>
+        <li>Essential number display: huge (01, 02, 03&hellip;)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Colour by Essential</h3>
+      <ul>
+        <li><strong>Silence</strong> &mdash; sage soft</li>
+        <li><strong>Body</strong> &mdash; terracotta</li>
+        <li><strong>Skills</strong> &mdash; umber hard</li>
+        <li><strong>Digital Defence</strong> &mdash; ink edge</li>
+        <li><strong>Community</strong> &mdash; almond warm</li>
+        <li><strong>Knowledge</strong> &mdash; terracotta line</li>
+        <li><strong>Nature</strong> &mdash; sage strong</li>
+        <li><strong>Convictions / Tested Faith</strong> &mdash; umber + cream high contrast</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>1.7 Component Inventory</h3>
+  <table>
+    <tr><th>Component</th><th>Function</th><th>Notes</th></tr>
+    <tr><td>Sticky HUD</td><td>Orientation + navigation</td><td>Never scrolls away; shows progress, time, actions</td></tr>
+    <tr><td>Chapter card</td><td>Content container</td><td>Swipeable on mobile, scrollable on desktop</td></tr>
+    <tr><td>Challenge ticket</td><td>Weekly action</td><td>Level chip, time, mode, single CTA</td></tr>
+    <tr><td>Day chip</td><td>Daily wisdom</td><td>Day 1&ndash;7, tap to expand verse/reflection</td></tr>
+    <tr><td>Progress ring</td><td>Completion state</td><td>Subtle, around the essential number; no animation unless tapped</td></tr>
+    <tr><td>Fragment card</td><td>Shareable image</td><td>Auto-generated, cream + terracotta, screenshot-native</td></tr>
+    <tr><td>Audio player</td><td>Narrated content</td><td>Round terracotta play button, wave bars while playing</td></tr>
+    <tr><td>Pod summary</td><td>Group view</td><td>Avatar row, pod score, buddy indicator, silent partner icon</td></tr>
+    <tr><td>Evidence thumbnail</td><td>Proof of practice</td><td>Photo/video, privacy mode toggle, placeholder when locked</td></tr>
+    <tr><td>Export button</td><td>Data portability</td><td>One-tap JSON export, import on another device</td></tr>
+  </table>
+
+  <h3>1.8 Technical Constraints</h3>
+  <ul>
+    <li><strong>PWA first.</strong> Runs in any modern browser. Add to home screen. No app store gatekeeping for the base experience.</li>
+    <li><strong>Android APK via Capacitor.</strong> For users who want a native install. Same codebase, same components.</li>
+    <li><strong>Local-first.</strong> IndexedDB + localStorage. No account, no cloud, no data leaving the device unless the user exports.</li>
+    <li><strong>WebLLM local AI.</strong> Llama 3.2 1B (~780MB) runs in-browser via WebGPU. RAG knowledge base of all 8 essentials. Works offline after first download. No API, no server, no COPPA/GDPR server-side liability.</li>
+    <li><strong>Web Share API.</strong> All sharing goes through apps the young person already uses. No in-app chat to build, moderate, or secure.</li>
+  </ul>
+</section>
+
+<!-- ========== 2. DISTRIBUTION ========== -->
+<section id="distribution">
+  <div class="kicker">Section 2</div>
+  <h2>Distribution Channels</h2>
+  <p>There are four audiences. Each has a different decision type, a different channel, and a different emotional hook. Do not run one message everywhere.</p>
+
+  <table>
+    <tr><th>Audience</th><th>Decision Type</th><th>Primary Channel</th><th>Emotional Hook</th><th>What They Buy</th></tr>
+    <tr><td><strong>Youth pastors / leaders</strong></td><td>Purchasing (budget holders)</td><td>Email, Facebook Groups, conferences, denominational networks</td><td>"Ready-to-run programming that actually works"</td><td>Youth Group Licence ($299/yr), Mastery Kits for leaders</td></tr>
+    <tr><td><strong>Parents</strong></td><td>Advocacy / awareness</td><td>Instagram, Facebook, podcasts, church bulletins</td><td>"I'm worried about screens and I don't know what to do"</td><td>Mastery Kit ($44.88), gift for their teen, subscription</td></tr>
+    <tr><td><strong>Schools / teachers</strong></td><td>Curriculum adoption</td><td>Email, education conferences, teacher networks, PD days</td><td>"Classroom-ready format, no faith requirement"</td><td>School / District Licence ($1,500), Universal Edition</td></tr>
+    <tr><td><strong>Young people</strong></td><td>Viral / peer discovery</td><td>TikTok, Instagram Reels, YouTube Shorts, WhatsApp</td><td>"This is about real life, not another lecture"</td><td>Pod seat ($10), subscription ($5.99/mo), Mastery Kit</td></tr>
+  </table>
+
+  <h3>2.1 Channel Details</h3>
+
+  <div class="card">
+    <span class="tag terracotta">Primary</span>
+    <h3>Email to Youth Pastors</h3>
+    <p>The highest-converting channel. Youth pastors are reachable, budget-aware, and desperate for programming that does not feel like babysitting.</p>
+    <ul>
+      <li>Build a list from denominational directories, conference attendee lists, and Facebook Group admins</li>
+      <li>Subject lines: "8 weeks, 8 kids, $10 each" / "The silence session made my teen put her phone down"</li>
+      <li>Send a free PDF of Essential 01 (Silence) as the lead magnet</li>
+      <li>Follow-up sequence: 3 emails over 10 days &mdash; problem, product, proof</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="tag sage">Primary</span>
+    <h3>Facebook Groups for Youth Ministry</h3>
+    <p>There are active communities of youth pastors sharing curriculum, games, and survival tips. These are high-trust, high-intent spaces.</p>
+    <ul>
+      <li>Join as a participant, not a vendor. Answer questions. Share the free Silence chapter when relevant.</li>
+      <li>Post the "3 of them now cook Sunday lunch" story as a case study, not an ad</li>
+      <li>Offer a free leader pack to the first 10 groups that run the programme</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="tag sage">Primary</span>
+    <h3>Instagram + TikTok (Parent-Facing)</h3>
+    <p>Parents of teens are on Instagram and Facebook. They are worried, tired, and looking for someone to tell them it is not too late.</p>
+    <ul>
+      <li>Content: 60-second clips of a parent reading the Silence chapter, a teen cooking for the first time, a before/after screen-time stat</li>
+      <li>Hook: "You gave them a phone. Did you give them roots?"</li>
+      <li>CTA: link in bio to the free chapter, then email capture</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="tag umber">Secondary</span>
+    <h3>Podcasts</h3>
+    <p>Christian parenting and youth ministry podcasts are always looking for guests. Brendan has a story: why he built this, what the eight essentials are, what happened when teens tried silence.</p>
+    <ul>
+      <li>Target: youth ministry podcasts, Christian parenting shows, education reform shows</li>
+      <li>Offer: free Mastery Kit for the host, discount code for listeners</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="tag umber">Secondary</span>
+    <h3>Conferences & Events</h3>
+    <p>Youth ministry conferences (e.g. Youth Specialties, Orange Conference, denominational gatherings) are where curriculum buying happens in person.</p>
+    <ul>
+      <li>Booth or table with printed guides, phone demos, and a sign-up sheet</li>
+      <li>Run a 20-minute workshop: "How to run an 8-week formation programme with zero prep"</li>
+      <li>Collect emails, follow up within 48 hours</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="tag umber">Secondary</span>
+    <h3>Direct to Schools (Universal Edition)</h3>
+    <p>The Universal Edition is designed for secular settings. Sell to principals, chaplains, PDHPE coordinators, and wellbeing officers.</p>
+    <ul>
+      <li>Email principals directly with a one-page PDF: "8 weeks, 8 essentials, no faith requirement"</li>
+      <li>Offer a free staff training webinar for any school that buys a licence</li>
+      <li>Target alternative education programmes, homeschool co-ops, and community centres first &mdash; they move faster than districts</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="tag terracotta">Viral</span>
+    <h3>Peer-to-Peer (Young People)</h3>
+    <p>The $10 pod seat is designed for virality. One kid buys, seven friends join. The app makes sharing easy; the challenge makes it worth sharing.</p>
+    <ul>
+      <li>Postable fragments are the viral unit &mdash; one line of truth, screenshot, send to group chat</li>
+      <li>Pod codes make joining frictionless &mdash; no account, no password, just a code</li>
+      <li>The "3-minute podcast" feature gives young people a reason to create and share audio</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 3. PRICING ========== -->
+<section id="pricing">
+  <div class="kicker">Section 3</div>
+  <h2>Pricing & Packaging Strategy</h2>
+  <p>The pricing architecture is designed to remove friction at the bottom and capture value at the top. A teenager can start for $10. A school can pay $1,500. Everything in between serves a different buyer with a different budget.</p>
+
+  <h3>3.1 Product Architecture</h3>
+  <table>
+    <tr><th>Product</th><th>Price</th><th>Buyer</th><th>What It Includes</th><th>Role</th></tr>
+    <tr><td><strong>Pod Seat</strong></td><td>$10 / 8 weeks</td><td>Young person (or parent)</td><td>App access, pod membership, weekly challenges, AI assistant, podcast recording, evidence upload, service extension eligibility</td><td>Viral entry point. Gets young people in. Pays for itself in coffee.</td></tr>
+    <tr><td><strong>Mastery Kit</strong></td><td>$44.88</td><td>Parent, leader, serious individual</td><td>Full guide (140+ pages), audio narration, 80 prayers/reflections, 56 wisdom references, leader pack, mini course, offline AI tools, app access</td><td>Core revenue. The "I want everything" option. Priced below a video game.</td></tr>
+    <tr><td><strong>Youth Group Licence</strong></td><td>$299 / year</td><td>Youth pastor, church, community org</td><td>30 user seats, leader pack, mini course, audio, both Christian + Universal editions, discounted scaling</td><td>Institutional anchor. Turns one pastor into 30 users.</td></tr>
+    <tr><td><strong>Youth Subscription</strong></td><td>$5.99 / month</td><td>Individual teen or parent</td><td>Weekly challenges, progress tracking, audio offlining, group discussion prompts, optional leaderboard</td><td>Retention layer. Recurring revenue for ongoing engagement after the 8 weeks.</td></tr>
+    <tr><td><strong>School / District Licence</strong></td><td>$1,500</td><td>Principal, district, wellbeing officer</td><td>Full institutional licence, both editions, all resources, staff training materials, lifetime updates, tailored adoption support</td><td>Top-tier institutional. High touch, high margin, high impact.</td></tr>
+  </table>
+
+  <h3>3.2 Pricing Logic</h3>
+  <ul>
+    <li><strong>$10 pod seat:</strong> Impulse-buy territory for a teen with a part-time job. Eight friends at $10 each = $80 per pod. That is less than a youth group pizza night. The price signals "this is for you," not "this is for your parents."</li>
+    <li><strong>$44.88 Mastery Kit:</strong> Anchored against a video game ($70) or a pair of sneakers ($120). The .88 ending is intentional &mdash; it signals precision and accessibility, not luxury. 100 kits = $4,488. 1,000 = $44,880.</li>
+    <li><strong>$299 youth group licence:</strong> Most youth ministries have $200&ndash;$800/year for curriculum. $299 sits comfortably in that band. It is less than $10/month for 30 seats. The licence includes both editions, which removes the "which one do we buy" objection.</li>
+    <li><strong>$5.99/month subscription:</strong> Comparable to Spotify or Netflix. Positioned as "the cost of one coffee per month for a tool that actually helps." The subscription is for after the 8 weeks &mdash; retention, not acquisition.</li>
+    <li><strong>$1,500 school licence:</strong> Schools spend thousands on textbooks and PD. $1,500 for a full institutional licence with staff training is a rounding error in a school budget. It is high enough to signal seriousness, low enough to avoid procurement hell.</li>
+  </ul>
+
+  <h3>3.3 Bundling & Upsell Paths</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h3>The Pod Path</h3>
+      <p>Free chapter &rarr; $10 pod seat &rarr; finish 8 weeks &rarr; $5.99/mo subscription for ongoing challenges &rarr; buy Mastery Kit as a gift or reference.</p>
+    </div>
+    <div class="card">
+      <h3>The Leader Path</h3>
+      <p>Free leader pack &rarr; $44.88 Mastery Kit to evaluate &rarr; $299 youth group licence for the whole group &rarr; renew annually &rarr; refer another pastor.</p>
+    </div>
+    <div class="card">
+      <h3>The Parent Path</h3>
+      <p>Instagram ad &rarr; free Silence chapter &rarr; $44.88 Mastery Kit for the family &rarr; buy pod seats for the teen and their friends &rarr; gift to another parent.</p>
+    </div>
+    <div class="card">
+      <h3>The School Path</h3>
+      <p>Email &rarr; free Universal sample &rarr; $1,500 school licence &rarr; staff training webinar &rarr; renewal + expansion to other year levels.</p>
+    </div>
+  </div>
+
+  <h3>3.4 What Not To Do</h3>
+  <ul>
+    <li>Do not offer a free tier of the app. Free attracts tourists, not formation. The free chapter is the sample; the pod seat is the commitment.</li>
+    <li>Do not discount the pod seat below $10. It is already impulse-priced. Discounting signals desperation.</li>
+    <li>Do not bundle the subscription with the pod seat. They serve different phases: pod = 8 weeks, subscription = after.</li>
+    <li>Do not hide the Christian edition behind a paywall while giving the Universal away free. Both are paid. The free sample is Essential 01 only.</li>
+  </ul>
+</section>
+
+<!-- ========== 4. LAUNCH ========== -->
+<section id="launch">
+  <div class="kicker">Section 4</div>
+  <h2>Launch Sequence</h2>
+  <p>A 12-week sequence from pre-launch to first renewal. The goal is not a splashy launch day. The goal is 50 paying pods and 10 youth group licences by week 12.</p>
+
+  <h3>Phase 1: Pre-Launch (Weeks 1&ndash;2)</h3>
+  <table>
+    <tr><th>Week</th><th>Action</th><th>Owner</th><th>Deliverable</th></tr>
+    <tr><td>1</td><td>Finalise phone shell design, test on 5 young people</td><td>Brendan</td><td>Usability notes, fixed friction points</td></tr>
+    <tr><td>1</td><td>Build email list: 100 youth pastors, 50 parents, 20 school contacts</td><td>Brendan</td><td>CSV with names, roles, source</td></tr>
+    <tr><td>2</td><td>Create free sample: Essential 01 (Silence) as standalone PDF + audio</td><td>Brendan</td><td>Downloadable asset, landing page</td></tr>
+    <tr><td>2</td><td>Set up shop.onetoeight.org with Stripe</td><td>Brendan</td><td>Working checkout for all 5 products</td></tr>
+    <tr><td>2</td><td>Record 3 podcast outreach pitches</td><td>Brendan</td><td>Sent to 10 podcast hosts</td></tr>
+  </table>
+
+  <h3>Phase 2: Soft Launch (Weeks 3&ndash;6)</h3>
+  <table>
+    <tr><th>Week</th><th>Action</th><th>Goal</th></tr>
+    <tr><td>3</td><td>Email 100 youth pastors: free Silence chapter + leader pack offer</td><td>20 downloads, 5 replies</td></tr>
+    <tr><td>3</td><td>Post in 3 Facebook youth ministry groups: case study + free chapter</td><td>50 clicks, 10 email signups</td></tr>
+    <tr><td>4</td><td>Run first paid pod: 8 friends, $10 each, Brendan facilitates</td><td>Proof of concept, testimonial</td></tr>
+    <tr><td>4</td><td>Instagram/TikTok: 3 posts targeting parents (screen time hook)</td><td>500 views, 20 email signups</td></tr>
+    <tr><td>5</td><td>Follow up with pastors who downloaded: offer free Mastery Kit to first 5 who run the programme</td><td>3 youth group trials</td></tr>
+    <tr><td>5</td><td>Launch Thursday Night Live webinar ($8.88/mo) as a low-commitment entry</td><td>10 subscribers</td></tr>
+    <tr><td>6</td><td>Podcast interview #1 goes live</td><td>Traffic spike, email signups</td></tr>
+    <tr><td>6</td><td>Collect first testimonials from pod participants</td><td>3 quotes, 1 photo, 1 audio clip</td></tr>
+  </table>
+
+  <h3>Phase 3: Public Launch (Weeks 7&ndash;10)</h3>
+  <table>
+    <tr><th>Week</th><th>Action</th><th>Goal</th></tr>
+    <tr><td>7</td><td>Announce on all channels: "The Circles app is live. 8 weeks. 8 friends. $10 each."</td><td>500 app opens</td></tr>
+    <tr><td>7</td><td>Email parents: "The silence session made my daughter put her phone down"</td><td>20 Mastery Kit sales</td></tr>
+    <tr><td>8</td><td>Youth pastor case study: "3 of them now cook Sunday lunch" &mdash; full story, email + social</td><td>5 youth group licence inquiries</td></tr>
+    <tr><td>8</td><td>Release Universal Edition sample to school contacts</td><td>3 school meetings booked</td></tr>
+    <tr><td>9</td><td>Run second paid pod, this time with a referral code: "Bring a friend, get $5 off"</td><td>2 pods sold</td></tr>
+    <tr><td>9</td><td>Facebook Group AMA: "Ask me anything about teen formation and screens"</td><td>50 comments, 20 email signups</td></tr>
+    <tr><td>10</td><td>Podcast interview #2 and #3 go live</td><td>Sustained traffic</td></tr>
+    <tr><td>10</td><td>Close first youth group licence ($299)</td><td>Revenue proof</td></tr>
+  </table>
+
+  <h3>Phase 4: Consolidation (Weeks 11&ndash;12)</h3>
+  <table>
+    <tr><th>Week</th><th>Action</th><th>Goal</th></tr>
+    <tr><td>11</td><td>Survey first pod finishers: what worked, what did not, would they recommend?</td><td>NPS score, improvement list</td></tr>
+    <tr><td>11</td><td>Launch service extension to first finishers</td><td>5 participants in week 9</td></tr>
+    <tr><td>12</td><td>Email all leads who did not buy: "What stopped you?"</td><td>Objection list, FAQ update</td></tr>
+    <tr><td>12</td><td>Review metrics, decide next quarter focus</td><td>Go/no-go on paid ads, school outreach expansion</td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>Launch principle:</strong> Do not buy ads until you have 50 paying pods and 10 youth group licences through organic channels. Ads amplify what already works. If the product does not convert organically, ads will only burn money faster.
+  </div>
+</section>
+
+<!-- ========== 5. CONTENT MARKETING ========== -->
+<section id="content">
+  <div class="kicker">Section 5</div>
+  <h2>Content Marketing Approach</h2>
+  <p>Content marketing for onetoeight is not about building an audience of young people. It is about building trust with the adults who buy for them, and giving young people fragments worth sharing. The content is proof, not promotion.</p>
+
+  <h3>5.1 Content Pillars</h3>
+  <table>
+    <tr><th>Pillar</th><th>Audience</th><th>Format</th><th>Frequency</th><th>Example</th></tr>
+    <tr><td><strong>The Problem</strong></td><td>Parents, pastors</td><td>Short video, carousel post, email</td><td>2x / week</td><td>"7 hours a day. That is how long the average teen spends on a screen. Here is what it costs them."</td></tr>
+    <tr><td><strong>The Proof</strong></td><td>Pastors, parents</td><td>Case study, testimonial, photo essay</td><td>1x / week</td><td>"Three of them now cook Sunday lunch for the whole church. That is not a metaphor."</td></tr>
+    <tr><td><strong>The Practice</strong></td><td>Young people, leaders</td><td>Challenge demo, audio clip, fragment card</td><td>3x / week</td><td>"Try 3 minutes of silence today. No phone. No music. Just sit. Here is what happens."</td></tr>
+    <tr><td><strong>The Product</strong></td><td>All</td><td>Behind-the-scenes, feature demo, pricing explanation</td><td>1x / week</td><td>"Why we built the AI to run on your phone, not our server."</td></tr>
+  </table>
+
+  <h3>5.2 Channel-Specific Content</h3>
+
+  <div class="card">
+    <h3>Email (Pastors + Parents)</h3>
+    <ul>
+      <li><strong>Weekly:</strong> One essential, one story, one action. Subject line: "Essential 03: Skills &mdash; your teen can fix a tap by Friday."</li>
+      <li><strong>Monthly:</strong> Roundup of testimonials, new features, and a discount code for Mastery Kits.</li>
+      <li><strong>Automated:</strong> 3-email welcome sequence for new signups &mdash; problem, product, proof.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Instagram / TikTok (Parents)</h3>
+    <ul>
+      <li><strong>Reels:</strong> 60-second clips of a parent reading the guide, a teen doing a challenge, a before/after stat.</li>
+      <li><strong>Carousels:</strong> "8 things your teen needs that school did not teach them" &mdash; swipe through, CTA to free chapter.</li>
+      <li><strong>Stories:</strong> Polls ("Does your teen know how to budget?"), Q&A boxes, link stickers.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Facebook Groups (Youth Pastors)</h3>
+    <ul>
+      <li>Participate in discussions. Do not sell. When someone asks "any good curriculum on screen time?", share the free Silence chapter.</li>
+      <li>Post case studies with permission. "A pastor in Queensland ran this. Here is what happened."</li>
+      <li>Offer to do a free Zoom training for any group that buys a licence.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>YouTube / Podcast (Long-Form)</h3>
+    <ul>
+      <li><strong>YouTube:</strong> 10-minute videos &mdash; "What is formation?" / "Why silence is a superpower" / "How to run a pod."</li>
+      <li><strong>Podcast:</strong> Weekly 20-minute episodes &mdash; one essential per episode, interview with a young person who completed it, practical tips for leaders.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Postable Fragments (Young People)</h3>
+    <ul>
+      <li>Auto-generated from the app: one line of truth, essential number, onetoeight mark.</li>
+      <li>Designed for screenshot and share to WhatsApp, Telegram, Instagram Stories.</li>
+      <li>No logo watermark. No URL. Just the line and the mark. If it is good, people will ask where it came from.</li>
+    </ul>
+  </div>
+
+  <h3>5.3 Content Calendar (First 30 Days)</h3>
+  <table>
+    <tr><th>Day</th><th>Channel</th><th>Content</th></tr>
+    <tr><td>1</td><td>Email</td><td>Welcome: "You gave them a phone. Did you give them roots?"</td></tr>
+    <tr><td>3</td><td>Instagram</td><td>Reel: 7 hours a day stat + "Here is what we built"</td></tr>
+    <tr><td>5</td><td>Facebook</td><td>Post in youth ministry group: free Silence chapter</td></tr>
+    <tr><td>7</td><td>Email</td><td>Essential 01: Silence &mdash; "The first time my daughter put her phone down"</td></tr>
+    <tr><td>10</td><td>TikTok</td><td>60-sec: "3 minutes of silence. Try it. Here is what happens."</td></tr>
+    <tr><td>12</td><td>Instagram</td><td>Carousel: "8 things school did not teach your teen"</td></tr>
+    <tr><td>14</td><td>Email</td><td>Essential 02: Body &mdash; "Sleep, food, movement. The basics are not basic."</td></tr>
+    <tr><td>17</td><td>Facebook</td><td>Case study: "3 of them now cook Sunday lunch"</td></tr>
+    <tr><td>19</td><td>YouTube</td><td>Video: "What is formation?" (10 min)</td></tr>
+    <tr><td>21</td><td>Email</td><td>Essential 03: Skills &mdash; "Feed, fix, build, grow, finance"</td></tr>
+    <tr><td>24</td><td>Instagram</td><td>Reel: Teen cooking challenge, before/after</td></tr>
+    <tr><td>26</td><td>Podcast</td><td>Episode 1: "Why we built onetoeight"</td></tr>
+    <tr><td>28</td><td>Email</td><td>Essential 04: Digital Defence &mdash; "Agency in an extractive attention economy"</td></tr>
+    <tr><td>30</td><td>All</td><td>Month 1 roundup: stats, testimonials, CTA</td></tr>
+  </table>
+</section>
+
+<!-- ========== 6. PARTNERSHIPS ========== -->
+<section id="partnerships">
+  <div class="kicker">Section 6</div>
+  <h2>Partnership Strategy</h2>
+  <p>Partnerships are force multipliers. They give onetoeight access to audiences that would take years to build alone. The strategy is to partner with organisations that already have trust with the target audience, not to build parallel infrastructure.</p>
+
+  <h3>6.1 Partnership Tiers</h3>
+  <table>
+    <tr><th>Tier</th><th>Partner Type</th><th>What They Get</th><th>What onetoeight Gets</th><th>Example</th></tr>
+    <tr><td><strong>Tier 1: Distribution</strong></td><td>Denominations, dioceses, large church networks</td><td>Custom edition, bulk pricing, co-branded leader training</td><td>Access to hundreds of youth groups, institutional credibility</td><td>A Baptist Union or Catholic diocese adopts onetoeight as recommended curriculum</td></tr>
+    <tr><td><strong>Tier 2: Channel</strong></td><td>Youth ministry conferences, podcast networks, curriculum marketplaces</td><td>Booth fee waiver, affiliate commission, exclusive content</td><td>Direct access to decision-makers, speaking slots, email list growth</td><td>Youth Specialties or Orange Conference features onetoeight in a workshop</td></tr>
+    <tr><td><strong>Tier 3: Content</strong></td><td>Christian parenting influencers, education bloggers, family YouTubers</td><td>Free Mastery Kit, affiliate link (20%), early access to new features</td><td>Authentic promotion to engaged audiences, social proof</td><td>A parenting Instagram account with 50k followers runs the programme with their teen and posts about it</td></tr>
+    <tr><td><strong>Tier 4: Community</strong></td><td>Local businesses, community centres, libraries</td><td>Prize draw sponsorship, service extension visibility, local goodwill</td><td>Real-world anchors for the service extension, local press, foot traffic</td><td>A local hardware store sponsors the "Fix" challenge prize draw</td></tr>
+  </table>
+
+  <h3>6.2 Priority Partnerships (First 6 Months)</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h3>1. Denominational Youth Departments</h3>
+      <p>Every denomination has a youth ministry office. They recommend curriculum to their churches. One endorsement can mean 50 youth group licences.</p>
+      <p><strong>Approach:</strong> Offer a free Mastery Kit to the youth director, a custom report on outcomes, and a co-branded training webinar.</p>
+    </div>
+    <div class="card">
+      <h3>2. Homeschool Co-ops</h3>
+      <p>Homeschool families are already formation-focused. They buy curriculum directly, move fast, and talk to each other.</p>
+      <p><strong>Approach:</strong> Offer the Universal Edition at a group rate, plus a free leader pack for the co-op coordinator.</p>
+    </div>
+    <div class="card">
+      <h3>3. Christian Schools</h3>
+      <p>Christian schools want formation content that is not just Bible trivia. The Christian Edition fits their chapel and PDHPE programmes.</p>
+      <p><strong>Approach:</strong> Pitch the school licence with staff training included. Emphasise the measurable outcomes: cooking, budgeting, silence.</p>
+    </div>
+    <div class="card">
+      <h3>4. Youth Ministry Conferences</h3>
+      <p>Conferences are where pastors discover new curriculum. A workshop slot is worth more than a booth.</p>
+      <p><strong>Approach:</strong> Submit a workshop proposal: "8 Weeks to Formation: A Phone-First Programme for Screen-Born Teens." Offer a free pod seat to every attendee.</p>
+    </div>
+    <div class="card">
+      <h3>5. Christian Parenting Podcasts</h3>
+      <p>Podcast hosts need guests. Brendan has a story and a product. A single interview can drive hundreds of Mastery Kit sales.</p>
+      <p><strong>Approach:</strong> Pitch the story: "Why I built a formation app that runs entirely on the device, with no cloud, no data, and no surveillance." Offer a discount code for listeners.</p>
+    </div>
+    <div class="card">
+      <h3>6. Local Businesses (Service Extension)</h3>
+      <p>The service extension needs local prize sponsors. Businesses get goodwill and foot traffic. Young people get real-world rewards.</p>
+      <p><strong>Approach:</strong> Ask a local café, hardware store, or bookshop to sponsor a prize draw. Feature them in the app and in social posts.</p>
+    </div>
+  </div>
+
+  <h3>6.3 Partnership Rules</h3>
+  <ul>
+    <li><strong>No exclusivity deals in year one.</strong> onetoeight needs to learn what works before locking in.</li>
+    <li><strong>No white-labelling.</strong> The brand is the trust. Do not let a partner rebrand it.</li>
+    <li><strong>Always keep the free chapter free.</strong> No partner gets to gate the sample.</li>
+    <li><strong>Track partner-driven revenue separately.</strong> Know which partnerships pay and which are vanity.</li>
+  </ul>
+</section>
+
+<!-- ========== 7. METRICS ========== -->
+<section id="metrics">
+  <div class="kicker">Section 7</div>
+  <h2>Metrics That Matter</h2>
+  <p>Do not track vanity metrics. Downloads, page views, and social likes do not pay bills or prove formation. Track the numbers that show whether young people are actually changing, and whether the business is sustainable.</p>
+
+  <h3>7.1 Formation Metrics (Product)</h3>
+  <table>
+    <tr><th>Metric</th><th>Target</th><th>Why It Matters</th></tr>
+    <tr><td><strong>Pod completion rate</strong></td><td>60% of pods finish all 8 weeks</td><td>Formation is the product. If pods do not finish, the product is broken.</td></tr>
+    <tr><td><strong>Weekly challenge completion</strong></td><td>70% of active users complete the weekly challenge</td><td>Action is the point. Listening without doing is entertainment.</td></tr>
+    <tr><td><strong>Buddy check-in rate</strong></td><td>50% of buddies check in mid-week</td><td>Accountability is the mechanism. If buddies do not check in, the pod is a ghost town.</td></tr>
+    <tr><td><strong>Evidence upload rate</strong></td><td>40% of users upload evidence at least once</td><td>Proof of practice. Uploads show the challenge left the screen and entered the real world.</td></tr>
+    <tr><td><strong>Podcast recording rate</strong></td><td>30% of users record at least one 3-minute reflection</td><td>Creation over consumption. Recording means the user internalised the essential enough to speak about it.</td></tr>
+    <tr><td><strong>Service extension uptake</strong></td><td>25% of finishers start the service track</td><td>Formation continues beyond the programme. This is the long-term impact signal.</td></tr>
+  </table>
+
+  <h3>7.2 Business Metrics (Revenue)</h3>
+  <table>
+    <tr><th>Metric</th><th>Target (Year 1)</th><th>Why It Matters</th></tr>
+    <tr><td><strong>Pod seats sold</strong></td><td>500 seats ($5,000)</td><td>Viral engine health. Each seat is a young person in formation.</td></tr>
+    <tr><td><strong>Mastery Kits sold</strong></td><td>200 kits ($8,976)</td><td>Core revenue. Validates the $44.88 price point.</td></tr>
+    <tr><td><strong>Youth group licences</strong></td><td>15 licences ($4,485)</td><td>Institutional validation. Each licence is 30 seats.</td></tr>
+    <tr><td><strong>Monthly subscribers</strong></td><td>100 subs ($7,188/yr)</td><td>Retention and recurring revenue. Shows the product has life after week 8.</td></tr>
+    <tr><td><strong>School licences</strong></td><td>2 licences ($3,000)</td><td>Top-tier proof. Schools are slow; two in year one is strong.</td></tr>
+    <tr><td><strong>Total revenue</strong></td><td>$28,649</td><td>Conservative first-year target from the pitch page.</td></tr>
+  </table>
+
+  <h3>7.3 Channel Metrics (Marketing)</h3>
+  <table>
+    <tr><th>Metric</th><th>Target</th><th>Why It Matters</th></tr>
+    <tr><td><strong>Email open rate (pastors)</strong></td><td>35%</td><td>Pastors are busy. 35% means the subject line and sender name are working.</td></tr>
+    <tr><td><strong>Free chapter &rarr; pod seat conversion</strong></td><td>5%</td><td>The funnel health metric. If 100 people download the chapter, 5 should start a pod.</td></tr>
+    <tr><td><strong>Pod seat &rarr; Mastery Kit conversion</strong></td><td>10%</td><td>Upsell health. 10% of pod participants buy the full kit.</td></tr>
+    <tr><td><strong>Podcast &rarr; website conversion</strong></td><td>2%</td><td>Podcast listeners are high-intent. 2% click-through is strong.</td></tr>
+    <tr><td><strong>Facebook Group &rarr; email signup</strong></td><td>3%</td><td>Group posts should drive email capture, not just likes.</td></tr>
+    <tr><td><strong>Referral rate</strong></td><td>20% of new pods come from an existing pod referral</td><td>Viral coefficient. If 1 in 5 pods is referred, the product spreads on its own.</td></tr>
+  </table>
+
+  <h3>7.4 What Not To Track</h3>
+  <ul>
+    <li>App downloads without activation. A download is not a user.</li>
+    <li>Social media followers. Followers do not buy; email subscribers do.</li>
+    <li>Time in app. More time is not better. The app should get out of the way so formation can happen in the real world.</li>
+    <li>AI chat message count. The AI is a tool, not a companion. High usage might mean the content is unclear.</li>
+    <li>Daily active users. Formation is weekly, not daily. DAU is a social media metric.</li>
+  </ul>
+
+  <h3>7.5 Review Cadence</h3>
+  <table>
+    <tr><th>Cadence</th><th>Review</th><th>Decision</th></tr>
+    <tr><td><strong>Weekly</strong></td><td>Pod activity, challenge completion, email metrics</td><td>Fix friction, adjust email subject lines</td></tr>
+    <tr><td><strong>Monthly</strong></td><td>Revenue by product, channel conversion, testimonial collection</td><td>Shift channel budget, update pricing page, refresh testimonials</td></tr>
+    <tr><td><strong>Quarterly</strong></td><td>Completion rates, service extension uptake, partnership ROI</td><td>Product roadmap, partnership renewal, content strategy</td></tr>
+  </table>
+</section>
+
+<!-- ========== APPENDIX ========== -->
+<section>
+  <div class="kicker">Appendix</div>
+  <h2>Quick Reference</h2>
+
+  <div class="grid-3">
+    <div class="stat">
+      <div class="num">$44.88</div>
+      <div class="lbl">Mastery Kit &mdash; core revenue</div>
+    </div>
+    <div class="stat">
+      <div class="num">$299</div>
+      <div class="lbl">Youth Group Licence / year</div>
+    </div>
+    <div class="stat">
+      <div class="num">$10</div>
+      <div class="lbl">Pod seat &mdash; viral entry</div>
+    </div>
+  </div>
+
+  <h3>The Eight Essentials</h3>
+  <ol>
+    <li><strong>Silence</strong> &mdash; Stillness as a superpower. 3 minutes a day.</li>
+    <li><strong>Body</strong> &mdash; Stewardship of the only body you get. Sleep, food, movement.</li>
+    <li><strong>Skills</strong> &mdash; Feed, fix, build, grow, finance. Real competence.</li>
+    <li><strong>Digital Defence</strong> &mdash; Agency in an extractive attention economy.</li>
+    <li><strong>Community</strong> &mdash; People who know your name. The 2am test.</li>
+    <li><strong>Knowledge</strong> &mdash; What you still own when the signal dies.</li>
+    <li><strong>Nature</strong> &mdash; Sunlight, soil, and slow rhythm.</li>
+    <li><strong>Convictions / Tested Faith</strong> &mdash; Values that hold under pressure.</li>
+  </ol>
+
+  <h3>Brand Palette</h3>
+  <table>
+    <tr><th>Colour</th><th>Hex</th><th>Use</th></tr>
+    <tr><td>Cream</td><td>#FAF6EF</td><td>Background, field</td></tr>
+    <tr><td>Terracotta</td><td>#C96F4A</td><td>Action, CTA, accent</td></tr>
+    <tr><td>Sage</td><td>#7A8B6F</td><td>Support, secondary</td></tr>
+    <tr><td>Umber</td><td>#4A3F35</td><td>Structure, headings, top bar</td></tr>
+  </table>
+
+  <h3>Key URLs</h3>
+  <ul>
+    <li>Pitch page: <a href="https://autumn-atlas-ap56.here.now/onetoeight-pitch.html">autumn-atlas-ap56.here.now/onetoeight-pitch.html</a></li>
+    <li>Circles app: <a href="https://royal-soul-ajng.here.now/drafts/circles-app/index.html">royal-soul-ajng.here.now/drafts/circles-app/index.html</a></li>
+    <li>Shop: shop.onetoeight.org</li>
+    <li>Contact: brendan@onetoeight.org</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <p class="lede" style="text-align:center; margin-top:2rem;">onetoeight is not an app. Not a course. It is a formation kit. The phone shell is the delivery surface. The go-to-market is the bridge between the product and the people who need it. Both must be as serious as the problem they solve.</p>
+</section>
+
+</div>
+
+<div class="footer">
+  <p>onetoeight &middot; Formation for a screen-born generation<br>
+  Christian Edition &middot; Universal Edition &middot; EN / ES / ZH<br>
+  <a href="mailto:brendan@onetoeight.org">brendan@onetoeight.org</a> &middot; <a href="https://onetoeight.org">onetoeight.org</a></p>
+  <p style="margin-top:1rem; opacity:.7;">Youth Phone Shell + Go-To-Market Strategy &middot; v1.0 &middot; July 2026</p>
+</div>
+
+</body>
+</html>
