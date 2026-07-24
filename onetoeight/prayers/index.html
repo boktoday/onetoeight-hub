@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#E8E1D5">
+<title>Prayers for the Eight Essentials — one to eight</title>
+<meta name="description" content="80 original prayers for each of the eight essentials — silence, body, skills, digital self-defence, community, knowledge, nature, and tested faith.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:#4C362D;background:#E8E1D5;overflow-x:hidden;line-height:1.7}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:400;line-height:1.2}
+:root{--terracotta:#A46447;--almond:#CEB59E;--umber:#4C362D;--sage:#88937B;--linen:#E8E1D5;--cream:#f5f0e8;--ink:#4C362D;--muted:#7a6657}
+a{color:var(--terracotta);text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(232,225,213,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(76,54,45,.06)}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;color:var(--ink)}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:.9rem;font-weight:500;color:var(--ink);transition:color .2s}
+.nav-links a:hover{color:var(--terracotta);text-decoration:none}
+.nav-toggle{display:none}
+
+.hero{padding:7rem 2rem 3rem;text-align:center;background:radial-gradient(ellipse at 50% 0%,#f0e8da 0%,var(--linen) 50%,#ddd4c4 100%)}
+.hero-icon{width:120px;height:150px;margin:0 auto 1.5rem;display:block;opacity:.85}
+.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);color:var(--umber);letter-spacing:-.03em;margin-bottom:.8rem}
+.hero h1 em{font-style:italic;font-weight:300;color:var(--terracotta)}
+.hero p{max-width:600px;margin:0 auto;color:var(--muted);font-size:clamp(1rem,2vw,1.1rem)}
+
+.ess-nav{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 0;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.ess-nav a{padding:.5rem 1.2rem;border-radius:100px;font-size:.82rem;font-weight:500;background:var(--cream);color:var(--ink);transition:all .2s;border:1.5px solid transparent}
+.ess-nav a:hover{background:var(--terracotta);color:var(--linen);text-decoration:none}
+
+.section{max-width:720px;margin:0 auto;padding:3rem 1.5rem}
+.section-header{margin-bottom:2.5rem;border-bottom:2px solid var(--almond);padding-bottom:1rem}
+.section-header .num{font-size:.8rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--terracotta)}
+.section-header h2{font-size:1.6rem;color:var(--umber);margin:.3rem 0 .5rem}
+
+.prayer-audio-btn {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  color: var(--linen);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .75rem;
+  transition: all .2s;
+  z-index: 2;
+}
+.prayer-audio-btn:hover { background: var(--umber); transform: scale(1.1); }
+.prayer-audio-btn.playing { background: var(--umber); animation: pulse-audio 1.2s ease-in-out infinite; }
+@keyframes pulse-audio { 0%,100% { box-shadow: 0 0 0 0 rgba(164,100,71,.4); } 50% { box-shadow: 0 0 0 8px rgba(164,100,71,0); } }
+.prayer{background:var(--cream);border-radius:14px;padding:1.5rem 1.8rem;margin-bottom:1rem;border-left:4px solid var(--sage);transition:box-shadow .2s;position:relative}
+.prayer:hover{box-shadow:0 4px 16px rgba(76,54,45,.08)}
+.prayer-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:500;color:var(--terracotta);margin-bottom:.5rem;letter-spacing:-.01em}
+.prayer-text{font-size:.95rem;color:var(--ink);line-height:1.8;font-style:italic}
+.prayer-text .amen{display:block;margin-top:.8rem;font-style:normal;font-weight:500;color:var(--muted);font-size:.85rem}
+
+footer{background:var(--umber);color:rgba(232,225,213,.5);padding:2rem;text-align:center;font-size:.82rem;margin-top:3rem}
+footer a{color:var(--almond)}
+
+@media(max-width:1024px){
+  nav{padding:.8rem 1rem!important}
+  .nav-toggle{display:flex!important}
+  .nav-links{position:fixed;top:0;right:-100%;width:80vw;height:100vh;background:var(--linen);flex-direction:column;justify-content:center;gap:1.5rem;padding:2rem;box-shadow:-4px 0 30px rgba(0,0,0,.1);transition:right .3s;z-index:100;display:flex;align-items:center}
+  .nav-links.open{right:0!important}
+  .nav-links a{font-size:.95rem!important;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">one <em style="font-style:italic;font-weight:300;color:var(--terracotta)">to</em> eight</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/#guide">The Guide</a>
+    <a href="/onetoeight/scripture/index.html">Scripture</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <img src="jesus-portrait.jpg" alt="Jesus" class="hero-icon" loading="eager">
+  <h1>Prayers for the <em>Eight Essentials</em></h1>
+  <p>80 prayers — ten for each essential — written to be prayed honestly, alone or with others.</p>
+</section>
+
+<div class="ess-nav">
+  <a href="#silence">Silence</a>
+  <a href="#body">Body</a>
+  <a href="#skills">Skills</a>
+  <a href="#digital">Digital</a>
+  <a href="#community">Community</a>
+  <a href="#knowledge">Knowledge</a>
+  <a href="#nature">Nature</a>
+  <a href="#faith">Faith</a>
+</div>
+
+<!-- ===== SILENCE ===== -->
+<section class="section" id="silence">
+<div class="section-header"><div class="num">Essential 01</div><h2>The Ability to Sit in Silence</h2></div>
+<div class="prayer">
+    <audio id="pa-001" preload="none">
+      <source src="prayer-all-001.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-001')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Stillness</div>
+<div class="prayer-text">Lord, I come to You the way I am, restless, distracted, phone in hand, mind already three thoughts ahead. I confess I am more comfortable with noise than with You. Thank You that in Jesus, I don't have to clean myself up before I come, I can come as I am, and He has already made me clean. Teach me to be still. Not empty stillness, but expectant stillness. The kind that listens. The kind that waits. The kind that knows You are God and I am not. Still my hands. Slow my breath. Quiet the feed in my head. Help me to sit in the silence long enough to hear the whisper You've been speaking all along.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-002" preload="none">
+      <source src="prayer-all-002.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-002')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Quieting the Mind</div>
+<div class="prayer-text">Father, my mind runs like a river in flood, worries, plans, regrets, lists, and loops. I bring it to You and ask for the peace that passes understanding. Thank You that in Christ I have not received a spirit of fear, but of power, love, and a sound mind. Quiet the noise that doesn't come from You. Help me to take every thought captive and make it obedient to Christ. Let my mind rest in the truth that I am held by You.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-003" preload="none">
+      <source src="prayer-all-003.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-003')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Listening</div>
+<div class="prayer-text">Jesus, You often withdrew to lonely places to pray. Teach me that discipline. I am so quick to speak and so slow to listen, even with You. Forgive me for treating prayer as a monologue. Help me to be quiet long enough to hear Your voice. Not a dramatic voice, the still, small one that Elijah heard. The one that corrects in love, guides in peace, and comforts in sorrow. Give me ears to hear what the Spirit is saying.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-004" preload="none">
+      <source src="prayer-all-004.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-004')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Release from Noise Addiction</div>
+<div class="prayer-text">God, I reach for my phone before I reach for You. When silence threatens, I fill it with sound. I confess this addiction to noise, to notifications, to music, to the endless scroll that keeps me from facing my own thoughts. Thank You that in Jesus, I am free, not from noise, but from the need for it. Break the habit loop. Give me the courage to sit in silence and discover that You are there, waiting, long before I arrived.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-005" preload="none">
+      <source src="prayer-all-005.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-005')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For the Discipline of Solitude</div>
+<div class="prayer-text">Lord, solitude is uncomfortable. It exposes me to myself, the parts I avoid, the thoughts I suppress, the questions I don't want to ask. Thank You that Jesus walked this road before me, forty days in the wilderness, alone, tempted, and sustained. Give me the discipline to seek solitude not as escape, but as encounter. To be alone with You and find that I am never truly alone. Let solitude shape me the way the wilderness shaped Him.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-006" preload="none">
+      <source src="prayer-all-006.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-006')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Waiting on God</div>
+<div class="prayer-text">Father, I am impatient. I want answers now, clarity now, results now. But You are not in a hurry. Thank You that Your timing is perfect, even when I cannot see it. Teach me to wait, not passively, but actively, with my heart turned toward You. Waiting is not wasted time. It is the space where faith grows. Help me to wait in silence, to trust in Your character, and to believe that the One who promised is faithful.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-007" preload="none">
+      <source src="prayer-all-007.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-007')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Evening Stillness</div>
+<div class="prayer-text">Jesus, the day is done. The notifications have stopped. The demands have faded. Now it is just me and You. I lay down the weight of today, the failures, the worries, the words I wish I hadn't said. Thank You that Your mercies are new every morning, and that tonight, I can rest in the finished work of the cross. Calm my mind. Settle my heart. Let my last thought before sleep be of You, and my first thought tomorrow be of Your grace.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-008" preload="none">
+      <source src="prayer-all-008.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-008')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Sabbath Rest</div>
+<div class="prayer-text">Creator God, You rested on the seventh day, not because You were tired, but to show us the way. I confess I treat rest as a luxury rather than a commandment. Thank You that Jesus invites the weary to come to Him for rest, not for more work. Help me to keep a Sabbath, a day of stopping, of being, of delighting in You. Protect me from the guilt that says I should always be productive. Rest is not laziness. It is trust.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-009" preload="none">
+      <source src="prayer-all-009.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-009')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Inner Peace</div>
+<div class="prayer-text">Prince of Peace, my soul is often anything but peaceful. Anxiety creeps in. Restlessness takes over. I try to fix it with more control, more planning, more doing. Thank You that the peace You give is not the absence of trouble but the presence of Christ. Calm the storm inside me. Speak peace over my thoughts. Help me to anchor my heart in the truth that You are sovereign, You are good, and You are with me, always.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-010" preload="none">
+      <source src="prayer-all-010.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-010')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For God's Presence in Silence</div>
+<div class="prayer-text">Lord, I am afraid of silence because I am afraid I will find it empty. But You have promised to be with me always, even to the end of the age. Thank You that in Jesus, God is not distant, He is near. Help me to sit in silence not looking for a feeling, but trusting in a presence. You are here, even when I cannot feel You. You are speaking, even when I cannot hear. Let that be enough.<span class="amen">Amen.</span></div>
+</div>
+</section>
+
+<!-- ===== BODY ===== -->
+<section class="section" id="body">
+<div class="section-header"><div class="num">Essential 02</div><h2>Your Body is a Temple</h2></div>
+<div class="prayer">
+    <audio id="pa-011" preload="none">
+      <source src="prayer-all-011.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-011')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Gratitude for the Body</div>
+<div class="prayer-text">Father, I take my body for granted. I criticise it, compare it, push it beyond its limits, and neglect its needs. But You knit me together in my mother's womb and called me fearfully and wonderfully made. Thank You that in Jesus, my body is a temple of the Holy Spirit, not an accident, not an inconvenience, but a dwelling place for the living God. Teach me to treat my body with gratitude and care, as a gift from Your hand.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-012" preload="none">
+      <source src="prayer-all-012.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-012')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Purity</div>
+<div class="prayer-text">God, I live in a world that sells lust as love and indulgence as freedom. I confess I have not always guarded my body or my eyes. Thank You that in Christ, I am washed, sanctified, and declared clean, not because of my purity, but because of His. Help me to flee temptation and to pursue righteousness. Guard my heart, my eyes, and my mind. Let my body be an instrument of Your glory, not a slave to desire.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-013" preload="none">
+      <source src="prayer-all-013.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-013')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Self-Control</div>
+<div class="prayer-text">Lord, self-control is a fruit of Your Spirit, but I so often live as if I have no Spirit at all. I give in to cravings, to laziness, to the easy choice. Thank You that Jesus was tempted in every way and yet did not sin, and that His strength is available to me. Teach me discipline. Not as a burden, but as a path to freedom. Help me to say no to what harms me so I can say yes to what honours You.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-014" preload="none">
+      <source src="prayer-all-014.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-014')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Healing</div>
+<div class="prayer-text">Father, You are the Great Physician. I bring before You the brokenness in my body, whether from sickness, injury, exhaustion, or the slow wear of life. Thank You that in Jesus, there is healing, not always in the way I expect, but always in the way I need. If healing comes, I will praise You. If it does not, give me grace to trust that Your power is made perfect in my weakness. Sustain me until You make all things new.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-015" preload="none">
+      <source src="prayer-all-015.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-015')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Honouring God with the Body</div>
+<div class="prayer-text">Jesus, Paul wrote that my body is not my own, I was bought at a price. I forget that so easily. I treat my body as if it belongs to me, to do with as I please. Thank You that the price He paid was not silver or gold, but His own blood. Help me to honour You with my body, in what I eat, what I watch, how I rest, how I work. Let every physical choice be an act of worship.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-016" preload="none">
+      <source src="prayer-all-016.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-016')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Rest and Recovery</div>
+<div class="prayer-text">Lord, I run on empty and call it strength. I push through exhaustion and call it dedication. But You designed my body to need rest. Thank You that Jesus slept through a storm, He was not afraid to rest, even when the world was chaos. Give me the wisdom to rest before I break. Help me to listen to my body and to honour its limits. Sleep is not weakness; it is trust, trust that You are still working even when I am not.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-017" preload="none">
+      <source src="prayer-all-017.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-017')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Healthy Habits</div>
+<div class="prayer-text">God, I want to honour You with my body, but I don't always know where to start. Small changes feel pointless. Big changes feel impossible. Thank You that Your grace is sufficient for both, and that You are patient with my progress. Guide me toward habits that serve life: better food, more movement, deeper rest, less harm. Not out of guilt, but out of gratitude. Let me build slowly what will last.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-018" preload="none">
+      <source src="prayer-all-018.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-018')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Body Image</div>
+<div class="prayer-text">Father, I compare my body to everyone else's. I believe the lie that I am not enough because I do not look enough. Thank You that in Christ, my identity is not in my appearance but in His finished work. You made me on purpose, with purpose. Help me to see myself the way You see me, loved, chosen, and beautiful in Your sight. Free me from the endless comparison that steals my peace.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-019" preload="none">
+      <source src="prayer-all-019.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-019')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Strength and Discipline</div>
+<div class="prayer-text">Lord, give me strength, not just for my own sake, but so I can serve others with energy and joy. Paul disciplined his body like an athlete, not to earn salvation, but to run the race well. Thank You that the race is already won in Christ. Help me to train my body as an instrument of love, not an idol. Let my strength be used for Your glory and for the good of others.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-020" preload="none">
+      <source src="prayer-all-020.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-020')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For the Body as a Gift</div>
+<div class="prayer-text">Jesus, thank You for taking on a human body. You had hands that healed, feet that walked dusty roads, a back that bore the whip, a side that was pierced. You did not despise physicality, You redeemed it. Help me to see my body not as a problem to be solved but as a gift to be stewarded. Every breath, every heartbeat, every movement is a gift from You. Let me live in that gratitude.<span class="amen">Amen.</span></div>
+</div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section class="section" id="skills">
+<div class="section-header"><div class="num">Essential 03</div><h2>Useful Real-World Skills</h2></div>
+<div class="prayer">
+    <audio id="pa-021" preload="none">
+      <source src="prayer-all-021.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-021')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Diligence</div>
+<div class="prayer-text">Lord, teach me to work like the ant, without supervision, without complaint, without delay. I confess I often cut corners, procrastinate, and settle for good enough. Thank You that Jesus was a carpenter, He worked with His hands, did honest labor, and understood the dignity of a job well done. Help me to take pride in my work, to finish what I start, and to do everything as unto You, not for human approval.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-022" preload="none">
+      <source src="prayer-all-022.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-022')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Learning</div>
+<div class="prayer-text">Father, I have so much to learn and so little patience for the process. I want to be good at things without practicing, wise without study. Thank You that wisdom is not a gift You hoard, You give generously to those who ask. Give me a teachable spirit. Humble me enough to learn from others, from failure, from the slow accumulation of skill. Let me never be too proud to be a beginner.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-023" preload="none">
+      <source src="prayer-all-023.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-023')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Work as Worship</div>
+<div class="prayer-text">God, I divide life into sacred and secular, as if only worship songs matter and fixing a tap does not. But Colossians says whatever I do, I should work at it with all my heart, as working for You. Thank You that Jesus redeemed not just souls but the whole of life, including ordinary, everyday work. Help me to see every task as an offering. Washing dishes. Writing an essay. Building a shelf. All of it can be worship.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-024" preload="none">
+      <source src="prayer-all-024.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-024')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Perseverance in Practice</div>
+<div class="prayer-text">Lord, I want to be good at things immediately, but skill takes time. I start strong and fade fast. Thank You that You are patient with my slow growth and that Your grace covers every unfinished attempt. Help me to keep practicing, even when I am clumsy, even when I fail, even when no one is watching. Perseverance is not glamorous, but it is how character is built. Give me the grit to keep going.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-025" preload="none">
+      <source src="prayer-all-025.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-025')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Wisdom in Action</div>
+<div class="prayer-text">God, knowledge without action is just information. I don't need to know more, I need to do what I already know. Thank You that Jesus was not just a teacher but a doer, He didn't just speak the Word, He was the Word made flesh. Help me to be a doer and not a hearer only. Move me from knowing about things to actually doing them. Turn my knowledge into skill and my skill into service.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-026" preload="none">
+      <source src="prayer-all-026.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-026')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Skill as Service</div>
+<div class="prayer-text">Jesus, You washed Your disciples' feet, the most menial task, done by the most important person. Thank You that You turned the world's understanding of greatness upside down. Help me to use my skills not for my own glory but for the good of others. Whether I am cooking a meal, fixing a leak, or balancing a budget, let it be an act of love. The skills that serve are the skills that matter most.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-027" preload="none">
+      <source src="prayer-all-027.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-027')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Stewardship of Talents</div>
+<div class="prayer-text">Father, You have given me gifts, abilities, interests, opportunities. I confess I have buried some in fear and squandered others in pride. Thank You that the parable of the talents is about grace as much as accountability, the master trusted his servants with what they could handle. Help me to steward what You have given me. Not to compare, but not to boast, but to invest. Let me hear one day: "Well done, good and faithful servant."<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-028" preload="none">
+      <source src="prayer-all-028.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-028')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Excellence</div>
+<div class="prayer-text">Lord, excellence is not perfectionism, it is doing my best with what I have, for Your glory. I confess I often settle for mediocrity when I am capable of more. Thank You that the work of Your hands is always excellent, the detail of a snowflake, the precision of a galaxy. Help me to bring that same care to my work. Not to impress others, but to honour the One who gave me the ability to do it.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-029" preload="none">
+      <source src="prayer-all-029.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-029')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Practical Wisdom</div>
+<div class="prayer-text">God, I need wisdom for everyday decisions, what to study, how to manage money, who to trust, when to speak and when to listen. Thank You that the book of Proverbs exists, packed with practical wisdom for real life. Open my eyes to see it and my heart to receive it. Teach me to be shrewd as a serpent and innocent as a dove, wise about the world without being corrupted by it.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-030" preload="none">
+      <source src="prayer-all-030.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-030')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Confidence in Competence</div>
+<div class="prayer-text">Jesus, I often doubt my abilities. I compare myself to others and feel behind. But You have given me unique gifts and a unique path. Thank You that my confidence does not need to come from my competence, it comes from Christ in me. Help me to grow in skill without growing in pride. Let me be confident enough to try, humble enough to learn, and generous enough to teach others.<span class="amen">Amen.</span></div>
+</div>
+</section>
+
+<!-- ===== DIGITAL ===== -->
+<section class="section" id="digital">
+<div class="section-header"><div class="num">Essential 04</div><h2>Digital Self-Defence</h2></div>
+<div class="prayer">
+    <audio id="pa-031" preload="none">
+      <source src="prayer-all-031.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-031')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Guarding the Heart</div>
+<div class="prayer-text">Lord, above all else I must guard my heart, for everything I do flows from it. But I have been careless with the gate, letting in images, voices, and ideas that do not belong there. Thank You that in Christ, my heart can be renewed, rewired, and restored. Help me to be intentional about what I consume online. Not fearful, but wise. Not legalistic, but guarded. Let my heart be a garden, not a dumpster.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-032" preload="none">
+      <source src="prayer-all-032.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-032')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Discernment</div>
+<div class="prayer-text">Father, the internet is a river of truth and lies mixed together, and I am not always good at telling the difference. I believe things because they confirm my biases. I share things without checking. Thank You that Jesus is the Truth, and that the Holy Spirit leads me into all truth. Give me discernment. Not cynicism, discernment. The ability to test what I see, to question what I read, to hold loosely what I am told.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-033" preload="none">
+      <source src="prayer-all-033.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-033')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Freedom from Addiction</div>
+<div class="prayer-text">God, my phone feels like an extension of my hand. I check it compulsively, even when I know there is nothing new. I scroll past the point of enjoyment into the haze of consumption. Thank You that Christ came to set captives free, and that includes captivity to a screen. Break the chains. Help me to put the phone down and not pick it back up. Give me the freedom to be present to the life happening in front of me.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-034" preload="none">
+      <source src="prayer-all-034.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-034')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Truth in a World of Lies</div>
+<div class="prayer-text">Jesus, You said the truth will set us free. But I am surrounded by lies dressed up as wisdom, that my worth is my productivity, that my value is my visibility, that happiness is one more purchase away. Thank You that Your truth is unchanging, even when the whole world disagrees. Anchor me in what is real. Let me measure my life by Your word, not by the algorithm's approval.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-035" preload="none">
+      <source src="prayer-all-035.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-035')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Purity of Mind</div>
+<div class="prayer-text">Lord, Philippians tells me to think about what is true, noble, right, pure, lovely, admirable, excellent, and praiseworthy. But my feed is full of the opposite, outrage, lust, envy, fear, and comparison. Thank You that in Christ, I have the mind of Christ, not a mind enslaved to whatever the algorithm feeds me. Help me to curate my inputs. To unfollow what harms me. To fill my mind with what is good.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-036" preload="none">
+      <source src="prayer-all-036.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-036')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Boundaries</div>
+<div class="prayer-text">Father, I need boundaries, hard lines I will not cross. I confess I have let things into my life that I knew I should not. I told myself it was harmless. Thank You that Your commands are not restrictions but protections. Help me to set boundaries and keep them. To decide now, before I am tempted, what I will and will not allow. Let my yes be yes and my no be no, even when no one is watching.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-037" preload="none">
+      <source src="prayer-all-037.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-037')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Wisdom in Consumption</div>
+<div class="prayer-text">God, I consume more information in a day than my grandparents consumed in a year. But consuming is not the same as digesting, and scrolling is not the same as learning. Thank You that Your word is not like the noise of the world, it does not return empty. Help me to consume wisely. To ask before I click: is this true? Is this necessary? Is this kind? To be a filter, not a sponge.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-038" preload="none">
+      <source src="prayer-all-038.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-038')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Real Connection</div>
+<div class="prayer-text">Jesus, I have hundreds of followers but I am lonely. I get likes but not love. I message but I do not meet. Thank You that You called people not to an online community but to an embodied one, eating together, walking together, serving together. Help me to prioritize real connection over digital contact. To call instead of text. To show up instead of like. To build friendships that exist in three dimensions.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-039" preload="none">
+      <source src="prayer-all-039.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-039')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Protection from Deception</div>
+<div class="prayer-text">Lord, the enemy is the father of lies, and he works through every channel he can, including the one in my pocket. I am vulnerable to manipulation, to scams, to ideologies dressed as truth. Thank You that the Good Shepherd knows His sheep and His sheep know Him. Help me to recognize Your voice above all the others. Protect me from deception. Give me a heart that loves truth more than comfort.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-040" preload="none">
+      <source src="prayer-all-040.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-040')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Renewing the Mind</div>
+<div class="prayer-text">Father, Romans says do not be conformed to the pattern of this world, but be transformed by the renewing of the mind. The world's pattern is algorithm-driven, outrage-optimized, attention-harvesting. Thank You that in Christ, I am not only saved but being transformed. Let the renewal start in my mind. Strip away the patterns I have absorbed without noticing. Replace them with the pattern of Christ. Make my mind a sanctuary, not a marketplace.<span class="amen">Amen.</span></div>
+</div>
+</section>
+
+<!-- ===== COMMUNITY ===== -->
+<section class="section" id="community">
+<div class="section-header"><div class="num">Essential 05</div><h2>Real Community</h2></div>
+<div class="prayer">
+    <audio id="pa-041" preload="none">
+      <source src="prayer-all-041.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-041')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Deep Friendship</div>
+<div class="prayer-text">Lord, I have many acquaintances but few friends, people who would show up at 2am, who know my story, who speak truth to me even when it costs me. Thank You that Jesus called His disciples friends, not servants, He shared His life with them. Give me the courage to pursue deep friendships. To be vulnerable. To show up. To love not just in word but in deed. One faithful friend is worth a thousand followers.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-042" preload="none">
+      <source src="prayer-all-042.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-042')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Vulnerability</div>
+<div class="prayer-text">God, I hide. I wear masks. I pretend I am fine when I am falling apart. I am afraid that if people knew the real me, they would leave. Thank You that in Christ, I am fully known and fully loved, nothing I reveal can make Him love me less. Give me the courage to be real with safe people. To confess my struggles. To ask for help. Vulnerability is not weakness, it is the doorway to real connection.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-043" preload="none">
+      <source src="prayer-all-043.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-043')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For the Church</div>
+<div class="prayer-text">Jesus, You said You would build Your church, and the gates of hell would not overcome it. But I have been hurt by the church, disappointed by its leaders, frustrated by its failures. Thank You that the church is still Your body, broken, imperfect, but Yours. Help me not to give up gathering together. Forgive the church its sins as You have forgiven mine. Let me be part of the solution, not just a critic on the sidelines.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-044" preload="none">
+      <source src="prayer-all-044.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-044')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Bearing Burdens</div>
+<div class="prayer-text">Galatians says carry each other's burdens and so fulfill the law of Christ. But I do not even know what burdens my brothers and sisters are carrying, because I do not ask, and they do not tell. Thank You that Christ carried the ultimate burden so that we could carry each other's lighter ones. Open my eyes to see the hidden struggles around me. Give me words to ask and hands to help. Let me be someone who makes burdens lighter.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-045" preload="none">
+      <source src="prayer-all-045.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-045')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Unity</div>
+<div class="prayer-text">Father, Your heart is for unity, but Your church is divided, by doctrine, by denomination, by race, by politics, by preference. I contribute to the division when I make non-essentials into essentials and treat my siblings as enemies. Thank You that in Christ, there is neither Jew nor Greek, slave nor free, we are one. Help me to pursue unity without compromising truth. To love those who disagree with me. To remember that the world will know we are Christians by our love.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-046" preload="none">
+      <source src="prayer-all-046.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-046')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Hospitality</div>
+<div class="prayer-text">Lord, hospitality is not about having a perfect home, it is about having an open heart. I keep to myself, stay comfortable, and wait for others to invite me first. Thank You that Christ welcomed me when I was a stranger, an outsider, an enemy. Give me the courage to open my door and my table. To invite people in, not when everything is ready, but because connection matters more than presentation. Let my home be a place of welcome.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-047" preload="none">
+      <source src="prayer-all-047.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-047')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Accountability</div>
+<div class="prayer-text">God, I do not want anyone to see the parts of my life that do not line up with what I profess. I prefer the privacy of hidden sin to the freedom of confession. Thank You that James says confess your sins to each other and pray for each other so that you may be healed. Give me someone I can be honest with, not perfect, but honest. Someone who will ask the hard questions. Someone who will not let me settle for a comfortable mediocrity.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-048" preload="none">
+      <source src="prayer-all-048.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-048')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Loving Others</div>
+<div class="prayer-text">Jesus, You gave a new command: love one another as I have loved you. Not as the world loves, conditionally, conveniently, until it costs something. As You loved, sacrificially, persistently, to the end. Thank You that You loved me first, even when I was unlovable. Fill me with that same love for others. Not a feeling, but but a choice. Not when it is easy, but always. Let people know I am Your disciple by the way I love.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-049" preload="none">
+      <source src="prayer-all-049.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-049')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Forgiveness in Community</div>
+<div class="prayer-text">Father, community is messy. People disappoint me, hurt me, fail me. And I do the same to them. I hold grudges. I withdraw. I keep a record of wrongs. Thank You that in Christ, forgiveness is not a suggestion but a command, and that the measure I use for others is the measure used for me. Help me to forgive as I have been forgiven. To release the offenses. To pursue reconciliation. To stay when it would be easier to leave.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-050" preload="none">
+      <source src="prayer-all-050.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-050')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Belonging</div>
+<div class="prayer-text">Lord, I long to belong, to be known, accepted, included. I have searched for belonging in groups, in relationships, in online spaces. But true belonging is found in You. Thank You that in Christ, I am not a stranger or a guest but a member of the household of God. I belong to the family of faith. Root me in that identity. And help me to extend belonging to others, to make space for the lonely, the left out, the ones on the edge. Let Your family be known by its welcome.<span class="amen">Amen.</span></div>
+</div>
+</section>
+
+<!-- ===== KNOWLEDGE ===== -->
+<section class="section" id="knowledge">
+<div class="section-header"><div class="num">Essential 06</div><h2>Knowledge Without Wi-Fi</h2></div>
+<div class="prayer">
+    <audio id="pa-051" preload="none">
+      <source src="prayer-all-051.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-051')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Internalising Scripture</div>
+<div class="prayer-text">Lord, I have instant access to the Bible on my phone, but I do not have it in my heart. When trouble comes, I reach for a search bar instead of memory. When I am tempted, I do not have a word ready. Thank You that Jesus quoted Scripture from memory in the wilderness, the Word lived in Him. Help me to hide Your word in my heart. Not to impress others, but so that I will not sin against You. Let Scripture dwell in me richly.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-052" preload="none">
+      <source src="prayer-all-052.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-052')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Meditation on God's Word</div>
+<div class="prayer-text">Father, meditation in the Bible is not emptying the mind but filling it with truth. Joshua was told to meditate on Your law day and night. I confess I rush through Bible reading like a task on a checklist. Thank You that Your word is living and active, it does not need my performance to be powerful. Slow me down. Help me to sit with a single verse, to chew on it, to let it sink below my thoughts into my heart. That is where transformation happens.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-053" preload="none">
+      <source src="prayer-all-053.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-053')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Wisdom from Above</div>
+<div class="prayer-text">God, knowledge is knowing facts. Wisdom is knowing how to live. I have access to more information than any generation in history, but I am not sure I am wiser. Thank You that the fear of the Lord is the beginning of wisdom, and that You give wisdom generously to those who ask. Give me wisdom from above, pure, peace-loving, considerate, submissive, full of mercy and good fruit. Not the world's wisdom. Yours.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-054" preload="none">
+      <source src="prayer-all-054.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-054')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Memorising Truth</div>
+<div class="prayer-text">Jesus, I memorise song lyrics, movie quotes, and usernames, but I struggle to memorise Your word. I have convinced myself I am bad at memorisation, but I have not practiced. Thank You that hiding Your word in my heart is not about talent, it is about treasure. Help me to commit Scripture to memory, one verse at a time. Let it rise to the surface when I need it. Let it be the filter for every thought and the foundation for every decision.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-055" preload="none">
+      <source src="prayer-all-055.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-055')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Knowing God Personally</div>
+<div class="prayer-text">Father, I know a lot about You, theology, doctrine, Bible stories, but I want to know You. There is a difference between knowing about someone and knowing them. Thank You that through Jesus, I can know You as Father. Not just know facts about You, but know Your heart. Draw me into relationship, not just religion. Let my knowledge of You be personal, intimate, and alive, not just stored in my head but experienced in my life.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-056" preload="none">
+      <source src="prayer-all-056.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-056')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Passing on the Faith</div>
+<div class="prayer-text">Lord, Deuteronomy says to impress Your commands on your children, to talk about them at home and on the road, morning and night. I confess I keep my faith private when it should be shared. Thank You that the gospel is not a treasure to be hoarded but good news to be passed on. Give me opportunities and courage to share what I know. Not with arrogance, but but with love. Help me to pass on the faith to those coming after me, by my words and by my life.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-057" preload="none">
+      <source src="prayer-all-057.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-057')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Discernment in Learning</div>
+<div class="prayer-text">God, I am bombarded with competing claims about truth, from professors, influencers, podcasts, and news sources. I do not always know what to believe. Thank You that the Holy Spirit is called the Spirit of Truth, and He will guide me into all truth. Give me discernment as I learn. Help me to test everything against Your word. To hold fast to what is good. To reject what is false. To be a Berean, checking everything against Scripture.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-058" preload="none">
+      <source src="prayer-all-058.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-058')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Hungering After Truth</div>
+<div class="prayer-text">Jesus, You said blessed are those who hunger and thirst for righteousness. I confess I hunger more for entertainment than for truth. I spend hours consuming content and minutes reading Your word. Thank You that You satisfy the hungry soul. Create in me a hunger for Your word. Not obligation, appetite. Let me crave Scripture the way I crave stimulation. Let Your truth be the thing I reach for first, not last.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-059" preload="none">
+      <source src="prayer-all-059.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-059')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For the Holy Spirit as Teacher</div>
+<div class="prayer-text">Father, Jesus promised that the Holy Spirit would teach me all things and remind me of everything He said. I often study as if I am alone, relying on my own intellect. Thank You that the best Teacher lives within me. Open the eyes of my heart as I read Scripture. Illuminate what I do not understand. Bring to remembrance what I have learned. Let the Spirit be my tutor, my guide, and my illuminator, not replacing study, but empowering it.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-060" preload="none">
+      <source src="prayer-all-060.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-060')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Knowledge That Transforms</div>
+<div class="prayer-text">Lord, knowledge puffs up but love builds up. I have known people who are theologically correct and spiritually cold. I do not want to be one of them. Thank You that the goal of all knowledge is not information but transformation, to be conformed to the image of Christ. Let my learning change me. Not just what I think, but how I live. Let knowledge lead to worship, and worship lead to obedience, and obedience lead to joy. That is the kind of knowledge that holds.<span class="amen">Amen.</span></div>
+</div>
+</section>
+
+<!-- ===== NATURE ===== -->
+<section class="section" id="nature">
+<div class="section-header"><div class="num">Essential 07</div><h2>Prescribe Nature</h2></div>
+<div class="prayer">
+    <audio id="pa-061" preload="none">
+      <source src="prayer-all-061.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-061')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Gratitude for Creation</div>
+<div class="prayer-text">Creator God, the heavens declare Your glory and the skies proclaim the work of Your hands. I spend most of my time indoors, under artificial light, looking at screens. I forget that I am surrounded by Your handiwork. Thank You that every leaf, every cloud, every bird song is a testimony to Your creativity and care. Open my eyes to see the beauty around me. Let creation lead me to worship. Let the world remind me that I am part of something much bigger than my phone.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-062" preload="none">
+      <source src="prayer-all-062.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-062')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Awe and Wonder</div>
+<div class="prayer-text">Lord, I have lost my sense of wonder. I have seen too many photoshopped images, too many nature documentaries, too many special effects, and I have become numb to the real thing. Thank You that the real creation is far more astonishing than any image. Restore my capacity for awe. Let me look at a tree and be amazed. Let me watch a sunset and be still. Let me feel small beside the ocean and know that the God who made it loves me.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-063" preload="none">
+      <source src="prayer-all-063.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-063')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Rest in Nature</div>
+<div class="prayer-text">Jesus, You often withdrew to natural places, mountains, lakes, gardens, to rest and pray. I have made my rest about entertainment rather than environment. Thank You that You made green pastures and quiet waters for the restoration of my soul. Lead me outside. Help me to find rest not in another show or scroll, but in the rhythm of the natural world. Let the fresh air clear my mind. Let the quiet restore my soul. Let nature be the medicine I did not know I needed.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-064" preload="none">
+      <source src="prayer-all-064.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-064')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Seeing God in Creation</div>
+<div class="prayer-text">Father, Romans says Your invisible qualities, Your eternal power and divine nature, are clearly seen in what has been made. I do not need to look for You in a screen; I can see You in a sunrise, a forest, a field of flowers. Thank You that creation is not a distraction from You but a revelation of You. Help me to read the book of nature as well as the book of Scripture. Both speak of Your glory. Let me not miss the sermon that is preached by every living thing.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-065" preload="none">
+      <source src="prayer-all-065.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-065')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Stewardship of the Earth</div>
+<div class="prayer-text">Lord, You put us in the garden to work it and keep it. We have not kept it well. I confess I have consumed without thought, wasted without guilt, and ignored the cry of creation. Thank You that Christ came to reconcile all things, not just people, but the whole created order. Give me a heart for Your world. Help me to live more gently on the earth. To consume less. To care more. To see creation not as a resource to be used but as a gift to be stewarded.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-066" preload="none">
+      <source src="prayer-all-066.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-066')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Healing Through Nature</div>
+<div class="prayer-text">God, You made us from the dust of the earth, and there is something about returning to the earth that heals us. I have noticed that I feel better after a walk in the woods, calmer by the water, clearer under an open sky. Thank You that this is not coincidence but design. You built healing into the natural world. Help me to make time for nature, not as a luxury but as a necessary part of caring for the body and soul You have given me.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-067" preload="none">
+      <source src="prayer-all-067.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-067')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For the Rhythm of Seasons</div>
+<div class="prayer-text">Father, the seasons turn reliably, planting and harvest, winter and spring. They remind me that life has rhythms: times of growth and times of dormancy, times of abundance and times of scarcity. Thank You that You are the Lord of the seasons, and that every season has its purpose. Help me to trust the rhythm. To not rush the spring. To not despair in the winter. To know that You are working in every season, even the ones that feel like fallow ground.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-068" preload="none">
+      <source src="prayer-all-068.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-068')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Humility Before Creation</div>
+<div class="prayer-text">Jesus, nature humbles me. A mountain does not care about my reputation. The ocean does not notice my anxiety. The stars do not compete for attention. They simply are, gloriously, unapologetically themselves. Thank You that You spoke them into existence with a word, and they obeyed. Teach me the humility of creation. To simply be who You made me to be. To stop striving and start being. To find my identity not in what I do but in whose I am.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-069" preload="none">
+      <source src="prayer-all-069.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-069')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Sabbath in the Outdoors</div>
+<div class="prayer-text">Lord, I want to keep a Sabbath that is not just a day off but a day of delight. Help me to spend part of it outside, away from walls, away from Wi-Fi, away from the weight of the week. Thank You that the garden was the original sanctuary. Let me find You there. Let outdoor Sabbath become a rhythm in my life. A day to breathe, to walk, to notice, to pray with my feet on the ground and my face to the sun.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-070" preload="none">
+      <source src="prayer-all-070.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-070')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Creation's Praise</div>
+<div class="prayer-text">God, the Psalms call on everything that has breath to praise the Lord, sun, moon, stars, sea creatures, mountains, trees. All of creation is already worshipping its Maker. I am the one who is silent. Thank You that the rocks would cry out if I did not. Let me join the chorus. Let my life be a note in the song that all creation is singing. Not competing with the birds or the wind or the waves, but adding my voice to theirs, grateful, joyful, alive.<span class="amen">Amen.</span></div>
+</div>
+</section>
+
+<!-- ===== FAITH ===== -->
+<section class="section" id="faith">
+<div class="section-header"><div class="num">Essential 08</div><h2>Tested Faith</h2></div>
+<div class="prayer">
+    <audio id="pa-071" preload="none">
+      <source src="prayer-all-071.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-071')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Faith in Trials</div>
+<div class="prayer-text">Lord, I am in the fire, and it hurts. I want out. I want the easy path, the quick fix, the removal of the trial. But James says to count it all joy when I face trials of many kinds, because the testing of my faith produces perseverance. I do not feel joyful. I feel tired. But thank You that You are with me in the fire, not watching from a distance. Help me to trust that this trial is producing something real. Let me hold on. Let my faith emerge refined.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-072" preload="none">
+      <source src="prayer-all-072.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-072')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Perseverance</div>
+<div class="prayer-text">Father, I want to give up. The road is long, the progress is slow, and I do not see the end. I am tempted to quit, to settle for an easier path that demands less of me. Thank You that Jesus persevered to the end, through rejection, through suffering, through the cross, because of the joy set before Him. Fix my eyes on Him. Give me the endurance to keep going, not in my strength, but in His. One more step. One more day. He is faithful.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-073" preload="none">
+      <source src="prayer-all-073.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-073')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Trust When You Cannot See</div>
+<div class="prayer-text">Jesus, Thomas would not believe until he saw. I am like Thomas. I want proof. I want clarity. I want You to show me the plan before I commit to the path. Thank You that You blessed those who have not seen and yet have believed. Help my unbelief. Help me to trust You even when I cannot see where this is leading. Faith is confidence in what I hope for and assurance about what I do not see. Give me that confidence. Give me that assurance.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-074" preload="none">
+      <source src="prayer-all-074.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-074')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Hope in Suffering</div>
+<div class="prayer-text">Lord, Romans says suffering produces perseverance, perseverance produces character, and character produces hope. I am stuck at suffering, and I cannot see past it. Thank You that You do not waste pain. You are weaving something, even now, that I cannot yet perceive. Give me hope, not the fluffy kind that ignores reality, but the deep kind that trusts You in it. Hope that does not put me to shame. Hope that is anchored in the risen Christ, who has overcome the world.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-075" preload="none">
+      <source src="prayer-all-075.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-075')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Refinement Through Fire</div>
+<div class="prayer-text">Father, 1 Peter says the proven genuineness of my faith, of greater worth than gold, is refined by fire. Gold does not come out of the fire diminished; it comes out purer, brighter, more valuable. Thank You that You are not trying to destroy me; You are refining me. The heat is not punishment, it is purification. Help me to endure the process. To let go of what needs to burn away. To trust that what remains will be worth everything I lost in the flame.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-076" preload="none">
+      <source src="prayer-all-076.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-076')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Faith That Endures</div>
+<div class="prayer-text">Jesus, I do not want a faith that works only when life is easy. I want a faith that endures, through disappointment, through doubt, through the dark nights of the soul. Thank You that You prayed for Peter before he fell, and You pray for me too. Hold me when I cannot hold myself. When my faith falters, let Yours hold me up. Let me be like the tree planted by streams of water, whose leaf does not wither, rooted, steady, alive, even in drought.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-077" preload="none">
+      <source src="prayer-all-077.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-077')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Surrender</div>
+<div class="prayer-text">Lord, I want control. I hold tightly to my plans, my reputation, my future. Letting go feels like losing. But Jesus, You let go of everything, equality with God, the safety of heaven, the comfort of being understood, and surrendered to the Father's will. Thank You that Your surrender led to our salvation. Teach me to surrender. Not passively, but actively. Not giving up, but but giving over. Not my will, but but Yours. I trust You more than I trust myself.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-078" preload="none">
+      <source src="prayer-all-078.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-078')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Strength in Weakness</div>
+<div class="prayer-text">Father, I am weak. I have been trying to be strong on my own, and I am failing. Paul boasted in his weaknesses because Christ's power is made perfect in them. Thank You that I do not need to have it all together, I need to have Christ. Let Your power rest on me. When I am weak, let me be strong in You. When I am empty, let me be filled by Your Spirit. Let my weakness be the stage for Your strength to be displayed.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-079" preload="none">
+      <source src="prayer-all-079.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-079')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Confidence in God's Plan</div>
+<div class="prayer-text">God, Jeremiah 29:11 says You have plans to prosper me and not to harm me, plans to give me hope and a future. I do not always feel that. Sometimes Your plan does not look like prosperity, it looks like pruning, delay, or detour. Thank You that Your plans are higher than mine, and Your ways are not my ways. Help me to trust that You are working all things for my good, even when I cannot see it. Give me confidence that the Author of my faith will finish what He started.<span class="amen">Amen.</span></div>
+</div>
+<div class="prayer">
+    <audio id="pa-080" preload="none">
+      <source src="prayer-all-080.mp3" type="audio/mp3">
+    </audio>
+    <button class="prayer-audio-btn" onclick="togglePrayerAudioById('pa-080')" aria-label="Play prayer">&#9654;</button>
+    <div class="prayer-title">For Victory in Christ</div>
+<div class="prayer-text">Jesus, You said in this world I will have trouble. But take heart, You have overcome the world. Not You will overcome. You have overcome. It is finished. Done. Won. Thank You that my victory is not something I achieve but something I receive. The battle belongs to You. Help me to live today from victory, not for victory. Not fighting to be loved, but fighting from being loved. Not striving to earn, but resting in what has already been accomplished. The cross has the final word. And that word is victory.<span class="amen">Amen.</span></div>
+</div>
+</section>
+
+
+<footer>
+  <p><a href="/">one to eight</a> &middot; Prayers for the Eight Essentials</p>
+  <p style="margin-top:.5rem;">80 prayers &middot; Written from a Christian worldview &middot; Free to use, share, and pray</p>
+</footer>
+
+<script>
+function togglePrayerAudioById(id) {
+  let audio = document.getElementById(id);
+  let btn = audio.nextElementSibling;
+  if (audio.paused) {
+    document.querySelectorAll('.prayer-audio-btn').forEach(b => {
+      if(b !== btn) {
+        let a = b.previousElementSibling;
+        if(a && a.tagName === 'AUDIO' && !a.paused) { a.pause(); a.currentTime = 0; }
+        b.innerHTML = '&#9654;'; b.classList.remove('playing');
+      }
+    });
+    audio.play();
+    btn.innerHTML = '&#9646;&#9646;';
+    btn.classList.add('playing');
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+    btn.innerHTML = '&#9654;';
+    btn.classList.remove('playing');
+  }
+  audio.addEventListener('ended', function() {
+    btn.innerHTML = '&#9654;';
+    btn.classList.remove('playing');
+  }, {once: true});
+}
+</script>
+</body>
+</html>
