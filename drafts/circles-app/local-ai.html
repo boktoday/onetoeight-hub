@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3D2820">
+<meta name="mobile-web-app-capable" content="yes">
+<title>onetoeight · Local AI Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--terracotta:#A46447;--almond:#CEB59E;--sage:#88937B;--umber:#4C362D;--cream:#F5F0E8;--ink:#2a2520;--muted:#7a6657;--line:rgba(76,54,45,.10);--radius:16px}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden}
+body{font-family:Inter,system-ui,sans-serif;font-size:16px;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+.topbar{flex-shrink:0;background:linear-gradient(180deg,#3D2820,#4C362D);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.topbar h1{font-family:Fraunces,serif;font-size:1rem;font-weight:600;color:#fff;margin:0;flex:1}
+.topbar .sub{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:rgba(232,225,213,.7)}.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px}
+.status-dot.loading{background:#CEB59E;animation:pulse 1.5s infinite}
+.status-dot.ready{background:#88937B}
+.status-dot.error{background:#A46447}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+#chat{flex:1;overflow-y:auto;padding:8px 12px 4px;display:flex;flex-direction:column;gap:6px}
+.msg{max-width:85%;padding:10px 12px;border-radius:14px;font-size:.9rem;line-height:1.5;animation:fadeIn .25s}
+.msg.user{align-self:flex-end;background:var(--umber);color:#fff;border-bottom-right-radius:4px}
+.msg.assistant{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;color:var(--ink)}
+.msg.system{align-self:center;background:rgba(136,147,123,.12);color:var(--sage);font-size:.78rem;border-radius:999px;padding:6px 14px;max-width:90%}
+.msg .src{font-size:.66rem;color:var(--muted);margin-top:4px;font-weight:600}
+.suggestion-bar{overflow-x:auto;padding:6px 12px;display:flex;gap:6px;flex-shrink:0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.suggestion-bar::-webkit-scrollbar{display:none}
+.suggestion{padding:6px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.78rem;font-weight:600;color:var(--muted);white-space:nowrap;cursor:pointer;transition:.15s;flex-shrink:0}
+.suggestion:hover,.suggestion:active{background:var(--umber);color:#fff;border-color:var(--umber)}
+.input-bar{display:flex;gap:6px;padding:6px 12px 12px;flex-shrink:0;background:var(--cream)}
+.input-bar input{flex:1;padding:10px 14px;border:2px solid var(--line);border-radius:999px;font-size:.9rem;background:#fff;min-width:0}
+.input-bar button{width:42px;height:42px;border-radius:50%;background:var(--umber);color:#fff;border:0;font-size:1rem;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.input-bar button:disabled{opacity:.4}
+.kb-indicator{font-size:.65rem;color:var(--muted);padding:0 12px 4px;flex-shrink:0;display:flex;gap:4px;flex-wrap:wrap}
+.kb-tag{background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:.62rem;font-weight:600;color:var(--muted)}
+#modelProgress{position:fixed;bottom:0;left:0;right:0;z-index:10;background:linear-gradient(180deg,#3D2820,#4C362D);color:#fff;padding:12px 16px;display:none;font-size:.85rem;animation:slideUp .3s}
+@keyframes slideUp{from{transform:translateY(100%)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="sub">onetoeight · Local AI</div>
+  <h1>Formation Guide</h1>
+  <span id="statusDot" class="status-dot loading"></span>
+  <span id="statusText" style="font-size:.7rem;color:rgba(255,255,255,.7);font-weight:600">loading model...</span>
+</header>
+
+<div id="chat">
+  <div class="msg assistant">
+    <strong style="color:var(--umber)">Welcome to your local AI guide.</strong><br>
+    This runs entirely in your browser — nothing leaves your device. I can help you with daily reflections, prayers, practice ideas, and questions about the 8 essentials.
+  </div>
+</div>
+
+<div id="suggestionRow" class="suggestion-bar">
+  <span class="suggestion">Create a prayer for my goal</span>
+  <span class="suggestion">How to practice silence today</span>
+  <span class="suggestion">Reflect on Essential 1</span>
+  <span class="suggestion">Weekly challenge idea</span>
+  <span class="suggestion">What is the 8 essentials?</span>
+</div>
+
+<div class="kb-indicator" id="kbIndicator">
+  <span class="kb-tag" title="Stored locally on your device only">🔒 Local only</span>
+  <span class="kb-tag" id="kbSize" style="display:none"></span>
+</div>
+
+<div class="input-bar">
+  <input id="userInput" placeholder="Ask your guide..." onkeydown="if(event.key==='Enter') sendMessage()">
+  <button id="sendBtn" onclick="sendMessage()" disabled>→</button>
+</div>
+
+<div id="modelProgress">
+  <div style="font-weight:700;font-size:.9rem;margin-bottom:2px">Loading local model</div>
+  <div style="font-size:.75rem;opacity:.85" id="progressText">Downloading ~780MB model (one-time, cached after first load)...</div>
+  <div style="height:6px;background:rgba(255,255,255,.15);border-radius:999px;margin-top:6px;overflow:hidden">
+    <div id="progressBar" style="height:100%;width:0%;background:var(--almond);border-radius:999px;transition:width .3s"></div>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "@mlc-ai/web-llm": "https://unpkg.com/@mlc-ai/web-llm@0.2.68/lib/index.js"
+  }
+}
+</script>
+<script type="module">
+import * as webllm from "@mlc-ai/web-llm";
+
+// ==== ONETOEIGHT KNOWLEDGE BASE ====
+const KNOWLEDGE = [
+  {id:"ess1", title:"Essential 1: Silence", content:'Silence is not emptiness. It is recovery space for attention, emotion, and self-awareness. If you cannot sit still, you cannot think clearly. Practice: start with 3 minutes. Phone in another room. Sit, walk, or stare out a window. When the urge to escape comes, name it, then stay one more minute.', tags:["silence","stillness","attention","presence"]},
+  {id:"ess2", title:"Essential 2: Body", content:'Your body is the platform for everything else. Mood, focus, and patience are physical as much as mental. Neglect is not neutral. Practice: protect sleep. Cook real food. Move enough to raise your heart rate. Choose one gate and guard it for a week.', tags:["body","sleep","food","exercise","health"]},
+  {id:"ess3", title:"Essential 3: Skills", content:'Feed, fix, build, grow, finance. Skills create quiet confidence: not status confidence, but the kind where you can look after yourself and be useful to others. Practice: cook from scratch. Complete one repair. Start one grow project. Write a simple budget.', tags:["skills","cooking","repair","growing","budget","finance"]},
+  {id:"ess4", title:"Essential 4: Digital", content:'Your phone maps pressure points as much as plans. Free often means you are the product. Digital self-defence is adult agency. Practice: password manager plus MFA. Kill non-essential notifications. Strip permissions. Name your post-scam person.', tags:["digital","phone","screentime","privacy","security"]},
+  {id:"ess5", title:"Essential 5: Community", content:'Followers amplify. Friends carry. The 2am test reveals the gap. Build load-bearing relationships before the crisis. Practice: name your real people. Initiate one meet. Repair one strained relationship with honesty.', tags:["community","friends","relationships","repair"]},
+  {id:"ess6", title:"Essential 6: Knowledge", content:'Access is not possession. Stress reveals whether skill is real. Own knowledge, do not only rent it from a search bar. Practice: memorise key contacts. Build a one-page offline life sheet. Learn one thing slowly.', tags:["knowledge","learning","memory","offline"]},
+  {id:"ess7", title:"Essential 7: Nature", content:'Nature is not decoration. It is medicine that older generations received by default. Sunlight, soil, and slow rhythm restore what screens empty. Practice: morning outdoor light. One longer weekly outing. Sometimes leave headphones behind.', tags:["nature","outside","sunlight","rhythm"]},
+  {id:"ess8", title:"Essential 8: Convictions", content:'Decorative values look good and cost nothing. Load-bearing values still shape behaviour when inconvenient. Build convictions that can take pressure. Practice: list five values. Prove each with one action. Write a personal conviction statement.', tags:["convictions","values","faith","integrity"]},
+];
+
+// ==== RAG RETRIEVAL ====
+function searchKnowledge(query, topK=2) {
+  const q = query.toLowerCase();
+  const scored = KNOWLEDGE.map(k => {
+    let score = 0;
+    const txt = (k.title + " " + k.content + " " + k.tags.join(" ")).toLowerCase();
+    // Simple keyword scoring
+    k.tags.forEach(t => { if(q.includes(t)) score += 3; });
+    q.split(" ").forEach(w => { if(w.length > 2 && txt.includes(w)) score += 1; });
+    if(txt.includes(q)) score += 5;
+    return {...k, score};
+  });
+  return scored.sort((a,b) => b.score - a.score).slice(0, topK).filter(k => k.score > 0);
+}
+
+// ==== SYSTEM PROMPT ====
+const SYSTEM_PROMPT = `You are a formation guide for onetoeight, a programme that helps young people (teens and young adults) build roots in a screen-born age. You are warm, direct, and honest. You never hype or patronise.
+
+Your purpose is to help the user:
+- Understand the 8 essentials: Silence, Body, Skills, Digital, Community, Knowledge, Nature, Convictions
+- Create daily prayers and reflections based on their personal goals
+- Suggest practices and challenges from the guide
+- Give honest, grounded advice about growing up with phones and pressure
+
+Rules:
+- Keep responses under 150 words unless asked for depth.
+- When asked for a prayer, write it in a natural, grounded voice. Address it simply.
+- Reference the essentials when relevant.
+- When the user shares a personal goal, offer one concrete practice from the essentials.
+- Never collect or store personal data. This runs locally.`;
+
+let engine = null;
+let modelLoaded = false;
+let chatHistory = [];
+
+// ==== MODEL LOADING ====
+async function initModel() {
+  const progressDiv = document.getElementById("modelProgress");
+  const progressBar = document.getElementById("progressBar");
+  const progressText = document.getElementById("progressText");
+  const statusDot = document.getElementById("statusDot");
+  const statusText = document.getElementById("statusText");
+  const sendBtn = document.getElementById("sendBtn");
+  const kbSize = document.getElementById("kbSize");
+
+  progressDiv.style.display = "block";
+  statusDot.className = "status-dot loading";
+  statusText.textContent = "loading model...";
+  
+  try {
+    // Use a quantized Llama 3.2 1B model compatible with WebLLM
+    const modelId = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
+    
+    const initProgressCallback = (progress) => {
+      const pct = Math.round(progress.progress * 100);
+      progressBar.style.width = pct + "%";
+      progressText.textContent = `${progress.text || "Loading..."} (${pct}%)`;
+    };
+
+    engine = await webllm.CreateMLCEngine(modelId, {
+      initProgressCallback: initProgressCallback,
+    });
+
+    modelLoaded = true;
+    progressDiv.style.display = "none";
+    statusDot.className = "status-dot ready";
+    statusText.textContent = "ready";
+    sendBtn.disabled = false;
+    
+    // Show knowledge base size
+    const kbBytes = new TextEncoder().encode(JSON.stringify(KNOWLEDGE)).length;
+    kbSize.textContent = `📚 ${(kbBytes/1024).toFixed(0)}KB knowledge base`;
+    kbSize.style.display = "inline";
+    
+    addSystemMsg("Model ready! I'm running entirely on your device.");
+    
+  } catch (e) {
+    statusDot.className = "status-dot error";
+    statusText.textContent = "not available";
+    progressDiv.style.display = "none";
+    addMsg("system", `Could not load the local model. ${e.message || "Your browser may not support WebGPU. Try Chrome on desktop or Android."}`);
+  }
+}
+
+// ==== CHAT ====
+function addMsg(role, content, sources=null) {
+  const chat = document.getElementById("chat");
+  const div = document.createElement("div");
+  div.className = "msg " + role;
+  
+  // Format content with bold support
+  const formatted = content.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  div.innerHTML = formatted;
+  
+  if (sources && sources.length > 0) {
+    const src = document.createElement("div");
+    src.className = "src";
+    src.textContent = "📖 " + sources.map(s => s.title).join(", ");
+    div.appendChild(src);
+  }
+  
+  // Add copy button to assistant messages
+  if (role === "assistant") {
+    div.style.position = "relative";
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "copy-btn";
+    copyBtn.textContent = "📋 Copy";
+    copyBtn.style.cssText = "position:absolute;top:4px;right:4px;font-size:.62rem;color:var(--sage);background:transparent;border:0;cursor:pointer;padding:2px 6px;border-radius:4px;opacity:0;transition:opacity .15s;font-weight:600";
+    copyBtn.onclick = function(e) {
+      e.stopPropagation();
+      const plain = content.replace(/\*\*(.*?)\*\*/g,'$1');
+      navigator.clipboard.writeText(plain).then(function() {
+        copyBtn.textContent = "✅ Copied!";
+        copyBtn.style.color = "var(--sage)";
+        setTimeout(function() {
+          copyBtn.textContent = "📋 Copy";
+          copyBtn.style.color = "var(--sage)";
+        }, 1500);
+      });
+    };
+    div.appendChild(copyBtn);
+    div.addEventListener("mouseenter", function() { copyBtn.style.opacity = "1"; });
+    div.addEventListener("mouseleave", function() { copyBtn.style.opacity = "0"; });
+    // Also show on touch for mobile
+    div.addEventListener("touchstart", function() { copyBtn.style.opacity = "1"; }, {passive:true});
+  }
+  
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function addSystemMsg(text) {
+  addMsg("system", text);
+}
+
+async function sendMessage() {
+  const input = document.getElementById("userInput");
+  const text = input.value.trim();
+  if (!text || !modelLoaded || !engine) return;
+  
+  if (text === "debug") {
+    addMsg("assistant", `Model loaded: ${modelLoaded}\nEngine ready: ${engine !== null}\nChat history: ${chatHistory.length} messages`);
+    input.value = "";
+    return;
+  }
+  
+  input.value = "";
+  addMsg("user", text);
+  
+  // Search knowledge base
+  const relevant = searchKnowledge(text);
+  let context = "";
+  if (relevant.length > 0) {
+    context = "\n\nRelevant guide content:\n" + relevant.map(k => `[${k.title}]: ${k.content}`).join("\n");
+  }
+  
+  chatHistory.push({role:"user", content: text});
+  
+  // Build conversation
+  const messages = [
+    {role: "system", content: SYSTEM_PROMPT + context}
+  ];
+  for (const msg of chatHistory.slice(-8)) {
+    messages.push(msg);
+  }
+  
+  try {
+    const reply = await engine.chat.completions.create({
+      messages: messages,
+      max_tokens: 300,
+      temperature: 0.7,
+      top_p: 0.9,
+    });
+    
+    const output = reply.choices[0].message.content;
+    addMsg("assistant", output, relevant);
+    chatHistory.push({role: "assistant", content: output});
+  } catch(e) {
+    addMsg("system", `Generation error: ${e.message}`);
+  }
+}
+
+// Make functions globally accessible for inline onclick handlers
+window.sendMessage = sendMessage;
+window.initModel = initModel;
+
+// ==== SUGGESTIONS ====
+document.querySelectorAll(".suggestion").forEach(el => {
+  el.addEventListener("click", () => {
+    document.getElementById("userInput").value = el.textContent;
+    sendMessage();
+  });
+});
+
+// ==== START ====
+initModel();
+</script>
+</body>
+</html>
