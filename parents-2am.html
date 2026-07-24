@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1220">
+<meta name="description" content="What keeps Australian parents of preteens and teens awake — and how onetoeight turns those worries into a plan. Research-backed, with real eSafety data.">
+<title>2:07 AM — What Parents Worry About · onetoeight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0d1220; --night2:#131a2e; --night3:#1a2340;
+  --dawn:#f6efe3; --dawn2:#efe6d6; --paper:#fbf7ee;
+  --ink:#232a3d; --ink-soft:#5a6278;
+  --terra:#c2603e; --terra-deep:#9c4a2e;
+  --sage:#7d8a6e; --sage-deep:#5f6d52;
+  --gold:#d9a441; --gold-soft:#e8c87a;
+  --blue:#4f6f9e;
+  --star:rgba(255,255,255,.85);
+  --serif:'Fraunces',Georgia,serif;
+  --disp:'Space Grotesk',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--dawn);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--terra);color:#fff}
+h1,h2,h3,.serif{font-family:var(--serif)}
+a{color:var(--terra-deep)}
+img{max-width:100%}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}.reveal[data-d="4"]{transition-delay:.32s}
+.reveal[data-d="5"]{transition-delay:.4s}.reveal[data-d="6"]{transition-delay:.48s}
+.reveal[data-d="7"]{transition-delay:.56s}.reveal[data-d="8"]{transition-delay:.64s}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:.85rem 1.4rem;background:rgba(13,18,32,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+.brand{font-family:var(--serif);font-size:1.35rem;font-weight:600;color:var(--dawn);text-decoration:none;letter-spacing:-.01em}
+.brand em{font-style:italic;font-weight:300;color:var(--gold-soft)}
+.navlinks{display:flex;gap:1.4rem}
+.navlinks a{font-family:var(--disp);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(246,239,227,.62);text-decoration:none;transition:color .25s}
+.navlinks a:hover{color:var(--gold-soft)}
+@media(max-width:760px){.navlinks{display:none}}
+
+/* ---------- opening: the 2am scene ---------- */
+.night{position:relative;min-height:100vh;background:radial-gradient(ellipse 120% 90% at 50% 110%,#233055 0%,#17203c 42%,#0d1220 78%);color:var(--dawn);display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:7rem 1.5rem 5rem}
+.stars{position:absolute;inset:0;pointer-events:none}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--star);animation:twinkle var(--tw,3s) ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.95}}
+.moon{position:absolute;top:9%;right:8%;width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fdf6e3,#e8d9b0 60%,#cdb988);box-shadow:0 0 60px 18px rgba(232,217,176,.22);opacity:.9}
+.moon::after{content:'';position:absolute;top:16px;left:20px;width:12px;height:12px;border-radius:50%;background:rgba(180,160,110,.35)}
+.moon::before{content:'';position:absolute;top:38px;left:40px;width:8px;height:8px;border-radius:50%;background:rgba(180,160,110,.3)}
+.night-inner{position:relative;z-index:2;max-width:960px;margin:0 auto;width:100%}
+.clock{font-family:var(--disp);font-weight:700;font-size:clamp(4rem,13vw,8.5rem);letter-spacing:-.03em;line-height:1;color:var(--dawn);text-shadow:0 0 40px rgba(217,164,65,.25)}
+.clock .colon{animation:blink 1.4s steps(1) infinite;color:var(--gold-soft)}
+@keyframes blink{50%{opacity:.15}}
+.kicker{font-family:var(--disp);font-size:.72rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:1.1rem;display:flex;align-items:center;gap:.7rem}
+.kicker::before{content:'';width:34px;height:1px;background:var(--gold-soft)}
+.night h1{font-size:clamp(1.9rem,4.6vw,3.4rem);font-weight:400;line-height:1.18;letter-spacing:-.015em;max-width:20ch;margin:1.2rem 0 1.4rem}
+.night h1 em{font-style:italic;color:var(--gold-soft)}
+.night .lede{font-size:clamp(1rem,1.6vw,1.15rem);color:rgba(246,239,227,.72);max-width:56ch;line-height:1.7}
+.scrollcue{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--disp);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(246,239,227,.45);display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.scrollcue::after{content:'';width:1px;height:44px;background:linear-gradient(180deg,var(--gold-soft),transparent);animation:drip 1.8s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}56%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- section scaffolding ---------- */
+section{position:relative}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem}
+.sec-head{margin-bottom:3rem}
+.sec-tag{font-family:var(--disp);font-size:.7rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--terra);display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.sec-tag::before{content:'';width:30px;height:2px;background:var(--terra)}
+.sec-head h2{font-size:clamp(1.9rem,4.2vw,3rem);font-weight:500;line-height:1.12;letter-spacing:-.02em;max-width:24ch}
+.sec-head h2 em{font-style:italic;color:var(--terra-deep)}
+.sec-head .sub{margin-top:1rem;font-size:1.02rem;color:var(--ink-soft);max-width:60ch}
+
+/* ---------- the worries ---------- */
+.worries{background:var(--dawn);padding:6.5rem 0 5.5rem}
+.worry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem}
+.worry{position:relative;background:var(--paper);border:1px solid rgba(35,42,61,.08);border-radius:14px;padding:1.5rem 1.5rem 1.3rem;overflow:hidden;transition:transform .35s cubic-bezier(.22,.61,.36,1),box-shadow .35s,border-color .35s}
+.worry:hover{transform:translateY(-6px);box-shadow:0 18px 40px -18px rgba(35,42,61,.28);border-color:rgba(194,96,62,.35)}
+.worry::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--wc,var(--terra));transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+.worry:hover::before{transform:scaleX(1)}
+.worry .num{font-family:var(--disp);font-weight:700;font-size:.72rem;letter-spacing:.18em;color:var(--wc,var(--terra))}
+.worry h3{font-size:1.28rem;font-weight:600;margin:.55rem 0 .5rem;line-height:1.25}
+.worry p{font-size:.9rem;color:var(--ink-soft);line-height:1.6}
+.worry .stat{margin-top:.9rem;font-family:var(--disp);font-size:.78rem;font-weight:600;color:var(--ink);display:flex;align-items:baseline;gap:.45rem}
+.worry .stat b{font-size:1.35rem;font-weight:700;color:var(--wc,var(--terra))}
+.worry .stat span{font-size:.72rem;color:var(--ink-soft);font-weight:500}
+
+/* ---------- data / infographic ---------- */
+.data{background:var(--night);color:var(--dawn);padding:6.5rem 0;overflow:hidden}
+.data .sec-tag{color:var(--gold-soft)}
+.data .sec-tag::before{background:var(--gold-soft)}
+.data .sec-head h2{color:var(--dawn)}
+.data .sec-head h2 em{color:var(--gold-soft)}
+.data .sec-head .sub{color:rgba(246,239,227,.6)}
+.data-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3.5rem;align-items:start}
+@media(max-width:900px){.data-grid{grid-template-columns:1fr}}
+.barchart{display:flex;flex-direction:column;gap:1.15rem}
+.bar-row{display:grid;grid-template-columns:110px 1fr 56px;align-items:center;gap:1rem}
+.bar-label{font-family:var(--disp);font-size:.78rem;font-weight:600;color:rgba(246,239,227,.85);text-align:right}
+.bar-track{position:relative;height:30px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden}
+.bar-fill{position:absolute;inset:0;width:0;border-radius:6px;background:linear-gradient(90deg,var(--bf1,#c2603e),var(--bf2,#d9a441));transition:width 1.4s cubic-bezier(.22,.61,.36,1)}
+.bar-fill.pre{opacity:.32}
+.bar-val{font-family:var(--disp);font-weight:700;font-size:.95rem;color:var(--gold-soft)}
+.bar-note{font-size:.78rem;color:rgba(246,239,227,.5);margin-top:.4rem;grid-column:2}
+.legend{display:flex;gap:1.6rem;margin-bottom:1.6rem;font-family:var(--disp);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(246,239,227,.6)}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:.45rem;vertical-align:-2px}
+.legend .l-pre i{background:rgba(217,164,65,.35)}
+.legend .l-post i{background:linear-gradient(90deg,#c2603e,#d9a441)}
+.bigstats{display:flex;flex-direction:column;gap:1.2rem}
+.bigstat{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.4rem 1.5rem;transition:border-color .3s,transform .3s}
+.bigstat:hover{border-color:rgba(217,164,65,.4);transform:translateX(4px)}
+.bigstat .n{font-family:var(--disp);font-weight:700;font-size:2.6rem;line-height:1;color:var(--gold-soft);letter-spacing:-.02em}
+.bigstat .n small{font-size:1.3rem}
+.bigstat .t{margin-top:.45rem;font-size:.88rem;color:rgba(246,239,227,.75);line-height:1.5}
+.bigstat .t b{color:var(--dawn)}
+.src{margin-top:2.2rem;font-size:.74rem;color:rgba(246,239,227,.4);line-height:1.6}
+.src a{color:rgba(232,200,122,.7)}
+
+/* ---------- the gap ---------- */
+.gap{background:var(--dawn2);padding:6.5rem 0}
+.gap-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:2.5rem}
+@media(max-width:820px){.gap-cols{grid-template-columns:1fr}}
+.gap-card{border-radius:16px;padding:2rem;position:relative;overflow:hidden}
+.gap-card.doing{background:#e9efe4;border:1px solid rgba(125,138,110,.3)}
+.gap-card.missing{background:#f3e3da;border:1px solid rgba(194,96,62,.3)}
+.gap-card h3{font-size:1.4rem;font-weight:600;margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
+.gap-card.doing h3{color:var(--sage-deep)}
+.gap-card.missing h3{color:var(--terra-deep)}
+.gap-card ul{list-style:none}
+.gap-card li{position:relative;padding:.55rem 0 .55rem 2rem;font-size:.92rem;color:var(--ink);line-height:1.5;border-bottom:1px dashed rgba(35,42,61,.1)}
+.gap-card li:last-child{border-bottom:0}
+.gap-card li::before{position:absolute;left:0;top:.55rem;font-family:var(--disp);font-weight:700;font-size:.85rem}
+.gap-card.doing li::before{content:'✓';color:var(--sage-deep)}
+.gap-card.missing li::before{content:'!';color:var(--terra-deep)}
+.gap-card li b{font-weight:700}
+.gap-card li .pct{font-family:var(--disp);font-weight:700;font-size:.85rem}
+.gap-card.doing .pct{color:var(--sage-deep)}
+.gap-card.missing .pct{color:var(--terra-deep)}
+
+/* ---------- how onetoeight helps ---------- */
+.help{background:var(--paper);padding:6.5rem 0}
+.map{display:flex;flex-direction:column;gap:.85rem;margin-top:2.5rem}
+.map-row{display:grid;grid-template-columns:200px 40px 1fr;align-items:center;gap:1.2rem;background:var(--dawn);border:1px solid rgba(35,42,61,.07);border-radius:12px;padding:1.1rem 1.4rem;transition:transform .3s,box-shadow .3s,border-color .3s}
+.map-row:hover{transform:translateX(8px);box-shadow:0 12px 30px -16px rgba(35,42,61,.3);border-color:rgba(194,96,62,.4)}
+@media(max-width:760px){.map-row{grid-template-columns:1fr;gap:.5rem}.map-arrow{transform:rotate(90deg);justify-self:start}}
+.map-worry{font-family:var(--disp);font-weight:600;font-size:.85rem;color:var(--terra-deep)}
+.map-arrow{font-family:var(--disp);color:var(--gold);font-size:1.2rem;text-align:center}
+.map-fix{font-size:.92rem;color:var(--ink)}
+.map-fix b{font-family:var(--serif);font-weight:600;color:var(--sage-deep);font-size:1.02rem}
+.map-fix .ess{display:inline-block;font-family:var(--disp);font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(125,138,110,.16);color:var(--sage-deep);border-radius:99px;padding:.18rem .6rem;margin-left:.5rem;vertical-align:1px}
+
+/* ---------- outcomes ---------- */
+.outcomes{background:linear-gradient(160deg,#2c3a2a 0%,#3c4d36 55%,#4a5c40 100%);color:var(--dawn);padding:6.5rem 0}
+.outcomes .sec-tag{color:var(--gold-soft)}.outcomes .sec-tag::before{background:var(--gold-soft)}
+.outcomes .sec-head h2{color:var(--dawn)}.outcomes .sec-head h2 em{color:var(--gold-soft)}
+.outcomes .sec-head .sub{color:rgba(246,239,227,.65)}
+.out-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:2.5rem}
+@media(max-width:860px){.out-grid{grid-template-columns:1fr}}
+.out-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:1.9rem 1.7rem;transition:transform .35s,border-color .35s,background .35s}
+.out-card:hover{transform:translateY(-8px);border-color:rgba(232,200,122,.5);background:rgba(255,255,255,.09)}
+.out-card .ico{font-size:1.9rem;margin-bottom:1rem;display:inline-block;transition:transform .35s}
+.out-card:hover .ico{transform:scale(1.2) rotate(-6deg)}
+.out-card h3{font-size:1.35rem;font-weight:600;color:var(--gold-soft);margin-bottom:.9rem}
+.out-card ul{list-style:none}
+.out-card li{position:relative;padding:.4rem 0 .4rem 1.4rem;font-size:.88rem;color:rgba(246,239,227,.82);line-height:1.55}
+.out-card li::before{content:'→';position:absolute;left:0;color:var(--gold-soft);font-family:var(--disp)}
+
+/* ---------- the plan ---------- */
+.plan{background:var(--dawn);padding:6.5rem 0}
+.timeline{position:relative;margin-top:3rem;padding-left:2.4rem}
+.timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--terra),var(--gold),var(--sage))}
+.phase{position:relative;margin-bottom:2.6rem}
+.phase::before{content:'';position:absolute;left:-2.4rem;top:4px;width:18px;height:18px;border-radius:50%;background:var(--dawn);border:3px solid var(--pc,var(--terra));box-shadow:0 0 0 4px rgba(194,96,62,.12)}
+.phase .when{font-family:var(--disp);font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pc,var(--terra))}
+.phase h3{font-size:1.5rem;font-weight:600;margin:.35rem 0 .6rem}
+.phase p{font-size:.94rem;color:var(--ink-soft);max-width:64ch;line-height:1.65}
+.phase .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+.chip{font-family:var(--disp);font-size:.7rem;font-weight:600;letter-spacing:.06em;background:var(--paper);border:1px solid rgba(35,42,61,.14);color:var(--ink);border-radius:99px;padding:.32rem .8rem;transition:background .25s,color .25s,border-color .25s}
+.chip:hover{background:var(--terra);color:#fff;border-color:var(--terra)}
+
+/* messaging samples */
+.msgs{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-top:3rem}
+@media(max-width:820px){.msgs{grid-template-columns:1fr}}
+.msg{background:var(--night2);color:var(--dawn);border-radius:16px;padding:1.8rem;position:relative;overflow:hidden;transition:transform .3s}
+.msg:hover{transform:translateY(-5px)}
+.msg::after{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle at top right,rgba(217,164,65,.18),transparent 70%)}
+.msg .m-tag{font-family:var(--disp);font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:.9rem}
+.msg .subj{font-family:var(--disp);font-weight:600;font-size:.95rem;color:var(--dawn);margin-bottom:.8rem}
+.msg p{font-size:.86rem;color:rgba(246,239,227,.78);line-height:1.65;margin-bottom:.7rem}
+.msg .sig{font-family:var(--serif);font-style:italic;color:var(--gold-soft)}
+
+/* ---------- research appendix ---------- */
+.appendix{background:var(--night);color:var(--dawn);padding:5.5rem 0 4rem}
+.appendix .sec-tag{color:var(--gold-soft)}.appendix .sec-tag::before{background:var(--gold-soft)}
+.appendix h2{color:var(--dawn);font-size:clamp(1.7rem,3.4vw,2.4rem)}
+.ref{display:flex;gap:1.2rem;padding:1.3rem 0;border-bottom:1px solid rgba(255,255,255,.08);align-items:baseline}
+.ref .rn{font-family:var(--disp);font-weight:700;color:var(--gold-soft);font-size:.85rem;min-width:2.2rem}
+.ref .rt{font-size:.92rem;color:rgba(246,239,227,.85);line-height:1.55}
+.ref .rt b{color:var(--dawn)}
+.ref .rt .rm{display:block;font-size:.76rem;color:rgba(246,239,227,.45);margin-top:.25rem}
+.ref a{color:var(--gold-soft)}
+.honest{margin-top:2.5rem;background:rgba(217,164,65,.08);border:1px solid rgba(217,164,65,.25);border-radius:12px;padding:1.4rem 1.6rem;font-size:.85rem;color:rgba(246,239,227,.75);line-height:1.65}
+.honest b{color:var(--gold-soft)}
+
+footer{background:#0a0e19;color:rgba(246,239,227,.4);padding:2.2rem 1.5rem;text-align:center;font-size:.8rem}
+footer a{color:var(--gold-soft);text-decoration:none}
+footer .fbrand{font-family:var(--serif);font-size:1.15rem;color:var(--dawn);margin-bottom:.4rem}
+footer .fbrand em{font-style:italic;color:var(--gold-soft)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="hub/" class="brand">one <em>to</em> eight</a>
+  <div class="navlinks">
+    <a href="#worries">The worries</a>
+    <a href="#data">The data</a>
+    <a href="#gap">The gap</a>
+    <a href="#help">How it helps</a>
+    <a href="#plan">The plan</a>
+    <a href="#research">Research</a>
+  </div>
+</nav>
+
+<!-- ============ OPENING: 2AM ============ -->
+<header class="night">
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
+  <div class="night-inner">
+    <div class="kicker reveal">A briefing for parents of preteens &amp; teens</div>
+    <div class="clock reveal" data-d="1">2<span class="colon">:</span>07 <span style="font-size:.35em;letter-spacing:.05em;color:var(--gold-soft)">AM</span></div>
+    <h1 class="reveal" data-d="2">The house is quiet. <em>Your mind isn't.</em></h1>
+    <p class="lede reveal" data-d="3">Somewhere down the hall, a phone glows under a doona. And you're awake running the same loop — <em>who are they talking to, what are they seeing, are they okay, will they be okay?</em> You're not overthinking it. The data says these worries are rational. This page names them, backs them with Australian evidence, and shows you a way through — for your child, your family, and the community they'll grow into.</p>
+  </div>
+  <div class="scrollcue">scroll</div>
+</header>
+
+<!-- ============ THE WORRIES ============ -->
+<section class="worries" id="worries">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Part one</div>
+      <h2>Eight things that keep you <em>awake</em></h2>
+      <p class="sub">Not vague dread — specific, nameable fears. Every one of them shows up in Australian research on parents of 8–17 year olds. Naming them is the first step, because a named worry can be acted on and a nameless one just circles.</p>
+    </div>
+    <div class="worry-grid">
+      <div class="worry reveal" style="--wc:#c2603e">
+        <div class="num">01 · CONTACT</div>
+        <h3>Who are they talking to?</h3>
+        <p>Strangers, older kids, people with agendas. Grooming and sexual extortion are real, and they happen in the apps you can't see into.</p>
+        <div class="stat"><b data-count="26">0</b><span>% of parents don't feel fully aware of their child's online activities</span></div>
+      </div>
+      <div class="worry reveal" data-d="1" style="--wc:#b0543a">
+        <div class="num">02 · CONTENT</div>
+        <h3>What are they seeing?</h3>
+        <p>Violence, pornography, self-harm, hate — often stumbled into by accident, not searched for. Once seen, it can't be unseen.</p>
+        <div class="stat"><b data-count="58">0</b><span>% of parents say they struggle to keep their child safe online</span></div>
+      </div>
+      <div class="worry reveal" data-d="2" style="--wc:#9c4a2e">
+        <div class="num">03 · TIME</div>
+        <h3>Where do the hours go?</h3>
+        <p>The scroll that eats sleep, homework, and the dinner-table conversation. It's not weak willpower — the apps are engineered to win.</p>
+        <div class="stat"><b data-count="46">0</b><span>% hope their child can "look after themselves" online — hope isn't a plan</span></div>
+      </div>
+      <div class="worry reveal" data-d="3" style="--wc:#7d8a6e">
+        <div class="num">04 · MOOD</div>
+        <h3>Are they okay, really?</h3>
+        <p>The comparison spiral, the group chat that goes quiet, the body-image feed. Anxiety and low mood track closely with heavy social use.</p>
+        <div class="stat"><b data-count="83">0</b><span>% of parents believe they talk openly — but kids report telling less</span></div>
+      </div>
+      <div class="worry reveal" data-d="4" style="--wc:#5f6d52">
+        <div class="num">05 · SAFETY SKILLS</div>
+        <h3>Do they know what to do when it goes wrong?</h3>
+        <p>Sextortion, live location-sharing, online dating — most parents have never even raised these, let alone prepared their child for them.</p>
+        <div class="stat"><b data-count="8">0</b><span>% of parents have discussed sexual extortion with their child</span></div>
+      </div>
+      <div class="worry reveal" data-d="5" style="--wc:#4f6f9e">
+        <div class="num">06 · THE FUTURE</div>
+        <h3>What is this doing to who they're becoming?</h3>
+        <p>Attention, patience, real-world skills, the ability to sit with boredom and build something. The worry isn't just today — it's the adult they'll be.</p>
+        <div class="stat"><b data-count="11">0</b><span>% of parents have discussed how generative AI can be used or misused</span></div>
+      </div>
+      <div class="worry reveal" data-d="6" style="--wc:#8a6d3b">
+        <div class="num">07 · THE BAN</div>
+        <h3>Did the social media ban actually change anything?</h3>
+        <p>Australia banned under-16 accounts in December 2025. But most kids are still on the platforms — and the law never taught them what to do with the time.</p>
+        <div class="stat"><b data-count="69">0</b><span>% of kids kept their Instagram, Snapchat &amp; TikTok accounts anyway</span></div>
+      </div>
+      <div class="worry reveal" data-d="7" style="--wc:#a46447">
+        <div class="num">08 · ALONE IN IT</div>
+        <h3>Am I the only one fighting this?</h3>
+        <p>Every other parent looks like they've got it handled. Nobody compares notes. So you carry it alone — and your kid's friends' parents do too.</p>
+        <div class="stat"><b data-count="29">0</b><span>% of parents don't use any parental controls at all</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE DATA ============ -->
+<section class="data" id="data">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Part two · the evidence</div>
+      <h2>What the numbers <em>actually say</em></h2>
+      <p class="sub">Two national Australian studies — the eSafety Commissioner's surveys of thousands of children and parents — give us a clear picture. The headline: the ban removed accounts, but it didn't remove the problem.</p>
+    </div>
+    <div class="data-grid">
+      <div>
+        <div class="legend reveal">
+          <span class="l-pre"><i></i>Before the ban (Dec 2025)</span>
+          <span class="l-post"><i></i>After the ban</span>
+        </div>
+        <div class="barchart" id="barchart">
+          <div class="bar-row reveal"><div class="bar-label">YouTube</div><div class="bar-track"><div class="bar-fill pre" data-w="36.5"></div><div class="bar-fill" data-w="17.7"></div></div><div class="bar-val">17.7%</div></div>
+          <div class="bar-row reveal" data-d="1"><div class="bar-label">Snapchat</div><div class="bar-track"><div class="bar-fill pre" data-w="27.3"></div><div class="bar-fill" data-w="18.9"></div></div><div class="bar-val">18.9%</div></div>
+          <div class="bar-row reveal" data-d="2"><div class="bar-label">TikTok</div><div class="bar-track"><div class="bar-fill pre" data-w="24.1"></div><div class="bar-fill" data-w="16.7"></div></div><div class="bar-val">16.7%</div></div>
+          <div class="bar-row reveal" data-d="3"><div class="bar-label">Instagram</div><div class="bar-track"><div class="bar-fill pre" data-w="20.2"></div><div class="bar-fill" data-w="13.9"></div></div><div class="bar-val">13.9%</div></div>
+          <div class="bar-row reveal" data-d="4"><div class="bar-label">Facebook</div><div class="bar-track"><div class="bar-fill pre" data-w="13.8"></div><div class="bar-fill" data-w="8.8"></div></div><div class="bar-val">8.8%</div></div>
+          <div class="bar-note reveal" data-d="5">% of children aged 8–15 holding their own account on each platform. Source: eSafety Commissioner, March 2026 (n=898 parents).</div>
+        </div>
+      </div>
+      <div class="bigstats">
+        <div class="bigstat reveal"><div class="n"><span data-count="70">0</span><small>%</small></div><div class="t">of kids who had a <b>Snapchat, TikTok or Instagram</b> account before the ban <b>still had it</b> six weeks after. The ban thinned the crowd — it didn't clear the room.</div></div>
+        <div class="bigstat reveal" data-d="1"><div class="n"><span data-count="67">0</span><small>%</small></div><div class="t">of kids who kept an account did so simply because <b>the platform hadn't asked them to verify their age yet</b>. Compliance is a work in progress, not a wall.</div></div>
+        <div class="bigstat reveal" data-d="2"><div class="n"><span data-count="58">0</span><small>%</small></div><div class="t">of parents say they <b>struggle to keep their child safe online</b> — while <b>46%</b> simultaneously hope their child can handle it alone. That tension is the whole story.</div></div>
+        <div class="bigstat reveal" data-d="3"><div class="n"><span data-count="92">0</span><small>%</small></div><div class="t">of parents have <b>rules</b> about being online. Rules exist. What's missing isn't rules — it's <b>what fills the space</b> when the phone goes down.</div></div>
+      </div>
+    </div>
+    <p class="src reveal">Sources: eSafety Commissioner, <em>Under the new age restrictions: Early insights from Australian parents</em> (March 2026, n=898) and <em>Balancing risk and reward: Parenting in the digital world</em> (Keeping Kids Safe Online survey, Dec 2024–Feb 2025, n=3,454 children + parents). Full citations in the <a href="#research">research appendix</a>.</p>
+  </div>
+</section>
+
+<!-- ============ THE GAP ============ -->
+<section class="gap" id="gap">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Part three</div>
+      <h2>Parents are doing the <em>guarding</em>. Nobody's doing the <em>building</em>.</h2>
+      <p class="sub">The research shows Australian parents are far from passive. The gap isn't effort — it's direction. Protection removes risk; it doesn't install capability.</p>
+    </div>
+    <div class="gap-cols">
+      <div class="gap-card doing reveal">
+        <h3>🛡️ What parents are already doing</h3>
+        <ul>
+          <li><b>Setting rules</b> about being online <span class="pct">92%</span></li>
+          <li><b>Talking openly</b> about online safety <span class="pct">93%</span></li>
+          <li><b>Encouraging kids to speak up</b> when something goes wrong <span class="pct">84%</span></li>
+          <li><b>Actively monitoring</b> their child's online activity <span class="pct">68%</span></li>
+          <li><b>Using parental controls</b> (most, though not all) <span class="pct">71%</span></li>
+        </ul>
+      </div>
+      <div class="gap-card missing reveal" data-d="1">
+        <h3>🕳️ What's falling through the cracks</h3>
+        <ul>
+          <li><b>Sexual extortion</b> — the fastest-growing threat, barely discussed <span class="pct">8%</span></li>
+          <li><b>Generative AI</b> — how it can be used and misused <span class="pct">11%</span></li>
+          <li><b>Algorithmic influence</b> — how feeds shape what kids think <span class="pct">26%</span></li>
+          <li><b>Awareness of emerging tech</b> — VR, haptics, live location-sharing <span class="pct">low</span></li>
+          <li><b>Anything to replace the scroll</b> — the ban freed up time, but nothing filled it <span class="pct">—</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW ONETOEIGHT HELPS ============ -->
+<section class="help" id="help">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Part four</div>
+      <h2>Every worry maps to a <em>practice</em></h2>
+      <p class="sub">onetoeight isn't another parental-control app — it's an eight-week formation program a young person actually does, one essential per week, with a pod of their own people. It builds the inner life the screen keeps interrupting. Here's your 2am worry list, answered one for one.</p>
+    </div>
+    <div class="map">
+      <div class="map-row reveal"><div class="map-worry">"Who are they talking to?"</div><div class="map-arrow">→</div><div class="map-fix"><b>Real community</b> — a weekly pod of 8 people they meet face-to-face, so belonging comes from a room, not a stranger's DM.<span class="ess">Community</span></div></div>
+      <div class="map-row reveal" data-d="1"><div class="map-worry">"What are they seeing?"</div><div class="map-arrow">→</div><div class="map-fix"><b>Digital self-defence</b> — named skills for recognising manipulation, grooming and harmful content, and knowing exactly what to do next.<span class="ess">Digital</span></div></div>
+      <div class="map-row reveal" data-d="2"><div class="map-worry">"Where do the hours go?"</div><div class="map-arrow">→</div><div class="map-fix"><b>Silence</b> — learning to sit with stillness, so boredom stops being a trigger to scroll and becomes a place ideas come from.<span class="ess">Silence</span></div></div>
+      <div class="map-row reveal" data-d="3"><div class="map-worry">"Are they okay, really?"</div><div class="map-arrow">→</div><div class="map-fix"><b>Body</b> — physical discipline and presence; a young person who lives in their body is harder to flatten into a feed.<span class="ess">Body</span></div></div>
+      <div class="map-row reveal" data-d="4"><div class="map-worry">"Do they know what to do when it goes wrong?"</div><div class="map-arrow">→</div><div class="map-fix"><b>Skills</b> — practical competence, from hard conversations to asking for help, rehearsed before it's needed.<span class="ess">Skills</span></div></div>
+      <div class="map-row reveal" data-d="5"><div class="map-worry">"What is this doing to who they're becoming?"</div><div class="map-arrow">→</div><div class="map-fix"><b>Knowledge without Wi-Fi</b> — the habit of learning and thinking offline, so their mind isn't rented out to the algorithm.<span class="ess">Knowledge</span></div></div>
+      <div class="map-row reveal" data-d="6"><div class="map-worry">"Did the ban change anything?"</div><div class="map-arrow">→</div><div class="map-fix"><b>Nature</b> — the freed-up hours get a destination: outside, embodied, real. The ban removed the account; this gives back the afternoon.<span class="ess">Nature</span></div></div>
+      <div class="map-row reveal" data-d="7"><div class="map-worry">"Am I the only one fighting this?"</div><div class="map-arrow">→</div><div class="map-fix"><b>Convictions</b> — a pod means other parents are in the room too. You stop carrying it alone, and your kid sees adults who agree on what matters.<span class="ess">Convictions</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUTCOMES ============ -->
+<section class="outcomes" id="outcomes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Part five</div>
+      <h2>What changes — for the three circles that <em>matter</em></h2>
+      <p class="sub">A formation program isn't a product your child consumes. It's a practice your family and community grow into. Here's the honest picture of what eight weeks tends to shift.</p>
+    </div>
+    <div class="out-grid">
+      <div class="out-card reveal">
+        <span class="ico">🌱</span>
+        <h3>For the young person</h3>
+        <ul>
+          <li>A daily rhythm that isn't organised around a feed</li>
+          <li>Named skills for the online risks they'll actually meet</li>
+          <li>Confidence that comes from competence, not likes</li>
+          <li>Eight weeks of small, kept promises to themselves</li>
+          <li>A language for talking to adults about hard things</li>
+        </ul>
+      </div>
+      <div class="out-card reveal" data-d="1">
+        <span class="ico">🏠</span>
+        <h3>For the family</h3>
+        <ul>
+          <li>Conversations that start from a shared practice, not a confrontation</li>
+          <li>A reason to put phones down that isn't a punishment</li>
+          <li>Less policing, more mentoring — the relationship improves</li>
+          <li>Parents who finally have a script for the hard topics</li>
+          <li>The 2am loop gets quieter, because there's a plan</li>
+        </ul>
+      </div>
+      <div class="out-card reveal" data-d="2">
+        <span class="ico">🤝</span>
+        <h3>For the community</h3>
+        <ul>
+          <li>A pod of eight families who know and look out for each other</li>
+          <li>Young people who show up — to each other, and locally</li>
+          <li>Shared norms about screens, so no single family stands alone</li>
+          <li>A generation that builds things, not just scrolls past them</li>
+          <li>Adults and teens in the same room, on the same page</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE PLAN ============ -->
+<section class="plan" id="plan">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Part six · how we reach parents</div>
+      <h2>The plan for getting this into <em>parents' hands</em></h2>
+      <p class="sub">Parents of preteens and teens aren't on TikTok looking for a formation program. They're in school newsletters, church rosters, sports clubs, Facebook groups, and each other's kitchens. The plan meets them there — with empathy first, never a sales pitch.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="phase reveal" style="--pc:#c2603e">
+        <div class="when">Phase 1 · Weeks 1–4</div>
+        <h3>Lead with the worry, not the product</h3>
+        <p>Publish and share the "2:07 AM" piece (this page) as a free, honest resource. It names the problem with real Australian data and only then mentions onetoeight. Parents share things that make them feel understood — this is the shareable object. Pair it with a one-page "what the ban actually did" explainer, since that's the question every parent is asking right now.</p>
+        <div class="chips"><span class="chip">This infographic page</span><span class="chip">Ban explainer one-pager</span><span class="chip">Shareable quote cards</span></div>
+      </div>
+      <div class="phase reveal" data-d="1" style="--pc:#b0543a">
+        <div class="when">Phase 2 · Weeks 3–8</div>
+        <h3>Go through the trusted gatekeepers</h3>
+        <p>Parents trust institutions more than ads. Pitch the program to the adults who already have the room: school chaplains and wellbeing coordinators, youth pastors, sports club coordinators, and parent Facebook group admins. Offer a free 20-minute talk at a parent night — "Raising kids in a screen-born world" — with the program as the takeaway, not the pitch.</p>
+        <div class="chips"><span class="chip">School parent nights</span><span class="chip">Church &amp; youth groups</span><span class="chip">Sports clubs</span><span class="chip">Parent FB groups</span></div>
+      </div>
+      <div class="phase reveal" data-d="2" style="--pc:#d9a441">
+        <div class="when">Phase 3 · Weeks 6–12</div>
+        <h3>Make the first pod effortless</h3>
+        <p>The barrier isn't interest, it's logistics. Offer a "starter pod" kit: a ready-made 8-week plan, a host guide for one volunteer parent, and printable materials. One parent recruits seven friends from school pickup or church — that's the whole funnel. The pod is the product and the marketing at once.</p>
+        <div class="chips"><span class="chip">Starter pod kit</span><span class="chip">Host guide</span><span class="chip">Printable week sheets</span></div>
+      </div>
+      <div class="phase reveal" data-d="3" style="--pc:#7d8a6e">
+        <div class="when">Phase 4 · Ongoing</div>
+        <h3>Let parents tell parents</h3>
+        <p>Collect short, honest stories from parents after each pod — "what changed at our dinner table" — and turn them into the next shareable. Word of mouth between parents is the highest-converting channel there is; the job is just to give it something true to carry.</p>
+        <div class="chips"><span class="chip">Parent stories</span><span class="chip">Referral pods</span><span class="chip">Termly parent Q&amp;A</span></div>
+      </div>
+    </div>
+
+    <div class="msgs">
+      <div class="msg reveal">
+        <div class="m-tag">Message to a school / parent group</div>
+        <div class="subj">Subject: A free parent-night talk on screens — no pitch, just a plan</div>
+        <p>Hi [name], I've put together a short, honest talk for parents on raising kids after the social media ban — what the data actually shows, what the ban did and didn't do, and one practical thing families can do this term. It's free, 20 minutes, and the only takeaway is a program families can run themselves. Would your parent community find that useful?</p>
+        <div class="sig">— Brendan</div>
+      </div>
+      <div class="msg reveal" data-d="1">
+        <div class="m-tag">Message to a parent directly</div>
+        <div class="subj">Subject: The 2am scroll</div>
+        <p>You know the one — lying awake wondering what your kid's actually doing on that phone. I wrote down what the Australian research says about those worries, and what actually helps (it's not more parental controls). It's free to read and share. And if you ever want a small group of parents to figure this out together, that's exactly what a onetoeight pod is.</p>
+        <div class="sig">— Brendan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESEARCH APPENDIX ============ -->
+<section class="appendix" id="research">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Appendix</div>
+      <h2>Research &amp; sources</h2>
+    </div>
+    <div class="ref reveal"><div class="rn">[1]</div><div class="rt"><b>eSafety Commissioner</b> — <em>Under the new age restrictions: Early insights from Australian parents</em> (March 2026). Pulse survey of 898 parents of children aged 8–15, six weeks after the Social Media Minimum Age law took effect on 10 December 2025. Source of the pre/post account-ownership figures and the 67% "not yet asked to verify" finding.<span class="rm"><a href="https://www.esafety.gov.au/research/under-the-new-age-restrictions-early-insights-from-australian-parents" target="_blank">esafety.gov.au/research/under-the-new-age-restrictions…</a></span></div></div>
+    <div class="ref reveal" data-d="1"><div class="rn">[2]</div><div class="rt"><b>eSafety Commissioner</b> — <em>Balancing risk and reward: Parenting in the digital world</em> (Keeping Kids Safe Online survey, Dec 2024–Feb 2025). Nationally representative survey of 3,454 children aged 10–17 and a parent/carer. Source of the digital-parenting figures (92% rules, 93% talk, 58% struggle, 8% sextortion, 11% generative AI, 26% algorithmic influence).<span class="rm"><a href="https://www.esafety.gov.au/research/the-online-experiences-of-children-in-australia/balancing-risk-and-reward-parenting-in-the-digital-world" target="_blank">esafety.gov.au/research/…/balancing-risk-and-reward…</a></span></div></div>
+    <div class="ref reveal" data-d="2"><div class="rn">[3]</div><div class="rt"><b>Online Safety Amendment (Social Media Minimum Age) Act</b> — Australia's world-first law requiring age-restricted platforms (Facebook, Instagram, Snapchat, TikTok, YouTube, Reddit, X, Threads, Kick, Twitch) to prevent under-16 accounts, effective 10 December 2025.<span class="rm"><a href="https://www.esafety.gov.au/key-topics/social-media-age-restrictions" target="_blank">esafety.gov.au/key-topics/social-media-age-restrictions</a></span></div></div>
+    <div class="honest reveal" data-d="3"><b>A note on honesty:</b> The figures above are drawn from the two eSafety reports cited, which are the most current national Australian data on this topic. They are parent-reported and cross-sectional, so they reflect perceptions at a point in time rather than objective observation — eSafety flags this as a limitation. The outcomes listed in Part Five are the intended aims of the onetoeight program, not measured results; we will publish real outcome data as pods complete. The ban figures describe account ownership, not total screen time — kids whose accounts were removed often moved to other platforms or games.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="fbrand">one <em>to</em> eight</div>
+  <p>An eight-week formation program for a screen-born generation. Free, local-first, no account required.</p>
+  <p style="margin-top:.6rem"><a href="hub/">Resource Hub</a> · <a href="https://lucid-waffle-d75r.here.now/drafts/circles-app/index.html">The App</a> · <a href="https://devoted-valley-34cr.here.now/onetoeight/guide-eight-v3.html">The Guide</a></p>
+</footer>
+
+<script>
+// starfield
+(function(){
+  var s=document.getElementById('stars'),n=90,i,el;
+  for(i=0;i<n;i++){el=document.createElement('span');el.className='star';
+    el.style.left=(Math.random()*100)+'%';el.style.top=(Math.random()*100)+'%';
+    el.style.setProperty('--tw',(2+Math.random()*4).toFixed(2)+'s');
+    el.style.animationDelay=(Math.random()*4).toFixed(2)+'s';
+    var sz=(Math.random()<.85?2:3);el.style.width=sz+'px';el.style.height=sz+'px';
+    s.appendChild(el);}
+})();
+
+// reveal + counters + bars
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    // counters
+    e.target.querySelectorAll('[data-count]').forEach(function(c){
+      if(c.dataset.done)return;c.dataset.done=1;
+      var end=+c.dataset.count,t0=null;
+      function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1300,1);
+        p=1-Math.pow(1-p,3);c.textContent=Math.round(end*p);
+        if(p<1)requestAnimationFrame(step);else c.textContent=end;}
+      requestAnimationFrame(step);
+    });
+    // bars
+    e.target.querySelectorAll('.bar-fill').forEach(function(b){
+      if(b.dataset.done)return;b.dataset.done=1;
+      setTimeout(function(){b.style.width=b.dataset.w+'%';},150);
+    });
+    io.unobserve(e.target);
+  });
+},{threshold:.25});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+</body>
+</html>
