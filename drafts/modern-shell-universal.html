@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F5F0E8">
+<title>onetoeight modern shell · Universal Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --terracotta:#A46447; --almond:#CEB59E; --sage:#88937B; --umber:#4C362D;
+  --linen:#E8E1D5; --cream:#F5F0E8; --ink:#2a2520; --muted:#7a6657;
+  --card:#fff; --line:rgba(76,54,45,.10); --shadow:0 8px 24px rgba(76,54,45,.07);
+  --accent:var(--terracotta);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --pad:.85rem;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:Inter,system-ui,sans-serif;
+  background:var(--cream); color:var(--ink); line-height:1.55;
+  overflow-x:hidden;
+}
+img,svg,video{max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button,.btn{font:inherit;border:0;cursor:pointer;max-width:100%}
+h1,h2,h3,h4,p,li,label,span,div{overflow-wrap:anywhere;word-break:break-word}
+
+/* HUD: stacks cleanly on narrow phones */
+.hud{
+  position:sticky;top:0;z-index:50;
+  background:rgba(245,240,232,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  padding:.55rem var(--pad);
+  width:100%;
+}
+.hud-row{
+  max-width:920px;margin:0 auto;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:.5rem; align-items:center;
+  width:100%;
+}
+.brand{font-family:Fraunces,serif;font-weight:600;font-size:1rem;color:var(--umber);white-space:nowrap}
+.brand em{color:var(--terracotta);font-style:italic;font-weight:400}
+.hud-mid{min-width:0;max-width:100%}
+.hud-kicker{font-size:.62rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--sage);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hud-title{font-size:.86rem;font-weight:700;color:var(--umber);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.progress{height:5px;border-radius:999px;background:rgba(76,54,45,.08);overflow:hidden;margin-top:.3rem}
+.progress>i{display:block;height:100%;width:var(--p,12%);background:linear-gradient(90deg,var(--accent),var(--sage));border-radius:inherit}
+.hud-actions{display:flex;gap:.35rem;flex-shrink:0}
+.chip{border-radius:999px;padding:.38rem .58rem;font-size:.68rem;font-weight:800;background:#fff;border:1px solid var(--line);color:var(--umber);white-space:nowrap}
+.chip.solid{background:var(--accent);color:#fff;border-color:transparent}
+@media(max-width:420px){
+  .hud-row{grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"brand actions" "mid mid"}
+  .brand{grid-area:brand}
+  .hud-actions{grid-area:actions}
+  .hud-mid{grid-area:mid}
+  .chip.edition-chip{display:none}
+}
+
+.wrap{max-width:920px;margin:0 auto;padding:0.85rem var(--pad) 6.6rem;width:100%}
+.demo{
+  width:100%; margin:0 0 .85rem; padding:.7rem .8rem; border-radius:14px; background:#fff;
+  border:1px dashed rgba(164,100,71,.35); color:var(--muted); font-size:.84rem;
+}
+.demo strong{color:var(--umber)}
+
+.hero{display:grid;gap:.75rem;margin:0 0 1rem;width:100%}
+.hero-main,.hero-side,.card{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);
+  width:100%; max-width:100%; min-width:0;
+}
+.hero-main{padding:1rem .95rem;position:relative;overflow:hidden}
+.edition{display:inline-flex;font-size:.68rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);background:rgba(164,100,71,.12);padding:.3rem .55rem;border-radius:999px}
+.hero h1{font-family:Fraunces,serif;font-weight:500;font-size:clamp(1.45rem,6.2vw,2.15rem);line-height:1.14;color:var(--umber);margin:.6rem 0 .45rem}
+.lede{color:var(--muted);font-size:.94rem;max-width:40ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.85rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:.68rem .9rem;font-weight:800;font-size:.84rem}
+.btn.primary{background:var(--umber);color:#fff}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--umber)}
+.btn.soft{background:rgba(164,100,71,.12);color:var(--umber)}
+.hero-side{padding:.9rem;display:grid;gap:.55rem}
+.metric{display:flex;justify-content:space-between;gap:.7rem;align-items:baseline}
+.metric strong{font-family:Fraunces,serif;font-size:1.35rem;color:var(--accent);font-weight:500}
+.metric span{color:var(--muted);font-size:.8rem;text-align:right}
+.mini-note{font-size:.78rem;color:var(--muted)}
+
+.lane-label{font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);margin:.2rem 0 .45rem}
+/* IMPORTANT: fixed width cards, not percentage of viewport that overflows parent */
+.scroller{
+  display:flex; gap:.5rem; overflow-x:auto; overflow-y:hidden;
+  width:100%; max-width:100%;
+  padding:0 0 .4rem; margin:0 0 .4rem;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+}
+.scroller::-webkit-scrollbar{display:none}
+.ess-pill{
+  flex:0 0 128px; width:128px; max-width:75vw;
+  scroll-snap-align:start; border-radius:16px; padding:.75rem .7rem;
+  border:1px solid var(--line); background:#fff; min-height:86px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  text-align:left;
+}
+.ess-pill .n{font-family:Fraunces,serif;font-size:1.35rem;color:var(--accent);line-height:1}
+.ess-pill .t{font-size:.8rem;font-weight:800;color:var(--umber);margin-top:.3rem}
+.ess-pill .s{font-size:.7rem;color:var(--muted)}
+.ess-pill.active{box-shadow:inset 0 0 0 2px var(--accent); background:#fffaf6}
+
+.chapter{display:none;width:100%;max-width:100%;min-width:0}
+.chapter.active{display:block}
+.chapter-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.65rem;align-items:end;margin:.55rem 0 .7rem;width:100%}
+.num{font-family:Fraunces,serif;font-size:clamp(2.6rem,14vw,4rem);line-height:.85;color:var(--accent);letter-spacing:-.04em}
+.chapter-head h2{font-family:Fraunces,serif;font-weight:500;font-size:clamp(1.25rem,5.4vw,1.75rem);color:var(--umber);line-height:1.15;margin:0}
+.chapter-head p{color:var(--muted);font-size:.86rem;margin:.2rem 0 0}
+
+.stack{display:grid;gap:.65rem;width:100%;min-width:0}
+.card{padding:.9rem .9rem .95rem; border-left:4px solid var(--accent); min-width:0}
+.card.soft{border-left-color:var(--sage)}
+.card.dark{border-left-color:var(--umber)}
+.card .k{font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);margin-bottom:.3rem}
+.card h3{font-family:Fraunces,serif;font-weight:500;font-size:1.05rem;color:var(--umber);margin:0 0 .35rem}
+.card p{margin:.35rem 0;font-size:.93rem}
+.card ul,.card ol{margin:.35rem 0 .15rem 1.05rem;padding:0;font-size:.91rem}
+.card li{margin:.25rem 0}
+.more{margin-top:.55rem;padding-top:.55rem;border-top:1px solid var(--line)}
+.more summary{cursor:pointer;font-weight:800;font-size:.82rem;color:var(--umber);list-style:none}
+.more summary::-webkit-details-marker{display:none}
+.more[open] summary{margin-bottom:.4rem}
+.more p,.more li{color:var(--ink)}
+
+.tickets{display:grid;gap:.5rem;width:100%}
+.ticket{border-radius:16px;padding:.75rem .8rem;background:#fffaf6;border:1px solid var(--line);min-width:0}
+.ticket .top{display:flex;justify-content:space-between;gap:.45rem;align-items:center;flex-wrap:wrap}
+.tag{font-size:.64rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:var(--umber);color:#fff;border-radius:999px;padding:.25rem .45rem}
+.meta{font-size:.7rem;color:var(--muted);font-weight:700}
+.ticket h4{font-size:.92rem;color:var(--umber);margin:.35rem 0 .2rem}
+.ticket p{font-size:.84rem;margin:0;line-height:1.45}
+@media(min-width:700px){.tickets{grid-template-columns:1fr 1fr}}
+
+.days{
+  display:flex; gap:.5rem; overflow-x:auto; width:100%; max-width:100%;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding-bottom:.2rem;
+}
+.day{
+  flex:0 0 min(240px, 82vw); width:min(240px,82vw);
+  scroll-snap-align:start; border-radius:14px; background:#fff; border:1px solid var(--line);
+  padding:.7rem; min-height:118px;
+}
+.day b{display:block;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);margin-bottom:.3rem}
+.day p{font-family:Fraunces,serif;font-style:italic;color:var(--muted);font-size:.88rem;line-height:1.35;margin:0}
+.day span{display:block;margin-top:.4rem;font-size:.7rem;color:var(--umber);font-weight:800}
+
+.check-list{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.check-list li{display:flex;gap:.55rem;align-items:flex-start;padding:.65rem .7rem;border-radius:12px;background:#fff;border:1px solid var(--line);min-width:0}
+.check-list input{margin-top:.15rem;accent-color:var(--accent);flex:0 0 auto}
+.check-list label{font-size:.88rem;min-width:0}
+
+.take{
+  border-radius:18px;padding:.9rem;color:#fff;
+  background:linear-gradient(135deg,#4C362D,#A46447);
+  box-shadow:var(--shadow); width:100%;
+}
+.take .k{opacity:.85;font-size:.66rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.take p{font-family:Fraunces,serif;font-size:clamp(1rem,4.5vw,1.15rem);line-height:1.25;margin:.3rem 0 0}
+.take .sub{opacity:.88;font-size:.76rem;margin-top:.4rem}
+
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;width:100%;
+  padding:.5rem var(--pad) calc(.5rem + var(--safe-bottom));
+  background:rgba(245,240,232,.96); border-top:1px solid var(--line);
+}
+.dock-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;width:100%}
+.dock .btn{width:100%;padding:.72rem .25rem;font-size:.78rem}
+
+.foot{margin-top:1.1rem;color:var(--muted);font-size:.75rem}
+
+#toast{
+  position:fixed;left:50%;bottom:86px;transform:translateX(-50%);
+  background:#4C362D;color:#fff;padding:.65rem .9rem;border-radius:999px;
+  font-size:.8rem;font-weight:700;z-index:80;max-width:min(92vw,420px);text-align:center;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+
+@media(min-width:820px){
+  .hero{grid-template-columns:1.25fr .75fr}
+  .ess-pill{flex-basis:140px}
+}
+
+:root{--accent:#88937B;}
+</style>
+</head>
+<body>
+<header class="hud">
+  <div class="hud-row">
+    <div class="brand">one <em>to</em> eight</div>
+    <div class="hud-mid">
+      <div class="hud-kicker">Expanded modern shell · Universal</div>
+      <div class="hud-title" id="hudTitle">01 · Silence</div>
+      <div class="progress" aria-hidden="true"><i id="hudBar" style="--p:12.5%"></i></div>
+    </div>
+    <div class="hud-actions">
+      <span class="chip edition-chip">UNIVERSAL</span>
+      <button class="chip solid" type="button" onclick="nextChapter()">Next</button>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <div class="demo"><strong>Expanded + mobile-fixed presentation pass.</strong> Overflow passes locked: 100% width constraints, fixed carousel sizes, collapsing HUD, no page-level horizontal scroll.</div>
+  <section class="hero">
+    <div class="hero-main">
+      <div class="edition">Universal Edition</div>
+      <h1>Eight essentials. Phone-first. Filled out. Built so width never fights your screen.</h1>
+      <p class="lede">Fuller content from the guide spine, delivered as phone-first cards, with mobile overflow hard-fixed.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#picker">Start Essential 01</a>
+        <button class="btn ghost" type="button" onclick="toast('Discuss mode: use the Talk card + share your screen')">Discuss tips</button>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="metric"><strong>8</strong><span>carded essentials</span></div>
+      <div class="metric"><strong>Grow</strong><span>inside Skills</span></div>
+      <div class="metric"><strong>0</strong><span>em dashes</span></div>
+      <p class="mini-note">Overflow fixes: full-width constraints, safer HUD on narrow phones, fixed-size carousels, ticket grids that collapse cleanly, no horizontal page drag.</p>
+    </div>
+  </section>
+
+  <div class="lane-label" id="picker">Jump essentials</div>
+  <div class="scroller" id="essScroller"><button class="ess-pill active" type="button" data-i="0" aria-label="Essential 01 Silence"><div class="n">01</div><div class="t">Silence</div><div class="s">14 min</div></button><button class="ess-pill" type="button" data-i="1" aria-label="Essential 02 Body"><div class="n">02</div><div class="t">Body</div><div class="s">15 min</div></button><button class="ess-pill" type="button" data-i="2" aria-label="Essential 03 Skills"><div class="n">03</div><div class="t">Skills</div><div class="s">16 min</div></button><button class="ess-pill" type="button" data-i="3" aria-label="Essential 04 Digital"><div class="n">04</div><div class="t">Digital</div><div class="s">14 min</div></button><button class="ess-pill" type="button" data-i="4" aria-label="Essential 05 Community"><div class="n">05</div><div class="t">Community</div><div class="s">13 min</div></button><button class="ess-pill" type="button" data-i="5" aria-label="Essential 06 Knowledge"><div class="n">06</div><div class="t">Knowledge</div><div class="s">13 min</div></button><button class="ess-pill" type="button" data-i="6" aria-label="Essential 07 Nature"><div class="n">07</div><div class="t">Nature</div><div class="s">12 min</div></button><button class="ess-pill" type="button" data-i="7" aria-label="Essential 08 Convictions"><div class="n">08</div><div class="t">Convictions</div><div class="s">17 min</div></button></div>
+  
+<section class="chapter active" id="ch1" data-accent="#88937B" data-title="Silence" data-num="01">
+  <div class="chapter-head">
+    <div class="num">01</div>
+    <div>
+      <h2>Silence</h2>
+      <p>Stillness as a superpower, not a mood · 14 min</p>
+    </div>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <div class="k">Cover</div>
+      <h3>Recover attention. Create space between stimulus and response.</h3>
+      <p>Carded delivery of the same essential. Start with the story, move to practice, finish with action.</p>
+      <div class="cta-row">
+        <a class="btn soft" href="#act-ch1">Do this week</a>
+        <a class="btn ghost" href="#talk-ch1">Discuss</a>
+        <a class="btn primary" href="#done-ch1">Checklist</a>
+      </div>
+    </div>
+    <div class="card soft">
+      <div class="k">01 · Story</div>
+      <h3>The scene</h3>
+      <p>He could not do ten minutes. Phone in another room. Just sit. Within ninety seconds his knee bounced. At three minutes he checked the kettle. At five he took the phone back, just to check the time. By seven he was scrolling. He was not unusually weak. He was normally trained by constant stimulation.</p>
+    </div>
+    <div class="card">
+      <div class="k">02 · Why it matters</div>
+      <h3>Keep this in your pocket</h3>
+      <ul><li>Silence is not emptiness. It is recovery space for attention, emotion, creativity, and honest self-awareness.</li><li>If you cannot sit still, deep work, prayerful reflection, patience, and freedom from manipulation all get harder.</li><li>In a century designed for permanent stimulus, silence is training, not nostalgia.</li></ul>
+      <details class="more"><summary>Go deeper from the original guide</summary><p>What&#x27;s working against you: reward-engineered phones, endless audio, feeds that treat boredom as failure, and a nervous system expecting novelty every few seconds.</p><p>What silence does: lowers threat scanning, finishes unfinished thoughts, and creates a gap between impulse and action. That is why it feels hard. You meet what you have been postponing.</p><p>Architecture of distraction is not random. Notifications, autoplay, and always-on chat erase natural edges. If you do not build edges, other people&#x27;s urgency runs your day.</p></details>
+    </div>
+    <div class="card">
+      <div class="k">03 · Practice</div>
+      <h3>Small enough to start</h3>
+      <ol><li>Start with 3 minutes, not 30.</li><li>Phone in another room, not face down beside you.</li><li>Sit, walk slowly, or stare out a window. Stillness is the point, not a perfect technique.</li><li>When the urge to escape arrives, name it, then stay one more minute.</li><li>One daily quiet block before media.</li></ol>
+    </div>
+    <div class="card" id="act-ch1">
+      <div class="k">04 · This week</div>
+      <h3>Action tickets</h3>
+      <div class="tickets"><div class="ticket"><div class="top"><span class="tag">Level 1</span><span class="meta">8 min/day · Solo</span></div><h4>Level 1</h4><p>Three minutes of no-phone stillness each morning for seven days. Track it.</p></div><div class="ticket"><div class="top"><span class="tag">Level 2</span><span class="meta">30 min · Solo</span></div><h4>Level 2</h4><p>One walk this week with nothing in your ears and phone on Do Not Disturb.</p></div><div class="ticket"><div class="top"><span class="tag">Level 3</span><span class="meta">45 min · Solo</span></div><h4>Level 3</h4><p>A silent half hour alone. Journal the first wave of restlessness and what comes after.</p></div></div>
+    </div>
+    <div class="card soft" id="talk-ch1">
+      <div class="k">05 · Talk</div>
+      <h3>Best questions</h3>
+      <ol><li>When was the last time you sat without stimulation for ten minutes? What happened?</li><li>What do you reach for first when quiet arrives?</li><li>Which is harder: silence alone, or social silence where you do not fill the air?</li><li>What would improve if your attention spanned thirty minutes instead of thirty seconds?</li></ol>
+    </div>
+    <div class="card">
+      <div class="k">06 · Wisdom</div>
+      <h3>One line a day</h3>
+      <div class="days"><div class="day"><b>Day 1</b><p>Almost everything will work again if you unplug it for a few minutes, including you.</p><span>Anne Lamott</span></div><div class="day"><b>Day 2</b><p>Silence is a source of great strength.</p><span>Lao Tzu</span></div><div class="day"><b>Day 3</b><p>Within you there is a stillness and a sanctuary to which you can retreat at any time.</p><span>Hermann Hesse</span></div><div class="day"><b>Day 4</b><p>It is not enough to be busy. The question is: what are we busy about?</p><span>Thoreau</span></div><div class="day"><b>Day 5</b><p>Your mind will answer most questions if you learn to relax and wait for the answer.</p><span>William S. Burroughs</span></div><div class="day"><b>Day 6</b><p>Calmness is the cradle of power.</p><span>Josiah Gilbert Holland</span></div><div class="day"><b>Day 7</b><p>In pure self-observation, there is pure silence.</p><span>Krishnamurti</span></div></div>
+    </div>
+    <div class="card" id="done-ch1">
+      <div class="k">07 · Done looks like</div>
+      <h3>Checklist</h3>
+      <ul class="check-list"><li><input type="checkbox" id="ch1c1"><label for="ch1c1">I completed at least three deliberate silence sessions</label></li><li><input type="checkbox" id="ch1c2"><label for="ch1c2">I removed one default noise habit</label></li><li><input type="checkbox" id="ch1c3"><label for="ch1c3">I can name what makes stillness hard for me</label></li><li><input type="checkbox" id="ch1c4"><label for="ch1c4">I talked about this essential with someone</label></li></ul>
+    </div>
+    <div class="take">
+      <div class="k">Screenshot this</div>
+      <p>Quiet is not empty. It is where your attention comes back to you.</p>
+      <div class="sub">onetoeight · Essential 01 · Silence</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch2" data-accent="#A46447" data-title="Body" data-num="02">
+  <div class="chapter-head">
+    <div class="num">02</div>
+    <div>
+      <h2>Body</h2>
+      <p>High-value maintenance for the only body you get · 15 min</p>
+    </div>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <div class="k">Cover</div>
+      <h3>Treat your body as infrastructure, not an afterthought.</h3>
+      <p>Carded delivery of the same essential. Start with the story, move to practice, finish with action.</p>
+      <div class="cta-row">
+        <a class="btn soft" href="#act-ch2">Do this week</a>
+        <a class="btn ghost" href="#talk-ch2">Discuss</a>
+        <a class="btn primary" href="#done-ch2">Checklist</a>
+      </div>
+    </div>
+    <div class="card soft">
+      <div class="k">01 · Story</div>
+      <h3>The scene</h3>
+      <p>She could write a strong essay on mental health and still live on caffeine, late takeaways, almost no walking, and exhaustion worn as a badge. Her body was not failing dramatically. It was being deferred until crash, pain, or panic forced the issue.</p>
+    </div>
+    <div class="card">
+      <div class="k">02 · Why it matters</div>
+      <h3>Keep this in your pocket</h3>
+      <ul><li>Mood, focus, courage, patience, and capacity to care are densely physical.</li><li>A neglected body becomes an unreliable partner.</li><li>This is stewardship, not vanity culture.</li></ul>
+      <details class="more"><summary>Go deeper from the original guide</summary><p>High-value machines get serviced before they fail: sleep, real food, water, movement, hygiene.</p><p>Guarding the gates: substances, pornography, junk content, energy drinks, all-night gaming. Boundaries protect capacity.</p><p>Ownership: no one else can sleep for you. Admit what your body can sustain, not what the group chat celebrates.</p></details>
+    </div>
+    <div class="card">
+      <div class="k">03 · Practice</div>
+      <h3>Small enough to start</h3>
+      <ol><li>Protect a sleep window</li><li>Cook more from ingredients, less from packaging</li><li>Move enough to raise heart rate and load muscles</li><li>Choose one gate and guard it for two weeks</li></ol>
+    </div>
+    <div class="card" id="act-ch2">
+      <div class="k">04 · This week</div>
+      <h3>Action tickets</h3>
+      <div class="tickets"><div class="ticket"><div class="top"><span class="tag">Level 1</span><span class="meta">Nightly · Solo</span></div><h4>Level 1</h4><p>Consistent sleep window for seven nights.</p></div><div class="ticket"><div class="top"><span class="tag">Level 2</span><span class="meta">3 meals · Solo</span></div><h4>Level 2</h4><p>Cook three real meals from ingredients.</p></div><div class="ticket"><div class="top"><span class="tag">Level 3</span><span class="meta">2 weeks · Solo</span></div><h4>Level 3</h4><p>Guard one leak: screens late night, porn, energy drinks, or substances. Track mood and focus.</p></div></div>
+    </div>
+    <div class="card soft" id="talk-ch2">
+      <div class="k">05 · Talk</div>
+      <h3>Best questions</h3>
+      <ol><li>Where are you running deferred maintenance?</li><li>Which boundary would actually change your capacity this month?</li><li>Who benefits from your exhaustion?</li><li>If you trained your body as something valuable, what changes first?</li></ol>
+    </div>
+    <div class="card">
+      <div class="k">06 · Wisdom</div>
+      <h3>One line a day</h3>
+      <div class="days"><div class="day"><b>Day 1</b><p>Take care of your body. It is the only place you have to live.</p><span>Jim Rohn</span></div><div class="day"><b>Day 2</b><p>Discipline is choosing between what you want now and what you want most.</p><span>Attributed</span></div><div class="day"><b>Day 3</b><p>The groundwork for all happiness is good health.</p><span>Leigh Hunt</span></div><div class="day"><b>Day 4</b><p>Sleep is the best meditation.</p><span>Dalai Lama</span></div><div class="day"><b>Day 5</b><p>Movement is a medicine for body and mind.</p><span>Carol Welch</span></div><div class="day"><b>Day 6</b><p>Respect your body. It is the instrument for this whole assignment.</p><span>Field rule</span></div><div class="day"><b>Day 7</b><p>A fit body, a calm mind, a house full of love cannot merely be bought.</p><span>Naval Ravikant</span></div></div>
+    </div>
+    <div class="card" id="done-ch2">
+      <div class="k">07 · Done looks like</div>
+      <h3>Checklist</h3>
+      <ul class="check-list"><li><input type="checkbox" id="ch2c1"><label for="ch2c1">I know my sleep and food pattern honestly</label></li><li><input type="checkbox" id="ch2c2"><label for="ch2c2">I set one clear bodily boundary</label></li><li><input type="checkbox" id="ch2c3"><label for="ch2c3">I completed at least one challenge</label></li><li><input type="checkbox" id="ch2c4"><label for="ch2c4">I can explain why neglect is not neutral</label></li></ul>
+    </div>
+    <div class="take">
+      <div class="k">Screenshot this</div>
+      <p>Your body is not expendable. It is the platform for everything else.</p>
+      <div class="sub">onetoeight · Essential 02 · Body</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch3" data-accent="#4C362D" data-title="Skills" data-num="03">
+  <div class="chapter-head">
+    <div class="num">03</div>
+    <div>
+      <h2>Skills</h2>
+      <p>Feed, fix, build, grow, finance · 16 min</p>
+    </div>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <div class="k">Cover</div>
+      <h3>Quiet competence beats online cleverness.</h3>
+      <p>Carded delivery of the same essential. Start with the story, move to practice, finish with action.</p>
+      <div class="cta-row">
+        <a class="btn soft" href="#act-ch3">Do this week</a>
+        <a class="btn ghost" href="#talk-ch3">Discuss</a>
+        <a class="btn primary" href="#done-ch3">Checklist</a>
+      </div>
+    </div>
+    <div class="card soft">
+      <div class="k">01 · Story</div>
+      <h3>The scene</h3>
+      <p>He could drive five apps at once. When the sink leaked he filmed it. When rent night arrived early he panicked. When a shelf needed mounting he paid someone for a thirty minute job. Clever online, fragile offline.</p>
+    </div>
+    <div class="card">
+      <div class="k">02 · Why it matters</div>
+      <h3>Keep this in your pocket</h3>
+      <ul><li>Skills create people who can look after themselves and be useful to others.</li><li>Visibility culture rewards performance. Life rewards readiness.</li><li>Grow belongs with the core set: patience, seasons, provision, care.</li></ul>
+      <details class="more"><summary>Go deeper from the original guide</summary><p>Five categories: Feed, Fix, Build, Grow, Finance.</p><p>Feed: cook from base, batch, reduce dependence on expensive convenience.</p><p>Fix: basic household competence and the dignity of not being helpless.</p><p>Build: planning, patience, making something real.</p><p>Grow: windowsill herbs, sprouts, waste-to-compost awareness, one plant kept alive.</p><p>Finance: budget, delay, debt awareness, emergency buffer.</p></details>
+    </div>
+    <div class="card">
+      <div class="k">03 · Practice</div>
+      <h3>Small enough to start</h3>
+      <ol><li>Cook one full meal from scratch</li><li>Complete one repair or maintenance task</li><li>Start one edible grow project for 30 days</li><li>Write a budget simple enough to keep</li></ol>
+    </div>
+    <div class="card" id="act-ch3">
+      <div class="k">04 · This week</div>
+      <h3>Action tickets</h3>
+      <div class="tickets"><div class="ticket"><div class="top"><span class="tag">Level 1</span><span class="meta">1 meal · Solo/share</span></div><h4>Level 1</h4><p>Cook one full meal from base ingredients.</p></div><div class="ticket"><div class="top"><span class="tag">Level 2</span><span class="meta">1 hour · Solo</span></div><h4>Level 2</h4><p>One household fix or maintenance task.</p></div><div class="ticket"><div class="top"><span class="tag">Level 3</span><span class="meta">30 days · Solo</span></div><h4>Level 3</h4><p>Grow herbs or salad leaves. Keep them alive.</p></div><div class="ticket"><div class="top"><span class="tag">Level 4</span><span class="meta">4 weeks · Solo</span></div><h4>Level 4</h4><p>Live inside a simple written budget.</p></div><div class="ticket"><div class="top"><span class="tag">Stretch</span><span class="meta">Ongoing · Any</span></div><h4>Stretch</h4><p>Tiny grow system: compost scraps, succession, or share produce.</p></div></div>
+    </div>
+    <div class="card soft" id="talk-ch3">
+      <div class="k">05 · Talk</div>
+      <h3>Best questions</h3>
+      <ol><li>Which of the five categories is weakest right now?</li><li>What skill would raise your independence most this year?</li><li>Where do you outsource from fear, not efficiency?</li><li>Who could teach you one skill if you asked without embarrassment?</li></ol>
+    </div>
+    <div class="card">
+      <div class="k">06 · Wisdom</div>
+      <h3>One line a day</h3>
+      <div class="days"><div class="day"><b>Day 1</b><p>Go to the ant... consider its ways and be wise.</p><span>Ancient proverb</span></div><div class="day"><b>Day 2</b><p>Do what you can, with what you have, where you are.</p><span>Theodore Roosevelt</span></div><div class="day"><b>Day 3</b><p>Beware of little expenses; a small leak will sink a great ship.</p><span>Benjamin Franklin</span></div><div class="day"><b>Day 4</b><p>The master has failed more times than the beginner has even tried.</p><span>Stephen McCranie</span></div><div class="day"><b>Day 5</b><p>Skill unites experience, intellect, and passion.</p><span>John Ruskin</span></div><div class="day"><b>Day 6</b><p>All hard work brings a profit.</p><span>Proverbial wisdom</span></div><div class="day"><b>Day 7</b><p>Produce more than you consume in at least one part of life.</p><span>Formation rule</span></div></div>
+    </div>
+    <div class="card" id="done-ch3">
+      <div class="k">07 · Done looks like</div>
+      <h3>Checklist</h3>
+      <ul class="check-list"><li><input type="checkbox" id="ch3c1"><label for="ch3c1">I named my weakest skill category</label></li><li><input type="checkbox" id="ch3c2"><label for="ch3c2">I learned one concrete skill this week</label></li><li><input type="checkbox" id="ch3c3"><label for="ch3c3">I reduced one unnecessary paid dependency</label></li><li><input type="checkbox" id="ch3c4"><label for="ch3c4">I can help someone with one practical thing</label></li></ul>
+    </div>
+    <div class="take">
+      <div class="k">Screenshot this</div>
+      <p>Competence is freedom you can share.</p>
+      <div class="sub">onetoeight · Essential 03 · Skills</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch4" data-accent="#4C362D" data-title="Digital" data-num="04">
+  <div class="chapter-head">
+    <div class="num">04</div>
+    <div>
+      <h2>Digital</h2>
+      <p>Agency when attention is the product · 14 min</p>
+    </div>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <div class="k">Cover</div>
+      <h3>Take back privacy, focus, and composure.</h3>
+      <p>Carded delivery of the same essential. Start with the story, move to practice, finish with action.</p>
+      <div class="cta-row">
+        <a class="btn soft" href="#act-ch4">Do this week</a>
+        <a class="btn ghost" href="#talk-ch4">Discuss</a>
+        <a class="btn primary" href="#done-ch4">Checklist</a>
+      </div>
+    </div>
+    <div class="card soft">
+      <div class="k">01 · Story</div>
+      <h3>The scene</h3>
+      <p>She thought she was careful. Strong password, used twice. Location on for convenience. Free quiz apps. AI chat at 1am. Then a deepfake joke landed and she could not sleep.</p>
+    </div>
+    <div class="card">
+      <div class="k">02 · Why it matters</div>
+      <h3>Keep this in your pocket</h3>
+      <ul><li>Your phone maps pressure points as much as plans.</li><li>Free often means you are the product.</li><li>Resilience after a hit matters as much as prevention.</li></ul>
+      <details class="more"><summary>Go deeper from the original guide</summary><p>Fronts include surveillance economy, footprint, social profiling, AI intimacy without privacy, scams, deepfakes, pattern of life, mental load, practical defence, and post-incident recovery.</p><p>Minimum stack: password manager, MFA, least permissions, update software, verify urgency offline, schedule social rather than live inside it.</p></details>
+    </div>
+    <div class="card">
+      <div class="k">03 · Practice</div>
+      <h3>Small enough to start</h3>
+      <ol><li>Password manager + MFA on key accounts</li><li>Kill non-essential notifications</li><li>Strip permissions you do not need</li><li>Name who you would call after a scam or public hit</li></ol>
+    </div>
+    <div class="card" id="act-ch4">
+      <div class="k">04 · This week</div>
+      <h3>Action tickets</h3>
+      <div class="tickets"><div class="ticket"><div class="top"><span class="tag">Level 1</span><span class="meta">45 min · Solo</span></div><h4>Level 1</h4><p>Migrate top ten accounts to a password manager.</p></div><div class="ticket"><div class="top"><span class="tag">Level 2</span><span class="meta">20 min · Solo</span></div><h4>Level 2</h4><p>Remove one toxic or wasted app. Mute noise.</p></div><div class="ticket"><div class="top"><span class="tag">Level 3</span><span class="meta">60 min · Solo</span></div><h4>Level 3</h4><p>Full privacy and permissions pass on your phone.</p></div></div>
+    </div>
+    <div class="card soft" id="talk-ch4">
+      <div class="k">05 · Talk</div>
+      <h3>Best questions</h3>
+      <ol><li>What digital habit do you still defend even though it drains you?</li><li>If last month&#x27;s browsing were read aloud, what would embarrass you?</li><li>Where do you need convenience less than privacy or composure?</li><li>Who is your call after a digital emergency?</li></ol>
+    </div>
+    <div class="card">
+      <div class="k">06 · Wisdom</div>
+      <h3>One line a day</h3>
+      <div class="days"><div class="day"><b>Day 1</b><p>If you are not paying for the product, you are the product.</p><span>Popular caution</span></div><div class="day"><b>Day 2</b><p>We shape our tools and then our tools shape us.</p><span>After McLuhan</span></div><div class="day"><b>Day 3</b><p>Guard your attention as carefully as your money.</p><span>Field rule</span></div><div class="day"><b>Day 4</b><p>Technology is a useful servant but a dangerous master.</p><span>Christian Lous Lange</span></div><div class="day"><b>Day 5</b><p>Privacy is control over the conditions under which you are known.</p><span>Privacy ethics</span></div><div class="day"><b>Day 6</b><p>The price of convenience is often control.</p><span>Modern proverb</span></div><div class="day"><b>Day 7</b><p>Slow thinking is resistance.</p><span>Field rule</span></div></div>
+    </div>
+    <div class="card" id="done-ch4">
+      <div class="k">07 · Done looks like</div>
+      <h3>Checklist</h3>
+      <ul class="check-list"><li><input type="checkbox" id="ch4c1"><label for="ch4c1">Critical accounts have MFA</label></li><li><input type="checkbox" id="ch4c2"><label for="ch4c2">One major permission reduced</label></li><li><input type="checkbox" id="ch4c3"><label for="ch4c3">Scam response plan named</label></li><li><input type="checkbox" id="ch4c4"><label for="ch4c4">I can explain why free is rarely free</label></li></ul>
+    </div>
+    <div class="take">
+      <div class="k">Screenshot this</div>
+      <p>Your attention is finite. Treat it like money.</p>
+      <div class="sub">onetoeight · Essential 04 · Digital</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch5" data-accent="#9a7d63" data-title="Community" data-num="05">
+  <div class="chapter-head">
+    <div class="num">05</div>
+    <div>
+      <h2>Community</h2>
+      <p>People who know your name · 13 min</p>
+    </div>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <div class="k">Cover</div>
+      <h3>Build load-bearing relationships before the crisis.</h3>
+      <p>Carded delivery of the same essential. Start with the story, move to practice, finish with action.</p>
+      <div class="cta-row">
+        <a class="btn soft" href="#act-ch5">Do this week</a>
+        <a class="btn ghost" href="#talk-ch5">Discuss</a>
+        <a class="btn primary" href="#done-ch5">Checklist</a>
+      </div>
+    </div>
+    <div class="card soft">
+      <div class="k">01 · Story</div>
+      <h3>The scene</h3>
+      <p>1,400 followers. When life dropped, posting stopped. Almost nobody checked. The three who did had eaten with him, worked with him, and knew how he went quiet when he was not okay.</p>
+    </div>
+    <div class="card">
+      <div class="k">02 · Why it matters</div>
+      <h3>Keep this in your pocket</h3>
+      <ul><li>Followers amplify. Friends carry.</li><li>Isolation amplifies anxiety and distortion.</li><li>Belonging must be pre-built in ordinary weeks.</li></ul>
+      <details class="more"><summary>Go deeper from the original guide</summary><p>2am test: who can you call, who would come?</p><p>Pre-built ties: shared meals, repeated effort, honest conversation, small favours, repaired conflict.</p><p>How to build: initiate, choose rooms over threads, offer useful help, practise repair, join purpose larger than socialising.</p></details>
+    </div>
+    <div class="card">
+      <div class="k">03 · Practice</div>
+      <h3>Small enough to start</h3>
+      <ol><li>Diagnose with the 2am test</li><li>Initiate one real meet</li><li>Host something small</li><li>Repair one neglected relationship carefully</li></ol>
+    </div>
+    <div class="card" id="act-ch5">
+      <div class="k">04 · This week</div>
+      <h3>Action tickets</h3>
+      <div class="tickets"><div class="ticket"><div class="top"><span class="tag">Level 1</span><span class="meta">15 min · With someone</span></div><h4>Level 1</h4><p>Ask a real question and arrange a meet.</p></div><div class="ticket"><div class="top"><span class="tag">Level 2</span><span class="meta">2 hours · Host</span></div><h4>Level 2</h4><p>Tea, walk, meal, or game.</p></div><div class="ticket"><div class="top"><span class="tag">Level 3</span><span class="meta">Hard talk · With someone</span></div><h4>Level 3</h4><p>Repair one strained relationship with honesty.</p></div></div>
+    </div>
+    <div class="card soft" id="talk-ch5">
+      <div class="k">05 · Talk</div>
+      <h3>Best questions</h3>
+      <ol><li>Who passes your 2am test today?</li><li>Where are you broadcasting instead of belonging?</li><li>Where did you choose performance over honesty?</li><li>What group could build face-to-face ties this month?</li></ol>
+    </div>
+    <div class="card">
+      <div class="k">06 · Wisdom</div>
+      <h3>One line a day</h3>
+      <div class="days"><div class="day"><b>Day 1</b><p>Two are better than one... if either falls, one can help the other up.</p><span>Ancient wisdom</span></div><div class="day"><b>Day 2</b><p>Alone we can do so little; together we can do so much.</p><span>Helen Keller</span></div><div class="day"><b>Day 3</b><p>Belonging is stronger than fitting in.</p><span>After Brené Brown</span></div><div class="day"><b>Day 4</b><p>Friendship begins when one person says: You too?</p><span>After C.S. Lewis</span></div><div class="day"><b>Day 5</b><p>A friend knows your story and still stays.</p><span>Classic line</span></div><div class="day"><b>Day 6</b><p>We are all walking each other home.</p><span>Ram Dass</span></div><div class="day"><b>Day 7</b><p>People remember how you made them feel.</p><span>Popular wisdom</span></div></div>
+    </div>
+    <div class="card" id="done-ch5">
+      <div class="k">07 · Done looks like</div>
+      <h3>Checklist</h3>
+      <ul class="check-list"><li><input type="checkbox" id="ch5c1"><label for="ch5c1">I can name my real people</label></li><li><input type="checkbox" id="ch5c2"><label for="ch5c2">I initiated one shared experience</label></li><li><input type="checkbox" id="ch5c3"><label for="ch5c3">I offered help, not only attention</label></li><li><input type="checkbox" id="ch5c4"><label for="ch5c4">I am building community before I need it</label></li></ul>
+    </div>
+    <div class="take">
+      <div class="k">Screenshot this</div>
+      <p>Build community before you need it.</p>
+      <div class="sub">onetoeight · Essential 05 · Community</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch6" data-accent="#A46447" data-title="Knowledge" data-num="06">
+  <div class="chapter-head">
+    <div class="num">06</div>
+    <div>
+      <h2>Knowledge</h2>
+      <p>What you still know when Wi-Fi dies · 13 min</p>
+    </div>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <div class="k">Cover</div>
+      <h3>Own knowledge. Do not only rent it.</h3>
+      <p>Carded delivery of the same essential. Start with the story, move to practice, finish with action.</p>
+      <div class="cta-row">
+        <a class="btn soft" href="#act-ch6">Do this week</a>
+        <a class="btn ghost" href="#talk-ch6">Discuss</a>
+        <a class="btn primary" href="#done-ch6">Checklist</a>
+      </div>
+    </div>
+    <div class="card soft">
+      <div class="k">01 · Story</div>
+      <h3>The scene</h3>
+      <p>Signal died on a week away. No maps, no recipe apps, no cloud notes. The group found who actually knew first aid, could cook from leftovers, or calm someone without looking it up.</p>
+    </div>
+    <div class="card">
+      <div class="k">02 · Why it matters</div>
+      <h3>Keep this in your pocket</h3>
+      <ul><li>Access is not possession.</li><li>Stress reveals whether skill is real.</li><li>Backup knowledge lives in memory, muscle, judgement, and practice.</li></ul>
+      <details class="more"><summary>Go deeper from the original guide</summary><p>Rented knowledge sits on servers you do not control.</p><p>Owned knowledge survives offline and under speed pressure.</p><p>Build a backup base: contacts, offline maps, paper critical docs, practised first aid, slow learning that sticks.</p></details>
+    </div>
+    <div class="card">
+      <div class="k">03 · Practice</div>
+      <h3>Small enough to start</h3>
+      <ol><li>Memorise key contacts</li><li>Build a one-page offline life sheet</li><li>Learn one thing slowly without speedrun content</li><li>Teach one thing to someone else</li></ol>
+    </div>
+    <div class="card" id="act-ch6">
+      <div class="k">04 · This week</div>
+      <h3>Action tickets</h3>
+      <div class="tickets"><div class="ticket"><div class="top"><span class="tag">Level 1</span><span class="meta">25 min · Solo</span></div><h4>Level 1</h4><p>Memorise five key numbers and one emergency plan.</p></div><div class="ticket"><div class="top"><span class="tag">Level 2</span><span class="meta">1 session · Mentor</span></div><h4>Level 2</h4><p>Learn one skill without video shortcuts.</p></div><div class="ticket"><div class="top"><span class="tag">Level 3</span><span class="meta">1 hour · Solo</span></div><h4>Level 3</h4><p>One-page offline life sheet: contacts, meds, cash plan, home basics.</p></div></div>
+    </div>
+    <div class="card soft" id="talk-ch6">
+      <div class="k">05 · Talk</div>
+      <h3>Best questions</h3>
+      <ol><li>What important knowledge do you only rent from search?</li><li>If the internet vanished for a month, how capable would you remain?</li><li>What should be in your head if you must help someone tonight?</li><li>What deserves slow learning this season?</li></ol>
+    </div>
+    <div class="card">
+      <div class="k">06 · Wisdom</div>
+      <h3>One line a day</h3>
+      <div class="days"><div class="day"><b>Day 1</b><p>I hear and I forget. I see and I remember. I do and I understand.</p><span>Classic insight</span></div><div class="day"><b>Day 2</b><p>An investment in knowledge pays the best interest.</p><span>Benjamin Franklin</span></div><div class="day"><b>Day 3</b><p>We fall to the level of our training.</p><span>Training proverb</span></div><div class="day"><b>Day 4</b><p>Learning without thought is labour lost.</p><span>Confucius</span></div><div class="day"><b>Day 5</b><p>Tell me and I forget; involve me and I learn.</p><span>Often retold</span></div><div class="day"><b>Day 6</b><p>Own a few important things deeply rather than sampling everything shallowly.</p><span>Formation rule</span></div><div class="day"><b>Day 7</b><p>Knowledge is remembered practice, not only open tabs.</p><span>Field rule</span></div></div>
+    </div>
+    <div class="card" id="done-ch6">
+      <div class="k">07 · Done looks like</div>
+      <h3>Checklist</h3>
+      <ul class="check-list"><li><input type="checkbox" id="ch6c1"><label for="ch6c1">I distinguished owned vs rented knowledge</label></li><li><input type="checkbox" id="ch6c2"><label for="ch6c2">I offline-stored something important</label></li><li><input type="checkbox" id="ch6c3"><label for="ch6c3">I practised retrieval, not only browsing</label></li><li><input type="checkbox" id="ch6c4"><label for="ch6c4">I taught one thing</label></li></ul>
+    </div>
+    <div class="take">
+      <div class="k">Screenshot this</div>
+      <p>If the signal dies, what still belongs to you?</p>
+      <div class="sub">onetoeight · Essential 06 · Knowledge</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch7" data-accent="#88937B" data-title="Nature" data-num="07">
+  <div class="chapter-head">
+    <div class="num">07</div>
+    <div>
+      <h2>Nature</h2>
+      <p>The original therapy · 12 min</p>
+    </div>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <div class="k">Cover</div>
+      <h3>Sunlight, soil, and scale restore what screens empty.</h3>
+      <p>Carded delivery of the same essential. Start with the story, move to practice, finish with action.</p>
+      <div class="cta-row">
+        <a class="btn soft" href="#act-ch7">Do this week</a>
+        <a class="btn ghost" href="#talk-ch7">Discuss</a>
+        <a class="btn primary" href="#done-ch7">Checklist</a>
+      </div>
+    </div>
+    <div class="card soft">
+      <div class="k">01 · Story</div>
+      <h3>The scene</h3>
+      <p>Another productivity system. Another meditation app. Mood still flat, sleep still broken. A full day outside with no headphones, long walking, lunch on a wall in the sun, feet on grass. Nothing mystical. He just felt human again.</p>
+    </div>
+    <div class="card">
+      <div class="k">02 · Why it matters</div>
+      <h3>Keep this in your pocket</h3>
+      <ul><li>Outdoor light and movement renegotiate stress chemistry.</li><li>Nature restores scale: you are not the whole scene.</li><li>Seasons reintroduce patience after infinite feed-time.</li></ul>
+      <details class="more"><summary>Go deeper from the original guide</summary><p>Medicine: parks, water, hills, rain, wind that is not air-conditioning.</p><p>Sunlight and soil teach cadence: grow, wait, fruit, rest.</p><p>Indoor epidemic: bed-screen-chair-screen loops leave you entertained and poorly rooted.</p></details>
+    </div>
+    <div class="card">
+      <div class="k">03 · Practice</div>
+      <h3>Small enough to start</h3>
+      <ol><li>Morning outdoor light</li><li>One longer weekly outing</li><li>Leave headphones behind on some walks</li><li>Grow something, even tiny</li></ol>
+    </div>
+    <div class="card" id="act-ch7">
+      <div class="k">04 · This week</div>
+      <h3>Action tickets</h3>
+      <div class="tickets"><div class="ticket"><div class="top"><span class="tag">Level 1</span><span class="meta">10 min/day · Solo</span></div><h4>Level 1</h4><p>Outdoor minutes, no headphones, for seven days.</p></div><div class="ticket"><div class="top"><span class="tag">Level 2</span><span class="meta">2 hours · Any</span></div><h4>Level 2</h4><p>One longer outdoor block.</p></div><div class="ticket"><div class="top"><span class="tag">Level 3</span><span class="meta">1 day · Any</span></div><h4>Level 3</h4><p>Mostly outdoors: walk, park, hills, water.</p></div></div>
+    </div>
+    <div class="card soft" id="talk-ch7">
+      <div class="k">05 · Talk</div>
+      <h3>Best questions</h3>
+      <ol><li>What natural place restores you fastest?</li><li>What indoor habit is crowding outdoor recovery?</li><li>How would you redesign one afternoon around place, not content?</li><li>What changes in your mind after twenty outdoor minutes?</li></ol>
+    </div>
+    <div class="card">
+      <div class="k">06 · Wisdom</div>
+      <h3>One line a day</h3>
+      <div class="days"><div class="day"><b>Day 1</b><p>In every walk with nature one receives far more than he seeks.</p><span>John Muir</span></div><div class="day"><b>Day 2</b><p>Adopt the pace of nature: her secret is patience.</p><span>Emerson</span></div><div class="day"><b>Day 3</b><p>Look deep into nature, and then you will understand everything better.</p><span>Einstein</span></div><div class="day"><b>Day 4</b><p>Nature does not hurry, yet everything is accomplished.</p><span>Lao Tzu</span></div><div class="day"><b>Day 5</b><p>An early-morning walk is a blessing for the whole day.</p><span>Thoreau</span></div><div class="day"><b>Day 6</b><p>Those who contemplate the beauty of the earth find reserves of strength.</p><span>Rachel Carson</span></div><div class="day"><b>Day 7</b><p>Leave the road, take the trails.</p><span>Associated proverb</span></div></div>
+    </div>
+    <div class="card" id="done-ch7">
+      <div class="k">07 · Done looks like</div>
+      <h3>Checklist</h3>
+      <ul class="check-list"><li><input type="checkbox" id="ch7c1"><label for="ch7c1">Outdoor minutes logged</label></li><li><input type="checkbox" id="ch7c2"><label for="ch7c2">One longer outing done</label></li><li><input type="checkbox" id="ch7c3"><label for="ch7c3">Noticed mood or sleep shifts</label></li><li><input type="checkbox" id="ch7c4"><label for="ch7c4">Identified an indoor habit to displace</label></li></ul>
+    </div>
+    <div class="take">
+      <div class="k">Screenshot this</div>
+      <p>Go outside before you optimise further.</p>
+      <div class="sub">onetoeight · Essential 07 · Nature</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch8" data-accent="#4C362D" data-title="Convictions" data-num="08">
+  <div class="chapter-head">
+    <div class="num">08</div>
+    <div>
+      <h2>Convictions</h2>
+      <p>Values that hold when life invoices you · 17 min</p>
+    </div>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <div class="k">Cover</div>
+      <h3>Build load-bearing convictions, not decorative ones.</h3>
+      <p>Carded delivery of the same essential. Start with the story, move to practice, finish with action.</p>
+      <div class="cta-row">
+        <a class="btn soft" href="#act-ch8">Do this week</a>
+        <a class="btn ghost" href="#talk-ch8">Discuss</a>
+        <a class="btn primary" href="#done-ch8">Checklist</a>
+      </div>
+    </div>
+    <div class="card soft">
+      <div class="k">01 · Story</div>
+      <h3>The scene</h3>
+      <p>She inherited good values without examining them. Then grief arrived. Some values bent. Some nearly broke. A few held, not because they felt good that week, but because she decided they still mattered when nothing else did.</p>
+    </div>
+    <div class="card">
+      <div class="k">02 · Why it matters</div>
+      <h3>Keep this in your pocket</h3>
+      <ul><li>The other seven collapse without a centre that can take pressure.</li><li>Decorative values look good in a group chat and cost almost nothing.</li><li>Load-bearing values still shape action when inconvenient.</li></ul>
+      <details class="more"><summary>Go deeper from the original guide</summary><p>Preparation for deception: flattering narratives, tribal slogans, algorithms that confirm your tribe. Ask who benefits, what would change your mind, what you are not being shown.</p><p>Disappointment tests more than arguments.</p><p>Knowing about courage is not courage. Values become real when life presents an invoice.</p><p>Tests: suffering, doubt, success, hypocrisy, private silence, peer pressure.</p><p>Build by principles over feelings, few non-negotiables, low-stakes practice, reality seeking, older mentors, accountability, kept small promises.</p></details>
+    </div>
+    <div class="card">
+      <div class="k">03 · Practice</div>
+      <h3>Small enough to start</h3>
+      <ol><li>Inventory values with proof actions</li><li>Talk with someone older who has suffered well</li><li>Run one private integrity standard for seven days</li><li>Draft a short personal conviction statement</li></ol>
+    </div>
+    <div class="card" id="act-ch8">
+      <div class="k">04 · This week</div>
+      <h3>Action tickets</h3>
+      <div class="tickets"><div class="ticket"><div class="top"><span class="tag">Level 1</span><span class="meta">30 min · Solo</span></div><h4>Level 1</h4><p>List five values. Prove each with one recent action, or admit you cannot.</p></div><div class="ticket"><div class="top"><span class="tag">Level 2</span><span class="meta">1 talk · With someone</span></div><h4>Level 2</h4><p>Ask an older person what held under pressure.</p></div><div class="ticket"><div class="top"><span class="tag">Level 3</span><span class="meta">7 days · Solo</span></div><h4>Level 3</h4><p>One private integrity standard. Journal it.</p></div><div class="ticket"><div class="top"><span class="tag">Level 4</span><span class="meta">45 min · Solo</span></div><h4>Level 4</h4><p>Write a 10 to 15 line personal conviction statement.</p></div></div>
+    </div>
+    <div class="card soft" id="talk-ch8">
+      <div class="k">05 · Talk</div>
+      <h3>Best questions</h3>
+      <ol><li>Which of your values are decorative right now?</li><li>What would you keep even if nobody rewarded you?</li><li>Which test presses you hardest?</li><li>Where are you currently pretending?</li></ol>
+    </div>
+    <div class="card">
+      <div class="k">06 · Wisdom</div>
+      <h3>One line a day</h3>
+      <div class="days"><div class="day"><b>Day 1</b><p>He who has a why to live can bear almost any how.</p><span>Remembered via Frankl</span></div><div class="day"><b>Day 2</b><p>Character is what you are in the dark.</p><span>D.L. Moody</span></div><div class="day"><b>Day 3</b><p>Between stimulus and response there is a space.</p><span>Viktor Frankl</span></div><div class="day"><b>Day 4</b><p>You have power over your mind, not outside events.</p><span>Marcus Aurelius</span></div><div class="day"><b>Day 5</b><p>We are what we repeatedly do.</p><span>Will Durant after Aristotle</span></div><div class="day"><b>Day 6</b><p>Integrity is doing the right thing even when no one is watching.</p><span>Commonly attributed</span></div><div class="day"><b>Day 7</b><p>Your convictions will be tested because your life costs something real.</p><span>This chapter</span></div></div>
+    </div>
+    <div class="card" id="done-ch8">
+      <div class="k">07 · Done looks like</div>
+      <h3>Checklist</h3>
+      <ul class="check-list"><li><input type="checkbox" id="ch8c1"><label for="ch8c1">I reflected honestly, including doubts</label></li><li><input type="checkbox" id="ch8c2"><label for="ch8c2">I spoke with someone older</label></li><li><input type="checkbox" id="ch8c3"><label for="ch8c3">I completed a challenge</label></li><li><input type="checkbox" id="ch8c4"><label for="ch8c4">I drafted a personal conviction statement</label></li></ul>
+    </div>
+    <div class="take">
+      <div class="k">Screenshot this</div>
+      <p>Your convictions will be tested. That means your life costs something real.</p>
+      <div class="sub">onetoeight · Essential 08 · Convictions</div>
+    </div>
+  </div>
+</section>
+
+  <p class="foot">onetoeight expanded modern shell · Universal Edition · prototype</p>
+</main>
+<div class="dock">
+  <div class="dock-inner">
+    <button class="btn ghost" type="button" onclick="prevChapter()">Back</button>
+    <button class="btn soft" type="button" onclick="jumpTalk()">Talk</button>
+    <button class="btn primary" type="button" onclick="nextChapter()">Continue</button>
+  </div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+const chapters=[...document.querySelectorAll('.chapter')];
+const pills=[...document.querySelectorAll('.ess-pill')];
+let idx=0;
+function activate(i){
+  idx=(i+chapters.length)%chapters.length;
+  chapters.forEach((c,n)=>c.classList.toggle('active', n===idx));
+  pills.forEach((p,n)=>p.classList.toggle('active', n===idx));
+  const ch=chapters[idx];
+  const accent=ch.getAttribute('data-accent')||'#A46447';
+  document.documentElement.style.setProperty('--accent', accent);
+  document.getElementById('hudTitle').textContent=(ch.dataset.num||'')+' · '+(ch.dataset.title||'');
+  document.getElementById('hudBar').style.setProperty('--p', ((idx+1)/chapters.length*100).toFixed(2)+'%');
+  // keep horizontal position stable; only soft-scroll chapter into view under the sticky HUD
+  const y=ch.getBoundingClientRect().top + window.scrollY - 72;
+  window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
+  pills[idx]?.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+}
+function nextChapter(){activate(idx+1)}
+function prevChapter(){activate(idx-1)}
+function jumpTalk(){
+  const ch=chapters[idx];
+  const el=ch.querySelector('[id^="talk-"]');
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.style.opacity='1';
+  clearTimeout(window.__tt); window.__tt=setTimeout(()=>{t.style.opacity='0'}, 2200);
+}
+pills.forEach(p=>p.addEventListener('click',()=>activate(+p.dataset.i)));
+activate(0);
+</script>
+</body>
+</html>
