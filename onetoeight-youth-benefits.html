@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3D2820">
+<title>What changes when you finish the eight — onetoeight</title>
+<meta name="description" content="Eight weeks. Eight essentials. One life that actually holds.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:#F5F0E8;color:#2a2520;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Fraunces,serif;font-weight:500;line-height:1.15;color:#4C362D}
+a{color:#A46447;text-decoration:none}
+a:hover{text-decoration:underline}
+
+.topbar{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,#3D2820,#4C362D);padding:.7rem .9rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:.75rem}
+.logo{font-family:Fraunces,serif;font-weight:600;color:#fff;font-size:1.05rem}
+.logo em{color:#CEB59E;font-style:italic;font-weight:400}
+
+.hero{max-width:720px;margin:0 auto;padding:3rem .9rem 2rem;text-align:center}
+.hero-badge{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#A46447;background:rgba(164,100,71,.12);padding:.3rem .6rem;border-radius:999px;margin-bottom:.8rem}
+.hero h1{font-size:clamp(1.9rem,5.5vw,2.6rem);color:#4C362D;margin:0 0 .6rem}
+.hero h1 em{color:#A46447;font-style:italic}
+.hero p{font-size:1.05rem;color:#7a6657;max-width:34rem;margin:0 auto}
+
+.section{max-width:720px;margin:0 auto;padding:0 .9rem 2.5rem}
+.section-label{font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#88937B;margin-bottom:.5rem}
+.section h2{font-size:clamp(1.4rem,3.5vw,1.9rem);color:#4C362D;margin:0 0 .8rem}
+
+.benefit-grid{display:grid;grid-template-columns:1fr;gap:.8rem}
+@media(min-width:600px){.benefit-grid{grid-template-columns:1fr 1fr}}
+.benefit{background:#fff;border:1px solid rgba(76,54,45,.08);border-radius:16px;padding:1.1rem 1rem;box-shadow:0 4px 12px rgba(76,54,45,.04)}
+.benefit .num{font-family:Fraunces,serif;font-size:1.8rem;font-weight:600;color:#A46447;line-height:1;margin-bottom:.4rem}
+.benefit h3{font-size:1.05rem;margin:0 0 .3rem;color:#4C362D}
+.benefit p{font-size:.88rem;color:#7a6657;margin:0;line-height:1.55}
+.benefit .outcome{margin-top:.5rem;padding-top:.5rem;border-top:1px dashed rgba(76,54,45,.12);font-size:.82rem;color:#88937B;font-weight:600}
+.benefit .outcome strong{color:#4C362D}
+
+.big-quote{max-width:720px;margin:0 auto;padding:2rem .9rem;text-align:center}
+.big-quote blockquote{font-family:Fraunces,serif;font-size:clamp(1.3rem,3.5vw,1.8rem);font-style:italic;color:#4C362D;line-height:1.4;margin:0}
+.big-quote cite{display:block;margin-top:.8rem;font-size:.85rem;color:#7a6657;font-style:normal}
+
+.before-after{max-width:720px;margin:0 auto;padding:0 .9rem 2.5rem}
+.ba-grid{display:grid;grid-template-columns:1fr;gap:.8rem}
+@media(min-width:600px){.ba-grid{grid-template-columns:1fr 1fr}}
+.ba-col{background:#fff;border:1px solid rgba(76,54,45,.08);border-radius:16px;padding:1.1rem}
+.ba-col.before{border-left:4px solid #A46447}
+.ba-col.after{border-left:4px solid #88937B}
+.ba-col h3{font-size:.95rem;margin:0 0 .6rem}
+.ba-col ul{list-style:none;padding:0;margin:0}
+.ba-col li{padding:.35rem 0;font-size:.88rem;color:#7a6657;border-bottom:1px solid rgba(76,54,45,.06);display:flex;gap:.5rem;align-items:flex-start}
+.ba-col li:last-child{border-bottom:0}
+.ba-col li::before{content:"";width:6px;height:6px;border-radius:50%;margin-top:.45rem;flex-shrink:0}
+.ba-col.before li::before{background:#A46447}
+.ba-col.after li::before{background:#88937B}
+
+.cta{max-width:720px;margin:0 auto;padding:2rem .9rem 3rem;text-align:center}
+.cta-box{background:linear-gradient(135deg,#3D2820,#5C3A2E);border-radius:20px;padding:2rem 1.5rem;color:#F5F0E8}
+.cta-box h2{color:#F5F0E8;margin:0 0 .5rem;font-size:1.5rem}
+.cta-box p{color:rgba(245,240,232,.8);margin:0 0 1.2rem;font-size:.95rem}
+.cta-buttons{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.7rem 1.4rem;border-radius:999px;font-weight:700;font-size:.9rem;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-1px);text-decoration:none}
+.btn-primary{background:#A46447;color:#fff}
+.btn-outline{background:transparent;border:2px solid rgba(245,240,232,.3);color:#F5F0E8}
+
+footer{background:#3D2820;color:rgba(232,225,213,.5);padding:1.5rem;text-align:center;font-size:.82rem}
+footer a{color:#CEB59E}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="logo">one <em>to</em> eight</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">For young people</div>
+  <h1>What changes when you <em>finish the eight</em></h1>
+  <p>Eight weeks. Eight essentials. Not a course you complete and forget. A foundation you build the rest of your life on.</p>
+</section>
+
+<section class="section">
+  <div class="section-label">The outcome</div>
+  <h2>You become someone who can hold their own life.</h2>
+  <p style="font-size:.95rem;color:#7a6657;margin-bottom:1.2rem">Not because someone told you to. Because you proved it to yourself, one week at a time.</p>
+
+  <div class="benefit-grid">
+    <div class="benefit">
+      <div class="num">01</div>
+      <h3>You can sit still</h3>
+      <p>Three minutes of silence feels normal, not like torture. You can think a full thought without reaching for your phone. You notice things other people miss.</p>
+      <div class="outcome">After: <strong>You own your attention</strong></div>
+    </div>
+    <div class="benefit">
+      <div class="num">02</div>
+      <h3>You trust your body</h3>
+      <p>You sleep better. You cook real food. You move because it feels good, not because you're punishing yourself. Your body is your ally, not your enemy.</p>
+      <div class="outcome">After: <strong>You have energy for what matters</strong></div>
+    </div>
+    <div class="benefit">
+      <div class="num">03</div>
+      <h3>You're actually useful</h3>
+      <p>You can feed yourself, fix things, build things, grow something, and handle money without panic. People ask you for help. You don't Google everything.</p>
+      <div class="outcome">After: <strong>You're competent, not dependent</strong></div>
+    </div>
+    <div class="benefit">
+      <div class="num">04</div>
+      <h3>You control your phone</h3>
+      <p>Not the other way around. You know what it's doing to your attention, your mood, your sleep. You use it on purpose. You can put it down and stay down.</p>
+      <div class="outcome">After: <strong>You're the boss of your attention</strong></div>
+    </div>
+    <div class="benefit">
+      <div class="num">05</div>
+      <h3>You have real people</h3>
+      <p>Not followers. Friends who know your name, who'd pick up at 2am, who tell you the truth. You know how to repair a friendship when it breaks.</p>
+      <div class="outcome">After: <strong>You're not alone</strong></div>
+    </div>
+    <div class="benefit">
+      <div class="num">06</div>
+      <h3>You know things without Wi-Fi</h3>
+      <p>Phone numbers, directions, how to change a tyre, what to do when someone is bleeding. Your knowledge is in you, not in a search bar.</p>
+      <div class="outcome">After: <strong>You're reliable in a crisis</strong></div>
+    </div>
+    <div class="benefit">
+      <div class="num">07</div>
+      <h3>Nature restores you</h3>
+      <p>You know how to use sunlight, soil, and silence to reset. You don't need an app to feel human. You go outside and it actually works.</p>
+      <div class="outcome">After: <strong>You have a reset button</strong></div>
+    </div>
+    <div class="benefit">
+      <div class="num">08</div>
+      <h3>You know what you stand for</h3>
+      <p>Not what your feed says. Not what your friends think. What you actually believe, tested under pressure. Values that hold when life gets expensive.</p>
+      <div class="outcome">After: <strong>You're unshakeable</strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="big-quote">
+  <blockquote>"I didn't realise how much noise was in my head until I sat in silence for three minutes. It was the hardest and best thing I did all year."</blockquote>
+  <cite>— Early tester, 17</cite>
+</div>
+
+<section class="before-after">
+  <div class="section-label">The shift</div>
+  <h2>Before and after the eight weeks</h2>
+
+  <div class="ba-grid">
+    <div class="ba-col before">
+      <h3>Before</h3>
+      <ul>
+        <li>Phone is the first thing you see in the morning</li>
+        <li>You can't name three people who'd help you move</li>
+        <li>You've never cooked a full meal from scratch</li>
+        <li>You feel anxious when you're not entertained</li>
+        <li>You don't know what you believe about anything big</li>
+        <li>You scroll to avoid feeling things</li>
+      </ul>
+    </div>
+    <div class="ba-col after">
+      <h3>After</h3>
+      <ul>
+        <li>You sit in silence for 3 minutes before checking your phone</li>
+        <li>You have a pod of people who know your name</li>
+        <li>You can feed yourself, fix things, and grow something</li>
+        <li>You use your phone on purpose, not by default</li>
+        <li>You know your values and you've tested them</li>
+        <li>You feel things and let them pass through</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">How it works</div>
+  <h2>Eight weeks. One essential per week. Your pod.</h2>
+  <div style="background:#fff;border:1px solid rgba(76,54,45,.08);border-radius:16px;padding:1.1rem;margin-top:1rem">
+    <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem 0;border-bottom:1px solid rgba(76,54,45,.06)">
+      <div style="width:32px;height:32px;border-radius:50%;background:#88937B;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0">1</div>
+      <div>
+        <div style="font-weight:700;font-size:.9rem;color:#4C362D">Listen</div>
+        <div style="font-size:.82rem;color:#7a6657">Audio intro to the week's essential</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem 0;border-bottom:1px solid rgba(76,54,45,.06)">
+      <div style="width:32px;height:32px;border-radius:50%;background:#A46447;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0">2</div>
+      <div>
+        <div style="font-weight:700;font-size:.9rem;color:#4C362D">Do</div>
+        <div style="font-size:.82rem;color:#7a6657">Daily practice + weekly challenge</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem 0;border-bottom:1px solid rgba(76,54,45,.06)">
+      <div style="width:32px;height:32px;border-radius:50%;background:#4C362D;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0">3</div>
+      <div>
+        <div style="font-weight:700;font-size:.9rem;color:#4C362D">Check in</div>
+        <div style="font-size:.82rem;color:#7a6657">With your buddy mid-week</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem 0">
+      <div style="width:32px;height:32px;border-radius:50%;background:#CEB59E;color:#4C362D;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0">4</div>
+      <div>
+        <div style="font-weight:700;font-size:.9rem;color:#4C362D">Meet up</div>
+        <div style="font-size:.82rem;color:#7a6657">Sunday with your pod. No phones.</div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:.88rem;color:#7a6657;margin-top:1rem;text-align:center">8 friends. 8 weeks. $10 each. No account. No cloud. Your data stays on your phone.</p>
+</section>
+
+<section class="cta">
+  <div class="cta-box">
+    <h2>Ready to build a life that holds?</h2>
+    <p>Start with 3 minutes of silence. That's it. Everything else builds from there.</p>
+    <div class="cta-buttons">
+      <a href="https://royal-soul-ajng.here.now/drafts/circles-app/index.html" class="btn btn-primary">Open the app →</a>
+      <a href="https://autumn-atlas-ap56.here.now/onetoeight-pitch.html" class="btn btn-outline">Learn more</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><a href="https://onetoeight.org">one to eight</a> · Eight essentials for a screen-born generation</p>
+</footer>
+
+</body>
+</html>
