@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#3D2820">
+<title>onetoeight · Choose your edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --terracotta:#A46447; --almond:#CEB59E; --sage:#88937B; --umber:#4C362D;
+  --cream:#F5F0E8; --linen:#E8E1D5; --ink:#2a2520; --muted:#7a6657;
+  --forest-dark:#3D2820; --line:rgba(76,54,45,.10); --shadow:0 12px 32px rgba(76,54,45,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;overflow-x:hidden}
+body{
+  font-family:Inter,system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(900px 400px at 0% -10%, rgba(164,100,71,.10), transparent 55%),
+    radial-gradient(700px 360px at 100% 0%, rgba(136,147,123,.10), transparent 50%),
+    var(--cream);
+  line-height:1.55;
+  min-height:100vh;
+}
+.top{
+  background:linear-gradient(180deg,#3D2820 0%,#4C362D 100%);
+  color:var(--cream);
+  padding:1rem 1rem 1.15rem;
+  box-shadow:0 8px 24px rgba(45,28,20,.18);
+}
+.top-inner{max-width:880px;margin:0 auto}
+.brand{font-family:Fraunces,serif;font-weight:600;font-size:1.15rem}
+.brand em{color:var(--almond);font-style:italic;font-weight:400}
+.kicker{margin-top:.45rem;font-size:.68rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:rgba(232,225,213,.72)}
+.top h1{font-family:Fraunces,serif;font-weight:500;font-size:clamp(1.45rem,5.5vw,2rem);line-height:1.15;margin:.35rem 0 .4rem;color:#fff}
+.top p{margin:0;color:rgba(245,240,232,.82);font-size:.95rem;max-width:42ch}
+
+.wrap{max-width:880px;margin:0 auto;padding:1.1rem .9rem 2.5rem}
+.note{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:.85rem .95rem;
+  color:var(--muted);font-size:.9rem;box-shadow:var(--shadow);margin-bottom:1rem
+}
+.note strong{color:var(--umber)}
+.section-label{
+  font-size:.7rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--sage);margin:1.1rem 0 .55rem
+}
+.grid{display:grid;gap:.75rem}
+@media(min-width:720px){.grid.two{grid-template-columns:1fr 1fr}}
+.card{
+  display:block;background:#fff;border:1px solid var(--line);border-radius:18px;
+  padding:1rem 1rem 1.05rem;text-decoration:none;color:inherit;box-shadow:var(--shadow);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.card:active{transform:scale(.99)}
+.card .badge{
+  display:inline-flex;align-items:center;border-radius:999px;padding:.28rem .55rem;
+  font-size:.66rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#fff;margin-bottom:.55rem
+}
+.badge.u{background:var(--sage)}
+.badge.c{background:var(--terracotta)}
+.badge.field{background:var(--umber)}
+.badge.full{background:#5C3A2E}
+.card h2{font-family:Fraunces,serif;font-weight:500;font-size:1.2rem;color:var(--umber);margin:0 0 .3rem;line-height:1.2}
+.card p{margin:0;color:var(--muted);font-size:.9rem}
+.card .meta{margin-top:.65rem;display:flex;flex-wrap:wrap;gap:.35rem}
+.chip{
+  font-size:.68rem;font-weight:700;color:var(--umber);background:var(--linen);
+  border-radius:999px;padding:.28rem .5rem
+}
+.card .go{
+  margin-top:.8rem;display:inline-flex;font-size:.78rem;font-weight:800;color:var(--terracotta)
+}
+.foot{margin-top:1.4rem;color:var(--muted);font-size:.78rem}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">one <em>to</em> eight</div>
+    <div class="kicker">Edition chooser · draft review</div>
+    <h1>Choose how you want to open the guide</h1>
+    <p>Youth card shells for phone-first sessions. Full modern manuals for leaders and deep readers.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="note">
+    <strong>How to use this.</strong>
+    For young people running a week at a time, open a <em>Field shell</em>.
+    For church leaders, teachers, and anyone who wants the whole teaching text, open a <em>Full guide</em>.
+  </div>
+
+  <div class="section-label">Field edition · youth phone shells</div>
+  <div class="grid two">
+    <a class="card" href="./modern-shell-universal.html">
+      <span class="badge u">Universal</span>
+      <span class="badge field">Field shell</span>
+      <h2>Universal field edition</h2>
+      <p>Carded essentials, action tickets, discussion prompts. Non-religious framing for schools and community groups.</p>
+      <div class="meta">
+        <span class="chip">Phone first</span>
+        <span class="chip">Sessions</span>
+        <span class="chip">Grow in Skills</span>
+      </div>
+      <div class="go">Open field shell →</div>
+    </a>
+    <a class="card" href="./modern-shell-christian.html">
+      <span class="badge c">Christian</span>
+      <span class="badge field">Field shell</span>
+      <h2>Christian field edition</h2>
+      <p>Same modern shell with Scripture wisdom and Tested Faith. Built for youth groups and local church use.</p>
+      <div class="meta">
+        <span class="chip">Phone first</span>
+        <span class="chip">Youth groups</span>
+        <span class="chip">Tested Faith</span>
+      </div>
+      <div class="go">Open field shell →</div>
+    </a>
+  </div>
+
+  <div class="section-label">Full edition · leaders and deep readers</div>
+  <div class="grid two">
+    <a class="card" href="./universal-full-modern.html">
+      <span class="badge u">Universal</span>
+      <span class="badge full">Full guide</span>
+      <h2>Universal full modern</h2>
+      <p>Complete teaching bulk in the modern dark-top / cream-field reading chrome. For leaders and young people who want the whole text.</p>
+      <div class="meta">
+        <span class="chip">~full book</span>
+        <span class="chip">Teachers</span>
+        <span class="chip">Schools friendly</span>
+      </div>
+      <div class="go">Open full guide →</div>
+    </a>
+    <a class="card" href="./christian-full-modern.html">
+      <span class="badge c">Christian</span>
+      <span class="badge full">Full guide</span>
+      <h2>Christian full modern</h2>
+      <p>Complete Christian teaching bulk with the same modern reading shell. For pastors, leaders, families, and deep formation.</p>
+      <div class="meta">
+        <span class="chip">~full book</span>
+        <span class="chip">Church leaders</span>
+        <span class="chip">Scripture rooted</span>
+      </div>
+      <div class="go">Open full guide →</div>
+    </a>
+  </div>
+
+  <p class="foot">
+    Draft review hub only · not production routes · onetoeight brand palette preserved across all four editions.
+  </p>
+</main>
+</body>
+</html>
