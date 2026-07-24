@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>onetoeight Christian Edition: Draft Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--terracotta:#A46447;--almond:#CEB59E;--sage:#88937B;--umber:#4C362D;--linen:#E8E1D5;--cream:#F5F0E8;--ink:#2a2520;--muted:#7a6657}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.75}
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+.site-header{position:sticky;top:0;z-index:20;background:rgba(245,240,232,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(76,54,45,.08);padding:.85rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.logo{font-family:Fraunces,serif;font-weight:600;color:var(--umber);font-size:1.2rem}
+.logo em{color:var(--terracotta);font-weight:400;font-style:italic}
+.badge{background:var(--terracotta);color:#fff;font-size:.72rem;font-weight:600;padding:.35rem .65rem;border-radius:999px;white-space:nowrap}
+.wrap{max-width:820px;margin:0 auto;padding:2rem 1.25rem 5rem}
+.hero{padding:1rem 0 2rem;border-bottom:1px solid rgba(76,54,45,.1);margin-bottom:2rem}
+.hero .kicker{color:var(--sage);font-weight:600;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.6rem}
+.hero h1{font-family:Fraunces,serif;font-weight:500;font-size:clamp(2rem,5vw,2.8rem);color:var(--umber);line-height:1.15;margin-bottom:.8rem}
+.hero .lede{font-size:1.08rem;color:var(--muted);max-width:40rem}
+.toc{background:#fff;border:1px solid rgba(76,54,45,.08);border-radius:16px;padding:1.25rem 1.4rem;margin:1.5rem 0 2.5rem}
+.toc h2{font-family:Fraunces,serif;font-size:1.15rem;color:var(--umber);margin-bottom:.7rem}
+.toc ol{margin-left:1.2rem}
+.toc li{margin:.35rem 0}
+.chapter{padding:2rem 0 2.5rem;border-bottom:1px solid rgba(76,54,45,.08)}
+.chapter-meta{color:var(--sage);font-weight:600;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.4rem}
+h2{font-family:Fraunces,serif;font-weight:500;color:var(--umber);font-size:clamp(1.6rem,3.5vw,2rem);line-height:1.2;margin-bottom:.4rem}
+.subtitle{color:var(--muted);font-size:1.05rem;margin-bottom:1rem}
+h3{font-family:Fraunces,serif;font-weight:500;color:var(--terracotta);font-size:1.15rem;margin:1.6rem 0 .55rem}
+p{margin:.7rem 0}
+ul,ol{margin:.55rem 0 1rem 1.25rem}
+li{margin:.3rem 0}
+blockquote{border-left:3px solid var(--terracotta);margin:1.1rem 0;padding:.15rem 0 .15rem 1rem;color:var(--muted);font-style:italic}
+blockquote cite{display:block;margin-top:.35rem;font-style:normal;font-size:.88rem;color:var(--sage)}
+.scenario{background:#fff;border:1px solid rgba(76,54,45,.08);border-radius:14px;padding:1rem 1.15rem;margin:1.2rem 0}
+.scenario .label{font-size:.75rem;font-weight:700;color:var(--sage);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.35rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1.2rem 0}
+.stats div{background:#fff;border-radius:12px;padding:.9rem .7rem;text-align:center;border:1px solid rgba(76,54,45,.08)}
+.stats strong{display:block;font-family:Fraunces,serif;font-size:1.35rem;color:var(--terracotta)}
+.stats span{display:block;font-size:.78rem;color:var(--muted);line-height:1.35;margin-top:.25rem}
+.challenges .level{background:rgba(164,100,71,.08);border-radius:12px;padding:.85rem 1rem;margin:.55rem 0}
+.reflections .day{margin:.7rem 0}
+.reflections .day > span{display:block;font-size:.75rem;font-weight:700;color:var(--sage);letter-spacing:.04em;text-transform:uppercase}
+ul.check{list-style:none;margin-left:0}
+ul.check li{padding-left:1.4rem;position:relative}
+ul.check li::before{content:"\2610";position:absolute;left:0;color:var(--sage)}
+.table-wrap{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}
+th,td{border:1px solid rgba(76,54,45,.1);padding:.65rem .7rem;text-align:left;font-size:.92rem}
+th{background:var(--linen);color:var(--umber);font-family:Fraunces,serif;font-weight:500}
+.site-footer{margin-top:2rem;padding-top:1rem;color:var(--muted);font-size:.88rem}
+.note-banner{background:var(--linen);border:1px solid rgba(76,54,45,.08);border-radius:14px;padding:1rem 1.15rem;margin:1rem 0 1.5rem;color:var(--muted);font-size:.95rem}
+@media (max-width:700px){.stats{grid-template-columns:1fr}}
+@media print{.site-header{position:static} body{background:#fff} .chapter{break-inside:avoid-page}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="logo">one <em>to</em> eight</div>
+  <div class="badge">CHRISTIAN EDITION · DRAFT</div>
+</header>
+<main class="wrap">
+  <div class="hero">
+    <div class="kicker">Christian formation for a screen-born generation</div>
+    <h1>Eight essentials for a life that holds</h1>
+    <p class="lede">A complete Christian Edition draft in the same clean programme style as the Universal edition: practical, Scripture-rooted, and built for youth groups, families, and local church community.</p>
+  </div>
+  <div class="note-banner">
+    <strong>Review draft.</strong> Same layout and structure as the Universal Edition, with Christian framing throughout (especially Essential 8: Tested Faith). No em dashes. Grow is included under Skills. A separate Universal Edition exists for non-religious settings.
+  </div>
+  <nav class="toc"><h2>Contents</h2><ol><li><a href="#intro">Introduction: Why Roots Matter</a></li><li><a href="#ch1">1. Silence</a></li><li><a href="#ch2">2. Body as Temple</a></li><li><a href="#ch3">3. Skills</a></li><li><a href="#ch4">4. Digital Self-Defence</a></li><li><a href="#ch5">5. Real Community</a></li><li><a href="#ch6">6. Knowledge Without Wi-Fi</a></li><li><a href="#ch7">7. Prescribe Nature</a></li><li><a href="#ch8">8. Tested Faith</a></li><li><a href="#assessment">Roots Assessment</a></li><li><a href="#conclusion">Building a Life That Holds</a></li></ol></nav>
+  
+<section class="chapter" id="intro">
+  <div class="chapter-meta">Introduction</div>
+  <h2>Why Roots Matter</h2>
+  <p>You are the most connected generation in human history. You can reach almost anyone, almost anywhere. You carry more information in your pocket than whole libraries once held. And still, something is missing.</p>
+<p>If you're reading this, you're probably somewhere between sixteen and twenty-five. You might be finishing school, half-convinced the next exam is the only score that matters. You might be at university, learning that a degree alone will not answer the questions that surface at 2am. Or you might be newly out in the world, discovering that nobody taught you to cook a proper meal, fix a leaking tap, sit with your own thoughts for ten minutes, or hold convictions that still stand when life gets expensive.</p>
+<p>This is not another optimisation manual. It will not promise seven hacks, a reinvented personality, or permanent happiness. It may, however, tell you things you already half-know and have been avoiding, and invite you to build a life rooted in Christ.</p>
+  <h3>The Problem</h3>
+  <p>We have given young people screens. We have not given them roots.</p>
+<p>Many of you <em>have</em> been given roots by parents, grandparents, pastors, mentors, teachers, and neighbours. That still matters. But the wider culture is not designed to strengthen them. It is designed to keep you scrolling, performing, comparing, and consuming. It rewards dependence on things that can be switched off: a signal, a platform, an algorithm, a feed, a mood.</p>
+  <div class="stats">
+    <div><strong>1 in 5</strong><span>young people experience anxiety or depression</span></div>
+    <div><strong>7 hrs</strong><span>average daily teen screen time</span></div>
+    <div><strong>52%</strong><span>of graduates feel unprepared for real life</span></div>
+  </div>
+  <p>Those numbers are not here to frighten you. They name what many people already feel: the tools are powerful, and the foundations are thin.</p>
+  <h3>What This Guide Is</h3>
+  <p>onetoeight is a practical Christian formation kit. Eight essentials. Readable alone in a day, better worked over weeks with other people in a youth group, church community, or mentorship pair. Each chapter gives you a scenario, the why, forces working against you, clear practice, conversation questions, challenges, and Scripture-rooted wisdom.</p>
+  <ul><li><strong>Silence</strong>: stilling your soul before God without constant stimulation</li><li><strong>Body</strong>: honouring your body as a temple of the Holy Spirit</li><li><strong>Skills</strong>: feed, fix, build, grow, and finance as faithful stewardship</li><li><strong>Digital self-defence</strong>: guarding mind, privacy, and integrity online</li><li><strong>Community</strong>: belonging in the body of Christ and real friendship</li><li><strong>Knowledge without Wi&#8209;Fi</strong>: Scripture and wisdom you own, not only rent</li><li><strong>Nature</strong>: creation care and outdoor life as gifts from the Creator</li><li><strong>Tested faith</strong>: trust in Christ that holds under pressure</li></ul>
+  <h3>About This Edition</h3>
+  <p>This is the <strong>Christian Edition</strong>. Scripture, prayer, and faith in Jesus Christ shape the picture, especially Essential 8. The first seven essentials are also deeply practical for everyday life.</p>
+<p>A separate <strong>Universal Edition</strong> is available for schools and groups that need the same eight essentials without religious framing.</p>
+<p>Use it alone if you must. It works better with at least one other honest person, and best in a community that can both encourage and correct you.</p>
+  <blockquote><p>He is like a tree planted by streams of water, which yields its fruit in season and whose leaf does not wither.</p><cite>Psalm 1:3</cite></blockquote>
+</section>
+
+  
+<section class="chapter" id="ch1">
+  <div class="chapter-meta">Essential 01</div>
+  <h2>The Ability to Sit in Silence</h2>
+  <p class="subtitle">Stillness before God in a noisy age</p>
+  <blockquote><p>Be still, and know that I am God.</p><cite>Psalm 46:10</cite></blockquote>
+  <div class="scenario"><div class="label">The Scenario</div><p>He couldn't do it. Ten minutes. Phone in another room. Just sit. Within ninety seconds his knee bounced. At three minutes he stood up and checked the kettle. At five he retrieved the phone (just to check the time, he told himself). By seven he was scrolling.</p>
+<p>He was not unusually weak. He was normally trained. Constant stimulation had made quiet feel like a threat, even before the deeper question of whether he could pray without distraction.</p></div><h3>Why This Essential Matters</h3><p>Silence is not emptiness. In Christian life, stillness is where attention repairs, repentance can surface, and you can actually listen. Without it, discipleship collapses into reaction.</p>
+<p>If you cannot sit still, you will struggle to pray honestly, study Scripture deeply, keep a promise when boredom rises, or notice what your heart is worshipping. Silence is not only for monks. It is training for a noisy century, and a doorway to knowing God is God.</p><h3>What's Working Against You</h3><ul><li>Phones engineered for intermittent reward</li><li>Background audio that never ends</li><li>Social feeds that treat boredom as a problem to solve</li><li>The cultural story that quiet means lonely or unproductive</li><li>Your own nervous system, trained to expect novelty every few seconds</li><li>A restless heart that would rather perform for people than wait on God</li></ul><h3>What Silence Actually Does</h3><p>Quiet lowers the volume on threat-scanning. It lets unfinished thoughts finish. It creates a gap between stimulus and response. People who can tolerate stillness are harder to manipulate, less impulsive, and more able to bring one feeling at a time before God instead of numbing it.</p>
+<p>This is why silence feels hard at first: you meet what you have been postponing.</p><h3>The Practice of Silence</h3><ol><li>Start smaller than your pride wants: 3 minutes, not 30.</li><li>Leave the phone in another room, not face-down beside you.</li><li>Sit, walk slowly, or stare out a window. Begin with a simple prayer: "Here I am, Lord."</li><li>When the urge to escape arrives, name it. Stay for one more minute.</li><li>Keep a daily quiet block before media, if only brief.</li></ol><h3>Silence Across the Christian Path</h3><p>Jesus often withdrew to lonely places to pray. The psalms teach waiting, stillness, and honest speech before God. Monastic wise men and ordinary saints alike knew that a faith with no quiet becomes thin. You do not need a perfect technique. You need a practised presence.</p><h3>Discussion Questions</h3><ol><li>When was the last time you sat without stimulation for ten minutes? What happened?</li><li>What do you reach for first when quiet arrives?</li><li>Where is noise protecting you from prayer, confession, or grief?</li><li>What would change if you gave God undistracted attention before the feed each day?</li></ol><div class="challenges">
+<h3>Do This This Week</h3>
+<div class="level"><strong>Level 1</strong><p>Three minutes of no-phone stillness each morning for seven days. Begin with Psalm 46:10.</p></div>
+<div class="level"><strong>Level 2</strong><p>One thirty-minute walk this week with nothing in your ears. Pray as you walk.</p></div>
+<div class="level"><strong>Level 3</strong><p>A silent half-hour alone. Journal restlessness, then bring it honestly to God.</p></div>
+</div><h3>Wisdom Reflections</h3>
+<div class="reflections">
+<div class="day"><span>Day 1</span><blockquote><p>Be still, and know that I am God.</p><cite>Psalm 46:10</cite></blockquote></div>
+<div class="day"><span>Day 2</span><blockquote><p>In returning and rest you shall be saved; in quietness and in trust shall be your strength.</p><cite>Isaiah 30:15</cite></blockquote></div>
+<div class="day"><span>Day 3</span><blockquote><p>Be still before the Lord and wait patiently for him.</p><cite>Psalm 37:7</cite></blockquote></div>
+<div class="day"><span>Day 4</span><blockquote><p>Very early in the morning, while it was still dark, Jesus got up, left the house and went off to a solitary place, where he prayed.</p><cite>Mark 1:35</cite></blockquote></div>
+<div class="day"><span>Day 5</span><blockquote><p>For God alone my soul waits in silence; from him comes my salvation.</p><cite>Psalm 62:1</cite></blockquote></div>
+<div class="day"><span>Day 6</span><blockquote><p>But when you pray, go into your room and shut the door and pray to your Father who is in secret.</p><cite>Matthew 6:6</cite></blockquote></div>
+<div class="day"><span>Day 7</span><blockquote><p>The Lord is in his holy temple; let all the earth keep silence before him.</p><cite>Habakkuk 2:20</cite></blockquote></div>
+</div><h3>Checklist</h3><ul class="check"><li>I have done at least three deliberate silence sessions</li><li>I removed one default noise habit this week</li><li>I can name what feels hard about stillness for me</li><li>I have prayed or reflected in quiet with someone else in mind, not only myself</li></ul>
+</section>
+
+  
+<section class="chapter" id="ch2">
+  <div class="chapter-meta">Essential 02</div>
+  <h2>Your Body Is a Temple</h2>
+  <p class="subtitle">Stewardship, purity, rest, and honour</p>
+  <blockquote><p>Do you not know that your bodies are temples of the Holy Spirit?</p><cite>1 Corinthians 6:19</cite></blockquote>
+  <div class="scenario"><div class="label">The Scenario</div><p>She could write a strong essay on mental health. She could explain the importance of sleep. She also lived on caffeine, skipped meals into late-night takeaways, barely walked, treated exhaustion like a badge, and assumed holiness was mostly ideas, not body, sleep, and desire.</p>
+<p>Her body was not failing dramatically. It was being deferred. Deferred until the crash, the pain, the panic spiral, the illness that forced the issue.</p></div><h3>Why This Essential Matters</h3><p>In Christian faith your body is not an inconvenience or an ornament. It is a temple of the Holy Spirit. Mood, focus, courage, patience, and capacity to love are densely physical. A neglected body quietly becomes an unreliable partner in discipleship.</p>
+<p>This chapter is not vanity culture. It is stewardship. How you treat your body is, in important ways, worship.</p><h3>1. High-Value Maintenance, Not Neglect</h3><p>High-value machines get serviced before they fail. Food with protein and actual plants, sleep as a non-negotiable, water, movement that raises heart rate and loads muscles, plus basic hygiene and dental care. These are not hacks. They are rent you pay for a life that can carry weight for God's purposes.</p><h3>2. Guarding the Gates</h3><p>What you let into body and nervous system matters: substances, pornography, relentless junk content, energy drinks that mortgage tomorrow for today, all-night gaming that steals recovery. Boundaries are not purity theatre. They are gates that protect capacity and holiness.</p><h3>3. Radical Ownership</h3><p>No one else can sleep for you. No one else feels your hangover, anxiety spike, or lowered patience when you are underfuelled. Ownership means admitting what your body can sustain, not what your group chat celebrates, and bringing weakness to God rather than performing strength.</p><h3>4. Reverence for the Instrument</h3><p>Whether temple, instrument, or infrastructure, the ethic is the same. Treat this body as if it is irreplaceable, because it is. Glorify God in how you eat, rest, move, and refuse what degrades you.</p><h3>How This Connects</h3><p>Silence improves when your body is not chemically frantic. Skills need stamina. Community is hard if you are always depleted. Digital self-defence is partly nervous-system defence. Creation helps restore what screens empty. Faith under trial needs a body that is not constantly crashing.</p><h3>Discussion Questions</h3><ol><li>What is one way you currently treat your body as deferred maintenance?</li><li>Where do your boundaries leak: food, sleep, substances, screens, sexual content, or movement?</li><li>How does "temple of the Holy Spirit" challenge or comfort you?</li><li>If you trained your body like something entrusted by God, what would change this month?</li></ol><div class="challenges">
+<h3>Do This This Week</h3>
+<div class="level"><strong>Level 1</strong><p>Protect a consistent sleep window for seven nights. Thank God for rest as gift.</p></div>
+<div class="level"><strong>Level 2</strong><p>Cook three real meals from ingredients, not only reheat packaging.</p></div>
+<div class="level"><strong>Level 3</strong><p>Choose one gate to guard seriously for two weeks (for many, this includes digital purity). Track mood and focus.</p></div>
+</div><h3>Wisdom Reflections</h3>
+<div class="reflections">
+<div class="day"><span>Day 1</span><blockquote><p>Do you not know that your bodies are temples of the Holy Spirit, who is in you, whom you have received from God?</p><cite>1 Corinthians 6:19</cite></blockquote></div>
+<div class="day"><span>Day 2</span><blockquote><p>So whether you eat or drink or whatever you do, do it all for the glory of God.</p><cite>1 Corinthians 10:31</cite></blockquote></div>
+<div class="day"><span>Day 3</span><blockquote><p>I strike a blow to my body and make it my slave so that after I have preached to others, I myself will not be disqualified for the prize.</p><cite>1 Corinthians 9:27</cite></blockquote></div>
+<div class="day"><span>Day 4</span><blockquote><p>Come to me, all you who are weary and burdened, and I will give you rest.</p><cite>Matthew 11:28</cite></blockquote></div>
+<div class="day"><span>Day 5</span><blockquote><p>It is in vain that you rise up early and go late to rest, eating the bread of anxious toil; for he gives to his beloved sleep.</p><cite>Psalm 127:2</cite></blockquote></div>
+<div class="day"><span>Day 6</span><blockquote><p>I praise you because I am fearfully and wonderfully made.</p><cite>Psalm 139:14</cite></blockquote></div>
+<div class="day"><span>Day 7</span><blockquote><p>Present your bodies as a living sacrifice, holy and acceptable to God, which is your spiritual worship.</p><cite>Romans 12:1</cite></blockquote></div>
+</div><h3>Checklist</h3><ul class="check"><li>I know my current sleep, movement, and food pattern honestly</li><li>I have set one clear bodily boundary</li><li>I completed at least one challenge</li><li>I can explain why neglect is not neutral before God</li></ul>
+</section>
+
+  
+<section class="chapter" id="ch3">
+  <div class="chapter-meta">Essential 03</div>
+  <h2>Useful Real-World Skills</h2>
+  <p class="subtitle">Feed, fix, build, grow, finance</p>
+  <blockquote><p>Go to the ant, you sluggard; consider its ways and be wise!</p><cite>Proverbs 6:6</cite></blockquote>
+  <div class="scenario"><div class="label">The Scenario</div><p>He could navigate five apps at once. He knew streaming hacks and keyboard shortcuts. When his sink leaked, he filmed it, posted it, and waited. When money ran out before rent, he panicked. When a shelf needed mounting, he paid someone to do a thirty-minute job.</p>
+<p>He was clever online and fragile offline. The asymmetry had been invisible until life demanded competence, service, and stewardship.</p></div><h3>Why This Essential Matters</h3><p>Skills create quiet confidence: not status confidence, but the kind where you can look after yourself and be useful to others. A person who can feed, fix, build, grow, and finance is harder to trap, freer to help, and better prepared for ordinary faithfulness.</p>
+<p>Jesus worked with his hands. Work well done can be worship. Laziness is not freedom.</p><h3>The Five Categories</h3><p><strong>Feed.</strong> Cook real food. Follow a recipe. Batch cook. Reduce dependence on expensive convenience. Know enough nutrition to stop winging your brain chemistry.</p><p><strong>Fix.</strong> Practical competence: radiator, drain, breaker, button, washer. You do not need to be a tradesperson. You need the dignity of not being helpless.</p><p><strong>Build.</strong> Assemble, paint, make, put up a shelf, mend furniture. Building trains planning, frustration tolerance, and pride that is not borrowed from likes.</p><p><strong>Grow.</strong> Soil, pots, herbs, veg, fruit, compost, seasons. Growing food (or one living plant you keep alive) teaches patience, attention, failure, and provision. God made a garden before a city. A windowsill, jar, planter, allotment, or church garden is enough to begin.</p><p><strong>Finance.</strong> Budget. Track. Delay purchase. Understand debt, interest, contracts, and emergency buffers. Money anxiety shrinks when you can see the system. Faithful stewardship includes pounds and cents.</p><h3>Resilience Over Visibility</h3><p>Online culture rewards visible cleverness. Skills culture rewards quiet readiness. No one claps when you cook for a sick flatmate or mend a hem for a younger sibling. That is exactly why it matters.</p><h3>Producing and Preserving</h3><p>Consumers wait. Producers make. Preservers keep skills, tools, leftovers, money, relationships, and knowledge. A balanced life needs production and preservation, not endless intake.</p><h3>Discussion Questions</h3><ol><li>Which of the five categories is your weakest?</li><li>What practical skill would most increase your ability to serve this year?</li><li>Where do you currently outsource because of fear rather than true efficiency?</li><li>Who around you could teach you one skill if you asked without embarrassment?</li></ol><div class="challenges">
+<h3>Do This This Week</h3>
+<div class="level"><strong>Level 1</strong><p>Cook one full meal for yourself from base ingredients. Share it if you can.</p></div>
+<div class="level"><strong>Level 2</strong><p>Learn and complete one household repair or maintenance task.</p></div>
+<div class="level"><strong>Level 3</strong><p>Start growing something edible this week: herbs, salad leaves, or a single pot. Keep it alive for thirty days.</p></div>
+<div class="level"><strong>Level 4</strong><p>Write a simple monthly budget and live within it for four weeks.</p></div>
+<div class="level"><strong>Stretch</strong><p>Plan a tiny grow system (compost scraps, successive plantings, or share produce).</p></div>
+</div><h3>Wisdom Reflections</h3>
+<div class="reflections">
+<div class="day"><span>Day 1</span><blockquote><p>Go to the ant, you sluggard; consider its ways and be wise!</p><cite>Proverbs 6:6</cite></blockquote></div>
+<div class="day"><span>Day 2</span><blockquote><p>Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.</p><cite>Colossians 3:23</cite></blockquote></div>
+<div class="day"><span>Day 3</span><blockquote><p>She selects wool and flax and works with eager hands.</p><cite>Proverbs 31:13</cite></blockquote></div>
+<div class="day"><span>Day 4</span><blockquote><p>If a man will not work, he shall not eat.</p><cite>2 Thessalonians 3:10</cite></blockquote></div>
+<div class="day"><span>Day 5</span><blockquote><p>The plans of the diligent lead surely to abundance.</p><cite>Proverbs 21:5</cite></blockquote></div>
+<div class="day"><span>Day 6</span><blockquote><p>And God saw everything that he had made, and behold, it was very good.</p><cite>Genesis 1:31</cite></blockquote></div>
+<div class="day"><span>Day 7</span><blockquote><p>Let the thief no longer steal, but rather let him labour, doing honest work with his own hands, so that he may have something to share with anyone in need.</p><cite>Ephesians 4:28</cite></blockquote></div>
+</div><h3>Checklist</h3><ul class="check"><li>I can name my weakest skill category</li><li>I learned one concrete skill this week</li><li>I reduced one unnecessary paid dependency</li><li>I can help someone else with one practical thing</li></ul>
+</section>
+
+  
+<section class="chapter" id="ch4">
+  <div class="chapter-meta">Essential 04</div>
+  <h2>Digital Self-Defence</h2>
+  <p class="subtitle">Guarding mind, witness, and freedom online</p>
+  <blockquote><p>Above all else, guard your heart, for everything you do flows from it.</p><cite>Proverbs 4:23</cite></blockquote>
+  <div class="scenario"><div class="label">The Scenario</div><p>She thought she was careful. Strong password, recycled twice. Location on for convenience. Free quiz apps for fun. AI chat for late-night spiral conversations. Photos of everything, somewhere. When a deepfake of her face appeared in a group chat as a joke, she laughed first. Then she could not sleep.</p></div><h3>Why This Essential Matters</h3><p>Your phone tracks patterns, people, places, and pressure points. That data shapes ads, recommendations, scams, and rank. More importantly, what enters your mind shapes your loves. Digital self-defence is not paranoia. It is discipleship and adult agency in an extractive environment.</p><h3>Ten Real Fronts</h3><ol><li><strong>Surveillance economy</strong>: free services monetise observation.</li><li><strong>Digital footprint</strong>: what you post lasts longer than your mood did.</li><li><strong>Social profiling</strong>: platforms sort you into a sellable story.</li><li><strong>AI chats</strong>: convenient, intimate, and often not private as people assume.</li><li><strong>Malware and scams</strong>: urgency, fear, and greed are usual tools.</li><li><strong>Deepfakes</strong>: seeing is no longer believing by default.</li><li><strong>Pattern of life</strong>: preferred routes, hours, contacts, vulnerabilities.</li><li><strong>Mental health load</strong>: comparison, outrage, and sexualisation as business models.</li><li><strong>Practical defence</strong>: password managers, MFA, updates, least-privilege permissions.</li><li><strong>Spiritual resilience</strong>: knowing how to repent, re-enter wisdom, and regain composure after a digital fall.</li></ol><h3>Practical Minimums</h3><ul><li>Password manager + multi-factor authentication on important accounts</li><li>Strip app permissions you do not need</li><li>Assume public posts are permanent</li><li>Verify unusual payment or romantic urgency by a second channel</li><li>Schedule social media; do not let it schedule you</li><li>If porn or doomscroll is a stronghold, tell a trusted mature believer and put real accountability in place</li></ul><h3>Discussion Questions</h3><ol><li>What is the most careless digital habit you still justify?</li><li>If your last thirty days of browsing were printed and read aloud, what would embarrass you before God?</li><li>Where do you need convenience less than you need holiness and privacy?</li><li>Who would you call if you were scammed, publicly targeted, or stuck in a digital pattern you cannot break?</li></ol><div class="challenges">
+<h3>Do This This Week</h3>
+<div class="level"><strong>Level 1</strong><p>Install a password manager and migrate your top ten accounts.</p></div>
+<div class="level"><strong>Level 2</strong><p>Turn off non-essential notifications and remove one toxic or wasted app.</p></div>
+<div class="level"><strong>Level 3</strong><p>Do a full permissions and privacy pass on your phone in one focused hour. Confess and reset where needed.</p></div>
+</div><h3>Wisdom Reflections</h3>
+<div class="reflections">
+<div class="day"><span>Day 1</span><blockquote><p>Above all else, guard your heart, for everything you do flows from it.</p><cite>Proverbs 4:23</cite></blockquote></div>
+<div class="day"><span>Day 2</span><blockquote><p>I will not set before my eyes anything that is worthless.</p><cite>Psalm 101:3</cite></blockquote></div>
+<div class="day"><span>Day 3</span><blockquote><p>Finally, brothers and sisters, whatever is true, whatever is noble, whatever is right, whatever is pure... think about such things.</p><cite>Philippians 4:8</cite></blockquote></div>
+<div class="day"><span>Day 4</span><blockquote><p>Have nothing to do with the fruitless deeds of darkness, but rather expose them.</p><cite>Ephesians 5:11</cite></blockquote></div>
+<div class="day"><span>Day 5</span><blockquote><p>Be as shrewd as snakes and as innocent as doves.</p><cite>Matthew 10:16</cite></blockquote></div>
+<div class="day"><span>Day 6</span><blockquote><p>Do not conform to the pattern of this world, but be transformed by the renewing of your mind.</p><cite>Romans 12:2</cite></blockquote></div>
+<div class="day"><span>Day 7</span><blockquote><p>The thief comes only to steal and kill and destroy; I came that they may have life and have it abundantly.</p><cite>John 10:10</cite></blockquote></div>
+</div><h3>Checklist</h3><ul class="check"><li>Critical accounts secured with MFA</li><li>One major digital permission reduced</li><li>Scam or relapse response plan named</li><li>I can explain why free is rarely free</li></ul>
+</section>
+
+  
+<section class="chapter" id="ch5">
+  <div class="chapter-meta">Essential 05</div>
+  <h2>Real Community</h2>
+  <p class="subtitle">Belonging that can carry weight</p>
+  <blockquote><p>Two are better than one... if either of them falls down, one can help the other up.</p><cite>Ecclesiastes 4:9-10</cite></blockquote>
+  <div class="scenario"><div class="label">The Scenario</div><p>He had 1,400 followers. When his relationships collapsed and he stopped posting, almost nobody checked on him. The three people who did were not his largest audience. They were the ones who had eaten with him, worked with him, prayed with him, and knew how he went quiet when he was not okay.</p></div><h3>Why This Essential Matters</h3><p>You were not made to do the Christian life alone. Isolation amplifies anxiety, distortion, and despair. Real community is load-sharing, truth-telling, celebration, and practical help. The church is not a perfect club. It is family under Christ, and you need it.</p>
+<p>Followers can amplify you. Friends can carry you. Those are not the same species.</p><h3>The 2am Test</h3><p>Who can you call at 2am without rehearsing a speech? Who would come? If the list is empty, this essential is urgent.</p><h3>Pre-Built Relationships</h3><p>Deep relationships are slow infrastructure. Shared meals, repeated work, honest conversation, small favours, repaired conflict: that is how belonging compounds. Build them in ordinary weeks so they exist in catastrophic ones.</p><h3>How to Build It</h3><ol><li>Be the initiator sometimes. Do not wait to be chosen every time.</li><li>Trade screens for rooms. Meet face to face.</li><li>Practise useful help: lifts, meals, studying together, childcare, job leads, sitting with someone in grief.</li><li>Learn repair. Community dies from unrepaired ruptures. Practise confession and forgiveness.</li><li>Join something with purpose larger than socialising: church community, youth group, service, music, skill guild.</li></ol><h3>Discussion Questions</h3><ol><li>Who would pass your 2am test right now?</li><li>Are you more practised at broadcasting or belonging?</li><li>Where have you chosen performance over honesty in friendship?</li><li>Where is God inviting you into committed local community, not only online Christian content?</li></ol><div class="challenges">
+<h3>Do This This Week</h3>
+<div class="level"><strong>Level 1</strong><p>Text one person not emptily, but to ask a real question and arrange a meet.</p></div>
+<div class="level"><strong>Level 2</strong><p>Host something small: tea, a walk, a shared meal.</p></div>
+<div class="level"><strong>Level 3</strong><p>Repair one neglected or strained relationship with an honest approach.</p></div>
+</div><h3>Wisdom Reflections</h3>
+<div class="reflections">
+<div class="day"><span>Day 1</span><blockquote><p>Carry each other's burdens, and in this way you will fulfill the law of Christ.</p><cite>Galatians 6:2</cite></blockquote></div>
+<div class="day"><span>Day 2</span><blockquote><p>And let us consider how we may spur one another on toward love and good deeds, not giving up meeting together.</p><cite>Hebrews 10:24-25</cite></blockquote></div>
+<div class="day"><span>Day 3</span><blockquote><p>A friend loves at all times, and a brother is born for a time of adversity.</p><cite>Proverbs 17:17</cite></blockquote></div>
+<div class="day"><span>Day 4</span><blockquote><p>By this everyone will know that you are my disciples, if you love one another.</p><cite>John 13:35</cite></blockquote></div>
+<div class="day"><span>Day 5</span><blockquote><p>As iron sharpens iron, so one person sharpens another.</p><cite>Proverbs 27:17</cite></blockquote></div>
+<div class="day"><span>Day 6</span><blockquote><p>They devoted themselves to the apostles' teaching and to fellowship, to the breaking of bread and to prayer.</p><cite>Acts 2:42</cite></blockquote></div>
+<div class="day"><span>Day 7</span><blockquote><p>Therefore encourage one another and build each other up.</p><cite>1 Thessalonians 5:11</cite></blockquote></div>
+</div><h3>Checklist</h3><ul class="check"><li>I can name my real people, not only my online circle</li><li>I initiated one concrete shared experience</li><li>I offered help, not only asked for attention</li><li>I am building community before I need it</li></ul>
+</section>
+
+  
+<section class="chapter" id="ch6">
+  <div class="chapter-meta">Essential 06</div>
+  <h2>Knowledge Without Wi&#8209;Fi</h2>
+  <p class="subtitle">What holds when the signal dies</p>
+  <blockquote><p>I have hidden your word in my heart that I might not sin against you.</p><cite>Psalm 119:11</cite></blockquote>
+  <div class="scenario"><div class="label">The Scenario</div><p>The Wi&#8209;Fi died during a week away. No maps. No recipe apps. No notes in the cloud. No chat to settle an argument. The group discovered who actually knew first aid, could make a meal from leftovers, remember a psalm, tell north from a watch shadow, or calm a younger person without looking it up.</p></div><h3>Why This Essential Matters</h3><p>Access is not the same as possession. Search bars create the feeling of knowledge without retained understanding. When devices fail, or when crisis moves faster than lookup, only internalised knowledge is truly yours.</p>
+<p>For Christians this includes Scripture hidden in the heart: not as performance, but as real wisdom available under pressure.</p><h3>Owned vs Rented Knowledge</h3><p>Rented knowledge lives on servers you do not control. Owned knowledge lives in memory, muscle, judgement, and practice. Both matter. Too much rental creates soft minds that cannot function offline or under stress.</p><h3>Internalised Wisdom and Skills</h3><p>Memorise crucial phone numbers. Know emergency steps. Learn basic navigation. Practise craft until it no longer depends on a prompt. Read hard books on paper sometimes. Memorise verses that name God truthfully when your feelings lie.</p><h3>Build a Backup Knowledge Base</h3><ul><li>Local notes for budget, recipes, contacts, medical info</li><li>Offline maps for places you frequent</li><li>Paper backups for critical documents</li><li>A small set of Scripture you can pray without a screen</li><li>Practised first aid, not only app-based confidence</li></ul><h3>Discussion Questions</h3><ol><li>What important knowledge do you currently only rent from search?</li><li>If the internet vanished for a month, how capable would your faith practices stay?</li><li>Which verse or truth would you want ready if you had to help someone tonight?</li><li>What subject or skill deserves slow, embodied learning from you this season?</li></ol><div class="challenges">
+<h3>Do This This Week</h3>
+<div class="level"><strong>Level 1</strong><p>Memorise five key contacts and one short psalm or promise of God by heart.</p></div>
+<div class="level"><strong>Level 2</strong><p>Learn one real skill from a book or mentor without video shortcuts.</p></div>
+<div class="level"><strong>Level 3</strong><p>Build a one-page offline life sheet: contacts, meds, cash plan, home basics, emergency prayers.</p></div>
+</div><h3>Wisdom Reflections</h3>
+<div class="reflections">
+<div class="day"><span>Day 1</span><blockquote><p>I have hidden your word in my heart that I might not sin against you.</p><cite>Psalm 119:11</cite></blockquote></div>
+<div class="day"><span>Day 2</span><blockquote><p>Your word is a lamp for my feet, a light on my path.</p><cite>Psalm 119:105</cite></blockquote></div>
+<div class="day"><span>Day 3</span><blockquote><p>Let the message of Christ dwell among you richly.</p><cite>Colossians 3:16</cite></blockquote></div>
+<div class="day"><span>Day 4</span><blockquote><p>All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness.</p><cite>2 Timothy 3:16</cite></blockquote></div>
+<div class="day"><span>Day 5</span><blockquote><p>Man shall not live on bread alone, but on every word that comes from the mouth of God.</p><cite>Matthew 4:4</cite></blockquote></div>
+<div class="day"><span>Day 6</span><blockquote><p>The fear of the Lord is the beginning of knowledge.</p><cite>Proverbs 1:7</cite></blockquote></div>
+<div class="day"><span>Day 7</span><blockquote><p>These commandments that I give you today are to be on your hearts. Impress them on your children.</p><cite>Deuteronomy 6:6-7</cite></blockquote></div>
+</div><h3>Checklist</h3><ul class="check"><li>Distinguished owned vs rented knowledge in my own life</li><li>Memorised or offline-stored something important</li><li>Practised retrieval, not only browsing</li><li>Taught one thing to someone else</li></ul>
+</section>
+
+  
+<section class="chapter" id="ch7">
+  <div class="chapter-meta">Essential 07</div>
+  <h2>Prescribe Nature</h2>
+  <p class="subtitle">Creation, care, and the original therapy</p>
+  <blockquote><p>The heavens declare the glory of God; the skies proclaim the work of his hands.</p><cite>Psalm 19:1</cite></blockquote>
+  <div class="scenario"><div class="label">The Scenario</div><p>He tried another productivity system, then another meditation app. Mood still flat. Sleep still broken. On a whim he spent a full day outside: no headphones, a long walk, lunch on a wall in the sun, feet in actual grass. Nothing mystical happened. He just felt human again for the first time in months, and suddenly the psalms about trees and water made more sense.</p></div><h3>Why This Essential Matters</h3><p>Nature is not decoration. It is medicine older generations received by default, and it is a theatre of God's glory. Sunlight, motion outdoors, and scale-shift beyond your phone restore attention. Isolation in climate-controlled boxes is a modern experiment with uneven results.</p><h3>Nature as Medicine and Window</h3><p>Forest walks, parks, beaches, hills, gardens, rain on skin, and real wind lower arousal differently from indoor distraction. You stop being the only object in the scene. Creation points beyond itself. The goal is not nature worship. The goal is gratitude, health, and awe that sends you back to the Creator.</p><h3>Sunlight, Soil, Slow Rhythm</h3><p>Morning light resets many people better than another motivational video. Soil and seasons declare growth, waiting, fruit, and die-back. That cadence counters the infinite now of feeds. You cannot optimise a tree into nonstop output without killing it. Humans are not so different.</p><h3>How to Prescribe It</h3><ol><li>Daily outdoor light, ideally earlier rather than only at night</li><li>Walking calls or conversations when possible</li><li>One weekly longer outing with no need for content capture</li><li>Grow something, even tiny</li><li>Leave headphones behind on some walks so your senses return</li></ol><h3>Discussion Questions</h3><ol><li>How many continuous outdoor minutes do you average on a weekday?</li><li>Which natural setting restores you fastest?</li><li>Where has creation recently made you more attentive to God?</li><li>How would you redesign one afternoon a week around place, not content?</li></ol><div class="challenges">
+<h3>Do This This Week</h3>
+<div class="level"><strong>Level 1</strong><p>Ten outdoor minutes a day, no headphones, for seven days. Pray a short thanksgiving outside.</p></div>
+<div class="level"><strong>Level 2</strong><p>A two-hour outdoor block this week with a friend or alone.</p></div>
+<div class="level"><strong>Level 3</strong><p>A mostly outdoor day: walk, picnic, park, coastline, or hills. Leave the performance mindset behind.</p></div>
+</div><h3>Wisdom Reflections</h3>
+<div class="reflections">
+<div class="day"><span>Day 1</span><blockquote><p>The heavens declare the glory of God; the skies proclaim the work of his hands.</p><cite>Psalm 19:1</cite></blockquote></div>
+<div class="day"><span>Day 2</span><blockquote><p>The Lord is my shepherd, I lack nothing. He makes me lie down in green pastures, he leads me beside quiet waters.</p><cite>Psalm 23:1-2</cite></blockquote></div>
+<div class="day"><span>Day 3</span><blockquote><p>Consider how the wild flowers grow. They do not labour or spin.</p><cite>Matthew 6:28</cite></blockquote></div>
+<div class="day"><span>Day 4</span><blockquote><p>When I consider your heavens, the work of your fingers... what is mankind that you are mindful of them?</p><cite>Psalm 8:3-4</cite></blockquote></div>
+<div class="day"><span>Day 5</span><blockquote><p>And God saw all that he had made, and it was very good.</p><cite>Genesis 1:31</cite></blockquote></div>
+<div class="day"><span>Day 6</span><blockquote><p>Ask the animals, and they will teach you, or the birds in the sky, and they will tell you.</p><cite>Job 12:7</cite></blockquote></div>
+<div class="day"><span>Day 7</span><blockquote><p>The earth is the Lord's, and everything in it.</p><cite>Psalm 24:1</cite></blockquote></div>
+</div><h3>Checklist</h3><ul class="check"><li>Outdoor minutes logged this week</li><li>One longer natural outing done</li><li>Noticed mood or sleep shifts</li><li>Identified an indoor habit to displace</li></ul>
+</section>
+
+  
+<section class="chapter" id="ch8">
+  <div class="chapter-meta">Essential 08</div>
+  <h2>Tested Faith</h2>
+  <p class="subtitle">Trust in Christ that holds under pressure</p>
+  <blockquote><p>Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.</p><cite>James 1:2-3</cite></blockquote>
+  <div class="scenario"><div class="label">The Scenario</div><p>She had grown up going to church. Her family was Christian, not loudly, but faithfully. She absorbed the faith without examining it. God was part of the air she breathed, so assumed that she never thought to question him.</p>
+<p>Then her younger brother died, suddenly, at nineteen. Every prayer, every Sunday, every easy story about fairness went through the fire. Over weeks and months the questions would not stop. Some beliefs bent. Some nearly broke. A few held, not because they felt good that week, but because she discovered that Christ is still trustworthy when explanations run out.</p>
+<p>That is tested faith: not certainty without doubt, not a life free of tragedy, but trust that has been to the fire and still leans on Jesus.</p></div><h3>Why This Essential Matters</h3><p>Faith in Christ is the last essential because it is the living foundation under the other seven. Without it, silence can become mere technique, body care mere self-project, skills mere self-reliance, community mere club, knowledge mere data, nature mere scenery.</p>
+<p>Tested faith answers quieter questions: Who is God when the story hurts? Who am I in Christ when achievement fails? What do I refuse to sell? Who will I stay for, and to whom will I keep turning when leaving would be easier?</p><h3>Decorative vs Load-Bearing Faith</h3><p>A decorative beam looks good and carries nothing. A load-bearing beam may be hidden and rough, but remove it and the building fails.</p>
+<p>Decorative faith looks admirable in church language and costs almost nothing. Load-bearing faith still shapes obedience when inconvenient. Knowing Christian words is not the same as being rooted in Christ.</p><h3>Preparation for Deception</h3><p>You will be pressed to believe false things: flattering narratives, tribal slogans, progressive or conservative idols dressed as gospel, arguments that sound clever while emptying the cross. Discernment is slower thinking shaped by Scripture and wise community. Who benefits if I believe this? Does this match the Jesus of the Gospels? What am I not being shown?</p><h3>Survival Through Disappointment</h3><p>The most common test is not intellectual. It is emotional. You hope and things fall apart. You pray and the answer is not the one you wanted. Decorative faith smuggles an unspoken bargain: if I am decent, God will repay me on my schedule. Load-bearing faith does not make trust optional when God feels silent. The psalmists complained honestly and still clung to the Lord.</p><h3>Knowing vs Knowing About</h3><p>You can know a lot about Jesus without trusting him. Reading about courage is not courage. Studying the creeds is not the same as enduring with Christ. Faith becomes real when life presents an invoice and you discover whether you will bend life around him, or bend him around your preferences.</p><h3>The Tests That Come</h3><ul><li><strong>Suffering</strong>: pain without tidy answers</li><li><strong>Doubt</strong>: frameworks cracking under honest questions</li><li><strong>Success</strong>: ease that makes self-reliance feel earned</li><li><strong>Hypocrisy</strong>: yours, or someone you respected in church</li><li><strong>Silence</strong>: no audience, no spiritual scoreboard</li><li><strong>Peer pressure</strong>: belonging that requires you to soft-pedal Christ</li></ul><h3>Building Load-Bearing Faith</h3><ol><li>Build on God's character and promises, not only feelings.</li><li>Read Scripture for obedience, not only inspiration.</li><li>Pray honestly, including anger, grief, and confusion.</li><li>Practise small faithfulness: gathering, confession, generosity, service.</li><li>Seek reality: ask honest questions with mature believers, not only with an algorithm.</li><li>Learn from the tested: older saints who suffered and still stood.</li><li>Keep accountability so self-deception is harder.</li><li>Stay close to Christ's death and resurrection. That is the centre, not your performance graph.</li></ol><h3>Where Does Faith Come From?</h3><p>Faith is a gift we receive and a response we grow into. It is not manufactured by willpower alone, and it must still be examined rather than merely inherited. For the Christian, all true load-bearing hope is rooted in a Person: Jesus Christ lived, died, and rose. He offers forgiveness, purpose, and life with God. He also calls you to take up a cross and follow.</p>
+<p>Inherited faith that has never been handled with honesty is fragile. Self-made spirituality without Jesus is also fragile. What lasts is trust that has been brought through the fire and still says with Job, in effect: though he slay me, yet will I hope in him. Purpose, in this light, is less a single discovery than a practice of kept promises with God and neighbour, one faithful day at a time.</p><h3>Discussion Questions</h3><ol><li>Have your convictions about God been tested? What held?</li><li>Is your faith mostly decorative or load-bearing right now?</li><li>Where did your strongest Christian beliefs actually come from, and have you examined them?</li><li>Which test presses you hardest?</li><li>Where are you currently pretending before God or people?</li><li>What would it look like this week to trust Christ in a small concrete way?</li></ol><div class="challenges">
+<h3>Do This This Week</h3>
+<div class="level"><strong>Level 1</strong><p>Write what you actually believe about Jesus. Not the official answers: the honest ones. Bring them to God in prayer.</p></div>
+<div class="level"><strong>Level 2</strong><p>Talk with an older believer who has suffered. Ask what held.</p></div>
+<div class="level"><strong>Level 3</strong><p>Choose one private obedience for seven days (no spiritual show for others). Journal it.</p></div>
+<div class="level"><strong>Level 4</strong><p>Write a 10 to 15 line faith statement: who Christ is, what you trust him for, and what practices keep that trust real under pressure.</p></div>
+</div><h3>Wisdom Reflections</h3>
+<div class="reflections">
+<div class="day"><span>Day 1</span><blockquote><p>Trust in the Lord with all your heart and lean not on your own understanding.</p><cite>Proverbs 3:5</cite></blockquote></div>
+<div class="day"><span>Day 2</span><blockquote><p>Consider it pure joy... whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.</p><cite>James 1:2-3</cite></blockquote></div>
+<div class="day"><span>Day 3</span><blockquote><p>And we know that in all things God works for the good of those who love him.</p><cite>Romans 8:28</cite></blockquote></div>
+<div class="day"><span>Day 4</span><blockquote><p>My grace is sufficient for you, for my power is made perfect in weakness.</p><cite>2 Corinthians 12:9</cite></blockquote></div>
+<div class="day"><span>Day 5</span><blockquote><p>I remain confident of this: I will see the goodness of the Lord in the land of the living. Wait for the Lord; be strong and take heart.</p><cite>Psalm 27:13-14</cite></blockquote></div>
+<div class="day"><span>Day 6</span><blockquote><p>In this world you will have trouble. But take heart! I have overcome the world.</p><cite>John 16:33</cite></blockquote></div>
+<div class="day"><span>Day 7</span><blockquote><p>These have come so that the proven genuineness of your faith... may result in praise, glory and honour when Jesus Christ is revealed.</p><cite>1 Peter 1:7</cite></blockquote></div>
+</div><h3>Checklist</h3><ul class="check"><li>Honest reflection done, including doubts</li><li>Older conversation with a tested believer</li><li>Challenge completed</li><li>Personal faith statement drafted</li><li>Discussed with at least one other person</li></ul>
+</section>
+
+  
+<section class="chapter" id="assessment">
+  <div class="chapter-meta">Practice</div>
+  <h2>Before & After: Roots Assessment</h2>
+  <p>Score yourself from 1 to 5 at the start of the programme and again at the end. Be honest before God. Inflation helps no one.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Essential</th><th>Start</th><th>Now</th><th>Notes / prayer points</th></tr></thead>
+    <tbody>
+      <tr><td>Silence</td><td></td><td></td><td></td></tr>
+      <tr><td>Body as temple</td><td></td><td></td><td></td></tr>
+      <tr><td>Skills (incl. grow)</td><td></td><td></td><td></td></tr>
+      <tr><td>Digital self-defence</td><td></td><td></td><td></td></tr>
+      <tr><td>Community</td><td></td><td></td><td></td></tr>
+      <tr><td>Knowledge without Wi&#8209;Fi</td><td></td><td></td><td></td></tr>
+      <tr><td>Nature</td><td></td><td></td><td></td></tr>
+      <tr><td>Tested faith</td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table></div>
+  <p>Where did you grow? Where are you still decorative rather than load-bearing? Choose one next practice, not ten fantasies. Pray specifically.</p>
+</section>
+
+  
+<section class="chapter" id="conclusion">
+  <div class="chapter-meta">Closing</div>
+  <h2>Building a Life That Holds</h2>
+  <p>Eight essentials. None of them are glamorous for long. All of them become obvious in crisis.</p>
+<p>You do not need perfection. You need direction, practice, people, and grace. Start with the essential densest with excuses. Do the next small, faithful thing.</p>
+<p>The goal is not to become impressive. The goal is to become reliable under Christ: to God, to the people who need you, and to the life you are called to live.</p>
+  <blockquote><p>Keep showing up. Trust Christ in a small voice when the larger one has gone quiet. Meaning is built, often quietly, every time your faith and your behaviour meet under the mercy of God.</p><cite>Christian Edition</cite></blockquote>
+  <h3>How to Use This After Today</h3>
+  <ul><li>Revisit one chapter a week with a friend, mentor, or youth group</li><li>Keep the challenges small and concrete</li><li>Retake the roots assessment every term</li><li>Use the prayer and Scripture resources alongside this guide</li><li>If you need a non-religious framing for school or community work, use the Universal Edition</li></ul>
+  <p>Whatever your background, and whatever brought you here: welcome. Build roots that can hold when the weather turns, rooted in the one who holds all things together.</p>
+</section>
+
+  <footer class="site-footer">
+    onetoeight Christian Edition · Draft for review · Not a replacement for pastoral care or professional mental health support · Stats cited as commonly used programme markers (ONS / Common Sense Media / graduate employability surveys).
+  </footer>
+</main>
+</body>
+</html>
