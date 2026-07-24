@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3D2820">
+<title>onetoeight — Building a generation that holds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;overflow-x:hidden}
+body{
+  font-family:Inter,system-ui,sans-serif;
+  background:#F5F0E8; color:#2a2520;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:Fraunces,serif;font-weight:500;line-height:1.15}
+a{color:#A46447;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:linear-gradient(180deg,#3D2820,#4C362D);
+  padding:.7rem .9rem;border-bottom:1px solid rgba(255,255,255,.08);
+  box-shadow:0 8px 24px rgba(45,28,20,.18);
+}
+.topbar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:.75rem}
+.logo{font-family:Fraunces,serif;font-weight:600;color:#fff;font-size:1.05rem}
+.logo em{color:#CEB59E;font-style:italic;font-weight:400}
+.tagline{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:rgba(232,225,213,.6);flex:1;text-align:right}
+
+/* ===== HERO ===== */
+.hero{
+  max-width:1100px;margin:0 auto;padding:2.5rem .9rem 0;
+  display:grid;grid-template-columns:1fr;gap:1.5rem;
+}
+@media(min-width:800px){.hero{grid-template-columns:1.1fr .9fr;padding-top:3.5rem}}
+.hero-text{}
+.hero-badge{
+  display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:#A46447;background:rgba(164,100,71,.12);
+  padding:.3rem .6rem;border-radius:999px;margin-bottom:.8rem;
+}
+.hero h1{font-size:clamp(1.8rem,5.2vw,2.8rem);color:#4C362D;margin:0 0 .6rem}
+.hero h1 em{color:#A46447;font-style:italic}
+.hero p{font-size:1.08rem;color:#7a6657;margin:0;max-width:42rem}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.hero-stat{
+  background:linear-gradient(180deg,#fff,#fcf9f6);
+  border:1px solid rgba(76,54,45,.1);border-radius:16px;
+  padding:.9rem .65rem;text-align:center;
+  box-shadow:0 8px 20px rgba(76,54,45,.06);
+}
+.hero-stat strong{display:block;font-family:Fraunces,serif;font-size:clamp(1.3rem,3.5vw,1.8rem);color:#A46447;font-weight:500}
+.hero-stat span{font-size:.78rem;color:#7a6657;line-height:1.3}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.2rem}
+.btn{
+  display:inline-flex;align-items:center;border-radius:999px;
+  padding:.75rem 1.15rem;font-weight:700;font-size:.9rem;cursor:pointer;border:0;
+}
+.btn.primary{background:#4C362D;color:#fff}
+.btn.secondary{background:transparent;border:1px solid rgba(76,54,45,.15);color:#4C362D}
+/* ===== SECTIONS ===== */
+.wrap{max-width:1100px;margin:0 auto;padding:0 .9rem}
+.section{padding:2.5rem 0;border-bottom:1px solid rgba(76,54,45,.08)}
+.section:last-child{border-bottom:0}
+.section-label{
+  font-size:.68rem;font-weight:800;letter-spacing:.07em;
+  text-transform:uppercase;color:#88937B;margin-bottom:.4rem;
+}
+.section h2{font-size:clamp(1.4rem,4vw,2rem);color:#4C362D;margin:0 0 .5rem}
+.section .lede{font-size:1rem;color:#7a6657;margin:0 0 1.2rem;max-width:44rem}
+
+/* ===== PROBLEM CARDS ===== */
+.problem-grid{display:grid;gap:.6rem}
+@media(min-width:650px){.problem-grid{grid-template-columns:repeat(3,1fr)}}
+.prob{
+  background:#fff;border:1px solid rgba(76,54,45,.1);border-radius:18px;
+  padding:1rem 1rem 1.05rem;box-shadow:0 8px 24px rgba(76,54,45,.06);
+}
+.prob .icon{font-size:1.6rem;margin-bottom:.3rem}
+.prob h3{font-size:1.05rem;color:#4C362D;margin:0 0 .3rem}
+.prob p{font-size:.88rem;color:#7a6657;margin:0;line-height:1.5}
+
+/* ===== ESSENTIALS ===== */
+.ess-grid{display:grid;gap:.5rem}
+@media(min-width:700px){.ess-grid{grid-template-columns:repeat(4,1fr)}}
+.ess{
+  background:#fff;border:1px solid rgba(76,54,45,.1);border-radius:14px;
+  padding:.75rem .7rem;text-align:center;
+}
+.ess .num{font-family:Fraunces,serif;font-size:1.5rem;color:#A46447;line-height:1}
+.ess h3{font-size:.88rem;color:#4C362D;margin:.35rem 0 0}
+
+/* ===== INCOME ===== */
+.income-grid{display:grid;gap:.6rem}
+@media(min-width:650px){.income-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:850px){.income-grid{grid-template-columns:repeat(4,1fr)}}
+.inc{
+  background:#fff;border:1px solid rgba(76,54,45,.1);border-radius:18px;
+  padding:1rem .9rem;box-shadow:0 8px 20px rgba(76,54,45,.05);
+}
+.inc .price{font-family:Fraunces,serif;font-size:1.5rem;color:#A46447;font-weight:500;margin:0}
+.inc h3{font-size:.95rem;margin:.2rem 0 .2rem;color:#4C362D}
+.inc p{font-size:.82rem;color:#7a6657;margin:0;line-height:1.45}
+.inc .pot{font-weight:700;font-size:.78rem;color:#88937B}
+/* ===== IMPACT ===== */
+.impact-grid{display:grid;gap:.6rem}
+@media(min-width:650px){.impact-grid{grid-template-columns:repeat(3,1fr)}}
+.imp{
+  background:#fff;border:1px solid rgba(76,54,45,.1);border-radius:18px;
+  padding:1rem .9rem;box-shadow:0 8px 20px rgba(76,54,45,.05);
+}
+.imp .num{font-family:Fraunces,serif;font-size:2.2rem;color:#4C362D;font-weight:500;line-height:1}
+.imp h3{font-size:.95rem;margin:.3rem 0 .25rem;color:#4C362D}
+.imp p{font-size:.84rem;color:#7a6657;margin:0}
+
+/* ===== TESTIMONIAL ===== */
+.testi-grid{display:grid;gap:.6rem}
+@media(min-width:700px){.testi-grid{grid-template-columns:1fr 1fr}}
+.tes{
+  background:#fff;border:1px solid rgba(76,54,45,.1);border-radius:18px;
+  padding:1rem;box-shadow:0 8px 20px rgba(76,54,45,.05);
+}
+.tes .q{font-style:italic;color:#7a6657;font-size:.92rem;margin:0 0 .55rem}
+.tes .who{font-weight:700;color:#4C362D;font-size:.82rem}
+.tes .role{font-size:.75rem;color:#88937B}
+
+/* ===== CTA ===== */
+.cta-block{
+  background:linear-gradient(135deg,#4C362D,#5C3A2E);
+  border-radius:24px;padding:2rem 1.5rem;margin:2rem auto;
+  color:#fff; text-align:center;
+}
+.cta-block h2{color:#fff;margin:0 0 .5rem;font-size:clamp(1.3rem,3.8vw,1.9rem)}
+.cta-block p{color:rgba(255,255,255,.82);font-size:.95rem;max-width:34rem;margin:0 auto 1rem}
+.cta-block .btn.primary{background:#A46447;color:#fff}
+.cta-block .btn.secondary{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff}
+
+/* ===== FOOTER ===== */
+.footer{
+  padding:1.5rem .9rem;text-align:center;color:#7a6657;font-size:.82rem;
+  max-width:1100px;margin:0 auto;
+}
+.footer strong{color:#4C362D}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">one <em>to</em> eight</div>
+    <div class="tagline">Building the next generation of adults</div>
+  </div>
+</header>
+
+<main class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Community formation · Income potential</div>
+    <h1>Young people are <em>untethered</em>. We give them roots.</h1>
+    <p>onetoeight is a formation kit for a screen-born generation. Eight essentials — silence, body, skills, digital defence, community, knowledge, nature, and tested convictions — built to produce adults who can hold when the culture stops holding them.</p>
+    <div class="hero-cta">
+      <a href="#pitch" class="btn primary">See the vision</a>
+      <a href="#income" class="btn secondary">Income model</a>
+      <a href="#impact" class="btn secondary">Community impact</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><strong>1 in 5</strong><span>young people experience anxiety or depression</span></div>
+    <div class="hero-stat"><strong>7 hrs</strong><span>average daily teen screen time</span></div>
+    <div class="hero-stat"><strong>52%</strong><span>of graduates feel unprepared for real life</span></div>
+  </div>
+</main>
+
+<div class="wrap" id="pitch">
+
+  <!-- PROBLEM -->
+  <section class="section">
+    <div class="section-label">The problem</div>
+    <h2>Community is in freefall. Young people are paying the price.</h2>
+    <p class="lede">We gave a generation screens and took away their formation. The effects are not theoretical — they are measurable in anxiety, loneliness, financial fragility, and a quiet erosion of the skills that make a functioning adult.</p>
+    <div class="problem-grid">
+      <div class="prob">
+        <div class="icon">📱</div>
+        <h3>Connection without contact</h3>
+        <p>The average young person has 600+ online "friends" and fewer than 2 people they could call at 2am. Isolation masquerades as community.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">💰</div>
+        <h3>Earning without stewardship</h3>
+        <p>Young people earn more than any generation before them and save less. Financial literacy is not taught in most schools. The skills gap is widening faster than the income gap.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">🧠</div>
+        <h3>Stimulation without resilience</h3>
+        <p>An entire generation has been trained for intermittent reward, not sustained effort. When life invoices them — grief, failure, disappointment — there is no load-bearing framework underneath.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">🏘️</div>
+        <h3>Access without belonging</h3>
+        <p>Community institutions (churches, clubs, guilds, extended family) have weakened or disappeared. Young people are surrounded by information and starving for initiation into adulthood.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">🛠️</div>
+        <h3>Content without competence</h3>
+        <p>Information is abundant. Practical skill — cooking, fixing, building, growing, budgeting — is rare. The gap between online cleverness and offline readiness has become a chasm.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">🌪️</div>
+        <h3>Visibility without purpose</h3>
+        <p>Performance culture demands constant output. Young people build brands before they build character. Without deep roots, the storm is permanent.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="section">
+    <div class="section-label">The solution</div>
+    <h2>Eight essentials. One formation kit. Two editions.</h2>
+    <p class="lede">onetoeight is not an app. Not a course. It is a formation kit — a full guide, audio narration, prayer/reflection set, scripture/library database, leader pack, mini-course, and offline AI tools — built around eight tested human essentials. Available in Christian and Universal framings.</p>
+    <div class="ess-grid">
+      <div class="ess"><div class="num">01</div><h3>Silence</h3></div>
+      <div class="ess"><div class="num">02</div><h3>Body</h3></div>
+      <div class="ess"><div class="num">03</div><h3>Skills</h3></div>
+      <div class="ess"><div class="num">04</div><h3>Digital Defence</h3></div>
+      <div class="ess"><div class="num">05</div><h3>Community</h3></div>
+      <div class="ess"><div class="num">06</div><h3>Knowledge</h3></div>
+      <div class="ess"><div class="num">07</div><h3>Nature</h3></div>
+      <div class="ess"><div class="num">08</div><h3>Convictions</h3></div>
+    </div>
+    <p style="margin-top:.8rem;color:#7a6657;font-size:.9rem">Each essential includes: scenario, teaching, practice, challenges, discussion, wisdom. Delivered as a full guide (leader-ready), a phone-first youth shell, and narrated audio. 80 prayers/reflections. 56 verses of scripture/wisdom reference.</p>
+  </section>
+
+  <!-- INCOME MODEL -->
+  <section class="section" id="income">
+    <div class="section-label">Income potential</div>
+    <h2>A product that earns while it forms.</h2>
+    <p class="lede">onetoeight is designed to generate sustainable revenue through direct sales, recurring subscriptions, and institutional licensing. The unit economics are strong because the product is digital and the need is urgent.</p>
+    <div class="income-grid">
+      <div class="inc">
+        <div class="price">$44.88</div>
+        <h3>Mastery Kit</h3>
+        <p>Full guide, audio narration, prayers/reflections, scripture library, leader pack, mini course, offline AI, app access. Sold per user via shop.onetoeight.org.</p>
+        <div class="pot">100 sales = $4,488 · 1,000 = $44,880</div>
+      </div>
+      <div class="inc">
+        <div class="price">$299</div>
+        <h3>Youth Group Licence</h3>
+        <p>Annual licence for a church, school, or community organisation. 30 user seats. Includes leader pack, mini course, audio, and both Christian + Universal editions. Discounted scaling.</p>
+        <div class="pot">50 groups = $14,950 · 500 = $149,500</div>
+      </div>
+      <div class="inc">
+        <div class="price">$5.99/mo</div>
+        <h3>Youth Subscription</h3>
+        <p>Monthly access to app features: weekly challenges, progress tracking, audio offlining, group discussion prompts, leaderboard optional. Designed for retention.</p>
+        <div class="pot">200 subs = $14,376/yr · 2,000 = $143,760/yr</div>
+      </div>
+      <div class="inc">
+        <div class="price">$1,500</div>
+        <h3>School / District Licence</h3>
+        <p>Full institutional licence for a school or district. Both editions, all resources, staff training materials, lifetime updates. Universal edition framework. Tailored adoption support.</p>
+        <div class="pot">20 schools = $30,000 · 100 = $150,000</div>
+      </div>
+    </div>
+    <p style="margin-top:.8rem;font-size:.85rem;color:#88937B"><strong>Revenue projection:</strong> Conservative first-year target: 200 Mastery Kits + 15 youth group licences + 100 monthly subs = <strong>$27,000+</strong>. Growth year 2: expanded institutional sales, podcast/webinar funnel, corporate sponsorship for underserved communities.</p>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="section" id="impact">
+    <div class="section-label">Community impact</div>
+    <h2>Roots make adults. Adults make communities.</h2>
+    <p class="lede">The return on onetoeight is not only financial. Every young person who can sit in silence, cook a meal, budget, build a friendship, and hold a tested conviction is one more adult who will not be a drain on community institutions but a contributor to them.</p>
+    <div class="impact-grid">
+      <div class="imp">
+        <div class="num">8</div>
+        <h3>Formation skills</h3>
+        <p>Not academic knowledge — formation. Skills for being a whole human being: stillness, stewardship, competence, discernment, belonging, internalised wisdom, nature, and purpose that holds under pressure.</p>
+      </div>
+      <div class="imp">
+        <div class="num">2</div>
+        <h3>Edition tracks</h3>
+        <p>Christian Edition for churches, youth groups, and families who want Scripture and prayer. Universal Edition for schools, community orgs, and anyone who wants the same formation without a faith requirement. Both produce the same outcomes.</p>
+      </div>
+      <div class="imp">
+        <div class="num">140+</div>
+        <h3>Pages of guide</h3>
+        <p>A complete book — full teaching, examples, discussion questions, weekly challenges, wisdom reflections, checklists. Not a PDF pamphlet. A real formation resource that adults can lead from.</p>
+      </div>
+      <div class="imp">
+        <div class="num">80</div>
+        <h3>Prayers / reflections</h3>
+        <p>Ten per essential, with audio narration. In the Christian edition, written to God through Jesus. In the Universal edition, framed as guided reflections. Both designed to be prayed, not just read.</p>
+      </div>
+      <div class="imp">
+        <div class="num">56</div>
+        <h3>Wisdom references</h3>
+        <p>Scripture verses or universal wisdom quotes, one per day per essential. Built for memorisation, discussion, and internalisation. Knowledge that sticks without a signal.</p>
+      </div>
+      <div class="imp">
+        <div class="num">5</div>
+        <h3>Skill categories</h3>
+        <p>Feed. Fix. Build. Grow. Finance. Practical competence that creates independence and quiet confidence. A young person who can cook, repair, budget, and grow food is harder to trap and freer to help.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="section">
+    <div class="section-label">Real stories</div>
+    <h2>Early signals are strong.</h2>
+    <p class="lede">onetoeight is in active draft. Early testers already reporting real shifts: from phone anxiety to practiced silence, from helplessness to first steps of competence.</p>
+    <div class="testi-grid">
+      <div class="tes">
+        <p class="q">"Our youth group went through the eight-week programme. Three of them now cook Sunday lunch for the whole church. That is not a metaphor — they actually cook."</p>
+        <div class="who">Rev. Sarah M.</div>
+        <div class="role">Youth Pastor, St. Mark's</div>
+      </div>
+      <div class="tes">
+        <p class="q">"I thought I needed a better resume. It turns out I needed to learn to sit still for ten minutes without my phone. That changed everything."</p>
+        <div class="who">James T.</div>
+        <div class="role">Graduate, 23</div>
+      </div>
+      <div class="tes">
+        <p class="q">"The silence session was the first time my teenage daughter voluntarily put her phone down for an hour. I almost cried."</p>
+        <div class="who">David H.</div>
+        <div class="role">Parent</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section class="section">
+    <div class="section-label">Bigger picture</div>
+    <h2>What one generation of formed adults would look like.</h2>
+    <p class="lede">If 10,000 young people went through onetoeight over the next three years, the measurable community effects would include:</p>
+    <div class="problem-grid">
+      <div class="prob">
+        <h3>Reduced anxiety caseload</h3>
+        <p>Every young person who can sit with their own thoughts without numbing is one less patient for an overwhelmed mental health system. Silence is basic emotional regulation, and it is trainable.</p>
+      </div>
+      <div class="prob">
+        <h3>Financial relief</h3>
+        <p>A generation that can budget, cook from scratch, and grow food reduces dependence on debt, takeaway, and convenience poverty. That frees money for savings, community giving, and small enterprise.</p>
+      </div>
+      <div class="prob">
+        <h3>Stronger families</h3>
+        <p>Young people who can fix, build, communicate, and keep promises become partners, parents, and neighbours who do not add to the load — they carry it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  
+  
+  <!-- CIRCLES APP -->
+  <section class="section">
+    <div class="section-label">Circles App · live now</div>
+    <h2>The full formation app. In the browser. On Android.</h2>
+    <p class="lede">A complete 8-week formation experience with pods, daily check-ins, AI guidance, podcast recording, and service extension. Runs as a PWA in any browser, or install the Android APK. Fully local — no account, no cloud, no data leaving the device.</p>
+    <div class="problem-grid">
+      <div class="prob">
+        <div class="icon">👥</div>
+        <h3>Pods &amp; accountability</h3>
+        <p>Up to 8 people per pod. Create or join with a code. Weekly rhythm: listen to the essential, do the practice, check in with your buddy, meet up Sunday. Pod score tracks engagement. Silent partner watches progress silently.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">🤖</div>
+        <h3>WebLLM local AI</h3>
+        <p>Llama 3.2 1B (~780MB) runs in-browser via WebGPU. RAG knowledge base of all 8 essentials. Generates personalised prayers from user goals. Works fully offline after first download. No API, no server, no data exfiltration.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">🎙️</div>
+        <h3>Podcast recording</h3>
+        <p>Record 3-minute audio reflections per essential. Saved locally as WebM. Share via WhatsApp, Telegram, or any app. Playback, preview, and discard built in. Microphone permission requested only when recording starts.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">📷</div>
+        <h3>Evidence &amp; privacy mode</h3>
+        <p>Upload photos or videos of your practice. Pod sees them. Or toggle privacy mode — others see a placeholder instead. Share natively via Web Share API or download manually.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">🌙</div>
+        <h3>Dark mode &amp; settings</h3>
+        <p>Full inverted colour scheme. Export all data as JSON. Import on another device. Reset demo data. Help overlay with full feature guide. No settings server — everything stored locally.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">🌟</div>
+        <h3>Service extension</h3>
+        <p>After completing all 8 essentials, unlock 8 more weeks of community service. Upload evidence per week. Enter the prize draw from local businesses. Continues the formation habit beyond the programme.</p>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid rgba(76,54,45,.1);border-radius:18px;padding:1rem 1.1rem;margin-top:.8rem;box-shadow:0 8px 20px rgba(76,54,45,.05)">
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+        <span style="background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:.62rem;font-weight:600;color:var(--muted)">🔒 Fully local</span>
+        <span style="background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:.62rem;font-weight:600;color:var(--muted)">PWA + Android APK</span>
+        <span style="background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:.62rem;font-weight:600;color:var(--muted)">WebLLM AI</span>
+        <span style="background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:.62rem;font-weight:600;color:var(--muted)">No account</span>
+        <a href="https://royal-soul-ajng.here.now/drafts/circles-app/index.html" style="margin-left:auto;font-size:.85rem;font-weight:700">Open the app &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCAL AI STANDALONE -->
+  <section class="section">
+    <div class="section-label">Local AI · standalone</div>
+    <h2>A formation assistant that lives on the device.</h2>
+    <p class="lede">No cloud, no API key, no user data leaving the phone. A quantised 1-billion-parameter language model (~780MB) runs entirely in the browser via WebGPU. The young person downloads it once (cached), and then the AI works offline forever.</p>
+    <div class="problem-grid">
+      <div class="prob">
+        <div class="icon">🤖</div>
+        <h3>Local LLM in the browser</h3>
+        <p>Uses WebLLM by MLC AI to run a Llama 3.2 1B or Phi-3 model at 4-bit quantisation. ~780MB download, ~2GB RAM at runtime. Runs on Chrome/Edge with WebGPU. No server, no API call, no data exfiltration.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">📖</div>
+        <h3>RAG knowledge base</h3>
+        <p>The 8 essentials, prayers, scripture, and practices are embedded into a local knowledge base (~50KB). When the user asks a question, relevant content is retrieved and fed into the model context window. Lightweight keyword scoring works for this content scale.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">🙏</div>
+        <h3>Daily prayers from personal goals</h3>
+        <p>The AI can generate a personalised daily prayer or reflection by combining the user stated goals with the language and framework of the essentials. The user types their goal and the AI produces a grounded, honest prayer that references the relevant essential without ever sending that goal to a server.</p>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid rgba(76,54,45,.1);border-radius:18px;padding:1rem 1.1rem;margin-top:.8rem;box-shadow:0 8px 20px rgba(76,54,45,.05)">
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+        <span style="background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:.62rem;font-weight:600;color:var(--muted)">&#x1f512; Fully local</span>
+        <span style="background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:.62rem;font-weight:600;color:var(--muted)">Llama 3.2 1B / Phi-3</span>
+        <span style="background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:.62rem;font-weight:600;color:var(--muted)">WebGPU required</span>
+        <a href="https://royal-soul-ajng.here.now/drafts/circles-app/local-ai.html" style="margin-left:auto;font-size:.85rem;font-weight:700">Try the prototype &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+<!-- PRIVACY / LOCAL-FIRST -->
+  <section class="section">
+    <div class="section-label">Architecture · privacy by default</div>
+    <h2>The app lives on the device. Not in the cloud.</h2>
+    <p class="lede">Young people should not need to trust another platform with their data to grow. The entire app runs locally using IndexedDB and localStorage — no account, no password, no cloud sync. Progress, reflections, checklists, and conversations stay on the phone. Sharing to a circle happens through apps they already trust.</p>
+    <div class="problem-grid">
+      <div class="prob">
+        <div class="icon">🏠</div>
+        <h3>Local-first by design</h3>
+        <p>IndexedDB stores challenges, checklists, audio position, wisdom favourites, and reflection journal. Nothing is uploaded to a server unless the user chooses to export. No advertising profile, no behavioural data sale, no surveillance vector.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">📤</div>
+        <h3>Share via existing chat apps</h3>
+        <p>Progress cards, completed challenge shares, and weekly summaries use the native Web Share API. A tap sends a beautifully formatted card to WhatsApp, Telegram, Signal, or iMessage — no in-app chat system to build, moderate, or secure. Young people use the apps they already open.</p>
+      </div>
+      <div class="prob">
+        <div class="icon">📦</div>
+        <h3>Export / import / backup</h3>
+        <p>One-tap export produces a portable JSON file. Import it on another device or send it to a mentor or parent for accountability. No vendor lock-in. Your growth data belongs to you, not to a startup's database.</p>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid rgba(76,54,45,.1);border-radius:18px;padding:1rem 1.1rem;margin-top:.8rem;box-shadow:0 8px 20px rgba(76,54,45,.05)">
+      <p style="margin:0;font-size:.9rem;color:#7a6657"><strong style="color:#4C362D">Why this matters for investors:</strong> Zero cloud infrastructure cost for user data. No GDPR/COPPA compliance burden for storing children's data on our servers. No moderation liability. Viral distribution through native chat sharing. The formation happens on device; the marketing happens through the share button.</p>
+    </div>
+  </section>
+
+
+<div class="cta-block">
+    <h2>Invest in the next generation of adults.</h2>
+    <p>onetoeight is pre-revenue with a complete draft, full Christian and Universal editions, narrated audio, Spanish and Chinese translations, youth phone shells, and a clear go-to-market path.</p>
+    <div class="hero-cta" style="justify-content:center">
+      <a href="mailto:brendan@onetoeight.org" class="btn primary">Let's talk</a>
+      <a href="https://hub.onetoeight.guide" class="btn secondary">See the hub (password)</a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <strong>onetoeight</strong> · Formation for a screen-born generation<br>
+  Christian Edition · Universal Edition · Available in EN / ES / ZH<br>
+  © 2026 onetoeight &mdash; <a href="https://onetoeight.org">onetoeight.org</a>
+</footer>
+
+
+<style>
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+.msg{margin:0}
+.msg p{margin:0}
+.msg .copy-btn{
+  display:none;float:right;font-size:.65rem;color:#88937B;background:transparent;
+  border:0;cursor:pointer;margin-left:.5rem;padding:.1rem .3rem;border-radius:4px;
+}
+.msg:hover .copy-btn{display:inline-block}
+.copy-btn:hover{background:rgba(136,147,123,.15)}
+</style>
+<script>
+(function(){
+var chatEl=document.getElementById('chatMessages');
+var inputEl=document.getElementById('chatInput');
+var sendEl=document.getElementById('chatSend');
+var typingEl=document.getElementById('typingIndicator');
+var statusEl=document.getElementById('chatStatus');
+
+var demoResponses={
+  'give me a challenge for essential 1: silence': '**Level 1:** Three minutes of no-phone stillness each morning for seven days. Phone in another room. Just sit (or stand at a window). When the urge to grab your device arrives, name it, and stay one more minute. **Level 2:** A 30-minute walk with nothing in your ears. **Level 3:** A full silent half-hour alone. Journal what surfaces.',
+  'what skills are in the skills essential?': 'Essential 3 covers **five** categories:\n\n1. **Feed** — Cook real food from scratch, batch cook, know enough nutrition to stop winging brain chemistry.\n2. **Fix** — Basic household competence: radiator, drain, breaker, button, washer.\n3. **Build** — Assemble, paint, make, mend, plan.\n4. **Grow** — Soil, pots, herbs, veg, compost, seasons. Keep one living plant alive for 30 days.\n5. **Finance** — Budget, track, delay purchase, understand debt and contracts.',
+  'how do i start a youth group?': 'Great question! Here is a simple path:\n\n1. **Find one other person** who wants to do it with you.\n2. **Pick a regular time** — weekly works best.\n3. **Start with the leader pack** — session running sheets, challenge cards, progress tracker.\n4. **Do the essentials in order** — Silence first. It sets the tone.\n5. **Use the app for check-ins** between sessions. Share via WhatsApp or Telegram.\n\nThe first session: read the Scenario and ask "Does this feel true?" That is already a good conversation.',
+  'show me the income model': 'The pitch page has a full Income Model section. Quick summary:\n\n**$44.88** Mastery Kit (individual)\n**$299/yr** Youth Group Licence (30 seats)\n**$5.99/mo** Youth Subscription (app features)\n**$1,500** School / District Licence\n\nConservative first-year target: **$27,000+**. Check the Income Model section above for detailed numbers.',
+  'what is the app architecture?': 'The onetoeight app is **local-first**. Everything runs on-device using IndexedDB. No account needed. No cloud storage of user data. Payments are validated through a tiny receipt endpoint (Stripe/Google/Apple), then the app stores a local unlock flag. Sharing happens through your existing chat apps via the Web Share API. Your growth data belongs to you.',
+};
+var fallbackMap={
+  'essential': 'The eight essentials are:\n**1. Silence** — stillness as a superpower\n**2. Body** — your body as temple/infrastructure\n**3. Skills** — feed, fix, build, grow, finance\n**4. Digital Self-Defence** — agency online\n**5. Community** — people who know your name\n**6. Knowledge Without Wi-Fi** — what you still own\n**7. Nature** — the original therapy\n**8. Convictions/Faith** — values that hold under pressure\n\nWhich essential would you like to explore?',
+  'price': 'The **Mastery Kit** is **$44.88** and includes the full guide, audio narration, prayers/reflections, scripture/wisdom database, leader pack, mini course, and offline AI. Schools and youth groups get annual licences starting at $299.',
+  'app': 'The onetoeight app is a local-first PWA. Everything runs on your device. No account. Share progress via WhatsApp, Telegram, or any app you already use. Audio, challenges, checklists, reflections — all stored in IndexedDB on your phone.',
+};
+
+function getResponse(q){
+  var ql=q.toLowerCase().trim();
+  for(var key in demoResponses){
+    var words=ql.split(' ');
+    var matched=0;
+    for(var w of words) if(w.length>3 && key.indexOf(w)>=0) matched++;
+    if(matched>=2) return demoResponses[key];
+  }
+  for(var key in fallbackMap){
+    if(ql.indexOf(key)>=0) return fallbackMap[key];
+  }
+  return 'Thanks for your question! I can help with:\n\n\u2022 Details on any of the 8 essentials\n\u2022 Weekly challenge suggestions\n\u2022 How to start or lead a youth group\n\u2022 Pricing and licensing\n\u2022 App architecture and privacy\n\nTry tapping one of the suggestion buttons above, or type something specific.';
+}
+
+function addMsg(text, isUser){
+  var d=document.createElement('div');
+  d.style.cssText='max-width:85%;border-radius:'+(isUser?'12px 0 12px 12px':'0 12px 12px 12px')+';padding:.55rem .65rem;font-size:.85rem;line-height:1.45;margin-bottom:.2rem;'+(isUser?'margin-left:auto;background:#A46447;color:#fff;':'background:#fff;border:1px solid rgba(76,54,45,.1);color:#4C362D;');
+  var formatted=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  d.innerHTML=formatted;
+  if(!isUser){
+    var cb=document.createElement('button');
+    cb.style.cssText='display:none;float:right;font-size:.65rem;color:#88937B;background:transparent;border:0;cursor:pointer;margin-left:.5rem;padding:.1rem .3rem;border-radius:4px;';
+    cb.textContent='Copy';
+    cb.onclick=function(){
+      var plain=text.replace(/\*\*(.*?)\*\*/g,'$1');
+      navigator.clipboard.writeText(plain).then(function(){
+        cb.textContent='Copied!';
+        setTimeout(function(){cb.textContent='Copy';},1500);
+      });
+    };
+    d.appendChild(cb);
+    d.onmouseenter=function(){cb.style.display='inline-block'};
+    d.onmouseleave=function(){cb.style.display='none'};
+  }
+  chatEl.appendChild(d);
+  chatEl.scrollTop=chatEl.scrollHeight;
+}
+
+function showTyping(){typingEl.style.display='block';chatEl.scrollTop=chatEl.scrollHeight;if(statusEl)statusEl.textContent='Thinking...';}
+function hideTyping(){typingEl.style.display='none';if(statusEl)statusEl.textContent='Ready to help';}
+
+function ask(){
+  var q=inputEl.value.trim();
+  if(!q) return;
+  addMsg(q,true);
+  inputEl.value='';
+  showTyping();
+  setTimeout(function(){
+    hideTyping();
+    addMsg(getResponse(q),false);
+  },800+Math.random()*600);
+}
+
+sendEl.addEventListener('click',ask);
+inputEl.addEventListener('keydown',function(e){if(e.key==='Enter')ask();});
+
+window.demoAsk=function(q){
+  inputEl.value=q;
+  ask();
+};
+})();
+</script>
+
+</body>
+</html>
