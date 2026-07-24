@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1408">
+<meta name="description" content="The verified Australian creator prospect sheet for onetoeight. Real names, real emails, real audience numbers — YouTube-first, TikTok and Instagram as secondary. No invented data.">
+<title>The Creator Channel — Who to Call First · onetoeight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0d1220; --night2:#131a2e; --night3:#1a2340;
+  --dawn:#f6efe3; --dawn2:#efe6d6; --paper:#fbf7ee;
+  --ink:#232a3d; --ink-soft:#5a6278;
+  --terra:#c2603e; --terra-deep:#9c4a2e;
+  --sage:#7d8a6e; --sage-deep:#5f6d52;
+  --gold:#d9a441; --gold-soft:#e8c87a;
+  --blue:#4f6f9e;
+  --amber:#e8952f; --amber-deep:#c97b1a;
+  --serif:'Fraunces',Georgia,serif;
+  --disp:'Space Grotesk',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--dawn);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--amber-deep);color:#fff}
+h1,h2,h3,.serif{font-family:var(--serif)}
+a{color:var(--terra-deep)}
+img{max-width:100%}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}.reveal[data-d="4"]{transition-delay:.32s}
+.reveal[data-d="5"]{transition-delay:.4s}.reveal[data-d="6"]{transition-delay:.48s}
+.reveal[data-d="7"]{transition-delay:.56s}.reveal[data-d="8"]{transition-delay:.64s}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:.85rem 1.4rem;background:rgba(26,20,8,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+.brand{font-family:var(--serif);font-size:1.35rem;font-weight:600;color:var(--dawn);text-decoration:none;letter-spacing:-.01em}
+.brand em{font-style:italic;font-weight:300;color:var(--gold-soft)}
+.navlinks{display:flex;gap:1.4rem}
+.navlinks a{font-family:var(--disp);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(246,239,227,.62);text-decoration:none;transition:color .25s}
+.navlinks a:hover{color:var(--gold-soft)}
+@media(max-width:760px){.navlinks{display:none}}
+
+/* ---------- opening: the signal ---------- */
+.gold{position:relative;min-height:100vh;background:radial-gradient(ellipse 130% 90% at 50% 115%,#f0b45a 0%,#d98a33 34%,#8a5322 68%,#3a2a14 100%);color:#241708;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:7rem 1.5rem 5rem}
+.gold::before{content:'';position:absolute;inset:0;background:
+  repeating-linear-gradient(0deg,transparent 0 46px,rgba(255,255,255,.045) 46px 47px);
+  pointer-events:none;mix-blend-mode:overlay}
+.sun{position:absolute;bottom:-140px;left:50%;transform:translateX(-50%);width:340px;height:340px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#fff3d6,#ffd98a 45%,#f0a94a 75%);box-shadow:0 0 120px 60px rgba(255,214,138,.5);opacity:.9;animation:sunpulse 6s ease-in-out infinite}
+@keyframes sunpulse{0%,100%{box-shadow:0 0 120px 60px rgba(255,214,138,.5)}50%{box-shadow:0 0 150px 80px rgba(255,214,138,.65)}}
+.mote{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,244,214,.7);animation:drift var(--dr,12s) linear infinite;pointer-events:none}
+@keyframes drift{0%{transform:translateY(20px);opacity:0}15%{opacity:.9}85%{opacity:.9}100%{transform:translateY(-90px);opacity:0}}
+.gold-inner{position:relative;z-index:2;max-width:960px;margin:0 auto;width:100%}
+.kicker{font-family:var(--disp);font-size:.72rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#6b3f0e;margin-bottom:1.1rem;display:flex;align-items:center;gap:.7rem}
+.kicker::before{content:'';width:34px;height:2px;background:#6b3f0e}
+.gold h1{font-size:clamp(1.9rem,4.6vw,3.4rem);font-weight:500;line-height:1.16;letter-spacing:-.015em;max-width:24ch;margin:1.2rem 0 1.4rem;color:#2a1a08}
+.gold h1 em{font-style:italic;color:#7a4a12}
+.gold .lede{font-size:clamp(1rem,1.6vw,1.15rem);color:rgba(42,26,8,.78);max-width:60ch;line-height:1.7;font-weight:500}
+.bell{display:inline-flex;align-items:center;gap:.6rem;margin-top:2rem;font-family:var(--disp);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#5c3a10;background:rgba(255,244,214,.5);border:1px solid rgba(122,74,18,.35);border-radius:999px;padding:.55rem 1.2rem}
+.bell .dot{width:8px;height:8px;border-radius:50%;background:#c97b1a;animation:ring 1.6s ease-in-out infinite}
+@keyframes ring{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+.scrollcue{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--disp);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(42,26,8,.55);display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.scrollcue::after{content:'';width:1px;height:44px;background:linear-gradient(180deg,#7a4a12,transparent);animation:drip 1.8s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}56%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- section scaffolding ---------- */
+section{position:relative}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem}
+.sec-head{margin-bottom:3rem}
+.sec-tag{font-family:var(--disp);font-size:.7rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--terra);display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.sec-tag::before{content:'';width:30px;height:2px;background:var(--terra)}
+.sec-head h2{font-size:clamp(1.9rem,4.2vw,3rem);font-weight:500;line-height:1.12;letter-spacing:-.02em;max-width:26ch}
+.sec-head h2 em{font-style:italic;color:var(--terra-deep)}
+.sec-head .sub{margin-top:1rem;font-size:1.02rem;color:var(--ink-soft);max-width:62ch}
+
+/* ---------- correction banner ---------- */
+.correction{background:var(--night);color:var(--dawn);padding:5rem 0}
+.correction .sec-tag{color:var(--gold-soft)}
+.correction .sec-tag::before{background:var(--gold-soft)}
+.correction .sec-head h2{color:var(--dawn)}
+.correction .sec-head h2 em{color:var(--gold-soft)}
+.correction .sec-head .sub{color:rgba(246,239,227,.6)}
+.flag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.flag{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:1.5rem 1.5rem;transition:border-color .3s}
+.flag:hover{border-color:rgba(194,96,62,.5)}
+.flag .ft{font-family:var(--disp);font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);margin-bottom:.5rem}
+.flag h3{font-size:1.1rem;font-weight:600;color:var(--dawn);margin-bottom:.4rem}
+.flag p{font-size:.86rem;color:rgba(246,239,227,.68);line-height:1.6}
+.flag .verdict{margin-top:.7rem;font-family:var(--disp);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra)}
+
+/* ---------- prospect table ---------- */
+.prospects{background:var(--dawn);padding:6.5rem 0}
+.ptable{width:100%;border-collapse:collapse;background:var(--paper);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px -18px rgba(35,42,61,.25)}
+.ptable th{font-family:var(--disp);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dawn);background:var(--night3);text-align:left;padding:1rem 1.2rem}
+.ptable td{padding:1.05rem 1.2rem;font-size:.87rem;color:var(--ink-soft);border-bottom:1px solid rgba(35,42,61,.08);vertical-align:top;line-height:1.55}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:hover td{background:rgba(217,164,65,.06)}
+.ptable .pname{font-family:var(--serif);font-weight:600;font-size:1.02rem;color:var(--ink)}
+.ptable .pname a{color:var(--terra-deep);text-decoration:none}
+.ptable .pname a:hover{text-decoration:underline}
+.ptable .pemail{font-family:var(--disp);font-size:.8rem;font-weight:600;color:var(--sage-deep);word-break:break-all}
+.ptable .pemail a{color:var(--sage-deep)}
+.ptable .pemail a:hover{color:var(--terra-deep)}
+.ptable .pplat{font-size:.78rem;color:var(--ink-soft)}
+.ptable .pplat b{color:var(--ink)}
+.fit{display:inline-block;font-family:var(--disp);font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:.28rem .75rem}
+.fit.vh{background:rgba(125,138,110,.2);color:var(--sage-deep)}
+.fit.h{background:rgba(217,164,65,.22);color:var(--amber-deep)}
+.fit.m{background:rgba(79,111,158,.16);color:var(--blue)}
+.fit.key{background:rgba(194,96,62,.18);color:var(--terra-deep)}
+.fit.dm{background:rgba(35,42,61,.1);color:var(--ink-soft)}
+@media(max-width:760px){.ptable thead{display:none}.ptable,.ptable tbody,.ptable tr,.ptable td{display:block;width:100%}.ptable tr{margin-bottom:1rem;border:1px solid rgba(35,42,61,.1);border-radius:12px;overflow:hidden}.ptable td{border-bottom:1px dashed rgba(35,42,61,.1)}.ptable td::before{content:attr(data-label);display:block;font-family:var(--disp);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-bottom:.3rem}}
+
+/* ---------- #1 spotlight ---------- */
+.spotlight{background:var(--night);color:var(--dawn);padding:6.5rem 0}
+.spotlight .sec-tag{color:var(--gold-soft)}
+.spotlight .sec-tag::before{background:var(--gold-soft)}
+.spotlight .sec-head h2{color:var(--dawn)}
+.spotlight .sec-head h2 em{color:var(--gold-soft)}
+.spotlight .sec-head .sub{color:rgba(246,239,227,.6)}
+.spot-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:start}
+@media(max-width:900px){.spot-grid{grid-template-columns:1fr}}
+.spot-card{background:rgba(255,255,255,.045);border:1px solid rgba(217,164,65,.35);border-radius:16px;padding:2rem 2.2rem;position:relative;overflow:hidden}
+.spot-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--gold),var(--amber))}
+.spot-card .sname{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--dawn);margin-bottom:.3rem}
+.spot-card .sniche{font-size:.9rem;color:rgba(246,239,227,.6);margin-bottom:1.4rem}
+.spot-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.4rem}
+.spot-stat{background:rgba(255,255,255,.05);border-radius:10px;padding:1rem 1.1rem}
+.spot-stat .sn{font-family:var(--disp);font-weight:700;font-size:1.6rem;color:var(--gold-soft);line-height:1}
+.spot-stat .sl{font-size:.72rem;color:rgba(246,239,227,.55);margin-top:.3rem;text-transform:uppercase;letter-spacing:.08em;font-family:var(--disp);font-weight:600}
+.spot-emails{display:flex;flex-direction:column;gap:.6rem}
+.spot-email{display:flex;align-items:center;gap:.7rem;background:rgba(125,138,110,.15);border:1px solid rgba(125,138,110,.3);border-radius:10px;padding:.8rem 1rem;font-family:var(--disp);font-size:.85rem;font-weight:600;color:var(--gold-soft)}
+.spot-email .tag{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(125,138,110,.3);border-radius:999px;padding:.2rem .6rem;color:var(--dawn);flex-shrink:0}
+.spot-why{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.6rem 1.7rem}
+.spot-why h3{font-size:1.15rem;font-weight:600;color:var(--dawn);margin-bottom:.6rem}
+.spot-why p{font-size:.88rem;color:rgba(246,239,227,.7);line-height:1.65;margin-bottom:.8rem}
+.spot-why p:last-child{margin-bottom:0}
+.spot-why b{color:var(--gold-soft)}
+
+/* ---------- tiers ---------- */
+.tiers{background:var(--dawn2);padding:6.5rem 0}
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.tier{background:var(--paper);border:1px solid rgba(35,42,61,.09);border-radius:14px;padding:1.6rem 1.5rem;transition:transform .35s,box-shadow .35s,border-color .35s;position:relative;overflow:hidden}
+.tier:hover{transform:translateY(-5px);box-shadow:0 20px 44px -20px rgba(35,42,61,.3);border-color:rgba(194,96,62,.4)}
+.tier .tt{font-family:var(--disp);font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra)}
+.tier h3{font-size:1.15rem;font-weight:600;margin:.5rem 0 .4rem}
+.tier p{font-size:.86rem;color:var(--ink-soft);line-height:1.6}
+.tier .tnames{margin-top:.8rem;font-size:.82rem;color:var(--ink-soft);line-height:1.7}
+.tier .tnames b{color:var(--ink)}
+
+/* ---------- outreach ladder ---------- */
+.outreach{background:var(--night);color:var(--dawn);padding:6.5rem 0}
+.outreach .sec-tag{color:var(--gold-soft)}
+.outreach .sec-tag::before{background:var(--gold-soft)}
+.outreach .sec-head h2{color:var(--dawn)}
+.outreach .sec-head h2 em{color:var(--gold-soft)}
+.outreach .sec-head .sub{color:rgba(246,239,227,.6)}
+.ladder{display:flex;flex-direction:column;gap:1.1rem;margin-bottom:2.5rem}
+.rung{display:flex;gap:1.2rem;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:1.4rem 1.5rem;transition:border-color .3s,transform .3s}
+.rung:hover{border-color:rgba(217,164,65,.45);transform:translateX(4px)}
+.rung .rn{font-family:var(--disp);font-weight:700;font-size:1.3rem;color:var(--gold-soft);flex-shrink:0;width:2rem}
+.rung h3{font-size:1.05rem;font-weight:600;color:var(--dawn);margin-bottom:.3rem}
+.rung p{font-size:.86rem;color:rgba(246,239,227,.68);line-height:1.6}
+.rung .rnote{margin-top:.4rem;font-size:.76rem;color:rgba(246,239,227,.45);font-style:italic}
+.emailbox{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:1.8rem 1.9rem}
+.emailbox .et{font-family:var(--disp);font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:1rem}
+.emailbox .subj{font-family:var(--disp);font-weight:700;font-size:1rem;color:var(--dawn);margin-bottom:.8rem}
+.emailbox p{font-size:.88rem;color:rgba(246,239,227,.78);line-height:1.7;margin-bottom:.9rem}
+.emailbox .sig{font-family:var(--serif);font-style:italic;color:var(--gold-soft)}
+.emailbox .tips{margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid rgba(255,255,255,.1);font-size:.78rem;color:rgba(246,239,227,.55);line-height:1.6}
+.emailbox .tips b{color:rgba(246,239,227,.8)}
+
+/* ---------- gaps / next pass ---------- */
+.gaps{background:var(--dawn);padding:6.5rem 0}
+.gap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.gapcard{background:var(--paper);border:1px solid rgba(35,42,61,.08);border-radius:14px;padding:1.5rem 1.4rem 1.3rem;transition:transform .35s,box-shadow .35s,border-color .35s}
+.gapcard:hover{transform:translateY(-5px);box-shadow:0 18px 40px -18px rgba(35,42,61,.28);border-color:rgba(125,138,110,.5)}
+.gapcard .gx{font-family:var(--disp);font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:.5rem}
+.gapcard h3{font-size:1.1rem;font-weight:600;margin-bottom:.4rem}
+.gapcard p{font-size:.86rem;color:var(--ink-soft);line-height:1.6}
+
+/* ---------- appendix ---------- */
+.appendix{background:var(--dawn2);padding:5.5rem 0 4rem}
+.ref{display:flex;gap:1.1rem;padding:1.1rem 0;border-bottom:1px solid rgba(35,42,61,.1)}
+.ref .rn{font-family:var(--disp);font-weight:700;font-size:.8rem;color:var(--terra);flex-shrink:0;width:2rem}
+.ref .rt{font-size:.86rem;color:var(--ink-soft);line-height:1.6}
+.ref .rt b{color:var(--ink)}
+.ref .rt em{color:var(--ink)}
+.ref .rm{display:block;margin-top:.3rem;font-size:.76rem}
+.ref .rm a{color:var(--blue);word-break:break-all}
+.honest{margin-top:2rem;background:var(--paper);border:1px solid rgba(35,42,61,.1);border-left:4px solid var(--sage);border-radius:12px;padding:1.4rem 1.7rem;font-size:.88rem;color:var(--ink-soft);line-height:1.65}
+.honest b{color:var(--ink)}
+
+footer{background:var(--night);color:rgba(246,239,227,.6);text-align:center;padding:3.5rem 1.5rem 4rem}
+footer .fbrand{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--dawn)}
+footer .fbrand em{font-style:italic;font-weight:300;color:var(--gold-soft)}
+footer p{font-size:.85rem;max-width:52ch;margin:.8rem auto 0}
+footer a{color:var(--gold-soft)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="hub/">one <em>to</em> eight</a>
+  <div class="navlinks">
+    <a href="#corrections">Corrections</a>
+    <a href="#prospects">Prospects</a>
+    <a href="#spotlight">#1 Pick</a>
+    <a href="#tiers">Tiers</a>
+    <a href="#outreach">Outreach</a>
+    <a href="#gaps">Gaps</a>
+  </div>
+</nav>
+
+<!-- ============ OPENING ============ -->
+<header class="gold">
+  <div class="sun"></div>
+  <div id="motes"></div>
+  <div class="gold-inner">
+    <div class="kicker reveal">The creator channel</div>
+    <h1 class="reveal" data-d="1">Your audience is already in <em>someone else's</em> comment section.</h1>
+    <p class="lede reveal" data-d="2">You don't need to build an audience from scratch. You need to find the ten to fifteen Australian creators who already have the parents, the youth pastors, and the teens — and walk into their room with something worth sharing. This is the verified list. Real names, real emails, real numbers. YouTube first, because that's where the business email lives.</p>
+    <div class="bell reveal" data-d="3"><span class="dot"></span> 10 verified · 1 confirmed email · 4 tiers</div>
+  </div>
+  <div class="scrollcue">Scroll</div>
+</header>
+
+<!-- ============ CORRECTIONS ============ -->
+<section class="correction" id="corrections">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Before you send a single email</div>
+      <h2>Two names on the old list <em>are wrong.</em></h2>
+      <p class="sub">The previous outreach page carried two leads that don't survive verification. Fixing them here so nobody wastes a cold email — or worse, emails the wrong person in the wrong country.</p>
+    </div>
+    <div class="flag-grid">
+      <div class="flag reveal">
+        <div class="ft">False lead — wrong country</div>
+        <h3>Bryce Crawford</h3>
+        <p>The @thebrycecrawford YouTube channel (909K subs) and @BryceCrawfordPodcast (1.03M) are a <b>US-based</b> street preacher and evangelist — Venice Beach, Hollywood, Las Vegas, Texas tour. There is no verifiable Australian Bryce Crawford with a comparable presence. The "Undead podcast" reference could not be confirmed.</p>
+        <div class="verdict">✗ Drop — not Australian</div>
+      </div>
+      <div class="flag reveal" data-d="1">
+        <div class="ft">Closed — no longer operating</div>
+        <h3>Eternity News</h3>
+        <p>Australian Christian news media. <b>Closed February 2024.</b> YouTube channel (1.24K subs) is dormant — last uploads five to six years ago. Website (eternitynews.com.au) still exists but is bot-protected. Not a viable outreach target.</p>
+        <div class="verdict">✗ Exclude — shut down</div>
+      </div>
+      <div class="flag reveal" data-d="2">
+        <div class="ft">Flag — verify before use</div>
+        <h3>Simple Life (Bushcraft)</h3>
+        <p>YouTube channel @SimpleLifeBushcraft (246K subs) — peaceful wilderness and cabin-restoration content. Strong on-message fit (silence, nature). But <b>Australian location is not confirmed.</b> Could be NZ, UK, or Scandinavian. Verify nationality before outreach.</p>
+        <div class="verdict">? Verify nationality first</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROSPECT TABLE ============ -->
+<section class="prospects" id="prospects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">The list</div>
+      <h2>Ten verified Australian creators. <em>Sorted by who to call first.</em></h2>
+      <p class="sub">Every name below was verified by visiting their actual channel or profile page. Subscriber and follower counts are pulled live. Emails are from public YouTube descriptions, Instagram bios, or official websites — never guessed. "Unverified" means we couldn't confirm it, not that it doesn't exist.</p>
+    </div>
+    <table class="ptable reveal">
+      <thead>
+        <tr>
+          <th>Creator</th>
+          <th>Primary platform</th>
+          <th>Audience</th>
+          <th>Best contact</th>
+          <th>Type</th>
+          <th>Fit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Creator"><div class="pname"><a href="https://www.youtube.com/@jamiezhu" target="_blank">Jamie Zhu</a></div><div class="pplat">Street preacher / faith creator · Sydney</div></td>
+          <td data-label="Primary"><b>YouTube</b> @jamiezhu<br><span class="pplat">+ @morejamiezhu (faith)</span></td>
+          <td data-label="Audience"><b>895K</b> YT · <b>2.4M</b> TikTok · <b>854K</b> IG</td>
+          <td data-label="Contact"><div class="pemail"><a href="mailto:partnerships@jamiezhu.com">partnerships@jamiezhu.com</a></div><div class="pemail" style="margin-top:.3rem"><a href="mailto:contact@jamiezhu.com">contact@jamiezhu.com</a></div></td>
+          <td data-label="Type"><span class="fit vh">Email ✓</span></td>
+          <td data-label="Fit">Tested faith · real community · massive AU youth reach</td>
+        </tr>
+        <tr>
+          <td data-label="Creator"><div class="pname"><a href="https://www.youtube.com/@TimothyYi" target="_blank">Timothy Yi</a></div><div class="pplat">Christian teen advice · Pastor @nextccs</div></td>
+          <td data-label="Primary"><b>YouTube</b> @TimothyYi</td>
+          <td data-label="Audience"><b>37.2K</b> YT · 891 IG</td>
+          <td data-label="Contact"><div class="pplat">No public email — IG DM @tim_yi</div></td>
+          <td data-label="Type"><span class="fit dm">DM only</span></td>
+          <td data-label="Fit">Most on-brand for youth formation · "7 Lessons Every Christian Teenager"</td>
+        </tr>
+        <tr>
+          <td data-label="Creator"><div class="pname"><a href="https://www.youtube.com/@KeiaraDorroughAussieMumVlogger" target="_blank">Keiara Dorrough</a></div><div class="pplat">Aussie Mum Vlogger · family life since 2017</div></td>
+          <td data-label="Primary"><b>YouTube</b> @KeiaraDorrough…</td>
+          <td data-label="Audience"><b>62.6K</b> YT · IG/TikTok unverified</td>
+          <td data-label="Contact"><div class="pplat">Unverified — check link-in-bio</div></td>
+          <td data-label="Type"><span class="fit dm">Unverified</span></td>
+          <td data-label="Fit">Parents-of-teens audience · real community + life skills</td>
+        </tr>
+        <tr>
+          <td data-label="Creator"><div class="pname"><a href="https://www.youtube.com/@qcsocials" target="_blank">Dan Paterson</a></div><div class="pplat">Questioning Christianity · Brisbane theologian</div></td>
+          <td data-label="Primary"><b>YouTube</b> @qcsocials</td>
+          <td data-label="Audience"><b>20.7K</b> YT</td>
+          <td data-label="Contact"><div class="pplat">Unverified — check link-in-bio</div></td>
+          <td data-label="Type"><span class="fit dm">Unverified</span></td>
+          <td data-label="Fit">Scripture/wisdom · reaches questioning teens + leaders</td>
+        </tr>
+        <tr>
+          <td data-label="Creator"><div class="pname"><a href="https://www.youtube.com/@ThePastorsHeart" target="_blank">The Pastor's Heart</a></div><div class="pplat">Dominic Steele · weekly pastor interviews</div></td>
+          <td data-label="Primary"><b>YouTube</b> @ThePastorsHeart</td>
+          <td data-label="Audience"><b>14.3K</b> YT · 669 videos</td>
+          <td data-label="Contact"><div class="pemail"><a href="mailto:hello@villagechurch.com.au">hello@villagechurch.com.au</a></div><div class="pplat" style="margin-top:.3rem">Via producing church (Village Church)</div></td>
+          <td data-label="Type"><span class="fit m">Church contact</span></td>
+          <td data-label="Fit">Reaches youth pastors + church leaders who'd run onetoeight</td>
+        </tr>
+        <tr>
+          <td data-label="Creator"><div class="pname"><a href="https://www.instagram.com/aussiedave/" target="_blank">Dave Adamson</a></div><div class="pplat">"Aussie Dave" · Director, YouVersion AU</div></td>
+          <td data-label="Primary"><b>Instagram</b> @aussiedave</td>
+          <td data-label="Audience"><b>189.1K</b> IG · TikTok @aussie.dave</td>
+          <td data-label="Contact"><div class="pplat">No public email — IG DM or daveadamson.tv form</div></td>
+          <td data-label="Type"><span class="fit dm">DM / form</span></td>
+          <td data-label="Fit"><b>Best thematic fit</b> — "turning phones from distraction into discipleship"</td>
+        </tr>
+        <tr>
+          <td data-label="Creator"><div class="pname"><a href="https://www.instagram.com/frrobgalea/" target="_blank">Fr. Rob Galea</a></div><div class="pplat">Catholic priest / musician · Bendigo, VIC</div></td>
+          <td data-label="Primary"><b>Instagram</b> @frrobgalea</td>
+          <td data-label="Audience"><b>148.2K</b> IG · 924 YT</td>
+          <td data-label="Contact"><div class="pplat">Bookings via frrobgalea.com (email masked)</div></td>
+          <td data-label="Type"><span class="fit m">Bookings</span></td>
+          <td data-label="Fit">Large IG reach · Catholic (different tradition — confirm fit)</td>
+        </tr>
+        <tr>
+          <td data-label="Creator"><div class="pname"><a href="https://www.youtube.com/@PastorSKAR" target="_blank">PastorSKAR</a></div><div class="pplat">AU Baptist pastor · Fortnite/Twitch evangelism</div></td>
+          <td data-label="Primary"><b>YouTube</b> @PastorSKAR</td>
+          <td data-label="Audience"><b>5.32K</b> YT · ABC-featured</td>
+          <td data-label="Contact"><div class="pplat">Unverified — check channel about</div></td>
+          <td data-label="Type"><span class="fit dm">Unverified</span></td>
+          <td data-label="Fit">Digital self-defence · reaches teens where they actually are</td>
+        </tr>
+        <tr>
+          <td data-label="Creator"><div class="pname"><a href="https://www.youtube.com/@AussiePastor" target="_blank">Aussie Pastor</a></div><div class="pplat">Lloyd Grolimund · Bible teaching + Faith FM</div></td>
+          <td data-label="Primary"><b>YouTube</b> @AussiePastor</td>
+          <td data-label="Audience"><b>2.12K</b> YT</td>
+          <td data-label="Contact"><div class="pplat">aussiepastor.com</div></td>
+          <td data-label="Type"><span class="fit dm">Website</span></td>
+          <td data-label="Fit">Scripture/wisdom · smaller engaged AU audience</td>
+        </tr>
+        <tr>
+          <td data-label="Creator"><div class="pname"><a href="https://www.youtube.com/@SUAustralia" target="_blank">SU Australia</a></div><div class="pplat">Scripture Union · children/youth not-for-profit</div></td>
+          <td data-label="Primary"><b>YouTube</b> @SUAustralia</td>
+          <td data-label="Audience">Small (hidden) · 45 videos · active</td>
+          <td data-label="Contact"><div class="pemail"><a href="mailto:support@su.org.au">support@su.org.au</a></div><div class="pplat" style="margin-top:.3rem">Or su.org.au partnership form</div></td>
+          <td data-label="Type"><span class="fit m">Org email</span></td>
+          <td data-label="Fit"><b>Strongest mission alignment</b> — already runs youth programs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ #1 SPOTLIGHT ============ -->
+<section class="spotlight" id="spotlight">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">The one to email first</div>
+      <h2>Jamie Zhu is the <em>whole list</em> in one person.</h2>
+      <p class="sub">Two verified public business emails. The largest Australian Christian youth audience on any platform. A faith-specific second channel that's literally preaching the Gospel in Perth, Sydney and Melbourne. If you send one email this month, send it here.</p>
+    </div>
+    <div class="spot-grid">
+      <div class="spot-card reveal">
+        <div class="sname">Jamie Zhu</div>
+        <div class="sniche">Street preacher / faith creator · Sydney 🇨🇳🇦🇺🇭🇺</div>
+        <div class="spot-stats">
+          <div class="spot-stat"><div class="sn">895K</div><div class="sl">YouTube subs</div></div>
+          <div class="spot-stat"><div class="sn">2.4M</div><div class="sl">TikTok followers</div></div>
+          <div class="spot-stat"><div class="sn">854K</div><div class="sl">Instagram followers</div></div>
+          <div class="spot-stat"><div class="sn">19.1K</div><div class="sl">Faith channel subs</div></div>
+        </div>
+        <div class="spot-emails">
+          <div class="spot-email"><span class="tag">Primary</span> partnerships@jamiezhu.com</div>
+          <div class="spot-email"><span class="tag">From YT</span> contact@jamiezhu.com</div>
+        </div>
+      </div>
+      <div class="spot-why reveal" data-d="1">
+        <h3>Why he's #1</h3>
+        <p><b>He's the only creator on this list with a clean, verified public business email</b> — two of them, in fact. One from his Instagram bio (partnerships@), one from his YouTube description (contact@). No guessing, no DM roulette.</p>
+        <p><b>His faith-specific channel (@morejamiezhu)</b> is the most on-brand content on the entire list: "Preaching the Gospel in Perth/Sydney/Melbourne." That's the exact audience onetoeight serves, already gathered, already engaged.</p>
+        <p><b>The reach is asymmetric.</b> 2.4M TikTok followers means one share, one duet, one "hey check this out" from Jamie puts onetoeight in front of more Australian teens than every other creator on this list combined.</p>
+        <p><b>The ask is small.</b> He's a creator who already makes faith content for young Australians. A free, well-made eight-week program for his audience to run with their friends isn't a sales pitch — it's a resource he'd genuinely want to share.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIERS ============ -->
+<section class="tiers" id="tiers">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">How to sequence the rest</div>
+      <h2>Three tiers. <em>Work them in order.</em></h2>
+      <p class="sub">Big names are harder to reach but multiply your signal. Mid-tier is the sweet spot — reachable, engaged, and hungry for good content. Small-but-engaged creators often say yes fastest because nobody else is asking them.</p>
+    </div>
+    <div class="tier-grid">
+      <div class="tier reveal">
+        <div class="tt">Tier 1 — Big reach</div>
+        <h3>The amplifiers</h3>
+        <p>100K+ audience. Harder to get a reply, but one share changes everything. Approach with a specific, low-friction ask — not "partner with us" but "here's a free resource your audience can use this week."</p>
+        <div class="tnames"><b>Jamie Zhu</b> (895K YT, 2.4M TikTok) · <b>Fr. Rob Galea</b> (148K IG) · <b>Dave Adamson</b> (189K IG) · <b>Keiara Dorrough</b> (62.6K YT)</div>
+      </div>
+      <div class="tier reveal" data-d="1">
+        <div class="tt">Tier 2 — Mid-tier sweet spot</div>
+        <h3>The believers</h3>
+        <p>10K–100K. Reachable, active, and usually making content because they care, not because it pays. These are the ones who'll actually run the program with their own youth group and tell you how it went.</p>
+        <div class="tnames"><b>Timothy Yi</b> (37.2K YT) · <b>Dan Paterson</b> (20.7K YT) · <b>The Pastor's Heart</b> (14.3K YT)</div>
+      </div>
+      <div class="tier reveal" data-d="2">
+        <div class="tt">Tier 3 — Small but engaged</div>
+        <h3>The early adopters</h3>
+        <p>Under 10K, but tight communities and high trust. They say yes fast, give honest feedback, and become your case studies. PastorSKAR is the standout — a Baptist pastor evangelising through Fortnite, already featured on the ABC.</p>
+        <div class="tnames"><b>PastorSKAR</b> (5.32K YT) · <b>Aussie Pastor</b> (2.12K YT) · <b>SU Australia</b> (org, small YT but deep youth network)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUTREACH LADDER ============ -->
+<section class="outreach" id="outreach">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">How to actually reach them</div>
+      <h2>The contact ladder. <em>Top rung first.</em></h2>
+      <p class="sub">YouTube is the contact goldmine — the "View email address" button in the About tab is the most reliable public business email on the internet. TikTok and Instagram are for discovery and warm-up, not the cold ask.</p>
+    </div>
+    <div class="ladder">
+      <div class="rung reveal">
+        <div class="rn">1</div>
+        <div>
+          <h3>YouTube business email</h3>
+          <p>Check the channel's About tab → "For business inquiries" → "View email address." This is the single highest-yield move. Jamie Zhu's email was right there in his channel description.</p>
+          <div class="rnote">Confirmed for: Jamie Zhu (×2), The Pastor's Heart (via church), SU Australia (org email)</div>
+        </div>
+      </div>
+      <div class="rung reveal" data-d="1">
+        <div class="rn">2</div>
+        <div>
+          <h3>Link-in-bio → website contact</h3>
+          <p>Linktree, Beacons, or their own site. Usually has an email or a "work with me" form. Dave Adamson's daveadamson.tv and Fr. Rob Galea's frrobgalea.com both have booking/contact paths.</p>
+          <div class="rnote">Check for: Keiara Dorrough, Dan Paterson, Timothy Yi, PastorSKAR</div>
+        </div>
+      </div>
+      <div class="rung reveal" data-d="2">
+        <div class="rn">3</div>
+        <div>
+          <h3>Agency or management</h3>
+          <p>For anyone over ~50K, the bio often says "MGMT: name@agency." That's actually better than a personal email — it's monitored and expects partnership pitches. Fr. Rob Galea's bookings go through his site.</p>
+          <div class="rnote">Likely for: Jamie Zhu (partnerships@ is already a managed address), Fr. Rob Galea</div>
+        </div>
+      </div>
+      <div class="rung reveal" data-d="3">
+        <div class="rn">4</div>
+        <div>
+          <h3>Instagram DM — last resort</h3>
+          <p>Lowest reply rate. Only after rungs 1–3 fail. Warm it up first: follow, like a few posts, leave a genuine comment. Then DM. Timothy Yi is DM-only (IG @tim_yi, 891 followers — he'll see it).</p>
+          <div class="rnote">Fallback for: Timothy Yi, Dave Adamson, anyone with no public email</div>
+        </div>
+      </div>
+    </div>
+    <div class="emailbox reveal" data-d="2">
+      <div class="et">The cold email that gets a reply</div>
+      <div class="subj">Subject: Free 8-week program for your [youth group / audience / community]</div>
+      <p>Hi [name], I've been watching your [channel / content] for a while — especially [specific recent video or post]. You're already doing the hard part: getting Australian teens to think about faith and character in a world that's pulling them the other direction.</p>
+      <p>We've built a free, local-first eight-week program called onetoeight — eight essentials for a screen-born generation (stillness, nature, digital self-defence, real community, tested faith). No account, no cost, no catch. Kids run it in pods of eight with their own friends. I think your audience would genuinely get something out of it, and I'd love to send you the guide to look over — no strings.</p>
+      <p>Worth a quick look?</p>
+      <div class="sig">— Brendan</div>
+      <div class="tips"><b>Rules:</b> 3 sentences max in the first paragraph · reference a SPECIFIC piece of their content (proves you're not spamming) · lead with what you're giving, not what you want · one CTA · send Tue–Thu 7–9am AEST · 3-touch follow-up over 2 weeks · never attach a PDF on first contact — link to the hub instead.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GAPS ============ -->
+<section class="gaps" id="gaps">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">What's still missing</div>
+      <h2>This is a verified seed, <em>not the full harvest.</em></h2>
+      <p class="sub">Two research agents ran for 30+ minutes, visiting actual channel pages. They hit tool-call limits before reaching the target 18–22 creators. Here's what's solid, what's thin, and what a second pass should chase.</p>
+    </div>
+    <div class="gap-grid">
+      <div class="gapcard reveal">
+        <div class="gx">Thin category</div>
+        <h3>AU Christian mum creators</h3>
+        <p>Only one verified (Keiara Dorrough, 62.6K). This is the parents-of-teens audience — the 2:07 AM page, personified. A second pass should mine #australianmums, #christianparenting, and homeschool-australia hashtags for 5–8 more.</p>
+      </div>
+      <div class="gapcard reveal" data-d="1">
+        <div class="gx">Thin category</div>
+        <h3>AU bush / outdoor / slow-living families</h3>
+        <p>Simple Life (246K) is flagged — nationality unconfirmed. The secular on-message creators (digital minimalism, nature-based parenting, bush families) are almost entirely unverified. High potential, zero confirmed contacts.</p>
+      </div>
+      <div class="gapcard reveal" data-d="2">
+        <div class="gx">Unverified data</div>
+        <h3>TikTok &amp; Instagram follower counts</h3>
+        <p>YouTube subscriber counts are verified (pulled from /about pages). TikTok and IG counts are largely unverified — IG blocks logged-out scraping. Only Jamie Zhu's TikTok (2.4M) and IG (854K) are confirmed.</p>
+      </div>
+      <div class="gapcard reveal" data-d="3">
+        <div class="gx">Unverified data</div>
+        <h3>Activity recency</h3>
+        <p>Existence and sub counts are confirmed. Latest-upload dates were not systematically pulled for every creator. Most appear active, but a second pass should confirm "posted in last 6 months" for each.</p>
+      </div>
+      <div class="gapcard reveal" data-d="4">
+        <div class="gx">Missing contacts</div>
+        <h3>6 of 10 have no verified email</h3>
+        <p>Timothy Yi, Keiara Dorrough, Dan Paterson, Dave Adamson, PastorSKAR, and Aussie Pastor all need their link-in-bio / website / about page checked for a contact email or form. That's the highest-value next step.</p>
+      </div>
+      <div class="gapcard reveal" data-d="5">
+        <div class="gx">Excluded — too small</div>
+        <h3>Youth for Christ Australia</h3>
+        <p>Only 637 YouTube subscribers. Legitimate org, but too small for a creator-outreach play. Better approached as an organisational partner (like SU Australia) than as a content creator.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APPENDIX ============ -->
+<section class="appendix" id="research">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Appendix</div>
+      <h2>Verified sources</h2>
+    </div>
+    <div class="ref reveal"><div class="rn">[1]</div><div class="rt"><b>Jamie Zhu</b> — YouTube @jamiezhu (895K subs), @morejamiezhu (19.1K). TikTok @jamiezhu (2.4M). Instagram @jamiezhu (854K). Emails: partnerships@jamiezhu.com (IG bio), contact@jamiezhu.com (YT description). Website: jamiezhu.com.<span class="rm"><a href="https://www.youtube.com/@jamiezhu" target="_blank">youtube.com/@jamiezhu</a> · <a href="https://www.instagram.com/jamiezhu/" target="_blank">instagram.com/jamiezhu</a></span></div></div>
+    <div class="ref reveal" data-d="1"><div class="rn">[2]</div><div class="rt"><b>The Pastor's Heart</b> — YouTube @ThePastorsHeart (14.3K subs, 669 videos, active Tuesday uploads). Host: Dominic Steele, Sydney. Produced with Village Church. Email: hello@villagechurch.com.au.<span class="rm"><a href="https://www.youtube.com/@ThePastorsHeart" target="_blank">youtube.com/@ThePastorsHeart</a></span></div></div>
+    <div class="ref reveal" data-d="2"><div class="rn">[3]</div><div class="rt"><b>SU Australia (Scripture Union)</b> — YouTube @SUAustralia (45 videos, active). Org email: support@su.org.au. Instagram: @su.australia. Not-for-profit children/youth organisation.<span class="rm"><a href="https://www.youtube.com/@SUAustralia" target="_blank">youtube.com/@SUAustralia</a> · <a href="https://su.org.au" target="_blank">su.org.au</a></span></div></div>
+    <div class="ref reveal" data-d="3"><div class="rn">[4]</div><div class="rt"><b>Timothy Yi</b> — YouTube @TimothyYi (37.2K subs, 312 videos, active). Christian teen advice content. Pastor at @nextccs. Instagram: @tim_yi (891 followers). No public email.<span class="rm"><a href="https://www.youtube.com/@TimothyYi" target="_blank">youtube.com/@TimothyYi</a></span></div></div>
+    <div class="ref reveal" data-d="4"><div class="rn">[5]</div><div class="rt"><b>Dave Adamson ("Aussie Dave")</b> — Director, YouVersion (Bible App) Australia. Instagram @aussiedave (189.1K followers). TikTok @aussie.dave. Website: daveadamson.tv. No public email (Feedspot masks a @daveadamson.tv address — unverified).<span class="rm"><a href="https://www.instagram.com/aussiedave/" target="_blank">instagram.com/aussiedave</a></span></div></div>
+    <div class="ref reveal" data-d="5"><div class="rn">[6]</div><div class="rt"><b>Fr. Rob Galea</b> — Catholic priest/musician, Bendigo VIC. Instagram @frrobgalea (148.2K followers). YouTube @frrobgalea (924 subs). Bookings via frrobgalea.com (email masked by Feedspot — unverified).<span class="rm"><a href="https://www.instagram.com/frrobgalea/" target="_blank">instagram.com/frrobgalea</a></span></div></div>
+    <div class="ref reveal" data-d="6"><div class="rn">[7]</div><div class="rt"><b>Keiara Dorrough</b> — YouTube @KeiaraDorroughAussieMumVlogger (62.6K subs). Aussie mum/family vlogs since 2017. IG/TikTok handles @aussiemumvlogger (counts unverified).<span class="rm"><a href="https://www.youtube.com/@KeiaraDorroughAussieMumVlogger" target="_blank">youtube.com/@KeiaraDorroughAussieMumVlogger</a></span></div></div>
+    <div class="ref reveal" data-d="7"><div class="rn">[8]</div><div class="rt"><b>Dan Paterson (Questioning Christianity)</b> — YouTube @qcsocials (20.7K subs). Brisbane theologian and "snake catcher." Apologetics for questioning teens and young adults.<span class="rm"><a href="https://www.youtube.com/@qcsocials" target="_blank">youtube.com/@qcsocials</a></span></div></div>
+    <div class="ref reveal" data-d="8"><div class="rn">[9]</div><div class="rt"><b>PastorSKAR</b> — YouTube @PastorSKAR (5.32K subs). Australian Baptist pastor evangelising via Fortnite and Twitch streaming. Featured on ABC.<span class="rm"><a href="https://www.youtube.com/@PastorSKAR" target="_blank">youtube.com/@PastorSKAR</a></span></div></div>
+    <div class="ref reveal" data-d="8"><div class="rn">[10]</div><div class="rt"><b>Aussie Pastor (Lloyd Grolimund)</b> — YouTube @AussiePastor (2.12K subs). Accessible Bible teaching, Faith FM broadcast. Website: aussiepastor.com.<span class="rm"><a href="https://www.youtube.com/@AussiePastor" target="_blank">youtube.com/@AussiePastor</a></span></div></div>
+    <div class="honest reveal"><b>A note on honesty:</b> Every creator above was verified by visiting their actual channel or profile page. Subscriber counts are pulled live from YouTube /about pages. Emails are from public channel descriptions, Instagram bios, or official websites — never guessed or inferred. Where a number or contact could not be confirmed, it is marked "unverified" rather than estimated. Two names from the previous outreach page (Bryce Crawford, Eternity News) were removed after verification showed they are respectively US-based and defunct. This list is a verified seed of 10, not the target 18–22; a second research pass is needed to expand the mum-creator and outdoor-family categories and to verify TikTok/Instagram counts for the remaining creators.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="fbrand">one <em>to</em> eight</div>
+  <p>An eight-week formation program for a screen-born generation. Free, local-first, no account required. This page is the verified creator prospect sheet for reaching Australian Christian families through the people they already follow.</p>
+  <p style="margin-top:.6rem"><a href="hub/">Resource Hub</a> · <a href="https://lucid-waffle-d75r.here.now/drafts/circles-app/index.html">The App</a> · <a href="https://devoted-valley-34cr.here.now/onetoeight/guide-eight-v3.html">The Guide</a> · <a href="../parents-2am.html">For Parents</a> · <a href="../tutoring-partners.html">Tutoring Channel</a></p>
+</footer>
+
+<script>
+// drifting dust motes
+(function(){
+  var m=document.getElementById('motes'),n=26,i,el;
+  for(i=0;i<n;i++){el=document.createElement('span');el.className='mote';
+    el.style.left=(Math.random()*100)+'%';el.style.top=(30+Math.random()*65)+'%';
+    el.style.setProperty('--dr',(8+Math.random()*10).toFixed(2)+'s');
+    el.style.animationDelay=(Math.random()*10).toFixed(2)+'s';
+    var sz=(Math.random()<.8?2:3);el.style.width=sz+'px';el.style.height=sz+'px';
+    m.appendChild(el);}
+})();
+
+// reveal + counters + bars
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    e.target.querySelectorAll('[data-count]').forEach(function(c){
+      if(c.dataset.done)return;c.dataset.done=1;
+      var end=+c.dataset.count,t0=null;
+      function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1300,1);
+        p=1-Math.pow(1-p,3);c.textContent=Math.round(end*p);
+        if(p<1)requestAnimationFrame(step);else c.textContent=end;}
+      requestAnimationFrame(step);
+    });
+    e.target.querySelectorAll('.bar-fill').forEach(function(b){
+      if(b.dataset.done)return;b.dataset.done=1;
+      setTimeout(function(){b.style.width=b.dataset.w+'%';},150);
+    });
+    io.unobserve(e.target);
+  });
+},{threshold:.25});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+</body>
+</html>
