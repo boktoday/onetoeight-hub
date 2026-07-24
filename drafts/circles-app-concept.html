@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#3D2820">
+<title>onetoeight · Circles App Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --terracotta:#A46447; --almond:#CEB59E; --sage:#88937B; --umber:#4C362D; --forest:#5C3A2E;
+  --forest-dark:#3D2820; --linen:#E8E1D5; --cream:#F5F0E8; --ink:#2a2520; --muted:#7a6657;
+  --white:#ffffff; --line:rgba(76,54,45,.10); --shadow:0 10px 28px rgba(76,54,45,.08);
+  --radius:18px; --max:820px; --hud-h:68px; --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;width:100%;overflow-x:hidden}
+body{
+  margin:0; font-family:Inter,system-ui,sans-serif; color:var(--ink); font-size:17px; line-height:1.7;
+  background:
+    radial-gradient(900px 420px at 0% -10%, rgba(164,100,71,.08), transparent 55%),
+    radial-gradient(700px 360px at 100% 0%, rgba(136,147,123,.10), transparent 50%),
+    var(--cream);
+  overflow-x:hidden; width:100%; padding-top:var(--hud-h); min-height:100vh;
+}
+h1,h2,h3,h4{font-family:Fraunces,serif;font-weight:500;line-height:1.25;color:var(--umber);overflow-wrap:anywhere}
+p,li{overflow-wrap:anywhere}
+a{color:var(--terracotta);text-decoration:none}
+strong{color:var(--umber);font-weight:600}
+
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--hud-h);
+  background:linear-gradient(180deg,#3D2820 0%,#4C362D 100%);
+  color:var(--cream);box-shadow:0 8px 24px rgba(45,28,20,.18);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.topbar-inner{max-width:1040px;margin:0 auto;height:100%;display:flex;align-items:center;gap:.75rem;padding:0 .9rem}
+.tb-brand{font-family:Fraunces,serif;font-weight:600;font-size:1rem;color:var(--cream);white-space:nowrap}
+.tb-brand em{color:var(--almond);font-style:italic;font-weight:400}
+.tb-mid{flex:1;min-width:0}
+.tb-kicker{font-size:.6rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:rgba(232,225,213,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-title{font-size:.85rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-actions{display:flex;gap:.35rem;flex-shrink:0}
+.tb-chip{display:inline-flex;align-items:center;border-radius:999px;padding:.35rem .6rem;font-size:.66rem;font-weight:800;background:rgba(255,255,255,.08);color:var(--cream);border:1px solid rgba(255,255,255,.12);text-decoration:none;white-space:nowrap}
+
+.wrap{max-width:820px;margin:0 auto;padding:.85rem .9rem 5rem}
+.head-section{margin:0 0 1.5rem}
+.tag{display:inline-flex;font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--terracotta);background:rgba(164,100,71,.12);padding:.3rem .55rem;border-radius:999px;margin-bottom:.6rem}
+h1{font-family:Fraunces,serif;font-weight:500;font-size:clamp(1.7rem,6vw,2.5rem);line-height:1.12;color:var(--umber);margin:0 0 .4rem}
+.lede{color:var(--muted);font-size:1.02rem;max-width:42ch;margin:0 0 .8rem}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1rem;margin:1rem 0}
+.card .k{font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);margin-bottom:.3rem}
+.card h2{font-family:Fraunces,serif;font-size:1.25rem;font-weight:500;margin:0 0 .35rem}
+.card h3{font-family:Fraunces,serif;font-size:1rem;font-weight:500;color:var(--terracotta);margin:.7rem 0 .3rem}
+.card p{margin:.35rem 0;font-size:.95rem}
+.card hr{border:none;border-top:1px solid var(--line);margin:.7rem 0}
+.card ul,ol{margin:.35rem 0 .25rem 1.1rem;font-size:.93rem}
+.card li{margin:.25rem 0}
+.card .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.5rem 0}
+.card .stat{background:var(--linen);border-radius:12px;padding:.6rem .4rem;text-align:center}
+.card .stat strong{display:block;font-family:Fraunces,serif;font-size:1.3rem;color:var(--terracotta)}
+.card .stat span{display:block;font-size:.68rem;color:var(--muted);margin-top:.05rem}
+.grid2{display:grid;gap:.6rem}
+@media(min-width:640px){.grid2{grid-template-columns:1fr 1fr}}
+
+.flow{display:grid;gap:.5rem;margin:.5rem 0}
+.flow-item{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem .6rem;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.flow-item .num{width:1.6rem;height:1.6rem;border-radius:50%;background:var(--umber);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Fraunces,serif;font-size:.8rem;flex:0 0 auto}
+.flow-item .txt{flex:1;font-size:.85rem;line-height:1.4}
+.flow-item .tag{flex:0 0 auto;font-size:.6rem;padding:.15rem .4rem;white-space:nowrap}
+
+.feat-grid{display:grid;gap:.55rem;margin:.5rem 0}
+@media(min-width:640px){.feat-grid{grid-template-columns:1fr 1fr}}
+.feat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:.75rem .7rem}
+.feat .icon{font-size:1.5rem;margin-bottom:.2rem}
+.feat h4{font-size:.92rem;margin:0 0 .15rem}
+.feat p{font-size:.8rem;margin:0;color:var(--muted);line-height:1.4}
+
+.pricing{display:grid;gap:.5rem;margin:.5rem 0}
+.pricing-row{display:flex;align-items:baseline;gap:.35rem;padding:.35rem 0;font-size:.88rem;border-bottom:1px solid var(--line)}
+.pricing-row:last-child{border:0}
+.pricing-row .l{flex:1;color:var(--ink)}
+.pricing-row .r{font-weight:700;color:var(--umber);font-family:Fraunces,serif;font-size:1.15rem}
+
+.risk{display:grid;gap:.55rem;margin:.5rem 0}
+@media(min-width:640px){.risk{grid-template-columns:1fr 1fr}}
+.risk-item{padding:.65rem .7rem;border-radius:12px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--almond)}
+.risk-item h4{font-size:.85rem;margin:0 0 .1rem}
+.risk-item p{font-size:.78rem;margin:0;color:var(--muted)}
+
+.big-quote{margin:1.2rem 0;padding:.85rem 1rem;border-radius:18px;background:linear-gradient(135deg,#fff,rgba(164,100,71,.05));border-left:4px solid var(--sage);box-shadow:var(--shadow)}
+.big-quote p{font-family:Fraunces,serif;font-style:italic;font-size:1rem;color:var(--muted);margin:0 0 .15rem}
+.big-quote cite{font-size:.75rem;color:var(--sage);font-style:normal;font-weight:700}
+
+.foot{margin-top:2rem;font-size:.78rem;color:var(--muted);text-align:center}
+
+.section-marker{margin:1.4rem 0 .3rem}
+.section-marker .n{font-size:.7rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--sage)}
+.section-marker h2{font-family:Fraunces,serif;font-weight:500;font-size:clamp(1.2rem,3.8vw,1.6rem);margin:.4rem 0 .6rem}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="tb-brand">one <em>to</em> eight</div>
+    <div class="tb-mid">
+      <div class="tb-kicker">Brainstorm</div>
+      <div class="tb-title">Circles App Concept</div>
+    </div>
+    <div class="tb-actions">
+      <a class="tb-chip" href="#how">How it works</a>
+      <a class="tb-chip" href="#pricing">Pricing</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="head-section">
+    <div class="tag">Concept stage · Not built yet</div>
+    <h1>The Circles App: eight friends, eight weeks, eight essentials</h1>
+    <p class="lede">A group accountability app for teenagers. Form a circle of up to eight friends. Each works through one essential per week together — in the app and in real life. The circle keeps everyone honest, and everyone shares the cost.</p>
+  </div>
+
+  <div class="big-quote">
+    <p>"Most formation content is consumed alone. This makes it something you do with people who know your name."</p>
+  </div>
+
+  <!-- Core idea -->
+  <div class="card">
+    <div class="k">The premise</div>
+    <h2>Social formation, not solo improvement</h2>
+    <p>The eight essentials work best with others. The guide already says it: "Use it with at least one other honest person." This app makes that happen structurally.</p>
+    <p><strong>A circle = 3 to 8 friends</strong> who commit to eight weeks together — one essential per week. The app guides them through each essential, prompts face-to-face meetups, tracks progress, and surfaces accountability nudges.</p>
+    <p>Each person buys a "seat" in the circle. A full circle of 8 at $10 each = $80 for the 8-week programme. Seats are tied to the specific circle. Friends have skin in the game together.</p>
+  </div>
+
+  <!-- Featuress -->
+  <div class="section-marker" id="how">
+    <div class="n">Experience design</div>
+    <h2>How the app feels to use</h2>
+  </div>
+
+  <div class="feat-grid">
+    <div class="feat">
+      <div class="icon">🔗</div>
+      <h4>Circle formation</h4>
+      <p>One person creates a circle, sends invite links to up to 7 friends. Each person claims their seat by paying $10.</p>
+    </div>
+    <div class="feat">
+      <div class="icon">📅</div>
+      <h4>8-week calendar</h4>
+      <p>Each week unlocks one essential. Monday: intro + audio. Wednesday: group challenge. Friday: check-in. Sunday: face-to-face prompt.</p>
+    </div>
+    <div class="feat">
+      <div class="icon">✅</div>
+      <h4>Accountability nudges</h4>
+      <p>If you miss two check-ins in a row, the circle gets notified. Gentle heat, not shame. You agreed to this.</p>
+    </div>
+    <div class="feat">
+      <div class="icon">👋</div>
+      <h4>Face-to-face prompts</h4>
+      <p>"This week, sit in silence together for 10 minutes. Then share what came up." or "Go outside with someone from the circle."</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🔥</div>
+      <h4>Streak + circle score</h4>
+      <p>Individual streaks for daily practice. Circle score = combined completion rate. A circle with 90%+ completion gets a completion badge.</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🤝</div>
+      <h4>Buddy pairs</h4>
+      <p>Each week the circle pairs you with a different person. You check in once mid-week directly: "Did you do the silence practice?"</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🎯</div>
+      <h4>Weekly skill together</h4>
+      <p>Essential 3 (Skills) week prompts: "Cook a meal together." Essential 5 (Community): "Show up for someone." Essential 7 (Nature): "Walk outside together without phones."</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🛡️</div>
+      <h4>Optional anonymity</h4>
+      <p>Usernames only within the circle. No public profiles, no followers. The circle is a private room, not a performance stage.</p>
+    </div>
+  </div>
+
+  <!-- Weekly flow -->
+  <div class="section-marker">
+    <div class="n">Weekly rhythm</div>
+    <h2>One week, one essential</h2>
+  </div>
+
+  <div class="card">
+    <div class="flow">
+      <div class="flow-item"><div class="num">1</div><div class="txt"><strong>Monday — Essential unlocks</strong><br>Short intro + audio for the week's essential. Solo practice assigned (e.g. "3 minutes silence").</div><div class="tag">Solo</div></div>
+      <div class="flow-item"><div class="num">2</div><div class="txt"><strong>Wednesday — Midweek challenge</strong><br>Circle gets a prompt: "Check in with your buddy. Share one thing that felt hard."</div><div class="tag">Buddy</div></div>
+      <div class="flow-item"><div class="num">3</div><div class="txt"><strong>Friday — Progress check</strong><br>Quick check-in in the app. Circle sees completion rate. Low completions trigger a nudge.</div><div class="tag">Circle</div></div>
+      <div class="flow-item"><div class="num">4</div><div class="txt"><strong>Sunday — Face-to-face prompt</strong><br>"Meet up for 45 minutes. Do the practice together. Then talk about it." Designed to build real depth, not group chat noise.</div><div class="tag">IRL</div></div>
+      <div class="flow-item"><div class="num">5</div><div class="txt"><strong>End of week — Next essential preps</strong><br>Circle scores update. Streaks visible. Next essential previews. Optional: share one insight to the circle feed.</div><div class="tag">Reflect</div></div>
+    </div>
+  </div>
+
+  <!-- Essential-by-essential meetup prompts -->
+  <div class="card">
+    <div class="k">IRL prompts by essential</div>
+    <h2>What to do face-to-face each week</h2>
+    <div class="grid2">
+      <div>
+        <h3>Week 1 · Silence</h3>
+        <p>"Sit together in silence for 10 minutes. No phones. Then share one thing that surfaced."</p>
+      </div>
+      <div>
+        <h3>Week 2 · Body</h3>
+        <p>"Go for a walk or do a bodyweight workout together. Talk about one gate you're choosing to guard."</p>
+      </div>
+      <div>
+        <h3>Week 3 · Skills</h3>
+        <p>"Cook a meal together from scratch. Each person brings one ingredient they've never used before."</p>
+      </div>
+      <div>
+        <h3>Week 4 · Digital</h3>
+        <p>"Do a 'phone swap' for 30 minutes. Hold each other's phones. Discuss what you noticed."</p>
+      </div>
+      <div>
+        <h3>Week 5 · Community</h3>
+        <p>"Do something for someone outside the circle together. Meal, visit, errand, note."</p>
+      </div>
+      <div>
+        <h3>Week 6 · Knowledge</h3>
+        <p>"Teach each other one skill you know that the rest don't. 10 minutes each."</p>
+      </div>
+      <div>
+        <h3>Week 7 · Nature</h3>
+        <p>"Go outside together for an hour. No phones. Walk somewhere without a destination."</p>
+      </div>
+      <div>
+        <h3>Week 8 · Convictions</h3>
+        <p>"Share your conviction statements with each other. Everyone keeps everyone else's. Follow up in a month."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="section-marker" id="pricing">
+    <div class="n">Revenue model</div>
+    <h2>$10 per seat, $80 per circle</h2>
+  </div>
+
+  <div class="card">
+    <div class="pricing">
+      <div class="pricing-row"><span class="l">1 seat (1 person, 8 weeks, full access)</span><span class="r">$10</span></div>
+      <div class="pricing-row"><span class="l">Full circle (8 seats)</span><span class="r">$80</span></div>
+      <div class="pricing-row"><span class="l">Per person per week</span><span class="r">$1.25</span></div>
+      </div>
+      <p style="font-size:.85rem;color:var(--muted);margin-top:.4rem">$10 per teen for 8 weeks of content + accountability + community. Compare to a single cinema ticket. The shared cost creates mutual commitment: everyone paid, everyone shows up.</p>
+    </div>
+
+  <div class="card">
+    <div class="k">Circle economics</div>
+    <h3>How money flows</h3>
+    <p>One person starts the circle and pays $80 to claim all 8 seats, or each person pays $10 individually. If someone drops out after week 1, the seat can be reassigned to someone else (the circle stays whole).<p>
+    <p>The $80 pays for: 8 weeks of guided essential content, audio for each essential, the accountability system, buddy pairing, weekly face-to-face prompts, completion score tracking, and a certificate at the end.</p>
+  </div>
+
+  <!-- Why this works -->
+  <div class="section-marker">
+    <div class="n">Psychological design</div>
+    <h2>Why the circle model works</h2>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="k">Mechanic 01</div>
+      <h3>Sunken cost + peer commitment</h3>
+      <p>Everyone paid. Everyone knows everyone paid. Missing a check-in means letting the circle down, not just yourself. This is far stronger than individual accountability.</p>
+    </div>
+    <div class="card">
+      <div class="k">Mechanic 02</div>
+      <h3>Buddy rotation</h3>
+      <p>A new pair each week prevents cliques and spreads relational weight. By week 8, everyone has connected 1:1 with everyone else at least once.</p>
+    </div>
+    <div class="card">
+      <div class="k">Mechanic 03</div>
+      <h3>IRL > digital</h3>
+      <p>The app is the skeleton. The real work happens in rooms, on walks, in kitchens. The app prompts face-to-face but doesn't try to replace it.</p>
+    </div>
+    <div class="card">
+      <div class="k">Mechanic 04</div>
+      <h3>Natural viral loop</h3>
+      <p>Each circle is 8 teens. If even half finish, they become advocates. Each one can start or join a new circle next term. Circles multiply.</p>
+    </div>
+  </div>
+
+  <!-- Risks -->
+  <div class="section-marker">
+    <div class="n">Risks to solve for</div>
+    <h2>What could go wrong and how</h2>
+  </div>
+
+  <div class="risk">
+    <div class="risk-item">
+      <h4>Dropout mid-programme</h4>
+      <p>Seat can be reassigned to a new member. The circle stays at full strength. No refunds after week 2 encourages commitment.</p>
+    </div>
+    <div class="risk-item">
+      <h4>One person dominates</h4>
+      <p>Buddy pairs prevent one voice taking over. The app gives everyone equal airtime through structured prompts.</p>
+    </div>
+    <div class="risk-item">
+      <h4>Nothing happens IRL</h4>
+      <p>If the group never meets, the app prompts for at least one meetup. Circle score is visible. No meetups = lower score.</p>
+    </div>
+    <div class="risk-item">
+      <h4>Friends just game the system</h4>
+      <p>Irish prompts require photo proof (group photo at meetup). Lightweight, not surveillance. But enough to prevent fake completions.</p>
+    </div>
+  </div>
+
+  <!-- Tech scope -->
+  
+<!-- Teen psychology section -->
+<div class="section-marker">
+  <div class="n">Teen psychology upgrade</div>
+  <h2>What teens actually want — and how the app gives it to them</h2>
+</div>
+<div class="card">
+  <p style="font-size:.95rem;color:var(--muted);margin-bottom:.7rem">Most formation programmes fail with teens because they're designed for adults. The circles model works if it's built around what young people already desire, not what adults want them to desire.</p>
+  <div class="grid2">
+    <div style="background:var(--linen);border-radius:14px;padding:.8rem .75rem">
+      <h3 style="margin-top:0">🧭 Autonomy</h3>
+      <p><strong>Teens want:</strong> "I chose this. It's not imposed on me."<br>
+      <strong>The app gives:</strong> No adult supervision in the pod. No youth pastor dashboard. The pod chooses its own name, culture, and rhythm within the 8-week structure. You can skip a week (the pod nudges, not the app).</p>
+    </div>
+    <div style="background:var(--linen);border-radius:14px;padding:.8rem .75rem">
+      <h3 style="margin-top:0">👥 Belonging</h3>
+      <p><strong>Teens want:</strong> "I have my people. They see me."<br>
+      <strong>The app gives:</strong> A small, private group that shares an experience over time, not broadcast. By week 8, these 8 people know each other differently. Buddy rotation ensures everyone connects 1:1.</p>
+    </div>
+    <div style="background:var(--linen);border-radius:14px;padding:.8rem .75rem">
+      <h3 style="margin-top:0">⚡ Competence</h3>
+      <p><strong>Teens want:</strong> "I'm good at something real."<br>
+      <strong>The app gives:</strong> Concrete skills by week 3 (cook, fix, budget). A visible completion score. A certificate at the end that says "I finished something hard with people I trust."</p>
+    </div>
+    <div style="background:var(--linen);border-radius:14px;padding:.8rem .75rem">
+      <h3 style="margin-top:0">🎮 Play</h3>
+      <p><strong>Teens want:</strong> "This doesn't feel like homework."<br>
+      <strong>The app gives:</strong> Pod names, circle scores, buddy mystery, silent partners, photo proof missions. But the stakes are real enough that it's not disposable.</p>
+    </div>
+    <div style="background:var(--linen);border-radius:14px;padding:.8rem .75rem">
+      <h3 style="margin-top:0">🔒 Privacy</h3>
+      <p><strong>Teens want:</strong> "Adults aren't watching this."<br>
+      <strong>The app gives:</strong> No parent portal. No pastor report. The pod exists in its own walled garden. The only external view is the completion certificate, which they control who sees.</p>
+    </div>
+    <div style="background:var(--linen);border-radius:14px;padding:.8rem .75rem">
+      <h3 style="margin-top:0">👁️ Realness</h3>
+      <p><strong>Teens want:</strong> "This isn't fake church energy."<br>
+      <strong>The app gives:</strong> No cheesy graphics, no hyped language, no guilt. The same tone as the guide: direct, honest, adult. The app trusts them to take it seriously because they chose it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Design upgrades -->
+<div class="section-marker">
+  <div class="n">Product design upgrades</div>
+  <h2>Small tweaks that change everything</h2>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="k">Rename</div>
+    <h3>Pod, not Circle</h3>
+    <p>"Circle" feels like church small group energy. "Pod" feels intimate, self-contained, slightly mysterious. Teens name their own pod. The app never assigns a default.</p>
+  </div>
+  <div class="card">
+    <div class="k">Friction removal</div>
+    <h3>Starter kit for the first meetup</h3>
+    <p>The app generates a 1-page PDF: "First Pod Meeting Agenda." Introductions > Pick a pod name > Read the Essential 01 scenario > Do 3 minutes of silence > Choose your weekly check-in time. The hardest step is the first one.</p>
+  </div>
+  <div class="card">
+    <div class="k">Anticipation</div>
+    <h3>Silent partners</h3>
+    <p>Each week, one person is assigned as your silent partner. They watch your progress but don't interact. At the end of 8 weeks, all silent partners reveal themselves and share one observation. Zero extra work, massive emotional payoff.</p>
+  </div>
+  <div class="card">
+    <div class="k">Off-ramp</div>
+    <h3>Bounded commitment</h3>
+    <p>8 weeks, then it's done. Not forever. Teens fear indefinite commitment. A clear end date makes starting feel possible. After 8 weeks, the pod can renew, switch members, or disband with honour.</p>
+  </div>
+  <div class="card">
+    <div class="k">Flexibility</div>
+    <h3>Solo mode exists</h3>
+    <p>Not everyone has 7 friends ready to commit. Solo mode: same content, no accountability, $5 for 8 weeks. Option to join a partial pod with matching. This solves the chicken-and-egg problem and gives non-johners a path in.</p>
+  </div>
+  <div class="card">
+    <div class="k">Real reward</div>
+    <h3>Completion is something real</h3>
+    <p>Not a digital badge. A printable "Letter of Completion" with each pod member's name. A discount code for the next pod. Access to an alumni group where past pods share what they did. Something they can show someone.</p>
+  </div>
+</div>
+
+<!-- One-punch pitch -->
+<div class="big-quote">
+  <p>"Eight weeks. Eight people. One essential per week. No adults. No fake energy. Just a group of people who decided to build roots together instead of scrolling alone."</p>
+  <cite>Proposed app tagline</cite>
+</div>
+
+<!-- Comparison table -->
+<div class="card">
+  <div class="k">Positioning</div>
+  <h2>What this competes with (and what it isn't)</h2>
+  <div class="grid2">
+    <div>
+      <h3>It's not a Bible study app</h3>
+      <p>Those feel like homework. This feels like a challenge you opted into with friends.</p>
+    </div>
+    <div>
+      <h3>It's not a self-improvement course</h3>
+      <p>Those are solo and dry. This is social and physical. You meet in rooms, not just in comments.</p>
+    </div>
+    <div>
+      <h3>It's not a social media detox app</h3>
+      <p>Those tell you to put your phone down alone. This gives you people to put it down with.</p>
+    </div>
+    <div>
+      <h3>It's not a youth group programme</h3>
+      <p>Those are led by adults. This is peer-to-peer. The youth pastor doesn't get a seat.</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="section-marker">
+    <div class="n">Technical</div>
+    <h2>What would need building</h2>
+  </div>
+
+  <div class="card">
+    <div class="grid2">
+      <div>
+        <h3>Web app (first)</h3>
+        <p>Circle creation, invite links, payment, weekly content delivery, check-ins, scoreboard, buddy assignments. Could ship as PWA with no app store needed.</p>
+      </div>
+      <div>
+        <h3>Mobile app (later)</h3>
+        <p>Push notifications for check-ins, nudge reminders, photo upload for IRL proof, audio player for essentials. Native feels better for teen adoption.</p>
+      </div>
+    </div>
+    <hr>
+    <p><strong>Smart MVP path:</strong> Ship as a mobile-optimised web app first using the existing content. Sign up → form circle → pay → get week 1 content → check-in system. If it works at all, the rest follows. Build in public with the first 50 circles as beta testers.</p>
+  </div>
+
+  <!-- Why it has real potential -->
+  <div class="big-quote">
+    <p>"The eight essentials were always meant to be done with other people. The circles app just makes that the default instead of an afterthought."</p>
+  </div>
+
+  <div class="card">
+    <div class="k">The big picture</div>
+    <h2>What this unlocks</h2>
+    <p>Right now, onetoeight is a guide. A good one, but a solo experience most people buy and never finish.<p>
+    <p>The circles model turns it into a <strong>social programme</strong> with natural accountability and a built-in distribution engine. Each circle that completes is 8 more people who:<p>
+    <ul>
+      <li>experienced the full eight essentials</li>
+      <li>have a shared language to talk about it</li>
+      <li>are likely to invite friends into the next circle</li>
+      <li>become free marketing through real-world proof</li>
+    </ul>
+    <p>It also solves the biggest problem with Christian curriculum: people buy it but don't run it. Circles <em>makes</em> them run it because the group expects it.</p>
+  </div>
+
+  <div class="card">
+    <div class="k">Next steps</div>
+    <h2>How to test this without building anything</h2>
+    <ol>
+      <li><strong>Ask 2–3 real teen friend groups:</strong> "Would you pay $10 each to do an 8-week challenge together with an app?"</li>
+      <li><strong>Run one circle manually:</strong> Use a WhatsApp group + the PDF guide. Send weekly prompts manually. See if they stay engaged.</li>
+      <li><strong>If yes:</strong> Build the web app MVP. Start with 10 beta circles (80 teens).</li>
+      <li><strong>If no:</strong> Learn exactly why and adjust the model before building anything.</li>
+    </ol>
+  </div>
+
+  <footer class="foot">
+    onetoeight Circles App Concept · Brainstorm draft · July 2026
+  </footer>
+</main>
+</body>
+</html>
