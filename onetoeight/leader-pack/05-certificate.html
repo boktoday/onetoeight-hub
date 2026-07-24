@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<title>onetoeight — Certificate of Completion</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 15mm; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; color: #2a2520; font-size: 10pt; line-height: 1.6; }
+h1, h2, h3, h4 { font-family: 'Fraunces', serif; font-weight: 500; color: #3D2820; }
+:root { --forest: #5C3A2E; --forest-dark: #3D2820; --amber: #A46447; --amber-light: #C4805A; --cream: #faf7f2; --cream-dark: #f0ebe0; --ink: #2a2520; --muted: #6b6358; --sage: #88937B; }
+.page-break { page-break-after: always; }
+.label { font-size: 7.5pt; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); font-weight: 700; }
+.header-bar { background: var(--forest-dark); color: var(--cream); padding: 12mm 15mm; margin: -15mm -15mm 1.5rem; }
+.header-bar .label { color: var(--amber-light); }
+.header-bar h1 { color: var(--cream); font-size: 18pt; margin-top: .3rem; }
+.header-bar .sub { font-size: 9pt; color: rgba(250,247,242,0.6); margin-top: .2rem; }
+.footer { text-align: center; font-size: 7pt; color: var(--muted); border-top: 1px solid var(--cream-dark); padding-top: 2mm; margin-top: 2rem; }
+.box { border: 1px solid var(--cream-dark); border-radius: 8px; padding: 1rem 1.2rem; margin: .8rem 0; }
+.box-amber { border-left: 3px solid var(--amber); }
+
+@page { size: A5; margin: 0; }
+.cert-page { width: 210mm; height: 148mm; padding: 15mm 20mm; background: var(--cream); display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+.cert-page::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5mm; background: var(--forest-dark); }
+.cert-page::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 5mm; background: var(--amber); }
+.cert-inner { border: 2px solid var(--forest-dark); border-radius: 8px; padding: 10mm 15mm; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.cert-label { font-size: 7pt; letter-spacing: 0.25em; text-transform: uppercase; color: var(--amber); font-weight: 700; }
+.cert-title { font-family: 'Fraunces', serif; font-size: 22pt; font-weight: 400; color: var(--forest-dark); margin: 4mm 0; line-height: 1.1; }
+.cert-title em { font-style: italic; font-weight: 300; color: var(--amber); }
+.cert-body { font-size: 9pt; color: var(--muted); margin: 2mm 0; }
+.cert-name { font-family: 'Fraunces', serif; font-size: 16pt; color: var(--forest-dark); border-bottom: 1px solid var(--amber); display: inline-block; padding: 0 20mm 2mm; margin: 3mm auto; min-width: 60mm; }
+.cert-signatures { display: flex; justify-content: space-around; margin-top: 6mm; }
+.cert-sig { text-align: center; }
+.cert-sig-line { border-bottom: 1px solid var(--ink); width: 50mm; margin: 8mm auto 1mm; }
+.cert-sig-label { font-size: 7pt; color: var(--muted); }
+.cert-logo { font-family: 'Fraunces', serif; font-size: 11pt; color: var(--forest-dark); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="cert-page">
+  <div class="cert-inner">
+    <div class="cert-logo">one <span style="color:var(--amber)">&rarr;</span> eight</div>
+    <div class="cert-label" style="margin-top: 3mm;">Certificate of Completion</div>
+    <div class="cert-title">Eight Essentials<br><em>for a Life That Holds</em></div>
+    <div class="cert-body">This certifies that</div>
+    <div class="cert-name">&nbsp;</div>
+    <div class="cert-body">has completed the onetoeight programme — eight essentials for a screen-born generation, including discussion, weekly challenges, and personal reflection across all eight chapters.</div>
+    <div class="cert-signatures">
+      <div class="cert-sig">
+        <div class="cert-sig-line"></div>
+        <div class="cert-sig-label">Group Leader</div>
+      </div>
+      <div class="cert-sig">
+        <div class="cert-sig-line"></div>
+        <div class="cert-sig-label">Date</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
