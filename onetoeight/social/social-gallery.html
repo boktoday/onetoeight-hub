@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>onetoeight — Social Media Posts Gallery</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f2ed; color: #2a2520; padding: 2rem 1rem; }
+h1 { font-family: Georgia, serif; font-size: 1.6rem; font-weight: 400; color: #3D2820; margin-bottom: .3rem; }
+.subtitle { color: #6b6358; font-size: .85rem; margin-bottom: 2rem; }
+.platform-section { margin-bottom: 3rem; }
+.platform-header { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.5rem; padding-bottom: .5rem; border-bottom: 2px solid #e8ddd0; }
+.platform-badge { display: inline-block; padding: .3rem .8rem; border-radius: 20px; font-size: .75rem; font-weight: 600; color: white; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; background: #e8ddd0; cursor: pointer; }
+.card-body { padding: 1rem 1.2rem 1.2rem; }
+.post-num { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: #A46447; font-weight: 600; margin-bottom: .5rem; }
+.post-text { font-size: .82rem; color: #2a2520; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+.post-text a { color: #A46447; }
+
+/* Lightbox */
+.lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; }
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 90%; max-height: 70vh; border-radius: 8px; }
+.lightbox-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; color: white; cursor: pointer; }
+.lightbox-caption { color: rgba(255,255,255,0.8); font-size: .85rem; margin-top: 1rem; max-width: 600px; text-align: center; white-space: pre-wrap; }
+
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+  .card img { aspect-ratio: 1; }
+}
+</style>
+</head>
+<body>
+
+<h1>onetoeight — Social Media Posts</h1>
+<p class="subtitle">30 posts (10 X.com, 10 Facebook, 10 Instagram) with 30 MiniMax-generated images. Click any image to enlarge.</p>
+
+<div class="platform-section">
+  <div class="platform-header">
+    <span class="platform-badge" style="background: #1a1a1a">X.com</span>
+    <span style="font-size: .85rem; color: #6b6358;">10 posts</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <img src="social-01.png" alt="Post 1" loading="lazy" onclick="openLightbox('social-01.png', 'Silence is not the absence of noise. It is the presence of yourself. The first of eight essentials in the onetoeight guide.\nRead it:\nhttps://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 1</div>
+        <div class="post-text">Silence is not the absence of noise. It is the presence of yourself. The first of eight essentials in the onetoeight guide.
+Read it:
+<a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-02.png" alt="Post 2" loading="lazy" onclick="openLightbox('social-02.png', 'UK adults now spend more than nine hours a day in front of a screen. Nine hours. The onetoeight guide is for anyone who suspects that is not alright.\nFind out more:\nhttps://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 2</div>
+        <div class="post-text">UK adults now spend more than nine hours a day in front of a screen. Nine hours. The onetoeight guide is for anyone who suspects that is not alright.
+Find out more:
+<a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-03.png" alt="Post 3" loading="lazy" onclick="openLightbox('social-03.png', 'Your neck has a memory, and it is keeping score. What does your body need that no app can provide? Chapter two of the onetoeight guide asks plainly.\nRead it:\nhttps://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 3</div>
+        <div class="post-text">Your neck has a memory, and it is keeping score. What does your body need that no app can provide? Chapter two of the onetoeight guide asks plainly.
+Read it:
+<a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-04.png" alt="Post 4" loading="lazy" onclick="openLightbox('social-04.png', 'The most valuable skill of the next decade will not be coding. It will be the courage to put the phone down. Skills are the third essential.\nRead the guide:\nhttps://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 4</div>
+        <div class="post-text">The most valuable skill of the next decade will not be coding. It will be the courage to put the phone down. Skills are the third essential.
+Read the guide:
+<a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-05.png" alt="Post 5" loading="lazy" onclick="openLightbox('social-05.png', 'Algorithms know your insecurities before your own mother does. Digital self-defence is not paranoia. It is essential four.\nSee for yourself:\nhttps://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 5</div>
+        <div class="post-text">Algorithms know your insecurities before your own mother does. Digital self-defence is not paranoia. It is essential four.
+See for yourself:
+<a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-06.png" alt="Post 6" loading="lazy" onclick="openLightbox('social-06.png', 'You have five hundred followers and no one to call at midnight. What is a community without presence? Chapter five of the onetoeight guide asks harder questions than your feed.\nRead it:\nhttps://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 6</div>
+        <div class="post-text">You have five hundred followers and no one to call at midnight. What is a community without presence? Chapter five of the onetoeight guide asks harder questions than your feed.
+Read it:
+<a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-07.png" alt="Post 7" loading="lazy" onclick="openLightbox('social-07.png', 'Information has never been cheaper. Wisdom has never been rarer. Knowledge is the sixth essential, and it is not the same as a feed.\nFind out more:\nhttps://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 7</div>
+        <div class="post-text">Information has never been cheaper. Wisdom has never been rarer. Knowledge is the sixth essential, and it is not the same as a feed.
+Find out more:
+<a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-08.png" alt="Post 8" loading="lazy" onclick="openLightbox('social-08.png', 'No software update has ever improved on a tree. Nature is essential seven, and it will not load any faster for you, however long you wait.\nRead it in onetoeight:\nhttps://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 8</div>
+        <div class="post-text">No software update has ever improved on a tree. Nature is essential seven, and it will not load any faster for you, however long you wait.
+Read it in onetoeight:
+<a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-09.png" alt="Post 9" loading="lazy" onclick="openLightbox('social-09.png', 'You can scroll through a thousand opinions without forming a single one of your own. Convictions are the eighth and final essential.\nStart here:\nhttps://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 9</div>
+        <div class="post-text">You can scroll through a thousand opinions without forming a single one of your own. Convictions are the eighth and final essential.
+Start here:
+<a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-10.png" alt="Post 10" loading="lazy" onclick="openLightbox('social-10.png', 'We did not grow up with screens. We grew up despite them. The onetoeight guide offers eight essentials for a generation that deserves better than doomscroll.\nStart reading:\nhttps://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 10</div>
+        <div class="post-text">We did not grow up with screens. We grew up despite them. The onetoeight guide offers eight essentials for a generation that deserves better than doomscroll.
+Start reading:
+<a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="platform-section">
+  <div class="platform-header">
+    <span class="platform-badge" style="background: #1877F2">Facebook</span>
+    <span style="font-size: .85rem; color: #6b6358;">10 posts</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <img src="social-11.png" alt="Post 1" loading="lazy" onclick="openLightbox('social-11.png', 'Last weekend, I watched my niece hold a tablet like it was the most natural thing in the world. It stayed with me, and it sparked the idea behind onetoeight: eight essentials for a screen-born generation. It&#39;s a small, gentle guide for parents, carers and educators who want to keep something real alive alongside all the swiping. You can read it here: https://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 1</div>
+        <div class="post-text">Last weekend, I watched my niece hold a tablet like it was the most natural thing in the world. It stayed with me, and it sparked the idea behind onetoeight: eight essentials for a screen-born generation. It's a small, gentle guide for parents, carers and educators who want to keep something real alive alongside all the swiping. You can read it here: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-12.png" alt="Post 2" loading="lazy" onclick="openLightbox('social-12.png', 'When was the last time you sat with your child and neither of you reached for a screen? The chapter on Silence in the onetoeight guide gently explores why boredom, stillness and daydreaming still matter, even now. Have a read here: https://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 2</div>
+        <div class="post-text">When was the last time you sat with your child and neither of you reached for a screen? The chapter on Silence in the onetoeight guide gently explores why boredom, stillness and daydreaming still matter, even now. Have a read here: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-13.png" alt="Post 3" loading="lazy" onclick="openLightbox('social-13.png', 'It&#39;s so easy for childhood to drift indoors and onto the sofa these days. The Body chapter is a quiet nudge back: climbing, jumping, walking somewhere muddy, feeling a heartbeat after a proper sprint. It&#39;s not anti-screen, it&#39;s simply pro-body. Find it in the guide: https://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 3</div>
+        <div class="post-text">It's so easy for childhood to drift indoors and onto the sofa these days. The Body chapter is a quiet nudge back: climbing, jumping, walking somewhere muddy, feeling a heartbeat after a proper sprint. It's not anti-screen, it's simply pro-body. Find it in the guide: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-14.png" alt="Post 4" loading="lazy" onclick="openLightbox('social-14.png', 'If you&#39;d like to gather a few friends and walk through onetoeight together, I&#39;m running small, informal reading circles over the coming weeks. Nothing formal, just a chance to swap notes on bringing up a screen-born generation. Drop me a message if you&#39;d like to join us, or start with the guide here: https://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 4</div>
+        <div class="post-text">If you'd like to gather a few friends and walk through onetoeight together, I'm running small, informal reading circles over the coming weeks. Nothing formal, just a chance to swap notes on bringing up a screen-born generation. Drop me a message if you'd like to join us, or start with the guide here: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-15.png" alt="Post 5" loading="lazy" onclick="openLightbox('social-15.png', 'A friend told me her nine-year-old could recite the rules of three games but had never set a privacy setting. That stayed with me for days. The Digital Self-Defence chapter is about giving children practical skills, not just a few more hours in front of a screen. It&#39;s one of the eight essentials in the guide: https://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 5</div>
+        <div class="post-text">A friend told me her nine-year-old could recite the rules of three games but had never set a privacy setting. That stayed with me for days. The Digital Self-Defence chapter is about giving children practical skills, not just a few more hours in front of a screen. It's one of the eight essentials in the guide: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-16.png" alt="Post 6" loading="lazy" onclick="openLightbox('social-16.png', 'Which ordinary life skill feels hardest to &quot;fit in&quot; alongside school, screens and sleep? Tying a knot, cooking something simple, fixing a puncture? The Skills chapter is a gentle reminder that these unhurried tasks are part of childhood too. Have a look here: https://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 6</div>
+        <div class="post-text">Which ordinary life skill feels hardest to "fit in" alongside school, screens and sleep? Tying a knot, cooking something simple, fixing a puncture? The Skills chapter is a gentle reminder that these unhurried tasks are part of childhood too. Have a look here: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-17.png" alt="Post 7" loading="lazy" onclick="openLightbox('social-17.png', 'There&#39;s knowing a fact because you looked it up, and there&#39;s knowing it because you lived with it. The Knowledge chapter celebrates the slow, layered kind of learning that an algorithm cannot really shortcut. I think it&#39;s changed how I think about homework. Read it here: https://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 7</div>
+        <div class="post-text">There's knowing a fact because you looked it up, and there's knowing it because you lived with it. The Knowledge chapter celebrates the slow, layered kind of learning that an algorithm cannot really shortcut. I think it's changed how I think about homework. Read it here: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-18.png" alt="Post 8" loading="lazy" onclick="openLightbox('social-18.png', 'The Convictions chapter isn&#39;t preachy, I promise. It&#39;s about helping a child find a few quiet &quot;this is what I believe&quot; moments, before the noise of the wider world fills in the gaps for them. I&#39;d love to hear what values you&#39;ve tried to pass on at home. Comment below, or read the guide here: https://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 8</div>
+        <div class="post-text">The Convictions chapter isn't preachy, I promise. It's about helping a child find a few quiet "this is what I believe" moments, before the noise of the wider world fills in the gaps for them. I'd love to hear what values you've tried to pass on at home. Comment below, or read the guide here: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-19.png" alt="Post 9" loading="lazy" onclick="openLightbox('social-19.png', 'We took the children to the same wood three weekends in a row, and something shifted on the third visit. They knew the tree with the bent branch. The Nature chapter is full of these small, ordinary observations that screens simply cannot hand over. Pick up the guide here: https://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 9</div>
+        <div class="post-text">We took the children to the same wood three weekends in a row, and something shifted on the third visit. They knew the tree with the bent branch. The Nature chapter is full of these small, ordinary observations that screens simply cannot hand over. Pick up the guide here: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-20.png" alt="Post 10" loading="lazy" onclick="openLightbox('social-20.png', 'Eight essentials, one little guide, and plenty of room for your own ideas. If you&#39;re raising, teaching or simply caring about a child who arrived into a screen-first world, I&#39;d love to know: which of the eight would you most like to start with? Share your thoughts below, or begin here: https://mystic-jasper-abtb.here.now/')">
+      <div class="card-body">
+        <div class="post-num">Post 10</div>
+        <div class="post-text">Eight essentials, one little guide, and plenty of room for your own ideas. If you're raising, teaching or simply caring about a child who arrived into a screen-first world, I'd love to know: which of the eight would you most like to start with? Share your thoughts below, or begin here: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="platform-section">
+  <div class="platform-header">
+    <span class="platform-badge" style="background: #E4405F">Instagram</span>
+    <span style="font-size: .85rem; color: #6b6358;">10 posts</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <img src="social-21.png" alt="Post 1" loading="lazy" onclick="openLightbox('social-21.png', 'Before the scroll, before the glow, there was something quieter worth keeping. Eight essentials for those who grew up with a screen in their hand. Begin here: https://mystic-jasper-abtb.here.now/\n#onetoeight #screenborn #digitalwisdom #offlineculture')">
+      <div class="card-body">
+        <div class="post-num">Post 1</div>
+        <div class="post-text">Before the scroll, before the glow, there was something quieter worth keeping. Eight essentials for those who grew up with a screen in their hand. Begin here: <a href="https://mystic-jasper-abtb.here.now/" target="_blank">https://mystic-jasper-abtb.here.now/</a>
+#onetoeight #screenborn #digitalwisdom #offlineculture</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-22.png" alt="Post 2" loading="lazy" onclick="openLightbox('social-22.png', 'A room without notifications, only the kettle, the rain, the clock on the wall. Silence is not the absence of sound but the presence of yourself. Link in bio.\n#silence #quietmind #onetoeight #stillness #digitaldetox')">
+      <div class="card-body">
+        <div class="post-num">Post 2</div>
+        <div class="post-text">A room without notifications, only the kettle, the rain, the clock on the wall. Silence is not the absence of sound but the presence of yourself. Link in bio.
+#silence #quietmind #onetoeight #stillness #digitaldetox</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-23.png" alt="Post 3" loading="lazy" onclick="openLightbox('social-23.png', 'Feet on cold ground, breath in cold air, a heart beating faster than any app can measure. The body remembers what the screen forgets. Link in bio.\n#bodymind #grounded #onetoeight #realskin #movement')">
+      <div class="card-body">
+        <div class="post-num">Post 3</div>
+        <div class="post-text">Feet on cold ground, breath in cold air, a heart beating faster than any app can measure. The body remembers what the screen forgets. Link in bio.
+#bodymind #grounded #onetoeight #realskin #movement</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-24.png" alt="Post 4" loading="lazy" onclick="openLightbox('social-24.png', 'Hands that mend a hem, sharpen a blade, write a letter without autocorrect. Skills are the original software upgrade. Link in bio.\n#realskills #craftsmanship #slowliving #onetoeight #handmade')">
+      <div class="card-body">
+        <div class="post-num">Post 4</div>
+        <div class="post-text">Hands that mend a hem, sharpen a blade, write a letter without autocorrect. Skills are the original software upgrade. Link in bio.
+#realskills #craftsmanship #slowliving #onetoeight #handmade</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-25.png" alt="Post 5" loading="lazy" onclick="openLightbox('social-25.png', 'A locked door, a mind trained to look away. Defending yourself online begins long before you touch the screen. Link in bio.\n#digitaldefence #mindfultech #attention #onetoeight #onlinesafety')">
+      <div class="card-body">
+        <div class="post-num">Post 5</div>
+        <div class="post-text">A locked door, a mind trained to look away. Defending yourself online begins long before you touch the screen. Link in bio.
+#digitaldefence #mindfultech #attention #onetoeight #onlinesafety</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-26.png" alt="Post 6" loading="lazy" onclick="openLightbox('social-26.png', 'A table set for many, voices in the same room rather than the same thread. Community is built in person, not in pixels. Link in bio.\n#community #reallife #belonging #onetoeight #togethers')">
+      <div class="card-body">
+        <div class="post-num">Post 6</div>
+        <div class="post-text">A table set for many, voices in the same room rather than the same thread. Community is built in person, not in pixels. Link in bio.
+#community #reallife #belonging #onetoeight #togethers</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-27.png" alt="Post 7" loading="lazy" onclick="openLightbox('social-27.png', 'A book held open in a pool of lamplight. Knowledge stored in the mind cannot be switched off by a distant server. Link in bio.\n#knowledge #reading #deeperthinking #onetoeight #learndeeply')">
+      <div class="card-body">
+        <div class="post-num">Post 7</div>
+        <div class="post-text">A book held open in a pool of lamplight. Knowledge stored in the mind cannot be switched off by a distant server. Link in bio.
+#knowledge #reading #deeperthinking #onetoeight #learndeeply</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-28.png" alt="Post 8" loading="lazy" onclick="openLightbox('social-28.png', 'Old trees do not count their followers. Step outside and remember what has stood here far longer than any feed. Link in bio.\n#nature #getoutside #wildandfree #onetoeight #reconnect')">
+      <div class="card-body">
+        <div class="post-num">Post 8</div>
+        <div class="post-text">Old trees do not count their followers. Step outside and remember what has stood here far longer than any feed. Link in bio.
+#nature #getoutside #wildandfree #onetoeight #reconnect</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-29.png" alt="Post 9" loading="lazy" onclick="openLightbox('social-29.png', 'A stance held when no one is watching. Convictions are the bones of a life, not the filter of a story. Link in bio.\n#convictions #values #integrity #onetoeight #standfirm')">
+      <div class="card-body">
+        <div class="post-num">Post 9</div>
+        <div class="post-text">A stance held when no one is watching. Convictions are the bones of a life, not the filter of a story. Link in bio.
+#convictions #values #integrity #onetoeight #standfirm</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="social-30.png" alt="Post 10" loading="lazy" onclick="openLightbox('social-30.png', 'Eight essentials, one small guide, a generation that deserves more than a glass rectangle for a window. Pick it up at the link.\n#onetoeight #screenborn #offlineguide #essentialreading #lifebeyondthethumb')">
+      <div class="card-body">
+        <div class="post-num">Post 10</div>
+        <div class="post-text">Eight essentials, one small guide, a generation that deserves more than a glass rectangle for a window. Pick it up at the link.
+#onetoeight #screenborn #offlineguide #essentialreading #lifebeyondthethumb</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<script>
+function openLightbox(filename, caption) {
+  var lb = document.getElementById('lightbox');
+  var img = document.getElementById('lightbox-img');
+  var cap = document.getElementById('lightbox-caption');
+  img.src = filename;
+  cap.textContent = caption;
+  lb.classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+
+</body>
+</html>
